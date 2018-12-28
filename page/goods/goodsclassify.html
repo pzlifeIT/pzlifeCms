@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>商品库</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../css/list.css">
+    <link rel="stylesheet" href="../../css/details.css">
+</head>
+
+<body>
+
+    <div class="iframenav">
+        <!-- <button class="">刷新</button> -->
+        <div class="din fl">
+            <span>
+            
+          </span>
+        </div>
+        <div class="refresh topbtn din fl" onclick="document.location.reload()">
+            <img src="../../images/sx.png" alt="">
+        </div>
+        <a href="goodsoperation.html">
+            <div class="addgoods topbtn din fl">
+                <img src="../../images/jia.png" alt="">
+            </div>
+        </a>
+    </div>
+    <div class="gs-list panel-default">
+        <div class="gl-head panel-heading ">
+            <span>商品分类</span>
+        </div>
+        <div class="gl-title">
+            <span class="col-md-2 bot-bor subli">分类ID</span>
+            <span class="col-md-2 bot-bor subli">父级分类</span>
+            <span class="col-md-2 bot-bor subli">商品分类名</span>
+            <span class="col-md-2 bot-bor subli">层级</span>
+            <span class="col-md-2 bot-bor subli">状态</span>
+            <span class="col-md-2 bot-bor subli">管理</span>
+        </div>
+        <ul class="gl-ul" id="classifylist">
+            <!-- <li>
+                <span class="col-md-2 bot-bor subli">1181</span>
+                <span class="col-md-2 bot-bor subli"><img src="http://www.inweeye.cn/image/cache/catalog/201812/goods/TIM截图20181210200811-40x40.png" alt=""></span>
+                <span class="col-md-2 bot-bor subli">萌宠系列手机壳</span>
+                <span class="col-md-2 bot-bor subli">1</span>
+                <span class="col-md-2 bot-bor subli">
+                  <span class="ant-switch up-down ant-switch-checked "></span>
+                </span>
+                <span class="col-md-2 bot-bor subli">
+                </span>
+            </li> -->
+        </ul>
+    </div>
+    <div class="pz-modal hide" id="classcompile">
+        <div class="refresh topbtn din fl" onclick="document.location.reload()">
+            <img src="../../images/sx.png" alt="">
+        </div>
+        <div class="pz-modal-content">
+            <div class="pz-modal-header">商品分类编辑</div>
+            <div class="pz-spin-container">
+                <div class="dl-show">
+                    <span class="dl-title">上级分类:</span>
+                    <span class="dl-text" id="superior"></span>
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">分类名称:</span>
+                    <input class="dl-info" id="classname" type="text">
+                </div>
+
+                <div class="dl-show">
+                    <span class="dl-title">状态:</span>
+                    <div class="ant-radio-group">
+                        <label data-status="启用" class="ant-radio-wrapper ant-radio-checked">
+                        <span class="ant-radio ">
+                          <input type="radio" id="radioinp1" class="ant-radio-input" >
+                          <span class="ant-radio-inner"></span>
+                        </span>
+                        <span class="din fl">启用</span>
+                       </label>
+                        <label data-status="停用" class="ant-radio-wrapper">
+                          <span class="ant-radio">
+                            <input type="radio" id="radioinp1" class="ant-radio-input" >
+                            <span class="ant-radio-inner"></span>
+                          </span>
+                          <span class="din fl">停用</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="dl-show flexcenter">
+                    <input type="button" id="c-cancel" value="取消" class="pz-btn btn-cancel ">
+                    <input type="button" id="c-amend" value="保存" class="pz-btn btn-amend">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pz-modal hide" id="classadd">
+        <div class="refresh topbtn din fl" onclick="document.location.reload()">
+            <img src="../../images/sx.png" alt="">
+        </div>
+        <div class="pz-modal-content">
+            <div class="pz-modal-header">商品分类编辑</div>
+            <div class="pz-spin-container">
+                <div class="dl-show">
+                    <span class="dl-title">上级分类:</span>
+                    <span class="dl-text"></span>
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">分类名称:</span>
+                    <input class="dl-info" type="text">
+                </div>
+
+                <div class="dl-show">
+                    <span class="dl-title">状态:</span>
+                    <div class="ant-radio-group">
+                        <label for="radioinp1" class="ant-radio-wrapper">
+                        <span class="ant-radio ant-radio-checked">
+                          <input type="radio" id="radioinp1" class="ant-radio-input" >
+                          <span class="ant-radio-inner"></span>
+                        </span>
+                        <span class="din fl">停用</span>
+                      </label>
+                        <label for="radioinp1" class="ant-radio-wrapper">
+                          <span class="ant-radio ant-radio-checked">
+                            <input type="radio" id="radioinp1" class="ant-radio-input" >
+                            <span class="ant-radio-inner"></span>
+                          </span>
+                          <span class="din fl">启用</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="dl-show flexcenter">
+                    <input type="button" value="取消" class="pz-btn btn-cancel ">
+                    <input type="button" value="保存" class="pz-btn btn-amend">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../../js/ajax.js"></script>
+<script src="../../js/common.js"></script>
+<script src="js/classify.js"></script>
+<script>
+    console.log(212)
+    pz.goodsclassify.init()
+</script>
+
+</html>

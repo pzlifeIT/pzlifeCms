@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>产品编辑</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../css/details.css">
+</head>
+
+<body>
+    <div class="iframenav">
+        <!-- <button class="">刷新</button> -->
+        <div class="din fl">
+            <span>
+        
+      </span>
+        </div>
+        <div class="refresh topbtn din fl" onclick="document.location.reload()">
+            <img src="../../images/sx.png" alt="">
+        </div>
+        <!-- <div class="addgoods topbtn din fl">
+            <img src="../../images/jia.png" alt="">
+        </div> -->
+
+    </div>
+    <div class="details">
+        <div class="dl-header">
+            <span class="dl-name">订单详情</span>
+            <input type="button" value="上架" class="pz-btn fr"></input>
+            <input type="button" value="保存" class="pz-btn fr"></input>
+        </div>
+        <div class="dl-con">
+            <ul class="dl-nav" id="dlnav">
+                <li>基本信息</li>
+                <li>产品选择</li>
+                <li>产品规格</li>
+                <li>产品详情</li>
+            </ul>
+            <div class="dlnav-con dl-1">
+                <div class="dl-show">
+                    <span class="dl-title">产品标题＊:</span>
+                    <!-- <span>SN201812171200316164</span> -->
+                    <input class="dl-info" value="夜光系列手机壳" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">产品副标题:</span>
+                    <!-- <span>2018-12-17 12:00:31</span> -->
+                    <input class="dl-info" value="优质PU皮革 孔位精准" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">产品规格标题:</span>
+                    <input class="dl-info" type="text">
+
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">产品重量:</span>
+                    <input class="dl-info" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">产品标题图:</span>
+                    <input type="" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">产品图片集:</span>
+                    <input type="text">
+                </div>
+            </div>
+            <div class="dlnav-con dl-1">
+                <div class="dl-show">
+                    <span class="dl-title">供应商:</span>
+                    <div class="din combobox" id="combobox1">
+                        <div class="ant-select">
+                            <div class="ant-select-selection">请选择</div>
+                            <span class="ant-select-arrow"></span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">分类:</span>
+                    <div class="din combobox" id="combobox2">
+                        <div class="ant-select">
+                            <div class="ant-select-selection">请选择</div>
+                            <span class="ant-select-arrow"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">评星模板:</span>
+                    <div class="din combobox" id="combobox3">
+                        <div class="ant-select">
+                            <div class="ant-select-selection">请选择</div>
+                            <span class="ant-select-arrow"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="dlnav-con dl-1">
+                <div class="dl-show">
+                    <span class="dl-title">收件人:</span>
+                    <span class="dl-text">肯德基</span>
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">联系电话:</span>
+                    <span class="dl-text">15739774582</span>
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">收货地址:</span>
+                    <span class="dl-text">上海市 市辖区 闵行区 大师傅</span>
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">留言信息:</span>
+                    <span class="dl-text">kdjfkdjf</span>
+                </div>
+            </div>
+            <div class="dlnav-con dl-2">
+                <ul class="d2-list">
+                    <li>
+                        <span class="col-md-2">时间</span>
+                        <span class="col-md-2">操作人</span>
+                        <span class="col-md-2">状态</span>
+                        <span class="col-md-3">完整状态</span>
+                        <span class="col-md-3">信息</span>
+                    </li>
+                    <li>
+                        <span class="col-md-2">2018-12-17 12:00:31	</span>
+                        <span class="col-md-2">测试3</span>
+                        <span class="col-md-2">待付款»已付款</span>
+                        <span class="col-md-3">» 订单已支付,</span>
+                        <span class="col-md-3">redmoney full payment</span>
+                    </li>
+                    <li>
+                        <span class="col-md-2">2018-12-17 12:00:31	</span>
+                        <span class="col-md-2">测试3</span>
+                        <span class="col-md-2">待付款»已付款</span>
+                        <span class="col-md-3">» 订单已支付,</span>
+                        <span class="col-md-3">redmoney full payment</span>
+                    </li>
+                    <li>
+                        <span class="col-md-2">2018-12-17 12:00:31	</span>
+                        <span class="col-md-2">测试3</span>
+                        <span class="col-md-2">待付款»已付款</span>
+                        <span class="col-md-3">» 订单已支付,</span>
+                        <span class="col-md-3">redmoney full payment</span>
+                    </li>
+                    <li>
+                        <span class="col-md-2">2018-12-17 12:00:31	</span>
+                        <span class="col-md-2">测试3</span>
+                        <span class="col-md-2">待付款»已付款</span>
+                        <span class="col-md-3">» 订单已支付,</span>
+                        <span class="col-md-3">redmoney full payment</span>
+                    </li>
+                    <li>
+                        <span class="col-md-2">2018-12-17 12:00:31	</span>
+                        <span class="col-md-2">测试3</span>
+                        <span class="col-md-2">待付款»已付款</span>
+                        <span class="col-md-3">» 订单已支付,</span>
+                        <span class="col-md-3">redmoney full payment</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</body>
+<script src="../../js/common.js"></script>
+<script>
+    tab({
+        head: '#dlnav',
+        con: '.dlnav-con'
+    })
+    select({
+        el: '#combobox1',
+        data: [{
+            id: 1,
+            text: '捷克蛋糕'
+        }, {
+            id: 2,
+            text: '爆米花'
+        }]
+    })
+    select({
+        el: '#combobox2',
+        data: [{
+            id: 1,
+            text: '捷克蛋糕'
+        }, {
+            id: 2,
+            text: '爆米花'
+        }]
+    })
+    select({
+        el: '#combobox3',
+        data: [{
+            id: 1,
+            text: '捷克蛋糕'
+        }, {
+            id: 2,
+            text: '爆米花'
+        }]
+    })
+</script>
+
+</html>

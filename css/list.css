@@ -1,0 +1,180 @@
+.gs-screen {
+    width: calc(100% - 30px);
+    margin: 0 auto;
+    overflow: auto;
+}
+
+.gs-header {
+    /* padding: 12px 15px; */
+    width: 100%;
+    height: 43px;
+    line-height: 43px;
+    text-indent: 15px;
+    border-bottom: 1px solid transparent;
+    border-top-right-radius: 2px;
+    border-top-left-radius: 2px;
+}
+
+.gs-header .btn {
+    margin-top: 6px;
+    margin-right: 10px;
+}
+
+.gs-con {
+    padding: 12px 15px;
+    overflow: auto;
+}
+
+.gs-con .gs-li {
+    height: 55px;
+    margin-bottom: 10px;
+}
+
+.gs-con .gs-li .combobox {
+    width: 80%;
+}
+
+.gs-con .gs-li .gs-name {
+    margin-bottom: 5px;
+    /* width: 100%; */
+}
+
+.gs-con .gs-li .gs-inp:focus {
+    border-color: #3bb4f2;
+}
+
+.gs-list {
+    width: calc(100% - 30px);
+    margin: 20px auto;
+    overflow: auto;
+}
+
+.gl-head {
+    line-height: 43px;
+    text-indent: 15px;
+}
+
+.gl-title {
+    overflow: hidden;
+}
+
+.gl-title span {
+    box-sizing: border-box;
+    height: 42px;
+    line-height: 42px;
+    text-align: center;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.gs-list ul.gl-ul {
+    overflow: hidden;
+}
+
+.gs-list ul.gl-ul li {
+    display: inline-block;
+    float: left;
+    width: 100%;
+    line-height: 42px;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.gs-list ul.gl-ul li:hover {
+    background-color: #f5f5f5;
+}
+
+.gs-list ul.gl-ul li:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+.subli {
+    box-sizing: border-box;
+    height: 42px;
+    line-height: 42px;
+    text-align: center;
+}
+
+.ant-switch {
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    /* width: 70px; */
+    height: 22px;
+    min-width: 44px;
+    line-height: 22px;
+    vertical-align: middle;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, .25);
+    cursor: pointer;
+    transition: all .3s;
+    user-select: none;
+}
+
+.ant-switch::after {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    left: 1px;
+    top: 1.5px;
+    border-radius: 18px;
+    background-color: #fff;
+    content: " ";
+    cursor: pointer;
+    transition: all .3s cubic-bezier(.78, .14, .15, .86);
+}
+
+.ant-switch-checked {
+    background-color: #3bb4f2;
+}
+
+.ant-switch::before {
+    display: inline-block;
+    float: right;
+    margin-right: 6px;
+    margin-left: 20px;
+    content: "";
+    color: #fff;
+    font-size: 14px;
+}
+
+.ant-switch-checked::before {
+    float: left;
+    margin-left: 6px;
+    margin-right: 20px;
+    content: "";
+}
+
+.ant-switch-checked::after {
+    left: 100%;
+    margin-left: -19px;
+}
+
+.up-down::before {
+    content: "下架"
+}
+
+.ant-switch-checked.up-down::before {
+    content: "上架"
+}
+
+.stop-open::before {
+    content: "停用"
+}
+
+.ant-switch-checked.stop-open::before {
+    content: "启用"
+}
+
+.dl-select {
+    width: 80%;
+    padding: 7px 6px;
+    border: 1px solid #d9d9d9;
+}
+
+.dl-select option {
+    line-height: 30px;
+    padding: 7px 6px;
+}
+
+.shrink {
+    width: 16px;
+}

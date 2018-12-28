@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>订单列表</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../css/list.css">
+    <link rel="stylesheet" href="../../css/data.css">
+</head>
+
+<body>
+    <div class="iframenav">
+        <!-- <button class="">刷新</button> -->
+        <div class="din fl">
+            <span>
+        
+      </span>
+        </div>
+        <div class="refresh topbtn din fl" onclick="document.location.reload()">
+            <img src="../../images/sx.png" alt="">
+        </div>
+        <!-- <div class="addgoods topbtn din fl">
+            <img src="../../images/jia.png" alt="">
+        </div> -->
+
+    </div>
+    <div class="gs-screen panel-default">
+        <div class="gs-header panel-heading">
+            <span class="din fl">筛选</span>
+            <input type="button" value="导出" class="btn btn-danger radius fr"></input>
+            <button class="btn btn-secondary radius din fr">筛选</button>
+            <div class="shrink"></div>
+        </div>
+        <div class="gs-con">
+            <ul>
+                <li class="gs-li col-md-3 col-sm-6  col-xs-12">
+                    <p class="gs-name">商品名称</p>
+                    <input class="gs-inp" type="text">
+                </li>
+                <li class="gs-li col-md-3 col-sm-6  col-xs-12">
+                    <p class="gs-name">销售价格</p>
+                    <input class="gs-inp" type="text">
+                </li>
+                <li class="gs-li col-md-3 col-sm-6  col-xs-12">
+                    <p class="gs-name">状态</p>
+                    <div class="combobox" id="combobox1">
+                        <div class="ant-select">
+                            <div class="ant-select-selection">请选择</div>
+                            <span class="ant-select-arrow"></span>
+                        </div>
+                    </div>
+                </li>
+                <li class="gs-li col-md-3 col-sm-6  col-xs-12">
+                    <p class="gs-name">库存数量</p>
+                    <input class="gs-inp" type="text">
+                </li>
+                <li class="gs-li col-md-3 col-sm-6  col-xs-12">
+                    <p class="gs-name">开始时间</p>
+                    <input id="calend" placeholder="开始时间" class="gs-inp"></input>
+                </li>
+                <li class="gs-li col-md-3 col-sm-6  col-xs-12">
+                    <p class="gs-name">结束时间</p>
+                    <input id="calend1" placeholder="结束时间" class="gs-inp"></input>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="gs-list panel-default">
+        <div class="gl-head panel-heading ">
+            <span>商品列表</span>
+        </div>
+        <div class="gl-title">
+            <span class="col-md-2 bot-bor subli">ID</span>
+            <span class="col-md-2 bot-bor subli">图片</span>
+            <span class="col-md-2 bot-bor subli">商品名称</span>
+            <span class="col-md-2 bot-bor subli">价格</span>
+            <span class="col-md-2 bot-bor subli">状态</span>
+            <span class="col-md-2 bot-bor subli">管理</span>
+        </div>
+        <ul class="gl-ul">
+            <li>
+                <span class=" col-md-2 bot-bor subli">1181</span>
+                <span class="col-md-2 bot-bor subli"><img src="http://www.inweeye.cn/image/cache/catalog/201812/goods/TIM截图20181210200811-40x40.png" alt=""></span>
+                <span class="col-md-2 bot-bor subli">萌宠系列手机壳</span>
+                <span class="col-md-2 bot-bor subli">68.00 ~ 68.00</span>
+                <span class="col-md-2 bot-bor subli"></span>
+                <span class="col-md-2 bot-bor subli"><a class="pz-btn btn-amend" href="orderdetails.html">查看</a></span>
+            </li>
+            <li>
+                <span class="col-md-2 bot-bor subli">1181</span>
+                <span class="col-md-2 bot-bor subli"><img src="http://www.inweeye.cn/image/cache/catalog/201812/goods/TIM截图20181210200811-40x40.png" alt=""></span>
+                <span class="col-md-2 bot-bor subli">萌宠系列手机壳</span>
+                <span class="col-md-2 bot-bor subli">68.00 ~ 68.00</span>
+                <span class="col-md-2 bot-bor subli">
+            </span>
+                <span class="col-md-2 bot-bor subli"><a class="pz-btn btn-amend" href="orderdetails.html">查看</a></span>
+            </li>
+        </ul>
+        <div class="w-floor-page">
+            <div class="floor-page" id="floorpages"></div>
+        </div>
+    </div>
+</body>
+<script src="../../js/common.js"></script>
+<script src="../../js/data.js"></script>
+<script>
+    pages.init({
+        el: '#floorpages',
+        pagenumber: 60
+    })
+
+    calender('#calend').init({
+        format: 'yyyy-MM-dd',
+        date: [2018, 5, 12]
+    }, function(date) {
+        this.value = date
+    })
+    calender('#calend1').init({
+        format: 'yyyy-MM-dd',
+        date: [2018, 5, 12]
+    }, function(date) {
+        this.value = date
+    })
+    select({
+        el: '#combobox1',
+        data: [{
+            id: 1,
+            text: '捷克蛋糕'
+        }, {
+            id: 2,
+            text: '爆米花'
+        }]
+    })
+</script>
+
+</html>

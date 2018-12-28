@@ -1,0 +1,316 @@
+;
+(function(win, doc) {
+    win.pz = function() {
+
+    }
+    win.pz = pz.prototype
+    window.pages = (function() {
+        function _page(obj) {
+            this.floorpages = doc.querySelector(obj.el)
+            this.num = obj.pagenumber
+            this.floorpages.innerHTML = "<span  id=\"firstprev\"  class=\"din fl\">首页</span><span  id=\"prev\" class=\"din fl\">上一页</span><ul class=\"fg-list din fl\" id=\"fglist\"></ul><span class=\"din fl\" id=\"next\" >下一页</span><span class=\"din fl\" id=\"lastnext\">尾页</span>"
+            this.init()
+        }
+        _page.prototype.init = function() {
+            this.firstprev = this.floorpages.querySelector('#firstprev')
+            this.prev = this.floorpages.querySelector('#prev')
+            this.next = this.floorpages.querySelector('#next')
+            this.lastnext = this.floorpages.querySelector('#lastnext')
+            this.fglist = this.floorpages.querySelector('#fglist')
+            this.current = 1 //当前页面页码
+            this.start = 1 //页码开始值
+            this.pagelen = 5 //页码长度
+            if (this.num <= this.pagelen) {
+                this.pagelen = this.num
+            }
+            this.bind()
+        }
+        _page.prototype.bind = function() {
+            this.setli()
+            this.setcolor()
+            this.setcurrent()
+            this.spanclick()
+        }
+        _page.prototype.spanclick = function() {
+            let that = this
+            that.firstprev.addEventListener('click', function(e) {
+                that.current = 1
+                that.setstart()
+            })
+            that.prev.addEventListener('click', function(e) {
+                if (that.current == 1) return
+                that.current--
+                    that.setstart()
+            })
+            that.next.addEventListener('click', function(e) {
+                if (that.current == that.num) return
+                that.current++
+                    that.setstart()
+            })
+            that.lastnext.addEventListener('click', function(e) {
+                that.current = that.num
+                that.setstart()
+            })
+        }
+        _page.prototype.setcurrent = function() { //设置当前页面页码
+            let that = this,
+                lis = this.fglist.querySelectorAll('li')
+            lis.forEach(function(li) {
+                li.addEventListener('click', function(e) {
+                    that.current = parseInt(li.getAttribute('data-page'))
+                    that.setstart()
+                })
+            })
+        }
+        _page.prototype.setstart = function() { //设置页码开始值
+            if (this.num <= this.pagelen) return
+            if (this.current <= 3) {
+                this.start = 1
+            } else if ((this.current + 2) >= this.num) {
+                this.start = this.num - 4
+            } else {
+                this.start = this.current - 2
+            }
+            this.setli()
+            this.setcolor()
+        }
+        _page.prototype.setcolor = function() { //选中当前页码
+            let that = this,
+                lis = this.fglist.querySelectorAll('li')
+            lis.forEach(function(li) {
+                li.classList.remove('active')
+                if (that.current == li.getAttribute('data-page')) {
+                    li.classList.add('active')
+                }
+            })
+        }
+
+        _page.prototype.setli = function() {
+            let lihtml = '',
+                n = this.start,
+                len = n + this.pagelen
+            for (let i = n; i < len; i++) {
+                lihtml += '<li data-page=\"' + i + '\">' + i + '</li>'
+            }
+            this.fglist.innerHTML = lihtml
+            this.setcurrent()
+        }
+        return {
+            init: function(obj) {
+                new _page(obj)
+            }
+        }
+    })()
+    window.tab = (function() {
+        function B(obj) {
+            this.lis = doc.querySelector(obj.head).querySelectorAll('li')
+            this.con = doc.querySelectorAll(obj.con)
+            this.num = obj.num || 1
+            this.init()
+        };
+        B.prototype = {
+            init: function() {
+                this.liclick();
+                this.setactive(this.lis, this.num)
+                this.setactive(this.con, this.num)
+            },
+            liclick: function() {
+                let t = this,
+                    i = 0;
+                t.lis.forEach(function(li) {
+                    i++;
+                    (function(i) {
+                        li.addEventListener('click', function(e) {
+                            t.setactive(t.lis, i)
+                            t.setactive(t.con, i)
+                        })
+                    }(i));
+                })
+            },
+            setactive: function(obj, n) {
+                let arr = obj,
+                    i = 0;
+
+                arr.forEach(function(li) {
+                    i++;
+                    li.classList.remove('active');
+                    (function(i) {
+                        if (i == n) {
+                            li.classList.add('active');
+                        }
+                    }(i));
+                })
+            }
+        }
+
+        function c(o) {
+            return new B(o)
+        };
+        return c
+    })()
+    window.select = (function() {
+        function D(o) {
+            this.box = doc.querySelector(o.el)
+            this.box.innerHTML += '<div class="as-dropdown"><ul class="as-dropdown-menu"></ul></div>'
+            this.menu = this.box.querySelector('.as-dropdown')
+            this.select = this.box.querySelector('.ant-select')
+            this.selection = this.box.querySelector('.ant-select-selection')
+            this.data = o.data
+            this.init()
+        }
+        D.prototype = {
+            init: function() {
+                this.dopen()
+                this.setmenustyle()
+                this.setitems()
+
+            },
+            setitems: function() { //循环出下拉框
+                let str = '',
+                    len = this.data.length,
+                    menulist = this.menu.querySelector('ul')
+                for (let i = 0; i < len; i++) {
+                    str += '<li class="as-dropdown-item" data-id="' + this.data[i].id + '" data-value="' + this.data[i].text + '" >' + this.data[i].text + '</li>'
+                }
+                menulist.innerHTML = str
+                this.itemclick()
+            },
+            itemclick: function() { //下拉框点击事件
+                let t = this,
+                    lis = t.menu.querySelectorAll('li'),
+                    sel = t.selection,
+                    body = doc.querySelector('body')
+
+                body.addEventListener('click', function(e) {
+                    if (t.select.classList.contains('ant-select-open')) {
+                        t.showmenu()
+                    }
+                })
+                lis.forEach(function(li) {
+                    li.addEventListener('click', function(e) {
+                        e.stopPropagation()
+                        let value = li.getAttribute('data-value'),
+                            id = li.getAttribute('data-id')
+                        sel.setAttribute('data-value', value)
+                        sel.setAttribute('data-id', id)
+                        sel.innerHTML = value
+                        sel.classList.add('already-select')
+                        t.showmenu()
+
+                    })
+                })
+            },
+            dopen: function() { //选择框点击
+                let t = this,
+                    top = t.menu.offsetTop,
+                    body = doc.querySelector('body')
+                t.select.addEventListener('click', function(e) {
+                    e.stopPropagation()
+                    t.menu.style.top = top - body.scrollTop + 'px'
+                    t.showmenu()
+                        // t.setmenustyle()
+                })
+            },
+            setmenustyle: function() { //设置下拉框的宽度和位置
+                let t = this,
+                    top = t.menu.offsetTop,
+                    body = doc.querySelector('body')
+                    // t.menu.style.top = top - body.scrollTop + 'px'
+                console.log(top)
+                t.menu.style.width = this.box.offsetWidth + 'px'
+                body.addEventListener('scroll', function(e) {
+                    if (!t.menu.classList.contains('active')) return
+                        // top = t.menu.offsetTop
+                    t.menu.style.top = top - body.scrollTop + 'px'
+                })
+            },
+            showmenu: function() {
+                let sel = this.select,
+                    menus = this.menu
+                if (sel.classList.contains('ant-select-open')) {
+                    sel.classList.remove('ant-select-open')
+                    menus.classList.remove('active')
+                } else {
+                    sel.classList.add('ant-select-open')
+                    menus.classList.add('active')
+                }
+            }
+        };
+
+        function d(o) {
+            return new D(o)
+        };
+        return d
+    })()
+    window.selpicure = (function() {
+        function S(o) {
+            this.picures = doc.querySelector(o.el)
+            this.num = o.num
+            this.images = []
+            this.files = []
+            this.init()
+        }
+        S.prototype.init = function() {
+            this.picures.innerHTML += '<ul class="picurelist"></ul><input class="file" accept="image/*" type="file" name="" id="">'
+            this.file = this.picures.querySelector('.file')
+            this.selfile = this.picures.querySelector('.selfile')
+            this.list = this.picures.querySelector('.picurelist')
+            this.bind()
+        }
+        S.prototype.bind = function() {
+            this.filechange()
+        }
+        S.prototype.filechange = function(e) {
+            let t = this
+            t.selfile.addEventListener('click', function(e) {
+                t.file.click()
+            })
+            t.file.addEventListener('change', function(e) {
+                if (t.file.files.length < 1) return
+                if (t.num == 1) {
+                    t.files = []
+                }
+                t.disposefiles(t.file.files)
+            })
+        }
+        S.prototype.disposefiles = function(files) {
+            let len3 = files.length
+            for (let y = 0; y < len3; y++) {
+                this.files.push(files[y])
+            }
+            this.disposeimages()
+        }
+        S.prototype.disposeimages = function() {
+            let len = this.files.length
+            this.images = []
+            for (let i = 0; i < len; i++) {
+                this.images.push(this.getObjectURL(this.files[i]))
+            }
+            this.showImg()
+        }
+        S.prototype.showImg = function() {
+            let str = '',
+                len = this.images.length
+            for (let i = 0; i < len; i++) {
+                str += '<li><img src="' + this.images[i] + '" alt=""></li>'
+            }
+            this.list.innerHTML = str
+        }
+        S.prototype.getObjectURL = function(file) {
+            var url = null
+            if (window.createObjectURL != undefined) { // basic  
+                url = window.createObjectURL(file)
+            } else if (window.URL != undefined) { // mozilla(firefox)  
+                url = window.URL.createObjectURL(file)
+            } else if (window.webkitURL != undefined) { // webkit or chrome  
+                url = window.webkitURL.createObjectURL(file)
+            }
+            return url
+        }
+
+        function s(o) {
+            return new S(o)
+        }
+        return s
+    }())
+})(window, document)

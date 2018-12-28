@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/left.css">
+    <title>品质生活cms</title>
+</head>
+
+<body>
+    <div class="navbar-header">
+        <div class="navbar-logo"></div>
+    </div>
+    <div class="navbar  din fl">
+        <!-- <div class="nav-user">
+            <div class="user-content">
+                <img class="headimg" src="http://ozwpnu2pa.bkt.clouddn.com/profile_small.jpg" alt="">
+                <p class="username">这是个名字</p>
+                <p class="userstatus">超级管理员</p>
+            </div>
+        </div> -->
+        <div class="sidebar">
+            <ul class="sb_list">
+                <!-- <li class="sb_li">
+                    <a class="sb_tit din" href="#"><img class="din fl" src="" alt="">首页</a>
+                </li> -->
+                <li class="sb_li">
+                    <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_17.png" alt="">订单</a>
+                    <ul class="sb_sub_list ">
+                        <li data-url="page/order/orderlist.html" data-name="订单管理">订单管理</li>
+                    </ul>
+                </li>
+                <li class="sb_li">
+                    <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_13.png" alt="">店铺</a>
+                    <ul class="sb_sub_list ">
+                        <li data-url="dingdan.html" data-name="店铺管理">店铺管理</li>
+                        <li data-url="dingdan.html">店铺申请列表</li>
+                        <li data-url="dingdan.html">店铺审核列表</li>
+                        <li data-url="dingdan.html">买主代表奖金</li>
+                    </ul>
+                </li>
+                <li class="sb_li">
+                    <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_09.png" alt="">商品</a>
+                    <ul class="sb_sub_list ">
+                        <li data-url="page/shop/supplier.html" data-name="供应商管理">供应商管理</li>
+                        <li data-url="dingdan.html">供应商分类</li>
+                        <li data-url="dingdan.html">供应商商品规格列表</li>
+                        <li data-url="page/goods/goods.html" data-name="商品库">商品库</li>
+                        <li data-url="page/goods/goodsclassify.html" data-name="商品分类">商品分类</li>
+                        <li data-url="dingdan.html">店铺商品列表</li>
+                        <li data-url="dingdan.html">运费模板</li>
+                        <li data-url="dingdan.html">评星模板</li>
+                    </ul>
+                </li>
+                <li class="sb_li">
+                    <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_14.png" alt="">会员</a>
+                    <ul class="sb_sub_list ">
+                        <li>会员管理</li>
+                        <li>会员归属</li>
+                        <li>会员银行卡</li>
+                        <li>佣金转出申请</li>
+                    </ul>
+                </li>
+                <li class="sb_li">
+                    <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_03.png" alt="">运营</a>
+                    <ul class="sb_sub_list ">
+                        <li>banner管理</li>
+                        <li data-url="page/operation/coupon.html" data-name="优惠券活动">优惠券活动</li>
+                        <li>分类专题</li>
+                        <li>分类专题商品推荐</li>
+                        <li>首页商品推荐管理</li>
+                        <li>分类商品推荐管理</li>
+                        <li>产品详情推荐管理</li>
+                    </ul>
+                </li>
+                <li class="sb_li">
+                    <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_10.png" alt="">平台设置</a>
+                    <ul class="sb_sub_list ">
+                        <li>权限管理</li>
+                        <li>人工调账</li>
+                        <li>分销分利比例设置</li>
+                        <li>系统配置</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="right din fl" onclick="">
+        <div class="r_tit_list">
+            <div class="roll-nav roll-left din fl"></div>
+            <ul class="r_tit_ul din">
+                <li class="r_tit_li active" name="workbench">首页</li>
+            </ul>
+            <div class="roll-nav roll-right din fr"></div>
+        </div>
+        <div class="content">
+            <iframe class="J_iframe" id="workbench" name="workbench" width="100%" height="100%" src="workbench.html" frameborder="0" seamless></iframe>
+        </div>
+    </div>
+</body>
+<script src="js/jq.js"></script>
+<script src="js/md5.js"></script>
+<script src="js/left.js"></script>
+<script>
+</script>
+<script type="text/javascript" src="jmjs/crypto-js.js"></script>
+<script type="text/javascript">
+    Tab.init(document.querySelector('.navbar'), document.querySelector('.content'))
+</script>
+
+</html>

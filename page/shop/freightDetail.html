@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Access-Control-Allow-Origin" content="http://wwwapi.pzlife.vip">
+    <title>订单详情</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../css/details.css">
+</head>
+
+<body>
+    <div class="iframenav">
+        <!-- <button class="">刷新</button> -->
+        <div class="din fl">
+            <span>
+        
+      </span>
+        </div>
+        <div class="retreat topbtn mr15 fl" onclick="history.back()">
+            <img src="../../images/goback.png" alt="">
+        </div>
+        <div class="refresh topbtn mr15 fl" onclick="document.location.reload()">
+            <img src="../../images/sx.png" alt="">
+        </div>
+        <!-- <div class="addgoods topbtn din fl">
+            <img src="../../images/jia.png" alt="">
+        </div> -->
+    </div>
+    <div class="details">
+        <div class="dl-header">
+            <span class="dl-name">运费模板详情</span>
+            <!-- <input type="button" value="订单退款" class="btn btn-danger radius fr"></input> -->
+            <input type="button" value="增加运费模板" class="btn btn-primary radius fr"></input>
+        </div>
+        <div class="dl-con">
+            <ul class="dl-nav" id="dlnav">
+                <li>基本信息</li>
+                <li>配送区域</li>
+            </ul>
+            <div class="dlnav-con dl-1">
+                <div class="dl-show">
+                    <span class="dl-title">计价方式:</span>
+                    <input class="dl-info" placeholder="计价方式" value="" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">标题:</span>
+                    <input class="dl-info" placeholder="标题" value="" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">详情:</span>
+                    <textarea class="dl-area" placeholder="详情" name="" id="" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="dlnav-con dl-2">
+                <!-- <div>kkkkk</div> -->
+                <ul class="d2-list mt15">
+                    <li>
+                        <span class="col-md-4">区域</span>
+                        <span class="col-md-2">邮费单价</span>
+                        <span class="col-md-2">续件价格</span>
+                        <span class="col-md-2">包邮价格</span>
+                        <span class="col-md-2">操作</span>
+                    </li>
+                    <li>
+                        <span class="col-md-4">2018-12-17 12:00:31	</span>
+                        <span class="col-md-2">2018-12-17 12:00:31	</span>
+                        <span class="col-md-2">测试3</span>
+                        <span class="col-md-2">测试3</span>
+                        <span class="col-md-2">
+                            <input class="pz-btn btn-amend" type="button" value="修改">
+                            <input class="pz-btn btn-del" type="button" value="删除">
+                        </span>
+                    </li>
+                </ul>
+                <!-- <div class="details mt15">
+                    <div class="dl-header">
+                        <span class="dl-name">运费模板1</span>
+                        <input type="button" value="增加规格" class="btn btn-primary radius fr"></input>
+                    </div>
+                    <div class="dl-con">
+                        <div class="details mt0" v-for="(v,k) in lll">
+                            <div class="dl-header">
+                                <span class="dl-name">价格</span>
+                                <input type="button" value="增加地区" class="btn btn-primary radius fr"></input>
+                            </div>
+                            <div class="dl-con">
+                                <div>
+                                    <span>未选择地区:</span>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    <div class="pz-modal hide">
+        <div class="refresh topbtn din fl" onclick="document.location.reload()">
+            <img src="../../images/sx.png" alt="">
+        </div>
+        <div class="pz-modal-content fd-cont">
+            <div class="pz-modal-header">运费模板</div>
+            <div class="pz-spin-container">
+                <div class="dl-show">
+                    <span class="dl-title">区域选择:</span>
+                    <div id="pzaddress">
+                        <div class="pz-address">
+                            <div class="lab-address">
+                                <input class="box checkbox" type="checkbox">
+                                <span class="box span-box"></span>
+                                <span class="address-text">北京</span>
+                            </div>
+                        </div>
+                        <div class="pz-address">
+                            <div class="lab-address">
+                                <input class="box checkbox" type="checkbox">
+                                <span class="box span-box"></span>
+                                <span class="address-text">北京</span>
+                            </div>
+                        </div>
+                        <div class="pz-address">
+                            <div class="lab-address">
+                                <input class="box checkbox" type="checkbox">
+                                <span class="box span-box"></span>
+                                <span class="address-text">北京</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">邮费单价:</span>
+                    <input class="dl-info" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">续件价格:</span>
+                    <input class="dl-info" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">包邮价格:</span>
+                    <input class="dl-info" type="text">
+                </div>
+                <div class="dl-show">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/html" id="javascript_template">
+
+</script>
+<script src="../../js/ajax.js"></script>
+<script src="shop.js"></script>
+<script src="../../js/common.js"></script>
+<script>
+    // import {
+    //     getProvinceCity
+    // } from '../../js/ajax.js'
+    tab({
+        head: '#dlnav',
+        con: '.dlnav-con',
+        num: 2
+    })
+</script>
+
+</html>
