@@ -178,3 +178,8 @@
 .shrink {
     width: 16px;
 }
+
+.tl {
+    text-align: left;
+    text-indent: 20px;
+}

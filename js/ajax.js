@@ -21,7 +21,7 @@
         type = type.toUpperCase();
         // 用于清除缓存
         let random = Math.random();
-
+        params.data = params.data || ''
         if (typeof params.data == 'object') {
             let str = '';
             for (let key in params.data) {
@@ -59,10 +59,8 @@
         }
     }
     quest.getcatelist = function(params) { //分类列表
-        console.log(params)
         this.Ajax({
-            type: 'post',
-            data: params.data || '',
+            data: params.data,
             url: 'admin/category/getcatelist',
             success: function(res) {
                 if (res.code == '200') {
@@ -71,11 +69,55 @@
             }
         })
     }
-
+    quest.addcatepage = function(params) { //获取前两级分类
+        this.Ajax({
+            data: params.data,
+            url: 'admin/category/addcatepage',
+            success: function(res) {
+                if (res.code == '200') {
+                    params.success(res)
+                }
+            }
+        })
+    }
+    quest.saveeditcate = function(params) { //提交编辑
+        this.Ajax({
+            data: params.data,
+            url: 'admin/category/saveeditcate',
+            success: function(res) {
+                if (res.code == '200') {
+                    params.success(res)
+                }
+            }
+        })
+    }
+    quest.stopstartcate = function(params) { //停用/启用分类
+        this.Ajax({
+            data: params.data,
+            url: 'admin/category/stopstartcate',
+            success: function(res) {
+                if (res.code == '200') {
+                    params.success(res)
+                }
+            }
+        })
+    }
+    quest.saveaddcate = function(params) { //添加分类
+        this.Ajax({
+            type: 'post',
+            data: params.data,
+            url: 'admin/category/saveaddcate',
+            success: function(res) {
+                if (res.code == '200') {
+                    params.success(res)
+                }
+            }
+        })
+    }
     quest.editcatepage = function(params) { //编辑分类页面
         this.Ajax({
             type: 'post',
-            data: params.data || '',
+            data: params.data,
             url: 'admin/category/editcatepage',
             success: function(res) {
                 if (res.code == '200') {

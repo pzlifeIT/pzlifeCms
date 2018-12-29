@@ -23,7 +23,8 @@ select {
 }
 
 body {
-    font: 12px"宋体", "Arial Narrow", HELVETICA;
+    font: 12px "宋体", "Arial Narrow", HELVETICA;
+    family: "Microsoft YaHei";
     background: #fff;
     -webkit-text-size-adjust: 100%;
 }
@@ -354,6 +355,8 @@ input {
 }
 
 .addgoods:hover::after {
+    width: 58px;
+    right: -66px;
     content: '添加商品';
 }
 
@@ -364,6 +367,10 @@ input {
 .addgoods img {
     width: 24px;
     margin: 5px;
+}
+
+.addclass:hover::after {
+    content: '添加分类';
 }
 
 

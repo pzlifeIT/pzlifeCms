@@ -170,7 +170,12 @@
                     len = this.data.length,
                     menulist = this.menu.querySelector('ul')
                 for (let i = 0; i < len; i++) {
-                    str += '<li class="as-dropdown-item" data-id="' + this.data[i].id + '" data-value="' + this.data[i].text + '" >' + this.data[i].text + '</li>'
+                    if (this.data.tier == 2) {
+                        this.data[i].type_name = '&nbsp;&nbsp;' + this.data[i].type_name
+                    } else if (this.data.tier == 3) {
+                        this.data[i].type_name = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + this.data[i].type_name
+                    }
+                    str += '<li class="as-dropdown-item" data-id="' + this.data[i].id + '" data-value="' + this.data[i].type_name + '" >' + this.data[i].type_name + '</li>'
                 }
                 menulist.innerHTML = str
                 this.itemclick()
@@ -206,9 +211,10 @@
                     body = doc.querySelector('body')
                 t.select.addEventListener('click', function(e) {
                     e.stopPropagation()
-                    t.menu.style.top = top - body.scrollTop + 'px'
+                        // t.menu.style.top = top - body.scrollTop + 'px'
+                    t.menu.style.top = t.box.getBoundingClientRect().top + t.box.offsetHeight + 'px'
                     t.showmenu()
-                        // t.setmenustyle()
+                    t.setmenustyle()
                 })
             },
             setmenustyle: function() { //设置下拉框的宽度和位置
@@ -216,12 +222,12 @@
                     top = t.menu.offsetTop,
                     body = doc.querySelector('body')
                     // t.menu.style.top = top - body.scrollTop + 'px'
-                console.log(top)
+                t.menu.style.top = t.box.getBoundingClientRect().top + t.box.offsetHeight + 'px'
                 t.menu.style.width = this.box.offsetWidth + 'px'
                 body.addEventListener('scroll', function(e) {
                     if (!t.menu.classList.contains('active')) return
                         // top = t.menu.offsetTop
-                    t.menu.style.top = top - body.scrollTop + 'px'
+                    t.menu.style.top = t.box.getBoundingClientRect().top + t.box.offsetHeight + 'px'
                 })
             },
             showmenu: function() {
