@@ -56,14 +56,14 @@
 
 .gl-title {
     overflow: hidden;
+    border-bottom: 1px solid #dcdcdc;
 }
 
-.gl-title span {
+.gl-title .subli {
     box-sizing: border-box;
     height: 42px;
     line-height: 42px;
     text-align: center;
-    border-bottom: 1px solid #dcdcdc;
 }
 
 .gs-list ul.gl-ul {
@@ -74,6 +74,7 @@
     display: inline-block;
     float: left;
     width: 100%;
+    min-height: 42px;
     line-height: 42px;
     border-bottom: 1px solid #dcdcdc;
 }
@@ -87,10 +88,23 @@
 }
 
 .subli {
+    display: inline-block;
     box-sizing: border-box;
-    height: 42px;
-    line-height: 42px;
+    height: auto;
+    /* line-height: 42px; */
     text-align: center;
+}
+
+.subli .liimg {
+    width: 42px;
+}
+
+.subli span {
+    padding: 10px;
+}
+
+.desc {
+    line-height: 20px;
 }
 
 .ant-switch {

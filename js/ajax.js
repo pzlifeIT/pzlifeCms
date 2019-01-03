@@ -104,7 +104,6 @@
     }
     quest.saveaddcate = function(params) { //添加分类
         this.Ajax({
-            type: 'post',
             data: params.data,
             url: 'admin/category/saveaddcate',
             success: function(res) {
@@ -116,7 +115,6 @@
     }
     quest.editcatepage = function(params) { //编辑分类页面
         this.Ajax({
-            type: 'post',
             data: params.data,
             url: 'admin/category/editcatepage',
             success: function(res) {
@@ -129,7 +127,6 @@
 
     quest.getProvinceCity = function(params) {
         this.Ajax({
-            type: 'post',
             url: 'admin/index/getProvinceCity',
             success: function(res) {
                 if (res.code == '200') {
@@ -138,6 +135,82 @@
             }
         })
     }
+    quest.suppliers = {
+        updateSupplier: function(params) {
+            quest.Ajax({
+                data: params.data || '',
+                url: 'admin/suppliers/updateSupplier',
+                success: function(res) {
+                    if (res.code == '200') {
+                        params.success(res)
+                    }
+                }
+            })
+        },
+        addsupplier: function() { //
+            quest.Ajax({
+                url: 'admin/suppliers/addsupplier',
+                success: function(res) {
+                    if (res.code == '200') {
+                        params.success(res)
+                    }
+                }
+            })
+        },
+        addsupplierfreight: function() {
+            quest.Ajax({
+                url: 'admin/suppliers/addsupplierfreight',
+                success: function(res) {
+                    if (res.code == '200') {
+                        params.success(res)
+                    }
+                }
+            })
+        },
+        getsuppliers: function(params) {
+            quest.Ajax({
+                data: params.data || '',
+                url: 'admin/suppliers/getsuppliers',
+                success: function(res) {
+                    if (res.code == '200') {
+                        params.success(res)
+                    }
+                }
+            })
+        },
+        getsupplierfreights: function() {
+            quest.Ajax({
+                url: 'admin/suppliers/getsupplierfreights',
+                success: function(res) {
+                    if (res.code == '200') {
+                        params.success(res)
+                    }
+                }
+            })
+        },
+        getsupplierfreightdetail: function() {
+            quest.Ajax({
+                url: 'admin/suppliers/getsupplierfreightdetail',
+                success: function(res) {
+                    if (res.code == '200') {
+                        params.success(res)
+                    }
+                }
+            })
+        },
+        getsupplierdata: function(params) { //获取供应商详情
+            quest.Ajax({
+                data: params.data || '',
+                url: 'admin/suppliers/getsupplierdata',
+                success: function(res) {
+                    if (res.code == '200') {
+                        params.success(res)
+                    }
+                }
+            })
+        }
+    }
+
 })()
 
 

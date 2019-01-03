@@ -4,10 +4,32 @@
 
     }
     win.pz = pz.prototype
+    pz.geturl = function() {
+        let href = location.href,
+            list = {}
+        if (href.indexOf('?') != -1) {
+            let params = href.split('?')[1]
+            if (params.indexOf('&') != -1) {
+                let arr = params.split('&'),
+                    len = arr.length
+                for (let i = 0; i < len; i++) {
+                    if (arr[i].indexOf('=') != -1) {
+                        let l = arr[i].split('=')
+                        list[l[0]] = l[1]
+                    }
+                }
+            } else if (params.indexOf('=') != -1) {
+                let arr = params.split('=')
+                list[arr[0]] = arr[1]
+            }
+        }
+        return list
+    }
     window.pages = (function() {
         function _page(obj) {
             this.floorpages = doc.querySelector(obj.el)
             this.num = obj.pagenumber
+            this.fn = obj.fn
             this.floorpages.innerHTML = "<span  id=\"firstprev\"  class=\"din fl\">首页</span><span  id=\"prev\" class=\"din fl\">上一页</span><ul class=\"fg-list din fl\" id=\"fglist\"></ul><span class=\"din fl\" id=\"next\" >下一页</span><span class=\"din fl\" id=\"lastnext\">尾页</span>"
             this.init()
         }
@@ -34,20 +56,22 @@
         _page.prototype.spanclick = function() {
             let that = this
             that.firstprev.addEventListener('click', function(e) {
+                if (that.current == 1) return
                 that.current = 1
                 that.setstart()
             })
             that.prev.addEventListener('click', function(e) {
                 if (that.current == 1) return
-                that.current--
-                    that.setstart()
+                that.current--;
+                that.setstart()
             })
             that.next.addEventListener('click', function(e) {
                 if (that.current == that.num) return
-                that.current++
-                    that.setstart()
+                that.current++;
+                that.setstart()
             })
             that.lastnext.addEventListener('click', function(e) {
+                if (that.current == that.num) return
                 that.current = that.num
                 that.setstart()
             })
@@ -59,6 +83,7 @@
                 li.addEventListener('click', function(e) {
                     that.current = parseInt(li.getAttribute('data-page'))
                     that.setstart()
+
                 })
             })
         }
@@ -73,6 +98,10 @@
             }
             this.setli()
             this.setcolor()
+
+            if (typeof this.fn == 'function') {
+                this.fn(this.current)
+            }
         }
         _page.prototype.setcolor = function() { //选中当前页码
             let that = this,
@@ -252,12 +281,14 @@
         function S(o) {
             this.picures = doc.querySelector(o.el)
             this.num = o.num
+            this.imglist = o.images
             this.images = []
             this.files = []
+            this.imgChange = o.imgChange
             this.init()
         }
         S.prototype.init = function() {
-            this.picures.innerHTML += '<ul class="picurelist"></ul><input class="file" accept="image/*" type="file" name="" id="">'
+            this.picures.innerHTML += '<ul class="picurelist"></ul><input class="file" accept="image/*" type="file" name="" id="imgFile">'
             this.file = this.picures.querySelector('.file')
             this.selfile = this.picures.querySelector('.selfile')
             this.list = this.picures.querySelector('.picurelist')
@@ -265,6 +296,16 @@
         }
         S.prototype.bind = function() {
             this.filechange()
+            this.disposeimg(this.imglist)
+        }
+        S.prototype.disposeimg = function(images) { //默认显示图片
+            if (!(images instanceof Array)) return
+            let len = images.length,
+                i
+            for (i = 0; i < len; i++) {
+                this.images.push(images[i].image)
+            }
+            this.showImg()
         }
         S.prototype.filechange = function(e) {
             let t = this
@@ -277,6 +318,7 @@
                     t.files = []
                 }
                 t.disposefiles(t.file.files)
+                t.imgChange(t.file.files)
             })
         }
         S.prototype.disposefiles = function(files) {

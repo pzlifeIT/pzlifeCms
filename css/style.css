@@ -348,29 +348,39 @@ input {
     content: '后退';
 }
 
-.addgoods {
+.add {
     position: relative;
     background-color: #3bb4f2;
     margin-left: 15px;
 }
 
-.addgoods:hover::after {
+.add:hover::after {
     width: 58px;
     right: -66px;
     content: '添加商品';
 }
 
-.addgoods:hover {
+.add:hover {
     background-color: #0f9ae0;
 }
 
-.addgoods img {
+.add img {
     width: 24px;
     margin: 5px;
 }
 
+.addgoods:hover::after {
+    content: '添加商品';
+}
+
 .addclass:hover::after {
     content: '添加分类';
+}
+
+.addsupplier:hover::after {
+    width: 68px;
+    right: -76px;
+    content: '添加供应商';
 }
 
 

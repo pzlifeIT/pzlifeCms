@@ -42,19 +42,19 @@
             <div class="dlnav-con dl-1">
                 <div class="dl-show">
                     <span class="dl-title">供应商名称:</span>
-                    <input class="dl-info" placeholder="请输入供应商名称" value="" type="text">
+                    <input class="dl-info" id="sdName" placeholder="请输入供应商名称" value="" type="text">
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">供应商客服:</span>
-                    <input class="dl-info" placeholder="供应商客服" value="" type="text">
-                </div>
-                <div class="dl-show">
-                    <span class="dl-title">供应商快递描述:</span>
-                    <textarea class="dl-area" placeholder="供应商快递描述" name="" id="" rows="3"></textarea>
+                    <input class="dl-info" id="sdTel" placeholder="供应商客服" value="" type="text">
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">供应商描述:</span>
-                    <textarea class="dl-area" placeholder="供应商描述" name="" id="" rows="3"></textarea>
+                    <textarea class="dl-area" id="sdTitle" placeholder="供应商描述" name="" id="" rows="3"></textarea>
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">供应商快递描述:</span>
+                    <textarea class="dl-area" id="sdDesc" placeholder="供应商快递描述" name="" id="" rows="3"></textarea>
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">供应商图片:</span>
@@ -68,6 +68,9 @@
                         <input class="file" type="file" name="" id=""> -->
                         <div class="selfile fr"></div>
                     </div>
+                </div>
+                <div class="dl-show">
+                    <input type="button" value="保存" id="sdSave" class="pz-btn btn-amend">
                 </div>
             </div>
             <div class="dlnav-con dl-2">
@@ -158,27 +161,17 @@
         </ul>
     </div>
 </script>
-<script src="../../js/common.js"></script>
 <script src="../../js/ajax.js"></script>
+<script src="../../js/common.js"></script>
+<script src="js/supplierdetails.js"></script>
 <script>
-    // import {
-    //     getProvinceCity
-    // } from '../../js/ajax.js'
     tab({
         head: '#dlnav',
         con: '.dlnav-con',
-        num: 2
-    })
-    selpicure({
-        el: '#selpicure1',
         num: 1
     })
-    getProvinceCity({
-        type: 'post',
-        success: function(res) {
-            console.log(res)
-        }
-    })
+
+    pz.supplierdetails.init()
 </script>
 
 </html>

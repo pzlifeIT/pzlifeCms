@@ -12,7 +12,6 @@
         }
         _GC.prototype.init = function() {
             this.getcatelist();
-
             this.savenew();
             this.savecompile();
             this.hidenew(this.classcompile);
@@ -279,25 +278,5 @@
     //     })
     // }
 
-    function geturl() {
-        let href = location.href,
-            list = {}
-        if (href.indexOf('?')) {
-            let params = href.split('?')[1]
-            if (params.indexOf('&')) {
-                let arr = params.split('&'),
-                    len = arr.length
-                for (let i = 0; i < len; i++) {
-                    if (arr[i].indexOf('=')) {
-                        let l = arr[i].split('=')
-                        list[l[0]] = l[1]
-                    }
-                }
-            } else if (params.indexOf('=')) {
-                let arr = params.split('=')
-                list[arr[0]] = arr[1]
-            }
-        }
-        return list
-    }
+
 })(window)

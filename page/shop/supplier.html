@@ -23,8 +23,8 @@
         <div class="refresh topbtn din fl" onclick="document.location.reload()">
             <img src="../../images/sx.png" alt="">
         </div>
-        <a href="goodsoperation.html">
-            <div class="addgoods topbtn din fl">
+        <a href="supplierdetails.html">
+            <div class="add addsupplier topbtn din fl">
                 <img src="../../images/jia.png" alt="">
             </div>
         </a>
@@ -50,16 +50,16 @@
             <span>供应商列表</span>
         </div>
         <div class="gl-title">
-            <span class="col-md-2 bot-bor subli">ID</span>
-            <span class="col-md-2 bot-bor subli">供应商图片</span>
-            <span class="col-md-2 bot-bor subli">供应商名称</span>
-            <span class="col-md-2 bot-bor subli">供应商客服</span>
-            <span class="col-md-2 bot-bor subli">供应商描述</span>
-            <span class="col-md-2 bot-bor subli">管理</span>
+            <div class="col-md-2 bot-bor subli">ID</div>
+            <div class="col-md-2 bot-bor subli">供应商图片</div>
+            <div class="col-md-2 bot-bor subli">供应商名称</div>
+            <div class="col-md-2 bot-bor subli">供应商客服</div>
+            <div class="col-md-2 bot-bor subli">供应商描述</div>
+            <div class="col-md-2 bot-bor subli">管理</div>
         </div>
-        <ul class="gl-ul">
-            <li>
-                <span class="col-md-2 bot-bor subli">1181</span>
+        <ul class="gl-ul" id="supplierslist">
+            <!-- <li>
+                <div class="col-md-2 bot-bor subli">1181</div>
                 <span class="col-md-2 bot-bor subli"><img src="http://www.inweeye.cn/image/cache/catalog/201812/goods/TIM截图20181210200811-40x40.png" alt=""></span>
                 <span class="col-md-2 bot-bor subli">萌宠系列手机壳</span>
                 <span class="col-md-2 bot-bor subli">111111111</span>
@@ -69,7 +69,7 @@
                   <a class="pz-btn btn-amend" href="supplierdetails.html">编辑</a>
                   <a class="pz-btn btn-del" href="#">删除</a>
                 </span>
-            </li>
+            </li> -->
         </ul>
         <div class="w-floor-page">
             <div class="floor-page" id="floorpages"></div>
@@ -77,13 +77,11 @@
     </div>
 
 </body>
-
+<script src="../../js/ajax.js"></script>
 <script src="../../js/common.js"></script>
+<script src="js/supplier.js"></script>
 <script>
-    pages.init({
-        el: '#floorpages',
-        pagenumber: 60
-    })
+    pz.supplier.init({})
 </script>
 
 </html>
