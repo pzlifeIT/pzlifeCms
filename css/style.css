@@ -383,6 +383,12 @@ input {
     content: '添加供应商';
 }
 
+.addsize:hover::after {
+    width: 68px;
+    right: -76px;
+    content: '添加规格';
+}
+
 
 /* 通用按钮 */
 
@@ -398,8 +404,8 @@ input {
 
 .btn-primary {
     color: #fff;
-    background-color: #5a98de;
-    border-color: #5a98de;
+    background-color: #3bb4f2;
+    border-color: #3bb4f2;
 }
 
 .gs-inp {
@@ -565,7 +571,7 @@ input {
 }
 
 .btn-amend {
-    background-color: #5a98de;
+    background-color: #3bb4f2;
 }
 
 .btn-cancel {
@@ -608,10 +614,11 @@ input {
     width: 100%;
     height: 100%;
     overflow: auto;
-    z-index: 999;
+    z-index: 24;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgba(0, 0, 0, .2);
     /* background-color: rgba(0, 0, 0, .2) */
 }
 
@@ -629,4 +636,79 @@ input {
 .pz-modal-header {
     padding: 13px 16px;
     border-bottom: 1px solid #e9e9e9;
+}
+
+
+/* 联动选择 */
+
+.linkage {
+    position: absolute;
+    border: 1px solid #d9d9d9;
+    z-index: 99;
+    width: auto;
+    background-color: #fff;
+}
+
+.one-li,
+.two-li {
+    position: relative;
+    /* background-color: #fff; */
+}
+
+.le-two,
+.le-three {
+    box-sizing: border-box;
+    border: 1px solid #d9d9d9;
+    background-color: #fff;
+}
+
+.le-text {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+    height: 30px;
+    line-height: 30px;
+    text-indent: 5px;
+    color: #404040;
+    cursor: pointer;
+}
+
+.le-text::after {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    content: '';
+    width: 10.5px;
+    height: 10.5px;
+    background: url(../images/jt.png) no-repeat center;
+    background-size: 100%;
+    transition: all .3s ease;
+    transform: rotate(180deg);
+}
+
+.le-text:hover::after {
+    transform: rotate(270deg)
+}
+
+.le-two,
+.le-three {
+    position: absolute;
+    display: none;
+    right: -202px;
+    top: 0;
+    transition: all .3s ease;
+}
+
+.two-text:hover+.le-three,
+.one-text:hover+.le-two {
+    display: block;
+}
+
+.le-three:hover,
+.le-two:hover {
+    display: block;
+}
+
+.noafter::after {
+    display: none;
 }

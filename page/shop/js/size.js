@@ -1,0 +1,224 @@
+;
+(function(pz) {
+    pz.size = (function() {
+        function _SE(o) {
+            this.sizelist = document.querySelector('#sizelist');
+            this.cancelNew = document.querySelector('#cancelNew')
+            this.saveNew = document.querySelector('#saveNew')
+            this.cancelcompile = document.querySelector('#cancelcompile')
+            this.savecompile = document.querySelector('#savecompile')
+            this.compileSize = document.querySelector('#compileSize')
+            this.compileNew = document.querySelector('#compileNew')
+            this.addsize = document.querySelector('.addsize')
+            this.id = ''
+            this.init()
+        }
+        _SE.prototype.init = function() {
+            this.getSpecList()
+            this.cancelModal()
+            this.allCateList()
+        }
+        _SE.prototype.cancelModal = function() { //隐藏弹框
+            let t = this
+            t.cancelNew.addEventListener('click', function(e) {
+                t.compileNew.classList.add('hide')
+            })
+            t.cancelcompile.addEventListener('click', function(e) {
+                t.compileSize.classList.add('hide')
+            })
+            t.addsize.addEventListener('click', function(e) {
+                t.compileNew.classList.remove('hide')
+            })
+            t.savecompile.onclick = function(e) {
+                t.compileSave()
+            }
+            t.saveNew.addEventListener('click', function(e) {
+                t.newSave()
+            })
+        }
+        _SE.prototype.compileSave = function() { //保存修改
+            let t = this,
+                name = document.querySelector('#sizeName').value;
+            quest.requests({
+                data: {
+                    id: t.id,
+                    sa_name: name,
+                    type: 1
+                },
+                url: 'saveEditSpecAttr',
+                success: function(res) {
+                    t.getSpecList()
+                    t.compileSize.classList.add('hide')
+                }
+            })
+        }
+        _SE.prototype.newSave = function() { //保存新建
+            let t = this,
+                name = document.querySelector('#newName').value;
+            id = document.querySelector('.multistage').getAttribute('data-id');
+
+            if (!name) return
+            if (!id) return
+            quest.requests({
+                data: {
+                    top_id: id,
+                    sa_name: name,
+                    type: 1
+                },
+                url: 'saveSpecAttr',
+                success: function(res) {
+                    t.getSpecList()
+                    t.compileNew.classList.add('hide')
+                }
+            })
+        }
+        _SE.prototype.getSpecList = function(data) { //获取规格列表
+            let t = this
+            data = data || ''
+            quest.requests({
+                data: {
+                    page: data.page || 1,
+                    page_num: data.page_num || 10
+                },
+                url: 'getSpecList',
+                success: function(res) {
+                    t.setGlul(res.data)
+                }
+            })
+        }
+        _SE.prototype.setGlul = function(data) { //循环出规格列表
+            let len = data.length,
+                i,
+                str = ''
+            for (i = 0; i < len; i++) {
+                str += '<li> \
+              <div class = "col-md-3 bot-bor subli" ><span>' + (i + 1) + '</span> </div> \
+              <div class = "col-md-3 bot-bor subli" ><span>' + data[i].category + ' </span></div> \
+              <div class = "col-md-3 bot-bor subli" ><span>' + data[i].spe_name + '</span></div> \
+              <div class = "col-md-3 bot-bor subli" >\
+              <a class = "pz-btn btn-amend" \
+              href = "javascript:;" > 查看属性 </a> \
+                  <a class = "pz-btn btn-amend seamend" \
+              href = "javascript:;" data-id="' + data[i].id + '" > 编辑 </a> \
+              <a class = "pz-btn btn-del" data-id="' + data[i].id + '" href = "#" > 删除 </a> </div></li>'
+            }
+            this.sizelist.innerHTML = str
+            this.delSize()
+            this.amendSize()
+        }
+        _SE.prototype.amendSize = function() { //编辑点击
+            let amends = document.querySelectorAll('.seamend'),
+                t = this;
+            amends.forEach(function(li) {
+                li.addEventListener('click', function(e) {
+                    let id = li.getAttribute('data-id')
+                    t.getEditData(id)
+                })
+            })
+        }
+        _SE.prototype.delSize = function() { //删除点击
+            let dels = document.querySelectorAll('.btn-del'),
+                t = this;
+            dels.forEach(function(li) {
+                li.addEventListener('click', function(e) {
+                    let id = li.getAttribute('data-id')
+                    t.delSpecAttr(id)
+                })
+            })
+
+        }
+        _SE.prototype.delSpecAttr = function(id) { //删除规格
+            quest.requests({
+                data: {
+                    id: id,
+                    type: 1
+                },
+                url: 'delSpecAttr',
+                success: function(res) {
+
+                }
+            })
+        }
+        _SE.prototype.getEditData = function(id) { //获取需要编辑的规格
+            let t = this
+            quest.requests({
+                data: {
+                    id: id,
+                    type: 1
+                },
+                url: 'getEditData',
+                success: function(res) {
+                    console.log(t.compileSize)
+                    t.compileSize.classList.remove('hide')
+
+                    t.id = res.spec.id
+                    document.querySelector('#sizeName').value = res.spec.spe_name
+                    console.log(res.spec.spe_name)
+                }
+            })
+        }
+        _SE.prototype.allCateList = function() { //获取所有分类
+            let t = this
+            quest.requests({
+                url: 'allCateList',
+                success: function(res) {
+                    pz.multistage.init({
+                        el: '.multistage',
+                        ellink: '.linkage',
+                        data: t.disCateList(res.data)
+                    })
+                }
+            })
+
+        }
+        _SE.prototype.disCateList = function(data) {
+            let i,
+                x,
+                y,
+                len = data.length,
+                len1,
+                len2,
+                tier1 = {},
+                tier2 = {},
+                tier3 = {},
+                arr = []
+            console.log(data)
+            for (i = 0; i < len; i++) {
+                tier1 = {
+                    id: data[i].id,
+                    name: data[i].type_name,
+                    _child: []
+                }
+                if (data[i].hasOwnProperty('_child')) {
+                    len1 = data[i]._child.length
+                    console.log(data[i]._child)
+                    for (x = 0; x < len1; x++) {
+                        tier2 = {
+                            id: data[i]._child[x].id,
+                            name: data[i]._child[x].type_name,
+                            _child: []
+                        }
+                        if (data[i]._child[x].hasOwnProperty('_child')) {
+                            len2 = data[i]._child[x]._child.length
+                            for (y = 0; y < len2; y++) {
+                                tier3 = {
+                                    id: data[i]._child[x]._child[y].id,
+                                    name: data[i]._child[x]._child[y].type_name
+                                }
+                                tier2._child.push(tier3)
+                            }
+                        }
+                        tier1._child.push(tier2)
+                    }
+                }
+                arr.push(tier1)
+            }
+            return arr
+        }
+        return {
+            init: function(o) {
+                return new _SE(o)
+            }
+        }
+    })()
+})(window.pz)

@@ -22,10 +22,11 @@
         }
         _GC.prototype.getcatelist = function() { //数据循环到页面
             let t = this
-            quest.getcatelist({
+            quest.requests({
                 data: {
                     type: 3
                 },
+                url: 'allCateList',
                 success: function(res) {
                     t.setglul(res.data);
                     t.addbtnclick();
@@ -183,7 +184,7 @@
             <span class="col-md-2 bot-bor subli tl ">' + ullist[i].type_name + '</span>\
             <span class="col-md-2 bot-bor subli">' + ullist[i].tier + '</span>\
             <span class="col-md-2 bot-bor subli">\
-              <span data-id="' + ullist[i].id + '" data-status="' + ullist[i].status + '" class="ant-switch stop-open "></span>\
+              <div data-id="' + ullist[i].id + '" data-status="' + ullist[i].status + '" class="ant-switch stop-open "></div>\
             </span>\
             <span class="col-md-2 bot-bor subli">\
             <a class="pz-btn btn-amend " data-id="' + ullist[i].id + '">编辑</a></span>\

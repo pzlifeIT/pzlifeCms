@@ -300,6 +300,7 @@
         }
         S.prototype.disposeimg = function(images) { //默认显示图片
             if (!(images instanceof Array)) return
+            if (images) return
             let len = images.length,
                 i
             for (i = 0; i < len; i++) {
@@ -361,4 +362,90 @@
         }
         return s
     }())
+    pz.multistage = (function() {
+        function _ME(o) {
+            this.el = document.querySelector(o.el)
+            this.ellink = document.querySelector(o.ellink)
+            this.data = o.data
+            this.init()
+        }
+        _ME.prototype.init = function() {
+            this.setlist(this.data)
+            this.elclick()
+            this.place()
+        }
+        _ME.prototype.elclick = function() {
+            let t = this
+            t.el.addEventListener('click', function(e) {
+                e.stopPropagation()
+                if (t.ellink.classList.contains('hide')) {
+                    t.place()
+                    t.ellink.classList.remove('hide')
+                } else {
+
+                    t.ellink.classList.add('hide')
+                }
+
+            })
+            document.querySelector('body').addEventListener('click', function(e) {
+                t.ellink.classList.add('hide')
+            })
+            t.ellink.addEventListener('click', function(e) {
+                e.stopPropagation()
+            })
+        }
+        _ME.prototype.place = function() {
+            let rect = this.el.getBoundingClientRect()
+            this.ellink.style.top = rect.top + rect.height + 'px'
+            this.ellink.style.left = rect.left + 'px'
+        }
+        _ME.prototype.setlist = function(data) { //循环输出数据
+            let str = '',
+                len = data.length,
+                len1, len2, i, x, y
+            for (i = 0; i < len; i++) {
+                str += '<div class="one-li">'
+                str += '<span class="one-text le-text" data-id="' + data[i].id + '" >' + data[i].name + '</span>'
+                if (data[i].hasOwnProperty('_child')) {
+                    len1 = data[i]._child.length
+                    str += '<div class="le-two">'
+                    for (x = 0; x < len1; x++) {
+                        str += '<div class="two-li">'
+                        str += '<span class="two-text le-text" data-id="' + data[i]._child[x].id + '" >' + data[i]._child[x].name + '</span>'
+                        if (data[i]._child[x].hasOwnProperty('_child')) {
+                            len2 = data[i]._child[x]._child.length
+                            str += '<div class="le-three">'
+                            for (y = 0; y < len2; y++) {
+                                str += '<div class="">'
+                                str += '<span class="le-text noafter" data-id="' + data[i]._child[x]._child[y].id + '" >' + data[i]._child[x]._child[y].name + '</span>'
+                                str += '</div>'
+                            }
+                            str += '</div>'
+                        }
+                        str += '</div>'
+                    }
+                    str += '</div>'
+                }
+                str += '</div>'
+            }
+            this.ellink.innerHTML = str;
+            this.clicksel()
+        }
+        _ME.prototype.clicksel = function() {
+            let t = this,
+                sels = t.ellink.querySelectorAll('.noafter');
+            sels.forEach(function(li) {
+                li.addEventListener('click', function(e) {
+                    t.el.setAttribute('data-id', li.getAttribute('data-id'))
+                    t.el.innerHTML = li.innerHTML
+                    t.ellink.classList.add('hide')
+                })
+            })
+        }
+        return {
+            init: function(o) {
+                new _ME(o)
+            }
+        }
+    })()
 })(window, document)

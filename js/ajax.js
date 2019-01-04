@@ -14,7 +14,7 @@
         } else {
             xhr = new ActiveXObject('Microsoft.XMLHTTP')
         }
-        if ('withCredentials' in xhr) { console.log(xhr) }
+        if ('withCredentials' in xhr) {}
         let url = 'http://wwwapi.pzlife.vip/'
         url += params.url
         let type = params.type || 'post'
@@ -22,7 +22,7 @@
         // 用于清除缓存
         let random = Math.random();
         params.data = params.data || ''
-        if (typeof params.data == 'object') {
+        if (!(params.data instanceof FormData) & typeof params.data == 'object') {
             let str = '';
             for (let key in params.data) {
                 str += key + '=' + params.data[key] + '&';
@@ -40,8 +40,13 @@
 
         } else if (type == 'POST') {
             xhr.open('POST', url, true);
-            // 如果需要像 html 表单那样 POST 数据，请使用 setRequestHeader() 来添加 http 头。
-            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+            if (params.data instanceof FormData) {
+                xhr.setRequestHeader("Content-type", "multipart/form-data", "charset=utf-8");
+            } else {
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded", "charset=utf-8");
+            }
+
             xhr.send(params.data);
         }
 
@@ -57,6 +62,56 @@
                 }
             }
         }
+    }
+    quest.questurl = {
+        updateSupplier: 'admin/suppliers/updateSupplier', //修改供应商
+        addSupplier: 'admin/suppliers/addSupplier', //新建供应商
+        addsupplierfreight: 'admin/suppliers/addsupplierfreight', //新建供应商快递模板
+        getSuppliers: 'admin/suppliers/getSuppliers', //获取供应商列表
+        getSupplierFreights: 'admin/suppliers/getSupplierFreights', //获取供应商快递模板
+        getSupplierFreightdetail: 'admin/suppliers/getSupplierFreightdetail', //获取供应商快递模板详情
+        getSupplierData: 'admin/suppliers/getSupplierData', //获取供应商详情
+        stopStartCate: 'admin/category/stopStartCate', //停用/启用分类
+        getCateList: 'admin/category/getCateList', //分类列表
+        delcategory: 'admin/category/delcategory', //删除分类
+        allCateList: 'admin/category/allCateList', //所有商品分类
+        saveeditcate: 'admin/category/saveeditcate', //提交编辑
+        saveaddcate: 'admin/category/saveaddcate', //添加分类
+        getThreeCate: 'admin/category/getThreeCate', //获取三级分类
+        addCatePage: 'admin/category/addCatePage', //获取前两级分类
+        editcatepage: 'admin/category/editcatepage', //获取需要编辑的分类数据
+        delGoods: 'admin/goods/delGoods', //删除商品
+        getGoodsList: 'admin/goods/getGoodsList', //商品列表
+        saveAddGoods: 'admin/goods/saveAddGoods', //添加商品
+        getOneGoods: 'admin/goods/getOneGoods', //获取一个商品数据
+        getProvinceCity: 'admin/provinces/getProvinceCity', //省市列表
+        getArea: 'admin/provinces/getArea', //获取区级列表
+        getCity: 'admin/provinces/getCity', //获取市级列表
+        saveEditSpecAttr: 'admin/spec/saveEditSpecAttr', //修改属性/规格
+        delSpecAttr: 'admin/spec/delSpecAttr', //删除属性/规格
+        getSpecList: 'admin/spec/getSpecList', //属性列表
+        saveSpecAttr: 'admin/spec/saveSpecAttr', //添加属性/规格
+        addAttrPage: 'admin/spec/addAttrPage', //获取一级规格
+        getEditData: 'admin/spec/getEditData', //获取需要编辑的规格/属性数据
+        loginUserByOpenid: 'index/user/loginUserByOpenid', //通过openid获取uid和手机号
+        getUser: 'index/user/getUser', //通过uid获取用户信息
+        getSms: 'admin/note/getSms', //查询短信记录
+        sendSms: 'admin/note/sendSms', //短信验证码发送
+        uploadfile: 'admin/upload/uploadfile'
+
+    }
+    quest.requests = function(params) {
+        let t = this
+        if (!t.questurl[params.url]) return
+        t.Ajax({
+            data: params.data || '',
+            url: t.questurl[params.url],
+            success: function(res) {
+                if (res.code == '200') {
+                    params.success(res)
+                }
+            }
+        })
     }
     quest.getcatelist = function(params) { //分类列表
         this.Ajax({
@@ -147,8 +202,9 @@
                 }
             })
         },
-        addsupplier: function() { //
+        addsupplier: function(params) { //
             quest.Ajax({
+                data: params.data || '',
                 url: 'admin/suppliers/addsupplier',
                 success: function(res) {
                     if (res.code == '200') {
@@ -157,7 +213,7 @@
                 }
             })
         },
-        addsupplierfreight: function() {
+        addsupplierfreight: function(params) {
             quest.Ajax({
                 url: 'admin/suppliers/addsupplierfreight',
                 success: function(res) {
