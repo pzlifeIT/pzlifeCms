@@ -42,11 +42,10 @@
             xhr.open('POST', url, true);
 
             if (params.data instanceof FormData) {
-                xhr.setRequestHeader("Content-type", "multipart/form-data", "charset=utf-8");
+                // xhr.setRequestHeader("Content-type", "multipart/form-data;");
             } else {
                 xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded", "charset=utf-8");
             }
-
             xhr.send(params.data);
         }
 
@@ -97,9 +96,17 @@
         getUser: 'index/user/getUser', //通过uid获取用户信息
         getSms: 'admin/note/getSms', //查询短信记录
         sendSms: 'admin/note/sendSms', //短信验证码发送
-        uploadfile: 'admin/upload/uploadfile'
+        uploadfile: 'admin/upload/uploadfile' //上传单个图片
 
     }
+    quest.ajaxRequest = function(params) {
+        $.ajax({
+            type: params.type || 'POST',
+            url: 'http://wwwapi.pzlife.vip/' + t.questurl[params.url],
+            contentType: false,
+        })
+    }
+
     quest.requests = function(params) {
         let t = this
         if (!t.questurl[params.url]) return

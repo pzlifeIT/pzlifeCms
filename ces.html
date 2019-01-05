@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <title>Document</title>
+    <script>
+        var Ajax = function(params) {
+            // 创建ajax对象
+            let xhr = null;
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            } else {
+                xhr = new ActiveXObject('Microsoft.XMLHTTP')
+            }
+            if ('withCredentials' in xhr) {}
+            let url = 'http://wwwapi.pzlife.vip/'
+            url += params.url
+            let type = params.type || 'post'
+            type = type.toUpperCase();
+            // 用于清除缓存
+            let random = Math.random();
+            params.data = params.data || ''
+            if (!(params.data instanceof FormData) & typeof params.data == 'object') {
+                let str = '';
+                for (let key in params.data) {
+                    str += key + '=' + params.data[key] + '&';
+                }
+                params.data = str.replace(/&$/, '');
+            }
+
+            if (type == 'GET') {
+                if (params.data) {
+                    xhr.open('GET', url + '?' + params.data, true);
+                } else {
+                    xhr.open('GET', url + '?t=' + random, true);
+                }
+                xhr.send();
+
+            } else if (type == 'POST') {
+                xhr.open('POST', url, true);
+
+                // if (params.data instanceof FormData) {
+                //     xhr.setRequestHeader("Content-type", "multipart/form-data;");
+                // } else {
+                // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded", "charset=utf-8");
+                // }
+                xhr.send(params.data);
+            }
+
+            // 处理返回数据
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        params.success(JSON.parse(xhr.responseText));
+                    } else {
+                        if (typeof params.failed == 'function') {
+                            params.failed(xhr.status);
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <form action="http://wwwapi.pzlife.vip/admin/upload/uploadfile" method="post">
+        <p>First name: <input type="text" name="fname" /></p>
+        <p>Last name: <input type="text" name="lname" /></p>
+        <input type="submit" value="Submit" />
+    </form>
+    <!-- <form id="upload" enctype="multipart/form-data" action="/fileupload" method="post" onsubmit="return submitForm()"> -->
+    <img src="http://pksbi5wmi.bkt.clouddn.com/20190105/3435876e578f205604430fc5cd702b5c5c3075954bb75.png" alt="">
+    <input type="file" name="image" id="pic" />
+    <input type="submit" onclick="submitForm()" value="提交" />
+    <input type="file" name="image" id="pic1" />
+    <input type="submit" onclick="submitForm1()" value="提交" />
+    <!-- </form> -->
+</body>
+<script>
+    function submitForm1() {
+        var pic = document.getElementById('pic1'),
+            formData = new FormData();
+        formData.append('image', pic.files[0])
+        Ajax({
+            url: "http://wwwapi.pzlife.vip/admin/upload/uploadfile",
+            data: formData,
+            success: function(res) {
+
+            }
+        })
+    }
+
+    function submitForm() {
+        var pic = document.getElementById('pic'),
+            formData = new FormData();
+        formData.append('image', pic.files[0])
+        console.log(formData)
+        $.ajax({
+            url: "http://wwwapi.pzlife.vip/admin/upload/uploadfile",
+            type: "post",
+            data: formData,
+            processData: false,
+            contentType: false,
+            done: function(res) {
+                // console.log
+            },
+            success: function(res) {
+                if (res) {
+                    // uxAlert("上传成功！");
+                }
+                console.log(res);
+            },
+            error: function(err) {
+                uxAlert("网络连接失败,稍后重试", err);
+            }
+        });
+    }
+</script>
+
+</html>

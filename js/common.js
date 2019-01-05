@@ -282,13 +282,17 @@
             this.picures = doc.querySelector(o.el)
             this.num = o.num
             this.imglist = o.images
+            console.log(o.images)
             this.images = []
             this.files = []
             this.imgChange = o.imgChange
             this.init()
         }
         S.prototype.init = function() {
-            this.picures.innerHTML += '<ul class="picurelist"></ul><input class="file" accept="image/*" type="file" name="" id="imgFile">'
+            if (!this.picures.querySelector('.picurelist')) {
+                console.log(3121)
+                this.picures.innerHTML += '<ul class="picurelist"></ul><input class="file" accept="image/*" type="file" name="" id="imgFile">'
+            }
             this.file = this.picures.querySelector('.file')
             this.selfile = this.picures.querySelector('.selfile')
             this.list = this.picures.querySelector('.picurelist')
@@ -299,12 +303,13 @@
             this.disposeimg(this.imglist)
         }
         S.prototype.disposeimg = function(images) { //默认显示图片
+            console.log('1', !(images instanceof Array))
             if (!(images instanceof Array)) return
-            if (images) return
+            console.log('2', images)
             let len = images.length,
                 i
             for (i = 0; i < len; i++) {
-                this.images.push(images[i].image)
+                this.images.push(images[i])
             }
             this.showImg()
         }
@@ -314,48 +319,65 @@
                 t.file.click()
             })
             t.file.addEventListener('change', function(e) {
-                if (t.file.files.length < 1) return
-                if (t.num == 1) {
-                    t.files = []
-                }
-                t.disposefiles(t.file.files)
-                t.imgChange(t.file.files)
+                // if (t.file.files.length < 1) return
+                // if (t.num == 1) {
+                //     t.files = []
+                // }
+                t.uploadfile(t.file.files[0])
             })
         }
-        S.prototype.disposefiles = function(files) {
-            let len3 = files.length
-            for (let y = 0; y < len3; y++) {
-                this.files.push(files[y])
+        S.prototype.uploadfile = function(file) {
+                let t = this,
+                    formdata = new FormData();
+                formdata.append('image', file)
+                quest.requests({
+                    data: formdata,
+                    url: 'uploadfile',
+                    success: function(res) {
+                        if (t.num == 1) {
+                            t.images = []
+                        }
+                        t.images.push(res.image_path);
+                        t.showImg();
+                        t.imgChange(t.images);
+                    }
+                })
             }
-            this.disposeimages()
-        }
-        S.prototype.disposeimages = function() {
-            let len = this.files.length
-            this.images = []
-            for (let i = 0; i < len; i++) {
-                this.images.push(this.getObjectURL(this.files[i]))
-            }
-            this.showImg()
-        }
+            // S.prototype.disposefiles = function(files) {
+            //     let len3 = files.length
+            //     for (let y = 0; y < len3; y++) {
+            //         this.files.push(files[y])
+            //     }
+            //     this.disposeimages()
+            // }
+            // S.prototype.disposeimages = function() {
+            //     let len = this.files.length
+            //     this.images = []
+            //     for (let i = 0; i < len; i++) {
+            //         this.images.push(this.getObjectURL(this.files[i]))
+            //     }
+            //     this.showImg()
+            // }
         S.prototype.showImg = function() {
-            let str = '',
-                len = this.images.length
-            for (let i = 0; i < len; i++) {
-                str += '<li><img src="' + this.images[i] + '" alt=""></li>'
+                let str = '',
+                    len = this.images.length
+                console.log(this.images)
+                for (let i = 0; i < len; i++) {
+                    str += '<li><img src="' + this.images[i] + '" alt=""></li>'
+                }
+                this.list.innerHTML = str
             }
-            this.list.innerHTML = str
-        }
-        S.prototype.getObjectURL = function(file) {
-            var url = null
-            if (window.createObjectURL != undefined) { // basic  
-                url = window.createObjectURL(file)
-            } else if (window.URL != undefined) { // mozilla(firefox)  
-                url = window.URL.createObjectURL(file)
-            } else if (window.webkitURL != undefined) { // webkit or chrome  
-                url = window.webkitURL.createObjectURL(file)
-            }
-            return url
-        }
+            // S.prototype.getObjectURL = function(file) {
+            //     var url = null
+            //     if (window.createObjectURL != undefined) { // basic  
+            //         url = window.createObjectURL(file)
+            //     } else if (window.URL != undefined) { // mozilla(firefox)  
+            //         url = window.URL.createObjectURL(file)
+            //     } else if (window.webkitURL != undefined) { // webkit or chrome  
+            //         url = window.webkitURL.createObjectURL(file)
+            //     }
+            //     return url
+            // }
 
         function s(o) {
             return new S(o)

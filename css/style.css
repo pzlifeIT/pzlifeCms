@@ -389,6 +389,12 @@ input {
     content: '添加规格';
 }
 
+.addfreight:hover::after {
+    width: 88px;
+    right: -96px;
+    content: '添加运费模板';
+}
+
 
 /* 通用按钮 */
 
