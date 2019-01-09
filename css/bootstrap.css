@@ -159,6 +159,7 @@
 }
 
 @media screen and (min-width: 992px) {
+    .col-md-05,
     .col-md-1,
     .col-md-2,
     .col-md-3,
@@ -208,6 +209,9 @@
     }
     .col-md-1 {
         width: 8.33333333%;
+    }
+    .col-md-05 {
+        width: 4.16666665%;
     }
 }
 

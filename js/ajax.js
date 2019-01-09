@@ -64,10 +64,14 @@
     }
     quest.questurl = {
         updateSupplier: 'admin/suppliers/updateSupplier', //修改供应商
+        updateSupplierFreight: 'admin/suppliers/updateSupplierFreight', //修改供应商快递模板
         addSupplier: 'admin/suppliers/addSupplier', //新建供应商
         addsupplierfreight: 'admin/suppliers/addsupplierfreight', //新建供应商快递模板
+        addSupplierFreightdetail: 'admin/suppliers/addSupplierFreightdetail', //新增供应商快递模板运费
+        getsupplierfreights: 'admin/suppliers/getsupplierfreights', //获取供应商快递模板列表
+        getSupplierFreightdetailList: 'admin/suppliers/getSupplierFreightdetailList', //获取供应商快递模板运费列表
         getSuppliers: 'admin/suppliers/getSuppliers', //获取供应商列表
-        getSupplierFreights: 'admin/suppliers/getSupplierFreights', //获取供应商快递模板
+        getSupplierFreight: 'admin/suppliers/getSupplierFreight', //获取供应商快递模板
         getSupplierFreightdetail: 'admin/suppliers/getSupplierFreightdetail', //获取供应商快递模板详情
         getSupplierData: 'admin/suppliers/getSupplierData', //获取供应商详情
         stopStartCate: 'admin/category/stopStartCate', //停用/启用分类
@@ -86,11 +90,13 @@
         getProvinceCity: 'admin/provinces/getProvinceCity', //省市列表
         getArea: 'admin/provinces/getArea', //获取区级列表
         getCity: 'admin/provinces/getCity', //获取市级列表
+        getprovincecitybyfreight: 'admin/provinces/getprovincecitybyfreight', //获取运费模版的剩余可选省市列表
         saveEditSpecAttr: 'admin/spec/saveEditSpecAttr', //修改属性/规格
         delSpecAttr: 'admin/spec/delSpecAttr', //删除属性/规格
         getSpecList: 'admin/spec/getSpecList', //属性列表
-        saveSpecAttr: 'admin/spec/saveSpecAttr', //添加属性/规格
+        savespecattr: 'admin/spec/savespecattr', //添加属性/规格
         addAttrPage: 'admin/spec/addAttrPage', //获取一级规格
+        getAttr: 'admin/spec/getAttr', //获取二级属性
         getEditData: 'admin/spec/getEditData', //获取需要编辑的规格/属性数据
         loginUserByOpenid: 'index/user/loginUserByOpenid', //通过openid获取uid和手机号
         getUser: 'index/user/getUser', //通过uid获取用户信息
@@ -98,13 +104,6 @@
         sendSms: 'admin/note/sendSms', //短信验证码发送
         uploadfile: 'admin/upload/uploadfile' //上传单个图片
 
-    }
-    quest.ajaxRequest = function(params) {
-        $.ajax({
-            type: params.type || 'POST',
-            url: 'http://wwwapi.pzlife.vip/' + t.questurl[params.url],
-            contentType: false,
-        })
     }
 
     quest.requests = function(params) {

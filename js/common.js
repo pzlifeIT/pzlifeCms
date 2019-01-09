@@ -25,6 +25,20 @@
         }
         return list
     }
+    pz.getPriceType = function(n) {
+        let data = {
+            '1': '件数',
+            '2': '重量',
+            '3': '体积'
+        }
+        return data[n]
+    }
+    pz.getEl = function(o) {
+        return document.querySelector(o)
+    }
+    pz.getAllEl = function(o) {
+        return document.querySelectorAll(o)
+    }
     window.pages = (function() {
         function _page(obj) {
             this.floorpages = doc.querySelector(obj.el)
@@ -399,12 +413,12 @@
         _ME.prototype.elclick = function() {
             let t = this
             t.el.addEventListener('click', function(e) {
+                console.log(t.el)
                 e.stopPropagation()
                 if (t.ellink.classList.contains('hide')) {
                     t.place()
                     t.ellink.classList.remove('hide')
                 } else {
-
                     t.ellink.classList.add('hide')
                 }
 

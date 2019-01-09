@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/bootstrap.css">
     <link rel="stylesheet" href="../../css/details.css">
+    <link rel="stylesheet" href="../../css/list.css">
 </head>
 
 <body>
@@ -25,63 +26,29 @@
         <!-- <div class="addgoods topbtn din fl">
             <img src="../../images/jia.png" alt="">
         </div> -->
-
     </div>
     <div class="details">
         <div class="dl-header">
-            <span class="dl-name">订单详情</span>
-            <input type="button" value="上架" class="pz-btn fr"></input>
-            <input type="button" value="保存" class="pz-btn fr"></input>
+            <span class="dl-name">商品详情</span>
         </div>
         <div class="dl-con">
             <ul class="dl-nav" id="dlnav">
                 <li>基本信息</li>
-                <li>产品选择</li>
-                <li>产品规格</li>
-                <li>产品详情</li>
+                <li>商品轮播图</li>
+                <li>商品规格</li>
+                <li>商品详情图</li>
             </ul>
             <div class="dlnav-con dl-1">
                 <div class="dl-show">
-                    <span class="dl-title">产品标题＊:</span>
-                    <!-- <span>SN201812171200316164</span> -->
-                    <input class="dl-info" value="夜光系列手机壳" type="text">
+                    <span class="dl-title">商品名称:</span>
+                    <input class="dl-info" value="" type="text">
                 </div>
                 <div class="dl-show">
-                    <span class="dl-title">产品副标题:</span>
-                    <!-- <span>2018-12-17 12:00:31</span> -->
-                    <input class="dl-info" value="优质PU皮革 孔位精准" type="text">
+                    <span class="dl-title">商品标题:</span>
+                    <input class="dl-info" value="" type="text">
                 </div>
                 <div class="dl-show">
-                    <span class="dl-title">产品规格标题:</span>
-                    <input class="dl-info" type="text">
-
-                </div>
-                <div class="dl-show">
-                    <span class="dl-title">产品重量:</span>
-                    <input class="dl-info" type="text">
-                </div>
-                <div class="dl-show">
-                    <span class="dl-title">产品标题图:</span>
-                    <input type="" type="text">
-                </div>
-                <div class="dl-show">
-                    <span class="dl-title">产品图片集:</span>
-                    <input type="text">
-                </div>
-            </div>
-            <div class="dlnav-con dl-1">
-                <div class="dl-show">
-                    <span class="dl-title">供应商:</span>
-                    <div class="din combobox" id="combobox1">
-                        <div class="ant-select">
-                            <div class="ant-select-selection">请选择</div>
-                            <span class="ant-select-arrow"></span>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="dl-show">
-                    <span class="dl-title">分类:</span>
+                    <span class="dl-title">商品类型:</span>
                     <div class="din combobox" id="combobox2">
                         <div class="ant-select">
                             <div class="ant-select-selection">请选择</div>
@@ -90,121 +57,287 @@
                     </div>
                 </div>
                 <div class="dl-show">
-                    <span class="dl-title">评星模板:</span>
-                    <div class="din combobox" id="combobox3">
+                    <span class="dl-title">供应商:</span>
+                    <div class="din combobox" id="combobox1">
                         <div class="ant-select">
                             <div class="ant-select-selection">请选择</div>
                             <span class="ant-select-arrow"></span>
                         </div>
                     </div>
                 </div>
+                <div class="dl-show">
+                    <span class="dl-title">三级分类:</span>
+                    <span class="multistage">请选择</span>
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">产品标题图:</span>
+                    <div class="selpicure" id="selpicure1">
+                        <div class="selfile fr"></div>
+                    </div>
+                </div>
 
+
+                <div class="dl-show flexcenter">
+                    <input type="button" value="取消" class="pz-btn btn-cancel" id="srCancel">
+                    <input type="button" value="保存" id="srSave" class="pz-btn btn-amend">
+                </div>
             </div>
             <div class="dlnav-con dl-1">
                 <div class="dl-show">
-                    <span class="dl-title">收件人:</span>
-                    <span class="dl-text">肯德基</span>
-                </div>
-                <div class="dl-show">
-                    <span class="dl-title">联系电话:</span>
-                    <span class="dl-text">15739774582</span>
-                </div>
-                <div class="dl-show">
-                    <span class="dl-title">收货地址:</span>
-                    <span class="dl-text">上海市 市辖区 闵行区 大师傅</span>
-                </div>
-                <div class="dl-show">
-                    <span class="dl-title">留言信息:</span>
-                    <span class="dl-text">kdjfkdjf</span>
+                    <span class="dl-title">产品图片集:</span>
+                    <div class="selpicure" id="selpicure2">
+                        <div class="selfile fr"></div>
+                    </div>
                 </div>
             </div>
-            <div class="dlnav-con dl-2">
-                <ul class="d2-list">
-                    <li>
-                        <span class="col-md-2">时间</span>
-                        <span class="col-md-2">操作人</span>
-                        <span class="col-md-2">状态</span>
-                        <span class="col-md-3">完整状态</span>
-                        <span class="col-md-3">信息</span>
-                    </li>
-                    <li>
-                        <span class="col-md-2">2018-12-17 12:00:31	</span>
-                        <span class="col-md-2">测试3</span>
-                        <span class="col-md-2">待付款»已付款</span>
-                        <span class="col-md-3">» 订单已支付,</span>
-                        <span class="col-md-3">redmoney full payment</span>
-                    </li>
-                    <li>
-                        <span class="col-md-2">2018-12-17 12:00:31	</span>
-                        <span class="col-md-2">测试3</span>
-                        <span class="col-md-2">待付款»已付款</span>
-                        <span class="col-md-3">» 订单已支付,</span>
-                        <span class="col-md-3">redmoney full payment</span>
-                    </li>
-                    <li>
-                        <span class="col-md-2">2018-12-17 12:00:31	</span>
-                        <span class="col-md-2">测试3</span>
-                        <span class="col-md-2">待付款»已付款</span>
-                        <span class="col-md-3">» 订单已支付,</span>
-                        <span class="col-md-3">redmoney full payment</span>
-                    </li>
-                    <li>
-                        <span class="col-md-2">2018-12-17 12:00:31	</span>
-                        <span class="col-md-2">测试3</span>
-                        <span class="col-md-2">待付款»已付款</span>
-                        <span class="col-md-3">» 订单已支付,</span>
-                        <span class="col-md-3">redmoney full payment</span>
-                    </li>
-                    <li>
-                        <span class="col-md-2">2018-12-17 12:00:31	</span>
-                        <span class="col-md-2">测试3</span>
-                        <span class="col-md-2">待付款»已付款</span>
-                        <span class="col-md-3">» 订单已支付,</span>
-                        <span class="col-md-3">redmoney full payment</span>
-                    </li>
-                </ul>
+            <div class="dlnav-con dl-1">
+                <div>
+                    <div class="add addattribute topbtn din fl">
+                        <img src="../../images/jia.png" alt="">
+                    </div>
+                </div>
+                <div class="d2-list">
+                    <div class="list-header">
+                        <span class="col-md-3">id</span>
+                        <span class="col-md-3">规格</span>
+                        <span class="col-md-3">属性</span>
+                        <span class="col-md-3">管理</span>
+                    </div>
+                    <ul>
+                        <li>
+                            <span class="col-md-3">2523</span>
+                            <span class="col-md-3">颜色</span>
+                            <span class="col-md-3">红色</span>
+                            <span class="col-md-3">
+                                <div class="pz-btn btn-amend" href="supplierdetails.html">编辑</div>
+                                <div class="pz-btn btn-del" href="#">删除</div>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="d2-list">
+                    <div class="list-header">
+                        <span class="col-md-1">规格</span>
+                        <span class="col-md-1">规格图</span>
+                        <span class="col-md-05">库存</span>
+                        <span class="col-md-05">市场价</span>
+                        <span class="col-md-05">零售价</span>
+                        <span class="col-md-1">预售价开始时间</span>
+                        <span class="col-md-1">预售价结束时间</span>
+                        <span class="col-md-05">预售价</span>
+                        <span class="col-md-05">活动价</span>
+                        <span class="col-md-1">活动价开始时间</span>
+                        <span class="col-md-1">活动价过期时间</span>
+                        <span class="col-md-05">毛利</span>
+                        <span class="col-md-1">积分售价</span>
+                        <span class="col-md-1">积分赠送</span>
+                        <span class="col-md-1">管理</span>
+                    </div>
+                    <ul>
+                        <li>
+                            <span class="col-md-1">0</span>
+                            <span class="col-md-1">0</span>
+                            <span class="col-md-05">0</span>
+                            <span class="col-md-05">100000</span>
+                            <span class="col-md-05">0</span>
+                            <span class="col-md-1">0</span>
+                            <span class="col-md-1">10000</span>
+                            <span class="col-md-05">0</span>
+                            <span class="col-md-05">0</span>
+                            <span class="col-md-1">0</span>
+                            <span class="col-md-1">0</span>
+                            <span class="col-md-05">0</span>
+                            <span class="col-md-1">0</span>
+                            <span class="col-md-1">0</span>
+                            <span class="col-md-1">
+                                <div class="pz-btn btn-amend" href="supplierdetails.html">编辑</div>
+                                <div class="pz-btn btn-del" href="#">删除</div>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="dl-show flexcenter">
+                    <input type="button" value="取消" class="pz-btn btn-cancel" id="goCancelbasic">
+                    <input type="button" value="保存" id="goSavebasic" class="pz-btn btn-amend">
+                </div>
+            </div>
+            <div class="dlnav-con dl-1">
+                <div class="refresh  topbtn addpreview">
+                    <img src="../../images/yulan.png" alt="">
+                </div>
+                <div class="photolist din fl">
+                    <div class="pl-li">
+                        <img class="pl-image" src="http://imagecache.pzlife.vip/website/article/2018-12-29/1546071154674862.jpg" alt="">
+                        <div class="hierarchy">10</div>
+                        <div class="pl-manage">
+                            <input type="button" value="删除">
+                            <input type="button" value="编辑">
+                        </div>
+                    </div>
+                </div>
+                <div class="photoPreview din fl">
+
+                </div>
             </div>
         </div>
     </div>
     </div>
     </div>
+    <div class="linkage hide"></div>
+    <div class="pz-modal hide" id="previewphoto">
+        <div class="pz-modal-content" id="modalContent">
+            <div class="pz-modal-header">预览图片</div>
+            <div class="pz-spin-container">
+                <img src="http://imagecache.pzlife.vip/website/article/2018-12-29/1546071154674862.jpg" alt="">
+                <img src="http://imagecache.pzlife.vip/website/article/2018-12-29/1546071158617338.jpg" alt="">
+                <img src="http://imagecache.pzlife.vip/website/article/2018-12-29/1546071161487116.jpg" alt="">
+                <img src="http://imagecache.pzlife.vip/website/article/2018-12-29/1546071163481440.jpg" alt="">
+                <img src="http://imagecache.pzlife.vip/website/article/2018-12-29/1546071165813655.jpg" alt="">
+                <img src="http://imagecache.pzlife.vip/website/article/2018-12-29/1546071167749944.jpg" alt="">
+                <img src="http://imagecache.pzlife.vip/website/article/2018-12-29/1546071169808763.jpg" alt="">
+                <img src="http://imagecache.pzlife.vip/website/article/2018-12-29/1546071174917922.jpg" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="pz-modal hide" id="attributeNew">
+        <div class="pz-modal-content">
+            <div class="pz-modal-header">添加属性</div>
+            <div class="pz-spin-container">
+                <div class="dl-show">
+                    <span class="dl-title">规格:</span>
+                    <!-- <input class="dl-info" id="threeClassify" type="text"> -->
+                    <span class="multistage">请选择</span>
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">属性:</span>
+                    <input class="dl-info" id="newName" type="text">
+                </div>
+                <div class="dl-show flexcenter">
+                    <input type="button" value="取消" class="pz-btn btn-cancel" id="cancelNew">
+                    <input type="button" value="保存" id="saveNew" class="pz-btn btn-amend">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pz-modal hide" id="amendAttribute">
+        <div class="refresh topbtn din fl" onclick="document.location.reload()">
+            <img src="../../images/sx.png" alt="">
+        </div>
+        <div class="pz-modal-content">
+            <div class="pz-modal-header">编辑商品规格</div>
+            <div class="pz-spin-container">
+                <div class="dl-show">
+                    <span class="dl-title">三级分类:</span>
+                    <span class="multistage">请选择</span>
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">库存:</span>
+                    <input class="dl-info" id="newName" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">市场价:</span>
+                    <input class="dl-info" id="newName" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">零售价:</span>
+                    <input class="dl-info" id="newName" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">预售价开始时间:</span>
+                    <input class="dl-info" id="newName" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">预售价结束时间:</span>
+                    <input class="dl-info" id="newName" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">预售价:</span>
+                    <input class="dl-info" id="newName" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">活动价:</span>
+                    <input class="dl-info" id="newName" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">活动价开始时间:</span>
+                    <input class="dl-info" id="newName" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">活动价过期时间:</span>
+                    <input class="dl-info" id="newName" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">毛利:</span>
+                    <input class="dl-info" id="newName" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">积分售价:</span>
+                    <input class="dl-info" id="newName" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">积分赠送:</span>
+                    <input class="dl-info" id="newName" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">积分赠送:</span>
+                    <div class="selpicure" id="selpicure1">
+                        <div class="selfile fr"></div>
+                    </div>
+                </div>
+                <div class="dl-show flexcenter">
+                    <input type="button" value="取消" class="pz-btn btn-cancel" id="cancelAmend">
+                    <input type="button" value="保存" id="saveAmend" class="pz-btn btn-amend">
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+<script src="../../js/ajax.js"></script>
 <script src="../../js/common.js"></script>
+<script src="js/goodsoperation.js"></script>
 <script>
     tab({
         head: '#dlnav',
-        con: '.dlnav-con'
+        con: '.dlnav-con',
+        num: 4
+    })
+    selpicure({
+        el: '#selpicure1',
+        num: 1,
+        images: [],
+        imgChange: function(images) {
+            console.log('images', images[0])
+        }
+    })
+    selpicure({
+        el: '#selpicure2',
+        num: 5,
+        images: [],
+        imgChange: function(images) {
+            console.log('images', images[0])
+        }
     })
     select({
         el: '#combobox1',
         data: [{
             id: 1,
-            text: '捷克蛋糕'
+            type_name: '捷克蛋糕'
         }, {
             id: 2,
-            text: '爆米花'
+            type_name: '爆米花'
         }]
     })
     select({
         el: '#combobox2',
         data: [{
             id: 1,
-            text: '捷克蛋糕'
+            type_name: '普通商品'
         }, {
             id: 2,
-            text: '爆米花'
+            type_name: '虚拟商品'
         }]
     })
-    select({
-        el: '#combobox3',
-        data: [{
-            id: 1,
-            text: '捷克蛋糕'
-        }, {
-            id: 2,
-            text: '爆米花'
-        }]
-    })
+    pz.goodsoperation.init()
 </script>
 
 </html>

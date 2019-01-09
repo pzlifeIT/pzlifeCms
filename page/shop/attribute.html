@@ -24,7 +24,7 @@
         <div class="refresh topbtn din fl" onclick="document.location.reload()">
             <img src="../../images/sx.png" alt="">
         </div>
-        <div class="add addsize topbtn din fl">
+        <div class="add addattribute topbtn din fl">
             <img src="../../images/jia.png" alt="">
         </div>
     </div>
@@ -49,74 +49,34 @@
         </div>
         <div class="gl-title">
             <div class="col-md-3 bot-bor subli">序号</div>
-            <div class="col-md-3 bot-bor subli">三级分类</div>
+            <div class="col-md-3 bot-bor subli">所属规格</div>
             <div class="col-md-3 bot-bor subli">属性名称</div>
             <div class="col-md-3 bot-bor subli">管理</div>
         </div>
-        <ul class="gl-ul" id="sizelist">
-            <!-- <li>
-                <div class="col-md-2 bot-bor subli">1181</div>
-                <span class="col-md-2 bot-bor subli"><img src="http://www.inweeye.cn/image/cache/catalog/201812/goods/TIM截图20181210200811-40x40.png" alt=""></span>
-                <span class="col-md-2 bot-bor subli">萌宠系列手机壳</span>
-                <span class="col-md-2 bot-bor subli">111111111</span>
-                <span class="col-md-2 bot-bor subli">
-                </span>
-                <span class="col-md-2 bot-bor subli">
-                  <a class="pz-btn btn-amend" href="supplierdetails.html">编辑</a>
-                  <a class="pz-btn btn-del" href="#">删除</a>
-                </span>
-            </li> -->
-        </ul>
+        <ul class="gl-ul" id="ablist"></ul>
         <div class="w-floor-page">
             <div class="floor-page" id="floorpages"></div>
         </div>
     </div>
-    <div class="pz-modal hide" id="compileSize">
-        <div class="pz-modal-content">
-            <div class="pz-modal-header">编辑规格</div>
-            <div class="pz-spin-container">
-                <!-- <div class="dl-show">
-                    <span class="dl-title">三级分类:</span>
-                    <span class="dl-text" id="threeClassify"></span>
-                </div> -->
-                <div class="dl-show">
-                    <span class="dl-title">规格名称:</span>
-                    <input class="dl-info" id="sizeName" type="text">
-                </div>
-                <div class="dl-show flexcenter">
-                    <input type="button" value="取消" class="pz-btn btn-cancel" id="cancelcompile">
-                    <input type="button" value="保存" id="savecompile" class="pz-btn btn-amend">
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="pz-modal hide" id="compileNew">
+    <div class="pz-modal hide" id="abcompile">
         <div class="pz-modal-content">
             <div class="pz-modal-header">编辑规格</div>
             <div class="pz-spin-container">
                 <div class="dl-show">
-                    <span class="dl-title">三级分类:</span>
-                    <!-- <input class="dl-info" id="threeClassify" type="text"> -->
-                    <span class="multistage">请选择</span>
-                </div>
-                <div class="dl-show">
                     <span class="dl-title">规格名称:</span>
-                    <input class="dl-info" id="newName" type="text">
+                    <input class="dl-info" id="abName" type="text">
                 </div>
                 <div class="dl-show flexcenter">
-                    <input type="button" value="取消" class="pz-btn btn-cancel" id="cancelNew">
-                    <input type="button" value="保存" id="saveNew" class="pz-btn btn-amend">
+                    <input type="button" value="取消" class="pz-btn btn-cancel" id="abCancel">
+                    <input type="button" value="保存" id="abSave" class="pz-btn btn-amend">
                 </div>
             </div>
         </div>
-    </div>
-    <div class="linkage hide">
-
     </div>
 </body>
 <script src="../../js/ajax.js"></script>
 <script src="../../js/common.js"></script>
-<script src="js/size.js"></script>
+<script src="js/attribute.js"></script>
 <script>
     pz.size.init()
 </script>

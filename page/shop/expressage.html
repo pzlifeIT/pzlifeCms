@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>商品库</title>
+    <title>快递模板</title>
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/bootstrap.css">
     <link rel="stylesheet" href="../../css/list.css">
@@ -16,11 +16,6 @@
 
     <div class="iframenav">
         <!-- <button class="">刷新</button> -->
-        <div class="din fl">
-            <span>
-            
-          </span>
-        </div>
         <div class="refresh topbtn din fl" onclick="document.location.reload()">
             <img src="../../images/sx.png" alt="">
         </div>
@@ -30,7 +25,7 @@
     </div>
     <div class="gs-list panel-default">
         <div class="gl-head panel-heading ">
-            <span>运费模板</span>
+            <span>快递模板</span>
         </div>
         <div class="gl-title">
             <div class="col-md-2 bot-bor subli">ID</div>
@@ -39,8 +34,8 @@
             <div class="col-md-3 bot-bor subli">详情</div>
             <div class="col-md-3 bot-bor subli">管理</div>
         </div>
-        <ul class="gl-ul" id="supplierslist">
-            <li>
+        <ul class="gl-ul" id="eelist">
+            <!-- <li>
                 <div class="col-md-2 bot-bor subli">1181</div>
                 <span class="col-md-2 bot-bor subli">重量</span>
                 <span class="col-md-2 bot-bor subli">萌宠系列手机壳</span>
@@ -49,32 +44,37 @@
                   <a class="pz-btn btn-amend" href="supplierdetails.html">编辑</a>
                   <a class="pz-btn btn-del" href="#">删除</a>
                 </span>
-            </li>
+            </li> -->
         </ul>
         <!-- <div class="w-floor-page">
             <div class="floor-page" id="floorpages"></div>
         </div> -->
     </div>
-    <div class="pz-modal hide" id="srcom">
+    <div class="pz-modal hide" id="eeAmend">
         <div class="pz-modal-content">
             <div class="pz-modal-header">编辑供应商快递模板
             </div>
             <div class="pz-spin-container">
                 <div class="dl-show">
                     <span class="dl-title">计价方式:</span>
-                    <input class="dl-info" id="srName" placeholder="计价方式" value="" type="text">
+                    <div class="din combobox" id="EEcombobox">
+                        <div class="ant-select">
+                            <div class="ant-select-selection">请选择</div>
+                            <span class="ant-select-arrow"></span>
+                        </div>
+                    </div>
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">标题:</span>
-                    <input class="dl-info" id="srName" placeholder="标题" value="" type="text">
+                    <input class="dl-info" id="eeTitle" placeholder="标题" value="" type="text">
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">详情:</span>
-                    <input class="dl-info" id="srName" placeholder="详情" value="" type="text">
+                    <input class="dl-info" id="eeDesc" placeholder="详情" value="" type="text">
                 </div>
                 <div class="dl-show flexcenter">
-                    <input type="button" value="取消" class="pz-btn btn-cancel" id="srCancel">
-                    <input type="button" value="保存" id="srSave" class="pz-btn btn-amend">
+                    <input type="button" value="取消" class="pz-btn btn-cancel" id="eeCancel">
+                    <input type="button" value="保存" id="eeSave" class="pz-btn btn-amend">
                 </div>
             </div>
         </div>
@@ -83,8 +83,22 @@
 <script src="../../js/jq.js"></script>
 <script src="../../js/ajax.js"></script>
 <script src="../../js/common.js"></script>
-<script src="js/supplierdetails.js"></script>
+<script src="js/expressage.js"></script>
 <script>
+    select({
+        el: '#EEcombobox',
+        data: [{
+            id: 1,
+            type_name: '件数'
+        }, {
+            id: 2,
+            type_name: '重量'
+        }, {
+            id: 3,
+            type_name: '体积'
+        }]
+    })
+    pz.expressage.init()
 </script>
 
 </html>

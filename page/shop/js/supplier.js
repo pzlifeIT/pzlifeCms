@@ -34,7 +34,7 @@
                 <div class = "col-md-2 bot-bor subli" ><span>' + data[i].tel + '</span></div> \
                 <div class = "col-md-2 bot-bor subli desc" ><span>' + data[i].desc + '</span></div> \
                 <div class = "col-md-2 bot-bor subli" >\
-                <a class="pz-btn btn-amend" href="supplierdetails.html?id=' + data[i].id + '">运费模板</a>\
+                <a class="pz-btn btn-amend" href="expressage.html?id=' + data[i].id + '">快递模板</a>\
                     <div class = "pz-btn btn-amend redact" data-id="' + data[i].id + '" > 编辑 </div> \
                 <div class = "pz-btn btn-del" data-id="' + data[i].id + '" > 删除 </div> </div></li>'
             }

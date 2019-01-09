@@ -56,7 +56,6 @@
             let t = this,
                 name = document.querySelector('#newName').value;
             id = document.querySelector('.multistage').getAttribute('data-id');
-
             if (!name) return
             if (!id) return
             quest.requests({
@@ -65,7 +64,7 @@
                     sa_name: name,
                     type: 1
                 },
-                url: 'saveSpecAttr',
+                url: 'savespecattr',
                 success: function(res) {
                     t.getSpecList()
                     t.compileNew.classList.add('hide')
@@ -97,7 +96,7 @@
               <div class = "col-md-3 bot-bor subli" ><span>' + data[i].spe_name + '</span></div> \
               <div class = "col-md-3 bot-bor subli" >\
               <a class = "pz-btn btn-amend" \
-              href = "javascript:;" > 查看属性 </a> \
+              href = "attribute.html?id=' + data[i].id + '" > 查看属性 </a> \
                   <a class = "pz-btn btn-amend seamend" \
               href = "javascript:;" data-id="' + data[i].id + '" > 编辑 </a> \
               <a class = "pz-btn btn-del" data-id="' + data[i].id + '" href = "#" > 删除 </a> </div></li>'
@@ -128,6 +127,7 @@
 
         }
         _SE.prototype.delSpecAttr = function(id) { //删除规格
+            let t = this
             quest.requests({
                 data: {
                     id: id,
@@ -135,7 +135,7 @@
                 },
                 url: 'delSpecAttr',
                 success: function(res) {
-
+                    t.getSpecList()
                 }
             })
         }

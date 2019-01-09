@@ -164,19 +164,19 @@
 }
 
 .up-down::before {
-    content: "下架"
+    content: "\4e0b\67b6"
 }
 
 .ant-switch-checked.up-down::before {
-    content: "上架"
+    content: "\4e0a\67b6"
 }
 
 .stop-open::before {
-    content: "停用"
+    content: "\505c\7528"
 }
 
 .ant-switch-checked.stop-open::before {
-    content: "启用"
+    content: "\542f\7528"
 }
 
 .dl-select {
@@ -206,6 +206,7 @@
     line-height: 30px;
     border: 1px solid #d9d9d9;
     text-indent: 10px;
+    font-size: 14px;
 }
 
 .multistage::after {
@@ -223,4 +224,100 @@
 
 .multistage-checked::after {
     transform: rotate(180deg);
+}
+
+.list-site {
+    width: 100%;
+    min-height: 40px;
+}
+
+.li-province,
+.li-city {
+    position: relative;
+    display: inline-block;
+    float: left;
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    cursor: pointer;
+}
+
+.list-city {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    box-sizing: border-box;
+    display: none;
+    border: 1px solid #e9e9e9;
+    overflow: auto;
+    background-color: #fff;
+    z-index: 20;
+}
+
+
+/* .list-province {
+    overflow: auto;
+} */
+
+.list-city:hover {
+    display: block;
+}
+
+.li-province .sel-box,
+.li-city .sel-box-city {
+    position: relative;
+    display: inline-block;
+    float: left;
+    width: 25px;
+    height: 25px;
+    margin: 7.5px;
+    border: 1px solid #e9e9e9;
+}
+
+.li-city .sel-box-city::after,
+.li-province .sel-box::after {
+    position: absolute;
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 2.5px;
+    background-color: #dd514c;
+    opacity: 0;
+}
+
+.li-city .set-text-city,
+.li-province .set-text {
+    display: inline-block;
+    float: left;
+    line-height: 40px;
+    font-size: 16px;
+}
+
+.li-city {
+    width: 148px;
+}
+
+.li-province.active .sel-box {
+    border-color: #dd514c;
+}
+
+.li-province.active .sel-box::after {
+    opacity: 1;
+}
+
+.li-province:hover .list-city {
+    display: block;
+}
+
+.consite {
+    position: relative;
+    min-height: 400px;
+}
+
+.botbtn {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin-top: 40px;
 }
