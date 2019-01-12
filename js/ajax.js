@@ -68,12 +68,14 @@
         addSupplier: 'admin/suppliers/addSupplier', //新建供应商
         addsupplierfreight: 'admin/suppliers/addsupplierfreight', //新建供应商快递模板
         addSupplierFreightdetail: 'admin/suppliers/addSupplierFreightdetail', //新增供应商快递模板运费
+        updatesupplierfreightarea: 'admin/suppliers/updatesupplierfreightarea', //更新运费模版和市的价格关联
         getsupplierfreights: 'admin/suppliers/getsupplierfreights', //获取供应商快递模板列表
         getSupplierFreightdetailList: 'admin/suppliers/getSupplierFreightdetailList', //获取供应商快递模板运费列表
         getSuppliers: 'admin/suppliers/getSuppliers', //获取供应商列表
         getSupplierFreight: 'admin/suppliers/getSupplierFreight', //获取供应商快递模板
         getSupplierFreightdetail: 'admin/suppliers/getSupplierFreightdetail', //获取供应商快递模板详情
         getSupplierData: 'admin/suppliers/getSupplierData', //获取供应商详情
+        getsuppliersall: 'admin/suppliers/getsuppliersall', //获取所有供应商
         stopStartCate: 'admin/category/stopStartCate', //停用/启用分类
         getCateList: 'admin/category/getCateList', //分类列表
         delcategory: 'admin/category/delcategory', //删除分类
@@ -84,9 +86,13 @@
         addCatePage: 'admin/category/addCatePage', //获取前两级分类
         editcatepage: 'admin/category/editcatepage', //获取需要编辑的分类数据
         delGoods: 'admin/goods/delGoods', //删除商品
-        getGoodsList: 'admin/goods/getGoodsList', //商品列表
-        saveAddGoods: 'admin/goods/saveAddGoods', //添加商品
-        getOneGoods: 'admin/goods/getOneGoods', //获取一个商品数据
+        saveupdategoods: 'admin/goods/saveupdategoods', //删除商品
+        getgoodslist: 'admin/goods/getGoodsList', //商品列表
+        saveaddgoods: 'admin/goods/saveAddGoods', //添加商品
+        addgoodsspec: 'admin/goods/addgoodsspec', //添加商品的规格属性
+        getgoodssku: 'admin/goods/getgoodssku', //获取一个sku信息
+        editgoodssku: 'admin/goods/editgoodssku', //获取一个sku信息
+        getonegoods: 'admin/goods/getOneGoods', //获取一个商品数据
         getProvinceCity: 'admin/provinces/getProvinceCity', //省市列表
         getArea: 'admin/provinces/getArea', //获取区级列表
         getCity: 'admin/provinces/getCity', //获取市级列表
@@ -96,6 +102,7 @@
         getSpecList: 'admin/spec/getSpecList', //属性列表
         savespecattr: 'admin/spec/savespecattr', //添加属性/规格
         addAttrPage: 'admin/spec/addAttrPage', //获取一级规格
+        getspecattr: 'admin/spec/getspecattr', //获取一级规格和二级属性
         getAttr: 'admin/spec/getAttr', //获取二级属性
         getEditData: 'admin/spec/getEditData', //获取需要编辑的规格/属性数据
         loginUserByOpenid: 'index/user/loginUserByOpenid', //通过openid获取uid和手机号

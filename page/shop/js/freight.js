@@ -12,6 +12,8 @@
             this.fhsite = document.querySelector('#fhsite')
             this.fhCancelSite = document.querySelector('#fhCancelSite')
             this.fhSaveSite = document.querySelector('#fhSaveSite')
+            this.listProvince = document.querySelector('#listProvince')
+            this.site = []
             this.init()
         }
         _FH.prototype.init = function() {
@@ -30,6 +32,9 @@
             t.eeSave.addEventListener('click', function(e) {
                 t.saveEE()
             })
+            t.fhSaveSite.addEventListener('click', function(e) {
+                t.saveSite()
+            })
         }
         _FH.prototype.getfreight = function() { //获取供应商快递模板运费列表
             let t = this
@@ -43,6 +48,7 @@
                 }
             })
         }
+
         _FH.prototype.setGlul = function(data) { //循环出供应商列表
             let len = data.length,
                 i,
@@ -88,11 +94,201 @@
             quest.requests({
                 url: 'getprovincecitybyfreight',
                 data: {
-                    freight_id: t.id
+                    freight_id: t.FhId,
+                    freight_detail_id: t.id
                 },
                 success: function(res) {
-                    // t.setData(res.data)
+                    t.site = res.data
+                    t.disSite()
                 }
+            })
+        }
+        _FH.prototype.disSite = function() {
+            let sdata = this.site,
+                len = sdata.length,
+                len1, i, y, p = 0,
+                c = 0;
+            for (i = 0; i < len; i++) {
+                len1 = sdata[i]._child.length
+                c = 0
+                for (y = 0; y < len1; y++) {
+                    if (sdata[i]._child[y].status == 2) {
+                        c++
+                    }
+                }
+                if (c == len1) {
+                    sdata[i].status = 2
+                } else if (c > 0) {
+                    sdata[i].status = 3
+                } else {
+                    sdata[i].status = 1
+                }
+            }
+            this.site = sdata
+            this.setSiteHtml(this.site)
+        }
+        _FH.prototype.setSiteHtml = function(data) {
+            let t = this,
+                len = data.length,
+                len1, x, y, str = '',
+                pcol = '',
+                ccol = ''
+            for (i = 0; i < len; i++) {
+                pcol = ''
+                if (data[i].status == 2) {
+                    pcol = 'active'
+                } else if (data[i].status == 3) {
+                    pcol = 'cur'
+                }
+                str += '<li class="li-province ' + pcol + ' p' + data[i].id + ' " data-id="' + data[i].id + '" >'
+                str += '<div class="li-pro-div">'
+                str += '<span class="sel-box"></span>'
+                str += '<span class="set-text">' + data[i].area_name + '</span>'
+                str += '</div>'
+                str += '<ul class="list-city">'
+                len1 = data[i]._child.length
+                for (y = 0; y < len1; y++) {
+                    ccol = ''
+                    if (data[i]._child[y].status == 2) {
+                        ccol = 'active'
+                    }
+                    str += '<li class="li-city ' + ccol + '  c' + data[i]._child[y].id + '  " data-id="' + data[i]._child[y].id + '">'
+                    str += '<span class="sel-box-city"></span>'
+                    str += '<span class="set-text-city">' + data[i]._child[y].area_name + '</span>'
+                    str += '</li>'
+                }
+                str += '</ul>'
+                str += '</div>'
+            }
+            t.listProvince.innerHTML = str
+            t.liclick()
+        }
+        _FH.prototype.setprovince = function(id, n) {
+            let sdata = this.site,
+                len = sdata.length,
+                len1, i, y, pel = document.querySelector('.p' + id);
+            for (i = 0; i < len; i++) {
+                len1 = sdata[i]._child.length
+                if (sdata[i].id == id) {
+                    for (y = 0; y < len1; y++) {
+                        sdata[i]._child[y].status = n
+                    }
+                    sdata[i].status = n
+                    break;
+                }
+            }
+            let cels = pel.querySelectorAll('.li-city');
+            if (n == 1) {
+                pel.classList.remove('active')
+            }
+            if (n == 2) {
+                pel.classList.add('active')
+            }
+            pel.classList.remove('cur')
+            cels.forEach(function(cel) {
+                if (n == 2) {
+                    cel.classList.add('active')
+                }
+                if (n == 1) {
+                    cel.classList.remove('active')
+                }
+
+            })
+            this.site = sdata
+        }
+        _FH.prototype.setcity = function(tid, id, n) {
+            let sdata = this.site,
+                len = sdata.length,
+                len1, i, y, p = 0,
+                c = 0,
+                cel = document.querySelector('.c' + id);
+            pel = document.querySelector('.p' + tid)
+            if (n == 1) {
+                cel.classList.remove('active')
+            }
+            if (n == 2) {
+                cel.classList.add('active')
+            }
+            for (i = 0; i < len; i++) {
+                len1 = sdata[i]._child.length;
+                c = 0;
+                if (sdata[i].id == tid) {
+                    for (y = 0; y < len1; y++) {
+                        if (sdata[i]._child[y].id == id) {
+                            sdata[i]._child[y].status = n;
+                        }
+                        if (sdata[i]._child[y].status == 2) {
+                            c++;
+                        }
+                    }
+                    if (c == len1) {
+                        sdata[i].status = 2;
+                        pel.classList.remove('cur')
+                        pel.classList.add('active')
+                    } else if (c > 0) {
+                        sdata[i].status = 3;
+                        pel.classList.add('cur')
+                        pel.classList.remove('active')
+                    } else {
+                        sdata[i].status = 1;
+                        pel.classList.remove('cur')
+                        pel.classList.remove('active')
+                    }
+                    break;
+                }
+
+            }
+            this.site = sdata;
+        }
+        _FH.prototype.saveSite = function() {
+            let t = this,
+                sdata = t.site,
+                len = sdata.length,
+                len1, i, y, str = '';
+            for (i = 0; i < len; i++) {
+                len1 = sdata[i]._child.length;
+                for (y = 0; y < len1; y++) {
+                    if (sdata[i]._child[y].status == 2) {
+                        str += sdata[i]._child[y].id + ','
+                    }
+                }
+            }
+            str = str.substr(0, str.length - 1);
+            quest.requests({
+                url: 'updatesupplierfreightarea',
+                data: {
+                    city_id_str: str,
+                    freight_detail_id: t.id
+                },
+                success: function(res) {
+                    t.fhsite.classList.add('hide')
+                }
+            })
+        }
+        _FH.prototype.liclick = function() {
+            let t = this,
+                liprovinces = t.listProvince.querySelectorAll('.li-province')
+            liprovinces.forEach(function(lip) {
+                let lid = lip.querySelector('.li-pro-div'),
+                    lics = lip.querySelectorAll('.li-city'),
+                    tid = lip.getAttribute('data-id');
+                lid.addEventListener('click', function(e) {
+                    if (lip.classList.contains('active')) {
+                        t.setprovince(tid, 1)
+                    } else {
+                        t.setprovince(tid, 2)
+                    }
+                })
+                lics.forEach(function(lic) {
+                    lic.addEventListener('click', function(el) {
+                        let id = lic.getAttribute('data-id')
+                        if (lic.classList.contains('active')) {
+                            t.setcity(tid, id, 1)
+                        } else {
+                            t.setcity(tid, id, 2)
+                        }
+                    })
+                })
             })
         }
         _FH.prototype.amend = function() { //修改
@@ -100,7 +296,6 @@
                 redactlist = t.eelist.querySelectorAll('.redact')
             redactlist.forEach(li => {
                 li.addEventListener('click', function(e) {
-                    console.log(li.getAttribute('data-id'))
                     t.id = li.getAttribute('data-id')
                     t.getSupplierFreight()
                     t.eeAmend.classList.remove('hide')
@@ -110,9 +305,9 @@
         _FH.prototype.getSupplierFreight = function() {
             let t = this
             quest.requests({
-                url: 'getSupplierFreight',
+                url: 'getSupplierFreightdetail',
                 data: {
-                    supplierFreightId: t.id
+                    sfd_id: t.id
                 },
                 success: function(res) {
                     // t.setData(res.data)

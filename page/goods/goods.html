@@ -67,36 +67,32 @@
             <span>商品列表</span>
         </div>
         <div class="gl-title">
-            <span class="col-md-2 bot-bor subli">ID</span>
+            <span class="col-md-1 bot-bor subli">ID</span>
             <span class="col-md-2 bot-bor subli">图片</span>
-            <span class="col-md-2 bot-bor subli">商品名称</span>
-            <span class="col-md-2 bot-bor subli">价格</span>
-            <span class="col-md-2 bot-bor subli">状态</span>
+            <span class="col-md-1 bot-bor subli">商品名称</span>
+            <span class="col-md-1 bot-bor subli">商品属性</span>
+            <span class="col-md-2 bot-bor subli">商品标题</span>
+            <span class="col-md-1 bot-bor subli">供应商名称</span>
+            <span class="col-md-1 bot-bor subli">分类名称</span>
+            <span class="col-md-1 bot-bor subli">状态</span>
             <span class="col-md-2 bot-bor subli">管理</span>
         </div>
-        <ul class="gl-ul">
-            <li>
-                <span class="col-md-2 bot-bor subli">1181</span>
-                <span class="col-md-2 bot-bor subli"><img src="http://www.inweeye.cn/image/cache/catalog/201812/goods/TIM截图20181210200811-40x40.png" alt=""></span>
-                <span class="col-md-2 bot-bor subli">萌宠系列手机壳</span>
-                <span class="col-md-2 bot-bor subli">68.00 ~ 68.00</span>
+        <ul class="gl-ul" id="goodlist">
+            <!-- <li>
+                <span class="col-md-1 bot-bor subli">ID</span>
+                <span class="col-md-2 bot-bor subli">图片</span>
+                <span class="col-md-1 bot-bor subli">商品名称</span>
+                <span class="col-md-1 bot-bor subli">商品属性</span>
+                <span class="col-md-2 bot-bor subli">供应商名称</span>
+                <span class="col-md-1 bot-bor subli">分类名称</span>
                 <span class="col-md-2 bot-bor subli">
                   <span class="ant-switch ant-switch-checked"></span>
                 </span>
                 <span class="col-md-2 bot-bor subli">
-                  
+                  <input type="button" value="取消" class="pz-btn btn-cancel" id="eeCancel">
+                    <input type="button" value="保存" id="eeSave" class="pz-btn btn-amend">
                 </span>
-            </li>
-            <li>
-                <span class="col-md-2 bot-bor subli">1181</span>
-                <span class="col-md-2 bot-bor subli"><img src="http://www.inweeye.cn/image/cache/catalog/201812/goods/TIM截图20181210200811-40x40.png" alt=""></span>
-                <span class="col-md-2 bot-bor subli">萌宠系列手机壳</span>
-                <span class="col-md-2 bot-bor subli">68.00 ~ 68.00</span>
-                <span class="col-md-2 bot-bor subli">
-                  <span class="ant-switch"></span>
-                </span>
-                <span class="col-md-2 bot-bor subli"></span>
-            </li>
+            </li> -->
         </ul>
         <div class="w-floor-page">
             <div class="floor-page" id="floorpages"></div>
@@ -104,25 +100,24 @@
     </div>
 
 </body>
+<script src="../../js/ajax.js"></script>
 <script src="../../js/common.js"></script>
+<script src="js/goods.js"></script>
 <script>
-    pages.init({
-        el: '#floorpages',
-        pagenumber: 60
-    })
     select({
         el: '#combobox1',
         data: [{
             id: 1,
-            text: '已上架'
+            type_name: '已上架'
         }, {
             id: 2,
-            text: '已下架'
+            type_name: '已下架'
         }, {
             id: 3,
-            text: '不限制'
+            type_name: '不限制'
         }]
     })
+    pz.goods.init()
 </script>
 
 </html>

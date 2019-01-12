@@ -15,11 +15,6 @@
 <body>
     <div class="iframenav">
         <!-- <button class="">刷新</button> -->
-        <div class="din fl">
-            <span>
-        
-      </span>
-        </div>
         <div class="refresh topbtn din fl" onclick="document.location.reload()">
             <img src="../../images/sx.png" alt="">
         </div>
@@ -41,15 +36,17 @@
             <div class="dlnav-con dl-1">
                 <div class="dl-show">
                     <span class="dl-title">商品名称:</span>
-                    <input class="dl-info" value="" type="text">
+                    <input class="dl-info" id="goodsNameNew" value="" type="text">
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">商品标题:</span>
-                    <input class="dl-info" value="" type="text">
+                    <input class="dl-info" id="goodsSubtitleNew" value="" type="text">
                 </div>
+
                 <div class="dl-show">
                     <span class="dl-title">商品类型:</span>
-                    <div class="din combobox" id="combobox2">
+                    <span class="disable hide" id="goodsTypeAmend">请选择</span>
+                    <div class="din combobox hide" id="goodsTypeNew">
                         <div class="ant-select">
                             <div class="ant-select-selection">请选择</div>
                             <span class="ant-select-arrow"></span>
@@ -58,7 +55,8 @@
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">供应商:</span>
-                    <div class="din combobox" id="combobox1">
+                    <span class="disable hide" id="supplierIdAmend">请选择</span>
+                    <div class="din combobox hide" id="supplierIdNew">
                         <div class="ant-select">
                             <div class="ant-select-selection">请选择</div>
                             <span class="ant-select-arrow"></span>
@@ -67,7 +65,8 @@
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">三级分类:</span>
-                    <span class="multistage">请选择</span>
+                    <span class="disable hide" id="cateIdAmend">请选择</span>
+                    <span class="multistage cateIdNew hide">请选择</span>
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">产品标题图:</span>
@@ -75,11 +74,8 @@
                         <div class="selfile fr"></div>
                     </div>
                 </div>
-
-
                 <div class="dl-show flexcenter">
-                    <input type="button" value="取消" class="pz-btn btn-cancel" id="srCancel">
-                    <input type="button" value="保存" id="srSave" class="pz-btn btn-amend">
+                    <input type="button" value="保存" id="goodSaveNew" class="pz-btn btn-amend">
                 </div>
             </div>
             <div class="dlnav-con dl-1">
@@ -98,68 +94,58 @@
                 </div>
                 <div class="d2-list">
                     <div class="list-header">
-                        <span class="col-md-3">id</span>
+                        <span class="col-md-3">序号</span>
                         <span class="col-md-3">规格</span>
                         <span class="col-md-3">属性</span>
                         <span class="col-md-3">管理</span>
                     </div>
-                    <ul>
-                        <li>
+                    <ul id="attributeList">
+                        <!-- <li>
                             <span class="col-md-3">2523</span>
                             <span class="col-md-3">颜色</span>
                             <span class="col-md-3">红色</span>
                             <span class="col-md-3">
-                                <div class="pz-btn btn-amend" href="supplierdetails.html">编辑</div>
                                 <div class="pz-btn btn-del" href="#">删除</div>
                             </span>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
                 <div class="d2-list">
                     <div class="list-header">
-                        <span class="col-md-1">规格</span>
+                        <span class="col-md-1">序号</span>
+                        <span class="col-md-1">规格名称</span>
                         <span class="col-md-1">规格图</span>
-                        <span class="col-md-05">库存</span>
-                        <span class="col-md-05">市场价</span>
-                        <span class="col-md-05">零售价</span>
-                        <span class="col-md-1">预售价开始时间</span>
-                        <span class="col-md-1">预售价结束时间</span>
-                        <span class="col-md-05">预售价</span>
-                        <span class="col-md-05">活动价</span>
-                        <span class="col-md-1">活动价开始时间</span>
-                        <span class="col-md-1">活动价过期时间</span>
-                        <span class="col-md-05">毛利</span>
+                        <span class="col-md-1">库存</span>
+                        <span class="col-md-1">市场价</span>
+                        <span class="col-md-1">零售价</span>
+                        <span class="col-md-1">成本价</span>
+                        <span class="col-md-1">其他运费成本</span>
                         <span class="col-md-1">积分售价</span>
                         <span class="col-md-1">积分赠送</span>
+                        <span class="col-md-1">运费</span>
                         <span class="col-md-1">管理</span>
                     </div>
-                    <ul>
-                        <li>
-                            <span class="col-md-1">0</span>
-                            <span class="col-md-1">0</span>
-                            <span class="col-md-05">0</span>
-                            <span class="col-md-05">100000</span>
-                            <span class="col-md-05">0</span>
-                            <span class="col-md-1">0</span>
-                            <span class="col-md-1">10000</span>
-                            <span class="col-md-05">0</span>
-                            <span class="col-md-05">0</span>
-                            <span class="col-md-1">0</span>
-                            <span class="col-md-1">0</span>
-                            <span class="col-md-05">0</span>
-                            <span class="col-md-1">0</span>
-                            <span class="col-md-1">0</span>
+                    <ul id="goodattributeList">
+                        <!-- <li>
+                            <span class="col-md-1">序号</span>
+                            <span class="col-md-2">商品规格名称</span>
+                            <span class="col-md-2">规格图</span>
+                            <span class="col-md-1">库存</span>
+                            <span class="col-md-1">市场价</span>
+                            <span class="col-md-1">零售价</span>
+                            <span class="col-md-1">其他运费成本</span>
+                            <span class="col-md-1">积分赠送</span>
+                            <span class="col-md-1">运费</span>
                             <span class="col-md-1">
-                                <div class="pz-btn btn-amend" href="supplierdetails.html">编辑</div>
-                                <div class="pz-btn btn-del" href="#">删除</div>
+                                <div class="pz-btn btn-amend">编辑</div>
                             </span>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
-                <div class="dl-show flexcenter">
+                <!-- <div class="dl-show flexcenter">
                     <input type="button" value="取消" class="pz-btn btn-cancel" id="goCancelbasic">
                     <input type="button" value="保存" id="goSavebasic" class="pz-btn btn-amend">
-                </div>
+                </div> -->
             </div>
             <div class="dlnav-con dl-1">
                 <div class="refresh  topbtn addpreview">
@@ -205,13 +191,23 @@
             <div class="pz-spin-container">
                 <div class="dl-show">
                     <span class="dl-title">规格:</span>
-                    <!-- <input class="dl-info" id="threeClassify" type="text"> -->
-                    <span class="multistage">请选择</span>
+                    <div class="din combobox" id="selattr">
+                        <div class="ant-select">
+                            <div class="ant-select-selection">请选择</div>
+                            <span class="ant-select-arrow"></span>
+                        </div>
+                    </div>
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">属性:</span>
-                    <input class="dl-info" id="newName" type="text">
+                    <div class="din combobox" id="selsite">
+                        <div class="ant-select">
+                            <div class="ant-select-selection">请选择</div>
+                            <span class="ant-select-arrow"></span>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="dl-show flexcenter">
                     <input type="button" value="取消" class="pz-btn btn-cancel" id="cancelNew">
                     <input type="button" value="保存" id="saveNew" class="pz-btn btn-amend">
@@ -227,62 +223,44 @@
             <div class="pz-modal-header">编辑商品规格</div>
             <div class="pz-spin-container">
                 <div class="dl-show">
-                    <span class="dl-title">三级分类:</span>
-                    <span class="multistage">请选择</span>
+                    <span class="dl-title">规格名称:</span>
+                    <span class="disable" id="sku_name">请选择</span>
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">库存:</span>
-                    <input class="dl-info" id="newName" type="text">
+                    <input class="dl-info" id="stock" type="text">
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">市场价:</span>
-                    <input class="dl-info" id="newName" type="text">
+                    <input class="dl-info" id="market_price" type="text">
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">零售价:</span>
-                    <input class="dl-info" id="newName" type="text">
+                    <input class="dl-info" id="retail_price" type="text">
                 </div>
                 <div class="dl-show">
-                    <span class="dl-title">预售价开始时间:</span>
-                    <input class="dl-info" id="newName" type="text">
+                    <span class="dl-title">成本价:</span>
+                    <input class="dl-info" id="cost_price" type="text">
                 </div>
                 <div class="dl-show">
-                    <span class="dl-title">预售价结束时间:</span>
-                    <input class="dl-info" id="newName" type="text">
-                </div>
-                <div class="dl-show">
-                    <span class="dl-title">预售价:</span>
-                    <input class="dl-info" id="newName" type="text">
-                </div>
-                <div class="dl-show">
-                    <span class="dl-title">活动价:</span>
-                    <input class="dl-info" id="newName" type="text">
-                </div>
-                <div class="dl-show">
-                    <span class="dl-title">活动价开始时间:</span>
-                    <input class="dl-info" id="newName" type="text">
-                </div>
-                <div class="dl-show">
-                    <span class="dl-title">活动价过期时间:</span>
-                    <input class="dl-info" id="newName" type="text">
-                </div>
-                <div class="dl-show">
-                    <span class="dl-title">毛利:</span>
-                    <input class="dl-info" id="newName" type="text">
+                    <span class="dl-title">其他运费成本:</span>
+                    <input class="dl-info" id="margin_price" type="text">
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">积分售价:</span>
-                    <input class="dl-info" id="newName" type="text">
+                    <input class="dl-info" id="integral_price" type="text">
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">积分赠送:</span>
+                    <input class="dl-info" id="integral_active" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">运费:</span>
                     <input class="dl-info" id="newName" type="text">
                 </div>
                 <div class="dl-show">
-                    <span class="dl-title">积分赠送:</span>
-                    <div class="selpicure" id="selpicure1">
-                        <div class="selfile fr"></div>
-                    </div>
+                    <span class="dl-title">规格详情图:</span>
+                    <input class="dl-info" id="sku_image" type="text">
                 </div>
                 <div class="dl-show flexcenter">
                     <input type="button" value="取消" class="pz-btn btn-cancel" id="cancelAmend">
@@ -299,36 +277,11 @@
     tab({
         head: '#dlnav',
         con: '.dlnav-con',
-        num: 4
+        num: 1
     })
-    selpicure({
-        el: '#selpicure1',
-        num: 1,
-        images: [],
-        imgChange: function(images) {
-            console.log('images', images[0])
-        }
-    })
-    selpicure({
-        el: '#selpicure2',
-        num: 5,
-        images: [],
-        imgChange: function(images) {
-            console.log('images', images[0])
-        }
-    })
+
     select({
-        el: '#combobox1',
-        data: [{
-            id: 1,
-            type_name: '捷克蛋糕'
-        }, {
-            id: 2,
-            type_name: '爆米花'
-        }]
-    })
-    select({
-        el: '#combobox2',
+        el: '#goodsTypeNew',
         data: [{
             id: 1,
             type_name: '普通商品'

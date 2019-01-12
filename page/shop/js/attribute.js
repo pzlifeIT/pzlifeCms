@@ -39,7 +39,7 @@
                 name = document.querySelector('#abName').value;
             quest.requests({
                 data: {
-                    id: t.topId,
+                    id: t.id,
                     sa_name: name,
                     type: 2
                 },
@@ -104,6 +104,7 @@
             amends.forEach(function(li) {
                 li.addEventListener('click', function(e) {
                     let id = li.getAttribute('data-id')
+                    console.log(id)
                     t.getEditData(id)
                 })
             })

@@ -199,7 +199,11 @@
             this.select = this.box.querySelector('.ant-select')
             this.selection = this.box.querySelector('.ant-select-selection')
             this.data = o.data
+            this.id = o.id || 'id'
+            this.type_name = o.name || 'type_name'
+            console.log(this.data)
             this.init()
+
         }
         D.prototype = {
             init: function() {
@@ -209,16 +213,17 @@
 
             },
             setitems: function() { //循环出下拉框
-                let str = '',
+                let t = this,
+                    str = '',
                     len = this.data.length,
                     menulist = this.menu.querySelector('ul')
                 for (let i = 0; i < len; i++) {
                     if (this.data.tier == 2) {
-                        this.data[i].type_name = '&nbsp;&nbsp;' + this.data[i].type_name
+                        this.data[i][t.type_name] = '&nbsp;&nbsp;' + this.data[i][t.type_name]
                     } else if (this.data.tier == 3) {
-                        this.data[i].type_name = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + this.data[i].type_name
+                        this.data[i][t.type_name] = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + this.data[i][t.type_name]
                     }
-                    str += '<li class="as-dropdown-item" data-id="' + this.data[i].id + '" data-value="' + this.data[i].type_name + '" >' + this.data[i].type_name + '</li>'
+                    str += '<li class="as-dropdown-item" data-id="' + this.data[i][t.id] + '" data-value="' + this.data[i][t.type_name] + '" >' + this.data[i][t.type_name] + '</li>'
                 }
                 menulist.innerHTML = str
                 this.itemclick()
@@ -296,16 +301,15 @@
             this.picures = doc.querySelector(o.el)
             this.num = o.num
             this.imglist = o.images
-            console.log(o.images)
             this.images = []
             this.files = []
             this.imgChange = o.imgChange
+            this.multiple = o.multiple || ''
             this.init()
         }
         S.prototype.init = function() {
             if (!this.picures.querySelector('.picurelist')) {
-                console.log(3121)
-                this.picures.innerHTML += '<ul class="picurelist"></ul><input class="file" accept="image/*" type="file" name="" id="imgFile">'
+                this.picures.innerHTML += '<ul class="picurelist"></ul><input class="file" accept="image/*" ' + this.multiple + ' type="file" name="" id="imgFile">'
             }
             this.file = this.picures.querySelector('.file')
             this.selfile = this.picures.querySelector('.selfile')
@@ -317,9 +321,7 @@
             this.disposeimg(this.imglist)
         }
         S.prototype.disposeimg = function(images) { //默认显示图片
-            console.log('1', !(images instanceof Array))
             if (!(images instanceof Array)) return
-            console.log('2', images)
             let len = images.length,
                 i
             for (i = 0; i < len; i++) {
@@ -375,7 +377,6 @@
         S.prototype.showImg = function() {
                 let str = '',
                     len = this.images.length
-                console.log(this.images)
                 for (let i = 0; i < len; i++) {
                     str += '<li><img src="' + this.images[i] + '" alt=""></li>'
                 }
@@ -413,7 +414,6 @@
         _ME.prototype.elclick = function() {
             let t = this
             t.el.addEventListener('click', function(e) {
-                console.log(t.el)
                 e.stopPropagation()
                 if (t.ellink.classList.contains('hide')) {
                     t.place()
