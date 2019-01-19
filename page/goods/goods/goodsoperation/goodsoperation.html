@@ -6,17 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>产品编辑</title>
-    <link rel="stylesheet" href="../../css/style.css">
-    <link rel="stylesheet" href="../../css/bootstrap.css">
-    <link rel="stylesheet" href="../../css/details.css">
-    <link rel="stylesheet" href="../../css/list.css">
+    <link rel="stylesheet" href="../../../../css/style.css">
+    <link rel="stylesheet" href="../../../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../../../css/details.css">
+    <link rel="stylesheet" href="../../../../css/list.css">
 </head>
+<script>
+    function back() {
+        console.log(window.frameElement.document)
+        window.frameElement.document.history.back(-1);
+
+        // return false;
+        // parent.document.getElementsByName('page/goods/goods/goods')[0].contentWindow.history.back();
+        // console.log(window.frameElement)
+        // window.parent.document.getElementsByName('page/goods/goods/goods')[0].history.back();
+        // window.event.chancelBUbble = true;
+    }
+</script>
 
 <body>
     <div class="iframenav">
         <!-- <button class="">刷新</button> -->
+        <div class="refresh topbtn din fl" onclick="back()">
+            <span></span>
+        </div>
         <div class="refresh topbtn din fl" onclick="document.location.reload()">
-            <img src="../../images/sx.png" alt="">
+            <img src="../../../../images/sx.png" alt="">
         </div>
         <!-- <div class="addgoods topbtn din fl">
             <img src="../../images/jia.png" alt="">
@@ -29,6 +44,7 @@
         <div class="dl-con">
             <ul class="dl-nav" id="dlnav">
                 <li>基本信息</li>
+                <li>专题</li>
                 <li>商品轮播图</li>
                 <li>商品规格</li>
                 <li>商品详情图</li>
@@ -79,17 +95,45 @@
                 </div>
             </div>
             <div class="dlnav-con dl-1">
+                <div class="addsubjecticon">
+                    <div class="add addsubject topbtn din fl">
+                        <img src="../../../../images/jia.png" alt="">
+                    </div>
+                </div>
+                <div class="d2-list subjectbox">
+                    <div class="list-header">
+                        <span class="col-md-1">序号</span>
+                        <span class="col-md-3">一级专题</span>
+                        <span class="col-md-3">二级专题</span>
+                        <span class="col-md-3">三级专题</span>
+                        <span class="col-md-2">管理</span>
+                    </div>
+                    <ul id="subjectlist">
+                        <!-- <li>
+                            <span class="col-md-1">2523</span>
+                            <span class="col-md-3">红色</span>
+                            <span class="col-md-3">
+                                <div class="pz-btn btn-del" href="#">删除</div>
+                            </span>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+            <div class="dlnav-con dl-1">
                 <div class="dl-show">
                     <span class="dl-title">产品图片集:</span>
                     <div class="selpicure" id="selpicure2">
                         <div class="selfile fr"></div>
                     </div>
+                    <!-- <div class="dl-show flexcenter">
+                        <input type="button" value="保存" id="goodSaveNew" class="pz-btn btn-amend">
+                    </div> -->
                 </div>
             </div>
             <div class="dlnav-con dl-1">
                 <div>
                     <div class="add addattribute topbtn din fl">
-                        <img src="../../images/jia.png" alt="">
+                        <img src="../../../../images/jia.png" alt="">
                     </div>
                 </div>
                 <div class="d2-list">
@@ -142,46 +186,65 @@
                         </li> -->
                     </ul>
                 </div>
-                <!-- <div class="dl-show flexcenter">
-                    <input type="button" value="取消" class="pz-btn btn-cancel" id="goCancelbasic">
-                    <input type="button" value="保存" id="goSavebasic" class="pz-btn btn-amend">
-                </div> -->
             </div>
             <div class="dlnav-con dl-1">
-                <div class="refresh  topbtn addpreview">
-                    <img src="../../images/yulan.png" alt="">
+                <div class="refresh  topbtn addpreview din fl">
+                    <img src="../../../../images/yulan.png" alt="">
                 </div>
+                <div class="add addImg topbtn fl">
+                    <img src="../../../../images/jia.png" alt="">
+                </div>
+                <input id="imgDetatil" type="file" accept="image/*" multiple="multiple">
                 <div class="photolist din fl">
-                    <div class="pl-li">
-                        <img class="pl-image" src="http://imagecache.pzlife.vip/website/article/2018-12-29/1546071154674862.jpg" alt="">
-                        <div class="hierarchy">10</div>
-                        <div class="pl-manage">
-                            <input type="button" value="删除">
-                            <input type="button" value="编辑">
+                    <div id="imagesDetatil">
+                        <!-- <div class="pl-li">
+                            <img class="pl-image" src="http://imagecache.pzlife.vip/website/article/2018-12-29/1546071154674862.jpg" alt="">
+                            <div class="hierarchy">10</div>
+                            <div class="pl-manage">
+                                <input type="button" value="删除">
+                                <input type="button" value="编辑">
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="photoPreview din fl">
+                        <div class="pl-li">
+                            <img class="pl-image" src="http://imagecache.pzlife.vip/website/article/2018-12-29/1546071154674862.jpg" alt="">
+                            <div class="hierarchy">10</div>
+                            <div class="pl-manage">
+                                <input type="button" value="删除">
+                                <input type="button" value="编辑">
+                            </div>
+                        </div>
+                    </div> -->
 
+                    </div>
+                    <div class="photoPreview din fl">
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     </div>
-    </div>
-    <div class="linkage hide"></div>
+    <div class="linkage hide" id="catelinkage"></div>
+    <div class="linkage hide" id="subjectlinkage"></div>
     <div class="pz-modal hide" id="previewphoto">
         <div class="pz-modal-content" id="modalContent">
             <div class="pz-modal-header">预览图片</div>
+            <div class="pz-spin-container" id="preview">''
+            </div>
+        </div>
+    </div>
+    <div class="pz-modal hide" id="subjectNew">
+        <div class="pz-modal-content">
+            <div class="pz-modal-header">关联专题</div>
             <div class="pz-spin-container">
-                <img src="http://imagecache.pzlife.vip/website/article/2018-12-29/1546071154674862.jpg" alt="">
-                <img src="http://imagecache.pzlife.vip/website/article/2018-12-29/1546071158617338.jpg" alt="">
-                <img src="http://imagecache.pzlife.vip/website/article/2018-12-29/1546071161487116.jpg" alt="">
-                <img src="http://imagecache.pzlife.vip/website/article/2018-12-29/1546071163481440.jpg" alt="">
-                <img src="http://imagecache.pzlife.vip/website/article/2018-12-29/1546071165813655.jpg" alt="">
-                <img src="http://imagecache.pzlife.vip/website/article/2018-12-29/1546071167749944.jpg" alt="">
-                <img src="http://imagecache.pzlife.vip/website/article/2018-12-29/1546071169808763.jpg" alt="">
-                <img src="http://imagecache.pzlife.vip/website/article/2018-12-29/1546071174917922.jpg" alt="">
+                <div class="dl-show">
+                    <span class="dl-title">专题:</span>
+                    <span class="multistage" data-id="" id="selSubject">请选择</span>
+                </div>
+                <div class="dl-show flexcenter">
+                    <input type="button" value="取消" class="pz-btn btn-cancel" id="cancelSubject">
+                    <input type="button" value="保存" id="saveSubject" class="pz-btn btn-amend">
+                </div>
             </div>
         </div>
     </div>
@@ -217,14 +280,14 @@
     </div>
     <div class="pz-modal hide" id="amendAttribute">
         <div class="refresh topbtn din fl" onclick="document.location.reload()">
-            <img src="../../images/sx.png" alt="">
+            <img src="../../../../images/sx.png" alt="">
         </div>
         <div class="pz-modal-content">
             <div class="pz-modal-header">编辑商品规格</div>
             <div class="pz-spin-container">
                 <div class="dl-show">
                     <span class="dl-title">规格名称:</span>
-                    <span class="disable" id="sku_name">请选择</span>
+                    <span class="disable" id="sku_name"></span>
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">库存:</span>
@@ -256,11 +319,18 @@
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">运费:</span>
-                    <input class="dl-info" id="newName" type="text">
+                    <div class="din combobox" id="freight_id">
+                        <div class="ant-select">
+                            <div class="ant-select-selection">请选择</div>
+                            <span class="ant-select-arrow"></span>
+                        </div>
+                    </div>
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">规格详情图:</span>
-                    <input class="dl-info" id="sku_image" type="text">
+                    <div class="selpicure" id="selpicure3">
+                        <div class="selfile fr"></div>
+                    </div>
                 </div>
                 <div class="dl-show flexcenter">
                     <input type="button" value="取消" class="pz-btn btn-cancel" id="cancelAmend">
@@ -270,9 +340,9 @@
         </div>
     </div>
 </body>
-<script src="../../js/ajax.js"></script>
-<script src="../../js/common.js"></script>
-<script src="js/goodsoperation.js"></script>
+<script src="../../../../js/ajax.js"></script>
+<script src="../../../../js/common.js"></script>
+<script src="goodsoperation.js"></script>
 <script>
     tab({
         head: '#dlnav',

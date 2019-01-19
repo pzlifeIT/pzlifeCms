@@ -5,20 +5,32 @@
         function _GC() {
             this.classcompile = document.querySelector('#classcompile');
             this.classadd = document.querySelector('#classadd');
-            this.addbtn = document.querySelector('#addbtn');
+            this.selClass = document.querySelector('#selClass')
             this.id = ''
             this.status = '1'
             this.init();
         }
         _GC.prototype.init = function() {
             this.getcatelist();
-            this.savenew();
             this.savecompile();
             this.hidenew(this.classcompile);
             this.hidenew(this.classadd);
             this.wapper(this.classcompile)
             this.wapper(this.classadd)
-            this.gettwocategory()
+            this.elclick()
+        }
+        _GC.prototype.elclick = function() {
+            let t = this
+            document.querySelector('#saveNew').onclick = function(e) {
+                t.savenew()
+            }
+            document.querySelector('#addbtn').onclick = function(e) {
+                t.gettwocategory()
+                t.selClass.setAttribute('data-id', '')
+                t.selClass.innerHTML = '请选择'
+                t.caname = ''
+                t.showel(t.classadd)
+            }
         }
         _GC.prototype.getcatelist = function() { //数据循环到页面
             let t = this
@@ -29,7 +41,6 @@
                 url: 'allCateList',
                 success: function(res) {
                     t.setglul(res.data);
-                    t.addbtnclick();
                     t.comp()
                 }
             });
@@ -37,36 +48,32 @@
 
         _GC.prototype.gettwocategory = function() {
             let t = this
-            quest.addcatepage({
+            console.log(21212)
+            quest.requests({
+                url: 'addcatepage',
                 success: function(res) {
-                    select({
-                        el: '#combobox_class',
-                        data: distwocategory(discategory(res.data))
+                    pz.multistage.init({
+                        el: '#selClass',
+                        ellink: '.linkage',
+                        name: 'type_name',
+                        data: distwocategory(res.data)
                     })
                 }
             })
         }
-        _GC.prototype.addbtnclick = function() {
-            let t = this
-            t.addbtn.addEventListener('click', function(e) {
-                t.showel(t.classadd)
-            })
-        }
         _GC.prototype.savenew = function() {
             let t = this,
-                amend = t.classadd.querySelector('.btn-amend')
-            amend.addEventListener('click', function(e) {
-                let params = {}
-                params.type_name = t.classadd.querySelector('#ca-name').value
-                params.pid = t.classadd.querySelector('#combobox_class .ant-select-selection').getAttribute('data-id')
-                params.status = t.status
-                t.saveaddcate({
-                    data: params,
-                    success: function(res) {
-                        t.getcatelist();
-                        t.hideel(t.classadd)
-                    }
-                })
+                params = {};
+            console.log(document.querySelector('#nameNew').value)
+            params.type_name = document.querySelector('#nameNew').value
+            params.pid = document.querySelector('#selClass').getAttribute('data-id')
+            params.status = t.status
+            t.saveaddcate({
+                data: params,
+                success: function(res) {
+                    t.getcatelist();
+                    t.hideel(t.classadd)
+                }
             })
         }
         _GC.prototype.savecompile = function() {

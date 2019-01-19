@@ -2,99 +2,106 @@
 (function(pz) {
     pz.size = (function() {
         function _SE(o) {
-            this.abName = document.querySelector('#abName');
-            this.abCancel = document.querySelector('#abCancel');
-            this.abSave = document.querySelector('#abSave');
-            this.abcompile = document.querySelector('#abcompile');
-            this.addattribute = document.querySelector('.addattribute');
-            this.ablist = document.querySelector('#ablist');
-            this.topId = pz.geturl().id
-            this.id = '';
-            this.init();
+            this.sizelist = document.querySelector('#sizelist');
+            this.cancelNew = document.querySelector('#cancelNew')
+            this.saveNew = document.querySelector('#saveNew')
+            this.cancelcompile = document.querySelector('#cancelcompile')
+            this.savecompile = document.querySelector('#savecompile')
+            this.compileSize = document.querySelector('#compileSize')
+            this.compileNew = document.querySelector('#compileNew')
+            this.addsize = document.querySelector('.addsize')
+            this.id = ''
+            this.init()
         }
         _SE.prototype.init = function() {
-            this.getattributeList();
-            this.cancelModal();
+            this.getSpecList()
+            this.cancelModal()
+            this.allCateList()
         }
         _SE.prototype.cancelModal = function() { //隐藏弹框
             let t = this
-            t.addattribute.addEventListener('click', function(e) {
-                t.id = '';
-                document.querySelector('#abName').value = '';
-                t.abcompile.classList.remove('hide');
+            t.cancelNew.addEventListener('click', function(e) {
+                t.compileNew.classList.add('hide')
             })
-            t.abCancel.addEventListener('click', function(e) {
-                t.abcompile.classList.add('hide');
+            t.cancelcompile.addEventListener('click', function(e) {
+                t.compileSize.classList.add('hide')
             })
-            t.abSave.addEventListener('click', function(e) {
-                if (t.id == '') {
-                    t.savenew();
-                } else {
-                    t.saveAb();
-                }
+            t.addsize.addEventListener('click', function(e) {
+                t.compileNew.classList.remove('hide')
+            })
+            t.savecompile.onclick = function(e) {
+                t.compileSave()
+            }
+            t.saveNew.addEventListener('click', function(e) {
+                t.newSave()
             })
         }
-        _SE.prototype.saveAb = function() { //保存修改
+        _SE.prototype.compileSave = function() { //保存修改
             let t = this,
-                name = document.querySelector('#abName').value;
+                name = document.querySelector('#sizeName').value;
             quest.requests({
                 data: {
                     id: t.id,
                     sa_name: name,
-                    type: 2
+                    type: 1
                 },
                 url: 'saveEditSpecAttr',
                 success: function(res) {
-                    t.getattributeList()
-                    t.abcompile.classList.add('hide')
+                    t.getSpecList()
+                    t.compileSize.classList.add('hide')
                 }
             })
         }
-        _SE.prototype.savenew = function() { //保存新建
+        _SE.prototype.newSave = function() { //保存新建
             let t = this,
-                name = document.querySelector('#abName').value;
-            console.log(name)
+                name = document.querySelector('#newName').value;
+            id = document.querySelector('.multistage').getAttribute('data-id');
+            if (!name) return
+            if (!id) return
             quest.requests({
                 data: {
-                    top_id: t.topId,
+                    top_id: id,
                     sa_name: name,
-                    type: 2
+                    type: 1
                 },
                 url: 'savespecattr',
                 success: function(res) {
-                    t.getattributeList()
-                    t.abcompile.classList.add('hide')
+                    t.getSpecList()
+                    t.compileNew.classList.add('hide')
                 }
             })
         }
-        _SE.prototype.getattributeList = function(data) { //获取规格列表
+        _SE.prototype.getSpecList = function(data) { //获取规格列表
             let t = this
             data = data || ''
             quest.requests({
                 data: {
-                    spec_id: t.topId
+                    page: data.page || 1,
+                    page_num: data.page_num || 10
                 },
-                url: 'getAttr',
+                url: 'getSpecList',
                 success: function(res) {
-                    t.setGlul(res.attr, res.spec_name)
+                    t.setGlul(res.data)
                 }
             })
         }
-        _SE.prototype.setGlul = function(data, name) { //循环出规格列表
+        _SE.prototype.setGlul = function(data) { //循环出规格列表
             let len = data.length,
                 i,
                 str = ''
             for (i = 0; i < len; i++) {
                 str += '<li> \
               <div class = "col-md-3 bot-bor subli" ><span>' + (i + 1) + '</span> </div> \
-              <div class = "col-md-3 bot-bor subli" ><span>' + name + ' </span></div> \
-              <div class = "col-md-3 bot-bor subli" ><span>' + data[i].attr_name + '</span></div> \
+              <div class = "col-md-3 bot-bor subli" ><span>' + data[i].category + ' </span></div> \
+              <div class = "col-md-3 bot-bor subli" ><span>' + data[i].spe_name + '</span></div> \
               <div class = "col-md-3 bot-bor subli" >\
+              <a class = "pz-btn btn-amend" \
+              href = "attribute/attribute.html?id=' + data[i].id + '" > 查看属性 </a> \
                   <a class = "pz-btn btn-amend seamend" \
               href = "javascript:;" data-id="' + data[i].id + '" > 编辑 </a> \
               <a class = "pz-btn btn-del" data-id="' + data[i].id + '" href = "#" > 删除 </a> </div></li>'
             }
-            this.ablist.innerHTML = str
+            this.sizelist.innerHTML = str
             this.delSize()
             this.amendSize()
         }
@@ -104,7 +111,6 @@
             amends.forEach(function(li) {
                 li.addEventListener('click', function(e) {
                     let id = li.getAttribute('data-id')
-                    console.log(id)
                     t.getEditData(id)
                 })
             })
@@ -121,6 +127,7 @@
 
         }
         _SE.prototype.delSpecAttr = function(id) { //删除规格
+            let t = this
             quest.requests({
                 data: {
                     id: id,
@@ -128,22 +135,36 @@
                 },
                 url: 'delSpecAttr',
                 success: function(res) {
-
+                    t.getSpecList()
                 }
             })
         }
-        _SE.prototype.getEditData = function(id) { //获取需要编辑的属性
+        _SE.prototype.getEditData = function(id) { //获取需要编辑的规格
             let t = this
             quest.requests({
                 data: {
                     id: id,
-                    type: 2
+                    type: 1
                 },
                 url: 'getEditData',
                 success: function(res) {
-                    t.abcompile.classList.remove('hide')
-                    t.id = res.attr.id
-                    document.querySelector('#abName').value = res.attr.attr_name
+                    t.compileSize.classList.remove('hide')
+                    t.id = res.spec.id
+                    document.querySelector('#sizeName').value = res.spec.spe_name
+                }
+            })
+        }
+        _SE.prototype.allCateList = function() { //获取所有分类
+            let t = this
+            quest.requests({
+                url: 'allCateList',
+                success: function(res) {
+                    pz.multistage.init({
+                        el: '.multistage',
+                        ellink: '.linkage',
+                        type: '3',
+                        data: t.disCateList(res.data)
+                    })
                 }
             })
         }

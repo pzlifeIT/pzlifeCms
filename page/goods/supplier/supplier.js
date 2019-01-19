@@ -28,13 +28,13 @@
             for (i = 0; i < len; i++) {
                 str += '<li> \
                 <div class = "col-md-2 bot-bor subli" ><span>' + data[i].id + '</span> </div> \
-                <div class = "col-md-2 bot-bor subli " ><span> <img class="liimg" src = "http://' + data[i].image + '"\
+                <div class = "col-md-2 bot-bor subli " ><span> <img class="liimg" src = "' + data[i].image + '"\
                 alt = "" > </span></div> \
                 <div class = "col-md-2 bot-bor subli" ><span>' + data[i].name + ' </span></div> \
                 <div class = "col-md-2 bot-bor subli" ><span>' + data[i].tel + '</span></div> \
                 <div class = "col-md-2 bot-bor subli desc" ><span>' + data[i].desc + '</span></div> \
                 <div class = "col-md-2 bot-bor subli" >\
-                <a class="pz-btn btn-amend" href="expressage.html?id=' + data[i].id + '">快递模板</a>\
+                <a class="pz-btn btn-amend" href="expressage/expressage.html?id=' + data[i].id + '">快递模板</a>\
                     <div class = "pz-btn btn-amend redact" data-id="' + data[i].id + '" > 编辑 </div> \
                 <div class = "pz-btn btn-del" data-id="' + data[i].id + '" > 删除 </div> </div></li>'
             }
@@ -145,13 +145,13 @@
         }
         _SR.prototype.setImg = function(img) { //显示图片
             let t = this
+            t.images = ''
             selpicure({
                 el: '#selpicure1',
                 num: 1,
-                images: [img],
+                images: [{ image: img }],
                 imgChange: function(images) {
-                    console.log('images', images[0])
-                    t.images = images[0]
+                    t.images = images[0].image
                 }
             })
         }

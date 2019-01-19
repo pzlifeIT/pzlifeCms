@@ -43,8 +43,13 @@
             },
             setGlul: function(data) {
                 let len = data.length,
-                    i, str = ''
+                    i, str = '',
+                    checked = ''
                 for (i = 0; i < len; i++) {
+                    checked = ''
+                    if (data[i].status == 1) {
+                        checked = 'ant-switch-checked'
+                    }
                     str += '<li><span class="col-md-1 bot-bor subli">' + data[i].id + '</span>'
                     str += '<span class="col-md-2 bot-bor subli">图片</span>'
                     str += '<span class="col-md-1 bot-bor subli">' + data[i].goods_name + '</span>'
@@ -52,12 +57,44 @@
                     str += '<span class="col-md-2 bot-bor subli">' + data[i].subtitle + '</span>'
                     str += '<span class="col-md-1 bot-bor subli">' + data[i].supplier + '</span>'
                     str += '<span class="col-md-1 bot-bor subli">' + data[i].cate + '</span>'
-                    str += '<span class="col-md-1 bot-bor subli"><span class="ant-switch up-down ant-switch-checked"></span></span>'
-                    str += '<span class="col-md-2 bot-bor subli"><a class="pz-btn btn-amend" href="goodsoperation.html?id=' + data[i].id + '">编辑</a>\
+
+                    str += '<span class="col-md-1 bot-bor subli"><span class="ant-switch up-down ' + checked + '" data-id="' + data[i].id + '" data-type="' + data[i].status + '" ></span></span>'
+                    str += '<span class="col-md-2 bot-bor subli"><a class="pz-btn btn-amend" href="goodsoperation/goodsoperation.html?id=' + data[i].id + '">编辑</a>\
                     <div class="pz-btn btn-del" href="#">删除</div></span>'
                     str += '</li>'
                 }
                 this.goodlist.innerHTML = str
+                this.updowngoods()
+            },
+            updowngoods: function() { //商品上下架
+                let t = this,
+                    lis = t.goodlist.querySelectorAll('.up-down')
+                lis.forEach(function(li) {
+                    li.addEventListener('click', function(e) {
+                        let id = li.getAttribute('data-id'),
+                            type = li.getAttribute('data-type')
+                        if (type == 1) {
+                            t.portupdowngoods(id, 2)
+                        } else {
+                            t.portupdowngoods(id, 1)
+                        }
+                    })
+                })
+            },
+            portupdowngoods: function(id, type) { //商品上下架接口
+                let t = this
+                quest.requests({
+                    url: 'updowngoods',
+                    data: {
+                        id: id,
+                        type: type
+                    },
+                    success: function(res) {
+                        t.getgoodslist({
+                            page: t.page
+                        })
+                    }
+                })
             },
             getgoods_type: function(n) {
                 if (n = 1) {

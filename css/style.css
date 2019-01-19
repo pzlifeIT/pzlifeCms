@@ -75,10 +75,6 @@ html {
     display: none
 }
 
-.hide {
-    display: none;
-}
-
 .din {
     display: inline-block;
 }
@@ -377,6 +373,10 @@ input {
     content: '\6dfb\52a0\5206\7c7b';
 }
 
+.addsubject:hover::after {
+    content: '\6dfb\52a0\4e13\9898';
+}
+
 .addsupplier:hover::after {
     width: 68px;
     right: -76px;
@@ -399,6 +399,12 @@ input {
     width: 68px;
     right: -76px;
     content: '\6dfb\52a0\5c5e\6027';
+}
+
+.addImg:hover::after {
+    width: 68px;
+    right: -76px;
+    content: '\6dfb\52a0\56fe\7247';
 }
 
 .addpreview:hover::after {
@@ -539,9 +545,22 @@ input {
 }
 
 .selpicure .picurelist li {
+    position: relative;
     float: left;
     width: 100px;
     margin-left: 10px;
+}
+
+.selpicure .picurelist .imgDel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    margin-right: 0;
+    cursor: pointer;
 }
 
 .selpicure .picurelist li img {
@@ -624,7 +643,7 @@ input {
 /*  */
 
 .pz-modal {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;

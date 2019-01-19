@@ -16,7 +16,15 @@
             this.goodSaveNew = pz.getEl('#goodSaveNew') //保存新建商品基本信息
             this.attributeList = pz.getEl('#attributeList') //规格属性列表
             this.goodattributeList = pz.getEl('#goodattributeList') //sku列表
+            this.subjectlist = pz.getEl('#subjectlist') //专题列表
+            this.freight = pz.getEl('#freight_id') //sku列表
+            this.addImg = pz.getEl('.addImg') //sku列表
+            this.imgDetatil = pz.getEl('#imgDetatil') //sku列表
+            this.imagesDetatil = pz.getEl('#imagesDetatil') //详情图列表
+            this.subjectNew = pz.getEl('#subjectNew') //专题弹窗
+            this.preview = pz.getEl('#preview') //预览图片
             this.goodImg = '' //产品标题图
+            this.sku_image = '' //产品规格图
             this.images_carousel = []
             this.goodInfo = ''
             this.dataAttr = []
@@ -24,39 +32,72 @@
             this.init()
         }
         _GO.prototype = {
-            init: function() {
+            init: function() { //进入执行
                 this.elClick()
                 this.getonegoods()
             },
-            getonegoods: function() {
-                let t = this
+            getonegoods: function(type) { //获取一个商品数据
+
+                let t = this,
+                    get_type = type || '',
+                    gtype = get_type
+                if (get_type == 5) {
+                    gtype = 3
+                }
+                if (t.id == '') {
+                    t.isNewAmend({
+                        cate_id: '',
+                        supplier_id: '',
+                        goods_type: '',
+                        goods_name: '',
+                    })
+                    return
+                }
+
                 quest.requests({
                     url: 'getonegoods',
                     data: {
-                        id: t.id
+                        id: t.id,
+                        get_type: gtype
                     },
                     success: function(res) {
                         t.goodInfo = res
-                        t.isNewAmend(t.goodInfo.goods_data)
-                        t.setattributeList(t.goodInfo.spec_attr)
-                        t.setgoodattributeList(t.goodInfo.sku)
+                        if (get_type == 1 || get_type == '') {
+                            t.isNewAmend(t.goodInfo.goods_data)
+                        }
+                        if (get_type == 2 || get_type == '') {
+                            t.setattributeList(t.goodInfo.spec_attr)
+                        }
+                        if (get_type == 3 || get_type == '') {
+                            t.setimages(t.goodInfo.images_carousel)
+                        }
+                        if (get_type == 4 || get_type == '') {
+                            t.setgoodattributeList(t.goodInfo.sku)
+                        }
+                        if (get_type == 5 || get_type == '') {
+                            t.setImgsDetatil(t.goodInfo.images_detatil)
+                            t.previewDetatil(t.goodInfo.images_detatil)
+                        }
+                        t.getgoodssubject(1)
                     }
                 })
             },
             isNewAmend: function(data) { //商品类型:供应商:三级分类:是否已经选择
+                console.log(data)
                 if (data.cate_id == 0 || data.cate_id == '') {
+                    this.allCateList()
                     this.elremovehide('.cateIdNew')
                 } else {
-                    this.allCateList()
                     this.elremovehide('#cateIdAmend')
                     let cateIdAmend = document.querySelector('#cateIdAmend')
                     cateIdAmend.innerHTML = data.goods_class
                     cateIdAmend.setAttribute('data-id', data.cate_id)
                 }
                 if (data.supplier_id == 0 || data.supplier_id == '') {
+                    this.getSuppliersAll()
                     this.elremovehide('#supplierIdNew')
                 } else {
-                    this.getSuppliersAll()
+                    this.getsupplierfreights()
                     this.elremovehide('#supplierIdAmend')
                     let supplierIdAmend = document.querySelector('#supplierIdAmend')
                     supplierIdAmend.innerHTML = data.supplier_name
@@ -78,35 +119,135 @@
                 }
                 this.setList()
             },
-            elremovehide: function(el) {
+            elremovehide: function(el) { //显示控件
                 document.querySelector(el).classList.remove('hide')
             },
-            setList: function() {
+            getsupplierfreights: function() { // 获取供应商快递模板列表
+                let t = this
+                quest.requests({
+                    url: 'getsupplierfreights',
+                    data: {
+                        supplierId: t.goodInfo.goods_data.supplier_id
+                    },
+                    success: function(res) {
+                        console.log(res.data)
+                        select({
+                            el: '#freight_id',
+                            name: 'title',
+                            data: res.data
+                        })
+                    }
+                })
+            },
+            setImgsDetatil: function(data) { //详情图输出
+                let t = this,
+                    len = data.length,
+                    i, str = ""
+                for (i = 0; i < len; i++) {
+                    str += '<div class="pl-li">'
+                    str += '<img class="pl-image" src="' + data[i].image_path + '" alt="">'
+                    str += '<div class="hierarchy">10</div>'
+                    str += '<div class="pl-manage"><input class="imgDel" type="button" data-image="' + data[i].image_path + '" value="删除"><input type="button" value="编辑"></div>'
+                    str += '</div>'
+                }
+                t.imagesDetatil.innerHTML = str
+                t.delImgsDetatil()
+            },
+            previewDetatil: function(data) { //预览图片
+                let t = this,
+                    len = data.length,
+                    i, str = ""
+                for (i = 0; i < len; i++) {
+                    str += '<img src="' + data[i].image_path + '" alt="">'
+                }
+                t.preview.innerHTML = str
+            },
+            delImgsDetatil: function() { //删除详情图片
+                let t = this,
+                    lis = t.imagesDetatil.querySelectorAll('.pl-li')
+                lis.forEach(function(li) {
+                    let imgDel = li.querySelector('.imgDel')
+                    imgDel.addEventListener('click', function(e) {
+                        let image = imgDel.getAttribute('data-image')
+                        t.delImg(image, 5)
+                    })
+                })
+            },
+            setimages: function(data) { //轮播图片
+                let t = this
+                selpicure({
+                    el: '#selpicure2',
+                    num: 5,
+                    images: data,
+                    field: 'image_path',
+                    type: 'multiple',
+                    imgChange: function(images) {
+                        t.disgoodsimages(images)
+                    },
+                    delImgFn: function(image) {
+                        t.delImg(image, 3)
+                    }
+                })
+            },
+            delImg: function(image, type) { //删除轮播图和详情图接口
+                let t = this;
+                quest.requests({
+                    url: 'delgoodsimage',
+                    data: {
+                        image_path: image
+                    },
+                    success: function(res) {
+                        t.getonegoods(type)
+                    }
+                })
+            },
+            disgoodsimages: function(images) { //formdata轮播图
+                let len = images.length,
+                    i, arr = [],
+                    formData = new FormData();
+                formData.append('image_type', 2)
+                formData.append('goods_id', this.id)
+                for (i = 0; i < len; i++) {
+                    if (images[i].upload) {
+                        formData.append('images[]', images[i].image_path)
+                    }
+                }
+                this.uploadgoodsimages(formData, 3)
+            },
+            uploadgoodsimages: function(formData, type) { //提交商品详情和轮播图
+                let t = this
+                quest.requests({
+                    url: 'uploadgoodsimages',
+                    data: formData,
+                    success: function(res) {
+                        t.getonegoods(type)
+                    }
+                })
+            },
+            setList: function() { //商品名称，标题，图片显示
                 let t = this,
                     goodsNameNew = document.querySelector('#goodsNameNew'),
-                    goodsSubtitleNew = document.querySelector('#goodsSubtitleNew')
-                goodsNameNew.value = t.goodInfo.goods_data.goods_name;
-                goodsSubtitleNew.value = t.goodInfo.goods_data.subtitle
+                    goodsSubtitleNew = document.querySelector('#goodsSubtitleNew'),
+                    img = '';
+                if (t.id != '') {
+                    goodsNameNew.value = t.goodInfo.goods_data.goods_name;
+                    goodsSubtitleNew.value = t.goodInfo.goods_data.subtitle
+                    img = t.goodInfo.goods_data.image
+                }
 
                 selpicure({
                     el: '#selpicure1',
-                    num: 1,
-                    images: [t.goodInfo.goods_data.image],
+                    images: [{ image: img }],
                     imgChange: function(images) {
                         t.goodImg = images[0]
                     }
                 })
-                selpicure({
-                    el: '#selpicure2',
-                    num: 5,
-                    images: [],
-                    multiple: 'multiple',
-                    imgChange: function(images) {}
-                })
+
             },
-            elClick: function() {
+            elClick: function() { //控件点击
                 let t = this
                 t.addattribute.addEventListener('click', function(e) {
+                    t.attrinit()
                     t.attributeNew.classList.remove('hide')
                     t.getspecattr()
                 })
@@ -138,6 +279,145 @@
                         t.saveGoodAmend()
                     }
                 })
+                t.addImg.addEventListener('click', function(e) {
+                    t.imgDetatil.click()
+                })
+                t.imgDetatil.addEventListener('change', function(e) {
+                    t.uploadmultifile(t.imgDetatil.files)
+                })
+                document.querySelector('.addsubject').addEventListener('click', function(e) {
+                    let sel = document.querySelector('#selSubject')
+                    sel.setAttribute('data-id', '')
+                    sel.innerHTML = '请选择'
+                    t.subjectNew.classList.remove('hide')
+                    t.getgoodssubject(2)
+                })
+                document.querySelector('#cancelSubject').addEventListener('click', function(e) {
+                    t.subjectNew.classList.add('hide')
+                })
+                document.querySelector('#saveSubject').onclick = function(e) {
+                    let id = document.querySelector('#selSubject').getAttribute('data-id')
+                    t.subjectSave(id)
+                }
+            },
+            subjectSave: function(id) {
+                let t = this
+                quest.requests({
+                    url: 'subjectgoodsassoc',
+                    data: {
+                        goods_id: t.id,
+                        subject_id: id
+                    },
+                    success: function(res) {
+                        t.getgoodssubject(1)
+                        t.subjectNew.classList.add('hide')
+                    }
+                })
+            },
+            getgoodssubject: function(type) { //获取商品专题
+                let t = this
+                quest.requests({
+                    url: 'getgoodssubject',
+                    data: {
+                        goods_id: t.id,
+                        stype: type
+                    },
+                    success: function(res) {
+                        if (type == 1) {
+                            t.setgoodssubject(res.data || [])
+                        } else {
+                            t.selgoodssubject(res.data || [])
+                        }
+                    },
+                    Error: function(code) {}
+                })
+            },
+            selgoodssubject: function(data) { //可选专题列表
+                pz.multistage.init({
+                    el: '#selSubject',
+                    ellink: '#subjectlinkage',
+                    name: 'subject',
+                    type: '3',
+                    data: data
+                })
+            },
+            setgoodssubject: function(data) { //关联列表输出
+                let len = data.length,
+                    i, str = ""
+                for (i = 0; i < len; i++) {
+                    str += '<li>'
+                    str += '<span class="col-md-1">' + (i + 1) + '</span>'
+                    str += '<span class="col-md-3">' + data[i].subject_tier1 + '</span>'
+                    str += '<span class="col-md-3">' + data[i].subject_tier2 + '</span>'
+                    str += '<span class="col-md-3">' + data[i].subject + '</span>'
+                    str += '<span class="col-md-2"><div class="pz-btn btn-del" data-id="' + data[i].id + '">删除</div></span>'
+                    str += '</li>'
+                }
+                this.subjectlist.innerHTML = str
+                this.delsubject()
+            },
+            delsubject: function() {
+                let t = this,
+                    delels = this.subjectlist.querySelectorAll('.btn-del');
+                delels.forEach(function(el) {
+                    el.addEventListener('click', function(e) {
+                        let id = el.getAttribute('data-id')
+                        console.log(id)
+                        t.delgoodssubjectassoc(id)
+                    })
+                })
+            },
+            delgoodssubjectassoc: function(id) {
+                let t = this
+                quest.requests({
+                    url: 'delgoodssubjectassoc',
+                    data: {
+                        goods_id: t.id,
+                        subject_id: id
+                    },
+                    success: function(res) {
+                        t.getgoodssubject(1)
+                    }
+                })
+            },
+            uploadmultifile: function(file) { //多张详情图片上传
+                let t = this,
+                    len = file.length,
+                    i,
+                    formdata = new FormData();
+                for (i = 0; i < len; i++) {
+                    formdata.append('images[]', file[i])
+                }
+                quest.requests({
+                    data: formdata,
+                    url: 'uploadmultifile',
+                    success: function(res) {
+                        t.disDetatilimages(res.data)
+                    }
+                })
+            },
+            disDetatilimages: function(images) { //formData详情图片
+                let len = images.length,
+                    i, arr = [],
+                    formData = new FormData();
+                formData.append('image_type', 1)
+                formData.append('goods_id', this.id)
+                for (i = 0; i < len; i++) {
+                    formData.append('images[]', images[i])
+                }
+                this.uploadgoodsimages(formData, 5)
+            },
+            attrinit: function() { //添加属性弹框初始化
+                let selattr = document.querySelector('#selattr').querySelector('.ant-select-selection'),
+                    selsite = document.querySelector('#selsite').querySelector('.ant-select-selection')
+                selattr.setAttribute('data-id', '')
+                selattr.setAttribute('data-value', '')
+                selattr.innerHTML = '请选择'
+                selattr.classList.remove('already-select')
+                selsite.setAttribute('data-id', '')
+                selsite.setAttribute('data-value', '')
+                selsite.innerHTML = '请选择'
+                selsite.classList.remove('already-select')
             },
             getSuppliersAll: function() { //获取所有供应商
                 let t = this
@@ -177,7 +457,6 @@
                     supplierId = pz.getEl('#supplierIdNew').querySelector('.ant-select-selection').getAttribute('data-id')
                 } else {
                     supplierId = document.querySelector('#supplierIdAmend').getAttribute('data-id')
-
                 }
                 if (t.goodInfo.goods_data.cate_id == 0 || t.goodInfo.goods_data.cate_id == '') {
                     cateId = pz.getEl('.cateIdNew').getAttribute('data-id')
@@ -228,13 +507,14 @@
                     success: function(res) {
                         pz.multistage.init({
                             el: '.cateIdNew',
-                            ellink: '.linkage',
+                            ellink: '#catelinkage',
+                            type: '3',
                             data: t.disCateList(res.data)
                         })
                     }
                 })
             },
-            getspecattr: function() { //
+            getspecattr: function() { //获取一级规格和二级属性
                 let t = this
                 quest.requests({
                     url: 'getspecattr',
@@ -255,7 +535,6 @@
             setsiteclick: function() { //点击选择规格
                 let t = this,
                     items = document.querySelector('#selattr').querySelectorAll('.as-dropdown-item')
-                console.log(items)
                 items.forEach(function(item) {
                     item.addEventListener('click', function(e) {
                         let id = item.getAttribute(
@@ -272,7 +551,6 @@
                 let data = this.dataAttr,
                     len = data.length,
                     i, str = []
-                console.log(id)
                 for (i = 0; i < len; i++) {
                     if (id == data[i].id) {
                         str = data[i].attr
@@ -284,7 +562,6 @@
             addgoodsspec: function() { //添加属性
                 let t = this,
                     attrid = document.querySelector('#selsite').querySelector('.ant-select-selection').getAttribute('data-id')
-                console.log(attrid)
                 if (!attrid) return
                 quest.requests({
                     url: 'addgoodsspec',
@@ -294,14 +571,15 @@
                     },
                     success: function(res) {
                         t.attributeNew.classList.add('hide')
+                        t.getonegoods(2)
+                        t.getonegoods(4)
                     }
                 })
             },
-            setattributeList: function(data) {
+            setattributeList: function(data) { //规格循环输出
                 let t = this,
                     len = data.length,
                     i, str = ''
-
                 for (i = 0; i < len; i++) {
                     str += '<li>'
                     str += '<span class="col-md-3">' + (i + 1) + '</span>'
@@ -311,8 +589,33 @@
                     str += '</li>'
                 }
                 t.attributeList.innerHTML = str
+                t.delattributeli()
             },
-            setgoodattributeList: function(data) {
+            delattributeli: function() { //删除规格
+                let t = this,
+                    items = t.attributeList.querySelectorAll('.btn-del');
+                items.forEach(function(item) {
+                    item.addEventListener('click', function(e) {
+                        let id = item.getAttribute('data-id')
+                        t.delgoodsspec(id)
+                    })
+                })
+            },
+            delgoodsspec: function(tid) { //删除规格接口
+                let t = this
+                quest.requests({
+                    url: 'delgoodsspec',
+                    data: {
+                        goods_id: t.id,
+                        attr_id: tid
+                    },
+                    success: function(res) {
+                        t.getonegoods(2)
+                        t.getonegoods(4)
+                    }
+                })
+            },
+            setgoodattributeList: function(data) { //sku 输出
                 let t = this,
                     len = data.length,
                     len1, i, x, s, str = ''
@@ -327,7 +630,7 @@
                     str += '<li>'
                     str += '<span class="col-md-1">' + (i + 1) + '</span>'
                     str += '<span class="col-md-1">' + s + '</span>'
-                    str += '<span class="col-md-1"><img src="' + data[i].sku_image + '" /></span>'
+                    str += '<span class="col-md-1"><img class="attrImg" src="' + data[i].sku_image + '" /></span>'
                     str += '<span class="col-md-1">' + data[i].stock + '</span>'
                     str += '<span class="col-md-1">' + data[i].market_price + '</span>'
                     str += '<span class="col-md-1">' + data[i].retail_price + '</span>'
@@ -335,7 +638,7 @@
                     str += '<span class="col-md-1">' + data[i].margin_price + '</span>'
                     str += '<span class="col-md-1">' + data[i].integral_price + '</span>'
                     str += '<span class="col-md-1">' + data[i].integral_active + '</span>'
-                    str += '<span class="col-md-1">' + data[i].integral_active + '</span>'
+                    str += '<span class="col-md-1">' + data[i].freight_title + '</span>'
                     str += '<span class="col-md-1"><div class="pz-btn btn-amend" data-id="' + data[i].id + '" >编辑</div></span>'
                     str += '</li>'
                 }
@@ -345,7 +648,6 @@
             amendSku: function() { //点击保存规格
                 let t = this,
                     items = t.goodattributeList.querySelectorAll('.btn-amend');
-                console.log(items)
                 items.forEach(function(item) {
                     item.addEventListener('click', function(e) {
                         let id = item.getAttribute('data-id')
@@ -355,7 +657,7 @@
                     })
                 })
             },
-            getgoodssku: function(id) {
+            getgoodssku: function(id) { //获取一条sku
                 let t = this
                 quest.requests({
                     url: 'getgoodssku',
@@ -368,7 +670,7 @@
                     }
                 })
             },
-            editgoodssku: function(data) {
+            editgoodssku: function(data) { //编辑sku
                 let t = this,
                     sku_name = document.querySelector('#sku_name'),
                     stock = document.querySelector('#stock'),
@@ -377,7 +679,16 @@
                     cost_price = document.querySelector('#cost_price'),
                     margin_price = document.querySelector('#margin_price'),
                     integral_price = document.querySelector('#integral_price'),
-                    integral_active = document.querySelector('#integral_active');
+                    integral_active = document.querySelector('#integral_active'),
+                    freight_id = t.freight.querySelector('.ant-select-selection'),
+                    len1 = data.attr.length,
+                    x,
+                    attr = '';
+                for (x = 0; x < len1; x++) {
+                    attr += data.attr[x] + ','
+                }
+                attr = attr.substr(0, attr.length - 1);
+                sku_name.innerHTML = attr
                 stock.value = data.stock
                 market_price.value = data.market_price
                 retail_price.value = data.retail_price
@@ -385,8 +696,26 @@
                 margin_price.value = data.margin_price
                 integral_price.value = data.integral_price
                 integral_active.value = data.integral_active
+                t.sku_image = ''
+                if (data.freight_id == 0) {
+                    freight_id.setAttribute('data-id', '')
+                    freight_id.innerHTML = '请选择'
+                    freight_id.classList.remove('already-select')
+                } else {
+                    freight_id.setAttribute('data-id', data.freight_id)
+                    freight_id.innerHTML = data.freight_title
+                    freight_id.classList.add('already-select')
+                }
+                // t.getsupplierfreights()
+                selpicure({
+                    el: '#selpicure3',
+                    images: [{ image: data.sku_image }],
+                    imgChange: function(images) {
+                        t.sku_image = images[0].image
+                    }
+                })
             },
-            savegoodssku: function() {
+            savegoodssku: function() { //保存sku
                 let t = this,
                     stock = document.querySelector('#stock').value,
                     market_price = document.querySelector('#market_price').value,
@@ -394,7 +723,8 @@
                     cost_price = document.querySelector('#cost_price').value,
                     margin_price = document.querySelector('#margin_price').value,
                     integral_price = document.querySelector('#integral_price').value,
-                    integral_active = document.querySelector('#integral_active').value;
+                    integral_active = document.querySelector('#integral_active').value,
+                    freight_id = t.freight.querySelector('.ant-select-selection').getAttribute('data-id');
                 quest.requests({
                     url: 'editgoodssku',
                     data: {
@@ -406,10 +736,12 @@
                         margin_price: margin_price,
                         integral_price: integral_price,
                         integral_active: integral_active,
-                        sku_image: '',
+                        sku_image: t.sku_image,
+                        freight_id: freight_id,
                     },
                     success: function(res) {
-
+                        t.getonegoods(4)
+                        t.amendAttribute.classList.add('hide')
                     }
                 })
             },

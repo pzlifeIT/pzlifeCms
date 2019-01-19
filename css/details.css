@@ -176,40 +176,15 @@
     position: relative;
     white-space: nowrap;
     cursor: pointer;
+    height: 30px;
     line-height: 30px;
-}
-
-.ant-radio {
-    position: relative;
-    outline: none;
-    float: left;
-    line-height: 1;
-    vertical-align: text-bottom;
-    display: inline-block;
-    white-space: nowrap;
-    cursor: pointer;
-    margin-top: 8px;
-    margin-right: 5px;
-}
-
-.ant-radio-checked {}
-
-.ant-radio-input {
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    opacity: 0;
-    line-height: normal;
-    width: 14px;
-    height: 14px;
-    cursor: pointer;
 }
 
 .ant-radio-inner {
     position: relative;
     width: 14px;
     height: 14px;
+    margin-top: 7px;
     border: 1px solid #3bb4f2;
     border-radius: 50%;
     cursor: pointer;
@@ -327,9 +302,12 @@
 
 .pl-li {
     position: relative;
+    display: inline-block;
+    float: left;
     width: 200px;
     height: auto;
     padding: 10px;
+    margin-right: 10px;
     border: 1px solid #e9e9e9;
     overflow: auto;
 }
@@ -402,4 +380,24 @@
 
 #previewphoto .pz-modal-content {
     width: 600px;
+}
+
+.attrImg {
+    width: 34px;
+    height: 34px;
+}
+
+#imgDetatil {
+    width: 0;
+    height: 0;
+}
+
+.subjectbox {
+    width: 900px;
+    margin: 10px;
+}
+
+.addsubjecticon {
+    width: 100%;
+    height: 40px;
 }

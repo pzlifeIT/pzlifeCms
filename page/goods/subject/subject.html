@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>专题</title>
+    <link rel="stylesheet" href="../../../../css/style.css">
+    <link rel="stylesheet" href="../../../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../../../css/list.css">
+    <link rel="stylesheet" href="../../../../css/details.css">
+</head>
+
+<body>
+
+    <div class="iframenav">
+        <div class="refresh topbtn din fl" onclick="document.location.reload()">
+            <img src="../../../../images/sx.png" alt="">
+        </div>
+        <div class="add addsubject topbtn din fl" id="addbtn">
+            <img src="../../../../images/jia.png" alt="">
+        </div>
+    </div>
+    <div class="gs-list panel-default">
+        <div class="gl-head panel-heading ">
+            <span>专题</span>
+        </div>
+        <div class="gl-title">
+            <span class="col-md-1 bot-bor subli">专题ID</span>
+            <span class="col-md-2 bot-bor subli">图片</span>
+            <span class="col-md-1 bot-bor subli">父级专题</span>
+            <span class="col-md-2 bot-bor subli">专题名称</span>
+            <span class="col-md-1 bot-bor subli">层级</span>
+            <span class="col-md-1 bot-bor subli">排序</span>
+            <span class="col-md-2 bot-bor subli">状态</span>
+            <span class="col-md-2 bot-bor subli">管理</span>
+        </div>
+        <ul class="gl-ul" id="getalllist">
+            <!-- <li>
+                <span class="col-md-2 bot-bor subli">1181</span>
+                <span class="col-md-2 bot-bor subli"><img src="http://www.inweeye.cn/image/cache/catalog/201812/goods/TIM截图20181210200811-40x40.png" alt=""></span>
+                <span class="col-md-2 bot-bor subli">萌宠系列手机壳</span>
+                <span class="col-md-2 bot-bor subli">1</span>
+                <span class="col-md-2 bot-bor subli">
+                  <span class="ant-switch up-down ant-switch-checked "></span>
+                </span>
+                <span class="col-md-2 bot-bor subli">
+                </span>
+            </li> -->
+        </ul>
+    </div>
+    <div class="pz-modal hide" id="subjectcompile">
+        <div class="refresh topbtn din fl" onclick="document.location.reload()">
+            <img src="../../../images/sx.png" alt="">
+        </div>
+        <div class="pz-modal-content">
+            <div class="pz-modal-header">商品分类编辑</div>
+            <div class="pz-spin-container">
+                <div class="dl-show">
+                    <span class="dl-title">分类名称:</span>
+                    <input class="dl-info" id="amendName" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">排序:</span>
+                    <input class="dl-info" id="amendOrder" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">状态:</span>
+                    <div class="ant-radio-group" id="amendGroup">
+                        <label data-status="1" class="ant-radio-wrapper ant-radio-checked">
+                          <span class="ant-radio-inner"></span>
+                          <span class="din fl">启用</span>
+                        </label>
+                        <label data-status="2" class="ant-radio-wrapper">
+                          <span class="ant-radio-inner"></span>
+                          <span class="din fl">停用</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">图片:</span>
+                    <div class="selpicure" id="selpicure2">
+                        <div class="selfile fr"></div>
+                    </div>
+                </div>
+                <div class="dl-show flexcenter">
+                    <input type="button" id="cancelAmend" value="取消" class="pz-btn btn-cancel ">
+                    <input type="button" id="saveAmend" value="保存" class="pz-btn btn-amend">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pz-modal hide" id="classadd">
+        <div class="pz-modal-content">
+            <div class="pz-modal-header">商品分类编辑</div>
+            <div class="pz-spin-container">
+                <div class="dl-show">
+                    <span class="dl-title">上级专题:</span>
+                    <span class="multistage" id="combobox_class">请选择</span>
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">专题名称:</span>
+                    <input class="dl-info" id="nameNew" type="text">
+                </div>
+
+                <div class="dl-show">
+                    <span class="dl-title">状态:</span>
+                    <div class="ant-radio-group">
+                        <label data-status="1" class="ant-radio-wrapper ant-radio-checked">
+                          <span class="ant-radio-inner"></span>
+                          <span class="din fl">启用</span>
+                        </label>
+                        <label data-status="2" class="ant-radio-wrapper">
+                          <span class="ant-radio-inner"></span>
+                          <span class="din fl">停用</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">图片:</span>
+                    <div class="selpicure" id="selpicure1">
+                        <div class="selfile fr"></div>
+                    </div>
+                </div>
+                <div class="dl-show flexcenter">
+                    <input type="button" value="取消" id="cancelNew" class="pz-btn btn-cancel">
+                    <input type="button" value="保存" id="saveNew" class="pz-btn btn-amend">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="linkage hide"></div>
+</body>
+<script src="../../../../js/ajax.js"></script>
+<script src="../../../../js/common.js"></script>
+<script src="subject.js"></script>
+<script>
+    pz.subject.init()
+</script>
+
+</html>

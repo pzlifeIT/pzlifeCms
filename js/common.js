@@ -1,8 +1,6 @@
 ;
 (function(win, doc) {
-    win.pz = function() {
-
-    }
+    win.pz = function() {}
     win.pz = pz.prototype
     pz.geturl = function() {
         let href = location.href,
@@ -201,7 +199,6 @@
             this.data = o.data
             this.id = o.id || 'id'
             this.type_name = o.name || 'type_name'
-            console.log(this.data)
             this.init()
 
         }
@@ -210,7 +207,6 @@
                 this.dopen()
                 this.setmenustyle()
                 this.setitems()
-
             },
             setitems: function() { //循环出下拉框
                 let t = this,
@@ -296,20 +292,22 @@
         };
         return d
     })()
-    window.selpicure = (function() {
+    window.selpicure = (function() { //添加图片
         function S(o) {
             this.picures = doc.querySelector(o.el)
             this.num = o.num
             this.imglist = o.images
             this.images = []
             this.files = []
+            this.field = o.field || 'image'
             this.imgChange = o.imgChange
-            this.multiple = o.multiple || ''
+            this.delImgFn = o.delImgFn
+            this.type = o.type || ''
             this.init()
         }
         S.prototype.init = function() {
             if (!this.picures.querySelector('.picurelist')) {
-                this.picures.innerHTML += '<ul class="picurelist"></ul><input class="file" accept="image/*" ' + this.multiple + ' type="file" name="" id="imgFile">'
+                this.picures.innerHTML += '<ul class="picurelist"></ul><input class="file" accept="image/*" ' + this.type + ' type="file" name="" id="imgFile">'
             }
             this.file = this.picures.querySelector('.file')
             this.selfile = this.picures.querySelector('.selfile')
@@ -331,34 +329,65 @@
         }
         S.prototype.filechange = function(e) {
             let t = this
-            t.selfile.addEventListener('click', function(e) {
+            t.selfile.onclick = function(e) {
                 t.file.click()
-            })
-            t.file.addEventListener('change', function(e) {
-                // if (t.file.files.length < 1) return
-                // if (t.num == 1) {
-                //     t.files = []
-                // }
-                t.uploadfile(t.file.files[0])
-            })
+            }
+            t.file.onchange = function(e) {
+                if (t.file.files.length < 1) return
+                if (t.type == 'multiple') {
+                    t.uploadmultifile(t.file.files)
+                } else {
+                    t.uploadfile(t.file.files[0])
+                }
+            }
         }
         S.prototype.uploadfile = function(file) {
+            let t = this,
+                formdata = new FormData();
+            formdata.append('image', file)
+            quest.requests({
+                data: formdata,
+                url: 'uploadfile',
+                success: function(res) {
+                    if (t.type == '') {
+                        t.images = []
+                    }
+                    let str = {}
+                    str[t.field] = res.image_path
+                    t.images.push(str);
+                    t.showImg();
+                    t.imgChange(t.images);
+                }
+            })
+        }
+        S.prototype.uploadmultifile = function(file) {
                 let t = this,
+                    len = file.length,
+                    i,
                     formdata = new FormData();
-                formdata.append('image', file)
+                for (i = 0; i < len; i++) {
+                    formdata.append('images[]', file[i])
+                }
                 quest.requests({
                     data: formdata,
-                    url: 'uploadfile',
+                    url: 'uploadmultifile',
                     success: function(res) {
-                        if (t.num == 1) {
-                            t.images = []
-                        }
-                        t.images.push(res.image_path);
+                        t.imgpush(res.data)
                         t.showImg();
                         t.imgChange(t.images);
                     }
                 })
-            }
+            },
+            S.prototype.imgpush = function(data) {
+                let len = data.length,
+                    i, str
+                for (i = 0; i < len; i++) {
+                    str = {}
+                    str['upload'] = true
+                    str[this.field] = data[i]
+                    this.images.push(str)
+                }
+            },
             // S.prototype.disposefiles = function(files) {
             //     let len3 = files.length
             //     for (let y = 0; y < len3; y++) {
@@ -374,13 +403,35 @@
             //     }
             //     this.showImg()
             // }
-        S.prototype.showImg = function() {
+            S.prototype.showImg = function() {
                 let str = '',
-                    len = this.images.length
+                    len = this.images.length,
+                    sp = '',
+                    t = false
+                if (this.type == 'multiple') {
+                    t = true
+                }
                 for (let i = 0; i < len; i++) {
-                    str += '<li><img src="' + this.images[i] + '" alt=""></li>'
+                    if (t) {
+                        sp = '<span class="imgDel" data-img="' + this.images[i][this.field] + '" >✖</span>'
+                    }
+                    str += '<li>' + sp + '<img src="' + this.images[i][this.field] + '" alt=""></li>'
                 }
                 this.list.innerHTML = str
+                if (t) {
+                    this.delImg()
+                }
+            },
+            S.prototype.delImg = function() {
+                let t = this,
+                    lis = t.list.querySelectorAll('li')
+                lis.forEach(function(li) {
+                    let delsp = li.querySelector('.imgDel')
+                    delsp.addEventListener('click', function(e) {
+                        let path = delsp.getAttribute('data-img')
+                        t.delImgFn(path)
+                    })
+                })
             }
             // S.prototype.getObjectURL = function(file) {
             //     var url = null
@@ -401,9 +452,13 @@
     }())
     pz.multistage = (function() {
         function _ME(o) {
+            this.el = ''
+            this.ellink = ''
             this.el = document.querySelector(o.el)
             this.ellink = document.querySelector(o.ellink)
             this.data = o.data
+            this.type = o.type || '0'
+            this.name = o.name || 'name'
             this.init()
         }
         _ME.prototype.init = function() {
@@ -413,22 +468,24 @@
         }
         _ME.prototype.elclick = function() {
             let t = this
-            t.el.addEventListener('click', function(e) {
+                // t.el.removeEventListener('click', function(e) {})
+            t.el.onclick = function(e) {
                 e.stopPropagation()
                 if (t.ellink.classList.contains('hide')) {
                     t.place()
-                    t.ellink.classList.remove('hide')
+                    console.log('remove')
+                    t.ellink.classList.remove('hide', false)
                 } else {
+                    console.log('add')
                     t.ellink.classList.add('hide')
                 }
-
-            })
-            document.querySelector('body').addEventListener('click', function(e) {
+            };
+            document.querySelector('body').onclick = function(e) {
                 t.ellink.classList.add('hide')
-            })
-            t.ellink.addEventListener('click', function(e) {
+            }
+            t.ellink.onclick = function(e) {
                 e.stopPropagation()
-            })
+            }
         }
         _ME.prototype.place = function() {
             let rect = this.el.getBoundingClientRect()
@@ -441,19 +498,19 @@
                 len1, len2, i, x, y
             for (i = 0; i < len; i++) {
                 str += '<div class="one-li">'
-                str += '<span class="one-text le-text" data-id="' + data[i].id + '" >' + data[i].name + '</span>'
+                str += '<span class="one-text le-text" data-id="' + data[i].id + '" >' + data[i][this.name] + '</span>'
                 if (data[i].hasOwnProperty('_child')) {
                     len1 = data[i]._child.length
                     str += '<div class="le-two">'
                     for (x = 0; x < len1; x++) {
                         str += '<div class="two-li">'
-                        str += '<span class="two-text le-text" data-id="' + data[i]._child[x].id + '" >' + data[i]._child[x].name + '</span>'
+                        str += '<span class="two-text le-text" data-id="' + data[i]._child[x].id + '" >' + data[i]._child[x][this.name] + '</span>'
                         if (data[i]._child[x].hasOwnProperty('_child')) {
                             len2 = data[i]._child[x]._child.length
                             str += '<div class="le-three">'
                             for (y = 0; y < len2; y++) {
                                 str += '<div class="">'
-                                str += '<span class="le-text noafter" data-id="' + data[i]._child[x]._child[y].id + '" >' + data[i]._child[x]._child[y].name + '</span>'
+                                str += '<span class="le-text noafter" data-id="' + data[i]._child[x]._child[y].id + '" >' + data[i]._child[x]._child[y][this.name] + '</span>'
                                 str += '</div>'
                             }
                             str += '</div>'
@@ -465,11 +522,21 @@
                 str += '</div>'
             }
             this.ellink.innerHTML = str;
-            this.clicksel()
+            if (this.type.indexOf('1') != -1 || this.type == '0') {
+                this.clickel('.one-text')
+            }
+            if (this.type.indexOf('2') != -1 || this.type == '0') {
+                this.clickel('.two-text')
+            }
+            if (this.type.indexOf('3') != -1 || this.type == '0') {
+                this.clickel('.noafter')
+            }
+            console.log('type', this.type)
         }
-        _ME.prototype.clicksel = function() {
+        _ME.prototype.clickel = function(name) {
             let t = this,
-                sels = t.ellink.querySelectorAll('.noafter');
+                sels = t.ellink.querySelectorAll(name);
+            if (!sels) return
             sels.forEach(function(li) {
                 li.addEventListener('click', function(e) {
                     t.el.setAttribute('data-id', li.getAttribute('data-id'))

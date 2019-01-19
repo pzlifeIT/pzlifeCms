@@ -6,21 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>商品库</title>
-    <link rel="stylesheet" href="../../css/style.css">
-    <link rel="stylesheet" href="../../css/bootstrap.css">
-    <link rel="stylesheet" href="../../css/list.css">
-    <link rel="stylesheet" href="../../css/details.css">
+    <title>商品分类</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../../css/list.css">
+    <link rel="stylesheet" href="../../../css/details.css">
 </head>
 
 <body>
 
     <div class="iframenav">
         <div class="refresh topbtn din fl" onclick="document.location.reload()">
-            <img src="../../images/sx.png" alt="">
+            <img src="../../../images/sx.png" alt="">
         </div>
         <div class="add addclass topbtn din fl" id="addbtn">
-            <img src="../../images/jia.png" alt="">
+            <img src="../../../images/jia.png" alt="">
         </div>
     </div>
     <div class="gs-list panel-default">
@@ -50,9 +50,6 @@
         </ul>
     </div>
     <div class="pz-modal hide" id="classcompile">
-        <div class="refresh topbtn din fl" onclick="document.location.reload()">
-            <img src="../../images/sx.png" alt="">
-        </div>
         <div class="pz-modal-content">
             <div class="pz-modal-header">商品分类编辑</div>
             <div class="pz-spin-container">
@@ -97,16 +94,17 @@
             <div class="pz-spin-container">
                 <div class="dl-show">
                     <span class="dl-title">上级分类:</span>
-                    <div class="din combobox" id="combobox_class">
+                    <span class="multistage" id="selClass">请选择</span>
+                    <!-- <div class="din combobox" id="combobox_class">
                         <div class="ant-select">
                             <div class="ant-select-selection">请选择</div>
                             <span class="ant-select-arrow"></span>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">分类名称:</span>
-                    <input class="dl-info" id="ca-name" type="text">
+                    <input class="dl-info" id="nameNew" type="text">
                 </div>
 
                 <div class="dl-show">
@@ -130,15 +128,16 @@
                 </div>
                 <div class="dl-show flexcenter">
                     <input type="button" value="取消" class="pz-btn btn-cancel">
-                    <input type="button" value="保存" class="pz-btn btn-amend">
+                    <input type="button" value="保存" id="saveNew" class="pz-btn btn-amend">
                 </div>
             </div>
         </div>
     </div>
+    <div class="linkage hide"></div>
 </body>
-<script src="../../js/ajax.js"></script>
-<script src="../../js/common.js"></script>
-<script src="js/classify.js"></script>
+<script src="../../../js/ajax.js"></script>
+<script src="../../../js/common.js"></script>
+<script src="classify.js"></script>
 <script>
     pz.goodsclassify.init()
 </script>

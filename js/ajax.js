@@ -83,11 +83,14 @@
         saveeditcate: 'admin/category/saveeditcate', //提交编辑
         saveaddcate: 'admin/category/saveaddcate', //添加分类
         getThreeCate: 'admin/category/getThreeCate', //获取三级分类
-        addCatePage: 'admin/category/addCatePage', //获取前两级分类
+        addcatepage: 'admin/category/addcatepage', //获取前两级分类
         editcatepage: 'admin/category/editcatepage', //获取需要编辑的分类数据
-        delGoods: 'admin/goods/delGoods', //删除商品
-        saveupdategoods: 'admin/goods/saveupdategoods', //删除商品
+        updowngoods: 'admin/goods/updowngoods', //删除商品
+        saveupdategoods: 'admin/goods/saveupdategoods', //修改商品基础信息
+        delgoodsimage: 'admin/goods/delgoodsimage', //修改商品基础信息
+        delgoodsspec: 'admin/goods/delgoodsspec', //删除商品的规格属性
         getgoodslist: 'admin/goods/getGoodsList', //商品列表
+        uploadgoodsimages: 'admin/goods/uploadgoodsimages', //提交商品详情和轮播图
         saveaddgoods: 'admin/goods/saveAddGoods', //添加商品
         addgoodsspec: 'admin/goods/addgoodsspec', //添加商品的规格属性
         getgoodssku: 'admin/goods/getgoodssku', //获取一个sku信息
@@ -109,8 +112,16 @@
         getUser: 'index/user/getUser', //通过uid获取用户信息
         getSms: 'admin/note/getSms', //查询短信记录
         sendSms: 'admin/note/sendSms', //短信验证码发送
-        uploadfile: 'admin/upload/uploadfile' //上传单个图片
-
+        uploadfile: 'admin/upload/uploadfile', //上传单个图片
+        uploadmultifile: 'admin/upload/uploadmultifile', //上传单个图片
+        editsubject: 'admin/subject/editsubject', //修改专题
+        delgoodssubject: 'admin/subject/delgoodssubject', //删除专题
+        delgoodssubjectassoc: 'admin/subject/delgoodssubjectassoc', //取消专题商品的关联
+        subjectgoodsassoc: 'admin/subject/subjectgoodsassoc', //建立商品专题关系
+        getallsubject: 'admin/subject/getallsubject', //所有专题
+        addsubject: 'admin/subject/addsubject', //添加专题
+        getsubjectdetail: 'admin/subject/getsubjectdetail', //添加专题
+        getgoodssubject: 'admin/subject/getgoodssubject' //获取商品专题
     }
 
     quest.requests = function(params) {
@@ -120,8 +131,12 @@
             data: params.data || '',
             url: t.questurl[params.url],
             success: function(res) {
-                if (res.code == '200') {
+                if (res.code == '200' || res.code == '3000') {
                     params.success(res)
+                } else {
+                    if (typeof params.Error == 'function') {
+                        params.Error(res.code)
+                    }
                 }
             }
         })
@@ -130,17 +145,6 @@
         this.Ajax({
             data: params.data,
             url: 'admin/category/getcatelist',
-            success: function(res) {
-                if (res.code == '200') {
-                    params.success(res)
-                }
-            }
-        })
-    }
-    quest.addcatepage = function(params) { //获取前两级分类
-        this.Ajax({
-            data: params.data,
-            url: 'admin/category/addcatepage',
             success: function(res) {
                 if (res.code == '200') {
                     params.success(res)

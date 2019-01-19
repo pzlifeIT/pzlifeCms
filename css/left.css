@@ -56,13 +56,15 @@
 }
 
 .sb_list .sb_li.active .sb_sub_list {
-    height: auto;
+    max-height: 150px;
+    overflow: auto;
+    transition: all 1s;
 }
 
 .sb_sub_list {
-    height: 0;
+    max-height: 0;
     overflow: hidden;
-    transition: all 1s;
+    transition: all .5s;
 }
 
 .sb_sub_list li {

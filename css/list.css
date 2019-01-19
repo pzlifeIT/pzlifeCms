@@ -345,3 +345,8 @@
 .li-pro-div:hover {
     background-color: rgba(59, 180, 242, .1);
 }
+
+.stImg {
+    width: 40px;
+    height: 40px;
+}
