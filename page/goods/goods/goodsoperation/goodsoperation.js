@@ -3,23 +3,16 @@
     pz.goodsoperation = (function() {
         function _GO() {
             this.id = pz.geturl().id || ''
-            this.addattribute = pz.getEl('.addattribute') //添加规格
+            console.log(this.id)
             this.attributeNew = pz.getEl('#attributeNew') //规格弹框
-            this.cancelNew = pz.getEl('#cancelNew') //隐藏规格弹框
-            this.saveNew = pz.getEl('#saveNew') //保存规格添加
             this.amendAttribute = pz.getEl('#amendAttribute') //商品规格弹框
-            this.cancelAmend = pz.getEl('#cancelAmend') //隐藏商品规格弹框
-            this.saveAmend = pz.getEl('#saveAmend') //保存商品规格
             this.previewphoto = pz.getEl('#previewphoto') //图片预览
-            this.addpreview = pz.getEl('.addpreview') //添加商品详情图片
-            this.modalContent = pz.getEl('#modalContent') //图片预览
-            this.goodSaveNew = pz.getEl('#goodSaveNew') //保存新建商品基本信息
             this.attributeList = pz.getEl('#attributeList') //规格属性列表
             this.goodattributeList = pz.getEl('#goodattributeList') //sku列表
             this.subjectlist = pz.getEl('#subjectlist') //专题列表
             this.freight = pz.getEl('#freight_id') //sku列表
-            this.addImg = pz.getEl('.addImg') //sku列表
-            this.imgDetatil = pz.getEl('#imgDetatil') //sku列表
+
+            this.imgDetatil = pz.getEl('#imgDetatil') //添加详情图片
             this.imagesDetatil = pz.getEl('#imagesDetatil') //详情图列表
             this.subjectNew = pz.getEl('#subjectNew') //专题弹窗
             this.preview = pz.getEl('#preview') //预览图片
@@ -29,6 +22,7 @@
             this.goodInfo = ''
             this.dataAttr = []
             this.skuid = ''
+
             this.init()
         }
         _GO.prototype = {
@@ -37,7 +31,6 @@
                 this.getonegoods()
             },
             getonegoods: function(type) { //获取一个商品数据
-
                 let t = this,
                     get_type = type || '',
                     gtype = get_type
@@ -83,7 +76,6 @@
                 })
             },
             isNewAmend: function(data) { //商品类型:供应商:三级分类:是否已经选择
-                console.log(data)
                 if (data.cate_id == 0 || data.cate_id == '') {
                     this.allCateList()
                     this.elremovehide('.cateIdNew')
@@ -130,11 +122,10 @@
                         supplierId: t.goodInfo.goods_data.supplier_id
                     },
                     success: function(res) {
-                        console.log(res.data)
                         select({
                             el: '#freight_id',
                             name: 'title',
-                            data: res.data
+                            data: res.data || []
                         })
                     }
                 })
@@ -246,40 +237,50 @@
             },
             elClick: function() { //控件点击
                 let t = this
-                t.addattribute.addEventListener('click', function(e) {
+                    //添加规格
+                document.querySelector('.addattribute').addEventListener('click', function(e) {
+                    if (t.id == '') return
                     t.attrinit()
                     t.attributeNew.classList.remove('hide')
                     t.getspecattr()
-                })
-                t.cancelNew.addEventListener('click', function(e) {
+                });
+                //隐藏规格弹框
+                document.querySelector('#cancelNew').addEventListener('click', function(e) {
                     t.attributeNew.classList.add('hide')
-                })
-                t.saveNew.addEventListener('click', function(e) {
+                });
+                //保存规格添加
+                document.querySelector('#saveNew').addEventListener('click', function(e) {
                     t.addgoodsspec()
-                })
-                t.cancelAmend.addEventListener('click', function(e) {
+                });
+                //隐藏商品规格弹框
+                document.querySelector('#cancelAmend').addEventListener('click', function(e) {
                     t.amendAttribute.classList.add('hide')
-                })
-                t.saveAmend.addEventListener('click', function(e) {
+                });
+                //保存商品规格
+                document.querySelector('#saveAmend').addEventListener('click', function(e) {
                     t.savegoodssku()
-                })
+                });
                 t.previewphoto.addEventListener('click', function(e) {
                     t.previewphoto.classList.add('hide')
-                })
-                t.addpreview.addEventListener('click', function(e) {
+                });
+                //添加商品详情图片
+                document.querySelector('.addpreview').addEventListener('click', function(e) {
                     t.previewphoto.classList.remove('hide')
-                })
-                t.modalContent.addEventListener('click', function(e) {
+                });
+                //图片预览
+                document.querySelector('#modalContent').addEventListener('click', function(e) {
                     window.event ? window.event.cancelBubble = true : e.stopPropagation();
-                })
-                t.goodSaveNew.addEventListener('click', function(e) {
-                    if (t.id == '') {
-                        t.saveGoodNew()
-                    } else {
-                        t.saveGoodAmend()
-                    }
-                })
-                t.addImg.addEventListener('click', function(e) {
+                });
+                //保存新建商品基本信息
+                document.querySelector('#goodSaveNew').addEventListener('click', function(e) {
+                        if (t.id == '') {
+                            t.saveGoodNew()
+                        } else {
+                            t.saveGoodAmend()
+                        }
+                    })
+                    //sku列表
+                document.querySelector('.addImg').addEventListener('click', function(e) {
                     t.imgDetatil.click()
                 })
                 t.imgDetatil.addEventListener('change', function(e) {
@@ -357,18 +358,19 @@
                 this.delsubject()
             },
             delsubject: function() {
+                if (this.id == '') return
                 let t = this,
                     delels = this.subjectlist.querySelectorAll('.btn-del');
                 delels.forEach(function(el) {
                     el.addEventListener('click', function(e) {
                         let id = el.getAttribute('data-id')
-                        console.log(id)
                         t.delgoodssubjectassoc(id)
                     })
                 })
             },
             delgoodssubjectassoc: function(id) {
                 let t = this
+                if (this.id == '') return
                 quest.requests({
                     url: 'delgoodssubjectassoc',
                     data: {
@@ -509,7 +511,8 @@
                             el: '.cateIdNew',
                             ellink: '#catelinkage',
                             type: '3',
-                            data: t.disCateList(res.data)
+                            name: 'type_name',
+                            data: res.data
                         })
                     }
                 })
@@ -628,16 +631,18 @@
                     }
                     s = s.substr(0, s.length - 1);
                     str += '<li>'
-                    str += '<span class="col-md-1">' + (i + 1) + '</span>'
+                    str += '<span class="col-md-05">' + (i + 1) + '</span>'
                     str += '<span class="col-md-1">' + s + '</span>'
                     str += '<span class="col-md-1"><img class="attrImg" src="' + data[i].sku_image + '" /></span>'
-                    str += '<span class="col-md-1">' + data[i].stock + '</span>'
+                    str += '<span class="col-md-05">' + data[i].stock + '</span>'
                     str += '<span class="col-md-1">' + data[i].market_price + '</span>'
                     str += '<span class="col-md-1">' + data[i].retail_price + '</span>'
                     str += '<span class="col-md-1">' + data[i].cost_price + '</span>'
                     str += '<span class="col-md-1">' + data[i].margin_price + '</span>'
-                    str += '<span class="col-md-1">' + data[i].integral_price + '</span>'
-                    str += '<span class="col-md-1">' + data[i].integral_active + '</span>'
+                    str += '<span class="col-md-05">' + data[i].integral_price + '</span>'
+                    str += '<span class="col-md-05">' + data[i].integral_active + '</span>'
+                    str += '<span class="col-md-1">' + data[i].weight + '</span>'
+                    str += '<span class="col-md-1">' + data[i].volume + '</span>'
                     str += '<span class="col-md-1">' + data[i].freight_title + '</span>'
                     str += '<span class="col-md-1"><div class="pz-btn btn-amend" data-id="' + data[i].id + '" >编辑</div></span>'
                     str += '</li>'
@@ -680,6 +685,8 @@
                     margin_price = document.querySelector('#margin_price'),
                     integral_price = document.querySelector('#integral_price'),
                     integral_active = document.querySelector('#integral_active'),
+                    weight = document.querySelector('#weight'),
+                    volume = document.querySelector('#volume'),
                     freight_id = t.freight.querySelector('.ant-select-selection'),
                     len1 = data.attr.length,
                     x,
@@ -696,6 +703,8 @@
                 margin_price.value = data.margin_price
                 integral_price.value = data.integral_price
                 integral_active.value = data.integral_active
+                weight.value = data.weight
+                volume.value = data.volume
                 t.sku_image = ''
                 if (data.freight_id == 0) {
                     freight_id.setAttribute('data-id', '')
@@ -724,6 +733,8 @@
                     margin_price = document.querySelector('#margin_price').value,
                     integral_price = document.querySelector('#integral_price').value,
                     integral_active = document.querySelector('#integral_active').value,
+                    weight = document.querySelector('#weight').value,
+                    volume = document.querySelector('#volume').value,
                     freight_id = t.freight.querySelector('.ant-select-selection').getAttribute('data-id');
                 quest.requests({
                     url: 'editgoodssku',
@@ -738,6 +749,8 @@
                         integral_active: integral_active,
                         sku_image: t.sku_image,
                         freight_id: freight_id,
+                        weight: weight,
+                        volume: volume,
                     },
                     success: function(res) {
                         t.getonegoods(4)

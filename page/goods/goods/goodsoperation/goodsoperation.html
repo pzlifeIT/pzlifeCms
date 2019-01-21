@@ -27,7 +27,7 @@
 <body>
     <div class="iframenav">
         <!-- <button class="">刷新</button> -->
-        <div class="refresh topbtn din fl" onclick="back()">
+        <div class="refresh topbtn din fl">
             <span></span>
         </div>
         <div class="refresh topbtn din fl" onclick="document.location.reload()">
@@ -56,7 +56,7 @@
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">商品标题:</span>
-                    <input class="dl-info" id="goodsSubtitleNew" value="" type="text">
+                    <textarea class="dl-area" id="goodsSubtitleNew" value="" type="text"></textarea>
                 </div>
 
                 <div class="dl-show">
@@ -156,16 +156,18 @@
                 </div>
                 <div class="d2-list">
                     <div class="list-header">
-                        <span class="col-md-1">序号</span>
+                        <span class="col-md-05">序号</span>
                         <span class="col-md-1">规格名称</span>
                         <span class="col-md-1">规格图</span>
-                        <span class="col-md-1">库存</span>
+                        <span class="col-md-05">库存</span>
                         <span class="col-md-1">市场价</span>
                         <span class="col-md-1">零售价</span>
                         <span class="col-md-1">成本价</span>
                         <span class="col-md-1">其他运费成本</span>
-                        <span class="col-md-1">积分售价</span>
-                        <span class="col-md-1">积分赠送</span>
+                        <span class="col-md-05">积分售价</span>
+                        <span class="col-md-05">积分赠送</span>
+                        <span class="col-md-1">重量(单位kg)</span>
+                        <span class="col-md-1">体积(单位m³)</span>
                         <span class="col-md-1">运费</span>
                         <span class="col-md-1">管理</span>
                     </div>
@@ -279,9 +281,6 @@
         </div>
     </div>
     <div class="pz-modal hide" id="amendAttribute">
-        <div class="refresh topbtn din fl" onclick="document.location.reload()">
-            <img src="../../../../images/sx.png" alt="">
-        </div>
         <div class="pz-modal-content">
             <div class="pz-modal-header">编辑商品规格</div>
             <div class="pz-spin-container">
@@ -325,6 +324,14 @@
                             <span class="ant-select-arrow"></span>
                         </div>
                     </div>
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">重量(单位kg):</span>
+                    <input class="dl-info" id="weight" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">体积(单位m³):</span>
+                    <input class="dl-info" id="volume" type="text">
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">规格详情图:</span>

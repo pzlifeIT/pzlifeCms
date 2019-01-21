@@ -44,13 +44,14 @@
         }
         _SR.prototype.getsuppliers = function(o) { //获得供应商列表
             let t = this
-            quest.suppliers.getsuppliers({
+            quest.requests({
+                url: 'getsuppliersall',
                 data: {
                     page: o.page || 1,
                     pagenum: o.pagenum || 10
                 },
                 success: function(res) {
-                    t.setGlul(res.data)
+                    t.setGlul(res.data || [])
                     let totle = Math.ceil(parseInt(res.totle) / 10)
                     if (t.totle == totle) return
                     t.totle = totle
@@ -113,12 +114,13 @@
         }
         _SR.prototype.getsupplierdata = function() { //获取供应商详情
             let t = this
-            quest.suppliers.getsupplierdata({
+            quest.requests({
+                url: 'getSupplierData',
                 data: {
                     supplierId: t.id
                 },
                 success: function(res) {
-                    t.setData(res.data)
+                    t.setData(res.data || [])
                 }
             })
         }
@@ -155,7 +157,9 @@
                 }
             })
         }
+        _SR.prototype.codeError = function(code) {
 
+        }
         _SR.prototype.saveSupplier = function() {
             let sdName = document.querySelector('#srName'),
                 sdTel = document.querySelector('#srTel'),
@@ -171,14 +175,40 @@
             formData.image = this.images
             if (t.id != '') {
                 formData.id = this.id
-                quest.suppliers.updateSupplier({
+                quest.requests({
+                    url: 'updateSupplier',
                     data: formData,
                     success: function(res) {
                         t.srcom.classList.add('hide');
                         t.getsuppliers({
                             page: t.page
                         })
-                        console.log(res)
+                    },
+                    Error: function(code) {
+                        switch (code) {
+                            case 3001:
+                                alert('手机号码格式错误')
+                                break;
+                            case 3002:
+                                alert('提交数据不完整')
+                                break;
+                            case 3003:
+                                alert('供应商ID必须是数字')
+                                break;
+                            case 3004:
+                                alert('更新失败')
+                                break;
+                            case 3005:
+                                alert('图片没有上传过')
+                                break;
+                            case 3006:
+                                alert('供应商id不存在')
+                                break;
+                            case 3007:
+                                alert('供应商名称不能重复')
+                                break;
+
+                        }
                     }
                 })
             } else {
