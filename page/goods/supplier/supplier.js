@@ -45,7 +45,7 @@
         _SR.prototype.getsuppliers = function(o) { //获得供应商列表
             let t = this
             quest.requests({
-                url: 'getsuppliersall',
+                url: 'getsuppliers',
                 data: {
                     page: o.page || 1,
                     pagenum: o.pagenum || 10
@@ -56,6 +56,16 @@
                     if (t.totle == totle) return
                     t.totle = totle
                     t.bottompage()
+                },
+                Error(code) {
+                    switch (parseInt(code)) {
+                        case 3002:
+                            alert('页码和查询条数只能是数字')
+                            break;
+                        default:
+                            alert('意料之外的错误')
+                            break;
+                    }
                 }
             })
         }
@@ -121,6 +131,16 @@
                 },
                 success: function(res) {
                     t.setData(res.data || [])
+                },
+                Error(code) {
+                    switch (parseInt(code)) {
+                        case 3002:
+                            alert('供应商ID只能是数字')
+                            break;
+                        default:
+                            alert('意料之外的错误')
+                            break;
+                    }
                 }
             })
         }
@@ -185,7 +205,7 @@
                         })
                     },
                     Error: function(code) {
-                        switch (code) {
+                        switch (parseInt(code)) {
                             case 3001:
                                 alert('手机号码格式错误')
                                 break;
@@ -207,18 +227,44 @@
                             case 3007:
                                 alert('供应商名称不能重复')
                                 break;
-
+                            default:
+                                break;
                         }
                     }
                 })
             } else {
-                quest.suppliers.addsupplier({
+                quest.requests({
+                    url: 'addsupplier',
                     data: formData,
                     success: function(res) {
                         t.srcom.classList.add('hide');
                         t.getsuppliers({
                             page: t.page
                         })
+                    },
+                    Error(code) {
+                        switch (parseInt(code)) {
+                            case 3001:
+                                alert('手机号码格式错误')
+                                break;
+                            case 3002:
+                                alert('提交数据不完整')
+                                break;
+                            case 3003:
+                                alert('未选择图片')
+                                break;
+                            case 3004:
+                                alert('添加失败')
+                                break;
+                            case 3005:
+                                alert('图片没有上传过')
+                                break;
+                            case 3006:
+                                alert('供应商名字不能重复')
+                                break;
+                            default:
+                                break;
+                        }
                     }
                 })
             }

@@ -65,18 +65,19 @@
     quest.questurl = {
         updateSupplier: 'admin/suppliers/updateSupplier', //修改供应商
         updateSupplierFreight: 'admin/suppliers/updateSupplierFreight', //修改供应商快递模板
-        addSupplier: 'admin/suppliers/addSupplier', //新建供应商
+        editsupplierfreightdetail: 'admin/suppliers/editsupplierfreightdetail', //修改供应商快递模板运费
+        addsupplier: 'admin/suppliers/addSupplier', //新建供应商
         addsupplierfreight: 'admin/suppliers/addsupplierfreight', //新建供应商快递模板
         addSupplierFreightdetail: 'admin/suppliers/addSupplierFreightdetail', //新增供应商快递模板运费
         updatesupplierfreightarea: 'admin/suppliers/updatesupplierfreightarea', //更新运费模版和市的价格关联
         getsupplierfreights: 'admin/suppliers/getsupplierfreights', //获取供应商快递模板列表
         getSupplierFreightdetailList: 'admin/suppliers/getSupplierFreightdetailList', //获取供应商快递模板运费列表
-        getSuppliers: 'admin/suppliers/getSuppliers', //获取供应商列表
+        getsuppliers: 'admin/suppliers/getSuppliers', //获取供应商列表
         getSupplierFreight: 'admin/suppliers/getSupplierFreight', //获取供应商快递模板
         getSupplierFreightdetail: 'admin/suppliers/getSupplierFreightdetail', //获取供应商快递模板详情
         getSupplierData: 'admin/suppliers/getSupplierData', //获取供应商详情
         getsuppliersall: 'admin/suppliers/getsuppliersall', //获取所有供应商
-        stopStartCate: 'admin/category/stopStartCate', //停用/启用分类
+        stopstartcate: 'admin/category/stopstartcate', //停用/启用分类
         getCateList: 'admin/category/getCateList', //分类列表
         delcategory: 'admin/category/delcategory', //删除分类
         allCateList: 'admin/category/allCateList', //所有商品分类
@@ -145,28 +146,6 @@
         this.Ajax({
             data: params.data,
             url: 'admin/category/getcatelist',
-            success: function(res) {
-                if (res.code == '200') {
-                    params.success(res)
-                }
-            }
-        })
-    }
-    quest.saveeditcate = function(params) { //提交编辑
-        this.Ajax({
-            data: params.data,
-            url: 'admin/category/saveeditcate',
-            success: function(res) {
-                if (res.code == '200') {
-                    params.success(res)
-                }
-            }
-        })
-    }
-    quest.stopstartcate = function(params) { //停用/启用分类
-        this.Ajax({
-            data: params.data,
-            url: 'admin/category/stopstartcate',
             success: function(res) {
                 if (res.code == '200') {
                     params.success(res)

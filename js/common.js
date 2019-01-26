@@ -357,6 +357,25 @@
                     t.images.push(str);
                     t.showImg();
                     t.imgChange(t.images);
+                },
+                Error(code) {
+                    switch (parseInt(code)) {
+                        case 3001:
+                            alert('上传的不是图片')
+                            break;
+                        case 3002:
+                            alert('上传图片不能超过2M')
+                            break;
+                        case 3003:
+                            alert('上传失败')
+                            break;
+                        case 3004:
+                            alert('上传文件不能为空')
+                            break;
+                        default:
+                            alert('意料之外的错误')
+                            break;
+                    }
                 }
             })
         }
@@ -375,6 +394,28 @@
                         t.imgpush(res.data)
                         t.showImg();
                         t.imgChange(t.images);
+                    },
+                    Error(code) {
+                        switch (parseInt(code)) {
+                            case 3001:
+                                alert('上传的不是图片')
+                                break;
+                            case 3002:
+                                alert('上传图片不能超过2M')
+                                break;
+                            case 3003:
+                                alert('上传失败')
+                                break;
+                            case 3004:
+                                alert('上传文件不能为空')
+                                break;
+                            case 3005:
+                                alert('上传文件不能为空')
+                                break;
+                            default:
+                                alert('意料之外的错误')
+                                break;
+                        }
                     }
                 })
             },

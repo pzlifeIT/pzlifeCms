@@ -38,7 +38,7 @@
                 data: {
                     type: 3
                 },
-                url: 'allCateList',
+                url: '',
                 success: function(res) {
                     t.setglul(res.data);
                     t.comp()
@@ -83,11 +83,40 @@
                 let params = {}
                 params.id = t.id
                 params.type_name = t.classcompile.querySelector('#classname').value
-                quest.saveeditcate({
+                quest.requests({
+                    url: 'saveeditcate',
                     data: params,
                     success: function(res) {
                         t.getcatelist();
                         t.hideel(t.classcompile)
+                    },
+                    Error(code) {
+                        switch (parseInt(code)) {
+                            case 3001:
+                                alert('保存失败')
+                                break;
+                            case 3002:
+                                alert('id必须为数字')
+                                break;
+                            case 3003:
+                                alert('状态参数有误')
+                                break;
+                            case 3004:
+                                alert('分类id不存在')
+                                break;
+                            case 3005:
+                                alert('该分类名称已经存在')
+                                break;
+                            case 3006:
+                                alert('图片没有上传过')
+                                break;
+                            case 3007:
+                                alert('没提交要修改的内容')
+                                break;
+                            default:
+                                alert('意料之外的错误')
+                                break;
+                        }
                     }
                 })
             })
@@ -141,21 +170,55 @@
         }
         _GC.prototype.classifydetail = function() { //获取分类详细信息
             let t = this
-            quest.editcatepage({
+            quest.requests({
+                url: 'editcatepage',
                 data: {
                     id: t.id
                 },
                 success: function(res) {
                     t.setdetail(res)
+                },
+                Error(code) {
+                    switch (parseInt(code)) {
+                        case 3002:
+                            alert('参数错误')
+                            break;
+                        default:
+                            alert('意料之外的错误')
+                            break;
+                    }
                 }
             })
         }
         _GC.prototype.saveaddcate = function(p) { //添加分类
             let t = this
-            quest.saveaddcate({
+            quest.requests({
+                url: 'saveaddcate',
                 data: p.data,
                 success: function(res) {
                     p.success(res)
+                },
+                Error(code) {
+                    switch (parseInt(code)) {
+                        case 3001:
+                            alert('保存失败')
+                            break;
+                        case 3002:
+                            alert('分类名称不能为空')
+                            break;
+                        case 3003:
+                            alert('图片没有上传过')
+                            break;
+                        case 3004:
+                            alert('状态参数有误')
+                            break;
+                        case 3005:
+                            alert('该分类名称已经存在')
+                            break;
+                        default:
+                            alert('意料之外的错误')
+                            break;
+                    }
                 }
             })
         }
@@ -218,13 +281,27 @@
                     } else {
                         gtype = 1
                     }
-                    quest.stopstartcate({
+                    quest.requests({
+                        url: 'stopstartcate',
                         data: {
                             id: id,
                             type: gtype
                         },
                         success: function() {
                             t.getcatelist()
+                        },
+                        Error(code) {
+                            switch (parseInt(code)) {
+                                case 3001:
+                                    alert('停用失败')
+                                    break;
+                                case 3002:
+                                    alert('参数错误')
+                                    break;
+                                default:
+                                    alert('意料之外的错误')
+                                    break;
+                            }
                         }
                     })
                 })

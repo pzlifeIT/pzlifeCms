@@ -64,6 +64,16 @@
                 success: function(res) {
                     t.getattributeList()
                     t.abcompile.classList.add('hide')
+                },
+                Error(code) {
+                    switch (parseInt(code)) {
+                        case 3002:
+                            alert('参数错误')
+                            break;
+                        default:
+                            alert('意料之外的错误')
+                            break;
+                    }
                 }
             })
         }
@@ -128,6 +138,19 @@
                 url: 'delSpecAttr',
                 success: function(res) {
                     t.getattributeList()
+                },
+                Error(code) {
+                    switch (parseInt(code)) {
+                        case 3002:
+                            alert('参数错误')
+                            break;
+                        case 3003:
+                            alert('无法删除')
+                            break;
+                        default:
+                            alert('意料之外的错误')
+                            break;
+                    }
                 }
             })
         }

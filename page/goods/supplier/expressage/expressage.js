@@ -35,6 +35,16 @@
                 },
                 success: function(res) {
                     t.setGlul(res.data || [])
+                },
+                Error(code) {
+                    switch (parseInt(code)) {
+                        case 3002:
+                            alert('供应商ID只能是数字')
+                            break;
+                        default:
+                            alert('意料之外的错误')
+                            break;
+                    }
                 }
             })
         }
@@ -88,6 +98,16 @@
                 success: function(res) {
                     t.setData(res.data)
                     t.eeAmend.classList.remove('hide')
+                },
+                Error(code) {
+                    switch (parseInt(code)) {
+                        case 3002:
+                            alert('供应商ID只能是数字')
+                            break;
+                        default:
+                            alert('意料之外的错误')
+                            break;
+                    }
                 }
             })
         }
@@ -139,6 +159,22 @@
                     success: function(res) {
                         t.getfreight()
                         t.eeAmend.classList.add('hide')
+                    },
+                    Error(code) {
+                        switch (parseInt(code)) {
+                            case 3001:
+                                alert('供应商id必须是数字')
+                                break;
+                            case 3002:
+                                alert('供应商ID只能是数字')
+                                break;
+                            case 3003:
+                                alert('标题和详情不能为空')
+                                break;
+                            default:
+                                alert('意料之外的错误')
+                                break;
+                        }
                     }
                 })
             } else {
@@ -153,6 +189,22 @@
                     success: function(res) {
                         t.getfreight()
                         t.eeAmend.classList.add('hide')
+                    },
+                    Error(code) {
+                        switch (parseInt(code)) {
+                            case 3001:
+                                alert('供应商模版id必须是数字')
+                                break;
+                            case 3002:
+                                alert('计价方式参数有误')
+                                break;
+                            case 3003:
+                                alert('标题和详情不能为空')
+                                break;
+                            default:
+                                alert('意料之外的错误')
+                                break;
+                        }
                     }
                 })
             }

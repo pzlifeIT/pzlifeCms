@@ -45,6 +45,16 @@
                 },
                 success: function(res) {
                     t.setGlul(res.data)
+                },
+                Error(code) {
+                    switch (parseInt(code)) {
+                        case 3002:
+                            alert('供应商快递模板ID和页码和每页条数只能是数字')
+                            break;
+                        default:
+                            alert('意料之外的错误')
+                            break;
+                    }
                 }
             })
         }
@@ -310,8 +320,18 @@
                     sfd_id: t.id
                 },
                 success: function(res) {
-                    // t.setData(res.data)
+                    t.setData(res.data)
                     t.eeAmend.classList.remove('hide')
+                },
+                Error(code) {
+                    switch (parseInt(code)) {
+                        case 3002:
+                            alert('供应商ID只能是数字')
+                            break;
+                        default:
+                            alert('意料之外的错误')
+                            break;
+                    }
                 }
             })
         }
@@ -363,16 +383,32 @@
                 })
             } else {
                 quest.requests({
-                    url: 'updateSupplierFreight',
+                    url: 'editsupplierfreightdetail',
                     data: {
-                        supplier_freight_Id: t.id,
-                        stype: eeType,
-                        title: eeTitle,
-                        desc: eeDesc
+                        freight_detail_id: t.id,
+                        price: fhPrice,
+                        after_price: fhAfter,
+                        total_price: fhTotal
                     },
                     success: function(res) {
                         t.getfreight()
                         t.eeAmend.classList.add('hide')
+                    },
+                    Error(code) {
+                        switch (parseInt(code)) {
+                            case 3001:
+                                alert('运费模版Id错误')
+                                break;
+                            case 3002:
+                                alert('价格只能是数字')
+                                break;
+                            case 3003:
+                                alert('运费详情不存在')
+                                break;
+                            default:
+                                alert('意料之外的错误')
+                                break;
+                        }
                     }
                 })
             }

@@ -119,6 +119,16 @@
                     },
                     success: function(res) {
                         t.subjectAmend(res.data)
+                    },
+                    Error(code) {
+                        switch (parseInt(code)) {
+                            case 3001:
+                                alert('id必须数字')
+                                break;
+                            default:
+                                alert('意料之外的错误')
+                                break;
+                        }
                     }
                 })
             },
@@ -203,6 +213,37 @@
                     success: function(res) {
                         t.subjectcompile.classList.add('hide')
                         t.getallsubject()
+                    },
+                    Error(code) {
+                        switch (parseInt(code)) {
+                            case 3001:
+                                alert('状态有误')
+                                break;
+                            case 3002:
+                                alert('id只能为数字')
+                                break;
+                            case 3003:
+                                alert('排序只能是数字')
+                                break;
+                            case 3004:
+                                alert('专题不存在')
+                                break;
+                            case 3005:
+                                alert('专题名已存在')
+                                break;
+                            case 3006:
+                                alert('图片没有上传过')
+                                break;
+                            case 3007:
+                                alert('没提交要修改的内容')
+                                break;
+                            case 3008:
+                                alert('保存失败')
+                                break;
+                            default:
+                                alert('意料之外的错误')
+                                break;
+                        }
                     }
                 })
             },
@@ -290,6 +331,34 @@
                     success: function(res) {
                         t.getallsubject()
                         t.classadd.classList.add('hide')
+                    },
+                    Error(code) {
+                        switch (parseInt(code)) {
+                            case 3001:
+                                alert('状态有误')
+                                break;
+                            case 3002:
+                                alert('pid只能为数字')
+                                break;
+                            case 3003:
+                                alert('专题名不能为空')
+                                break;
+                            case 3004:
+                                alert('pid查不到上级专题')
+                                break;
+                            case 3005:
+                                alert('专题名已存在')
+                                break;
+                            case 3006:
+                                alert('图片没有上传过')
+                                break;
+                            case 3007:
+                                alert('保存失败')
+                                break;
+                            default:
+                                alert('意料之外的错误')
+                                break;
+                        }
                     }
                 })
             },

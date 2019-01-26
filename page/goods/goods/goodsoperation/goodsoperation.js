@@ -72,6 +72,19 @@
                             t.previewDetatil(t.goodInfo.images_detatil)
                         }
                         t.getgoodssubject(1)
+                    },
+                    Error(code) {
+                        switch (parseInt(code)) {
+                            case 3001:
+                                alert('id必须是数字')
+                                break;
+                            case 3002:
+                                alert('get_type错误')
+                                break;
+                            default:
+                                alert('意料之外的错误')
+                                break;
+                        }
                     }
                 })
             },
@@ -189,6 +202,22 @@
                     },
                     success: function(res) {
                         t.getonegoods(type)
+                    },
+                    Error(code) {
+                        switch (parseInt(code)) {
+                            case 3001:
+                                alert('图片不能为空')
+                                break;
+                            case 3002:
+                                alert('图片不存在')
+                                break;
+                            case 3003:
+                                alert('上传失败')
+                                break;
+                            default:
+                                alert('意料之外的错误')
+                                break;
+                        }
                     }
                 })
             },
@@ -212,6 +241,31 @@
                     data: formData,
                     success: function(res) {
                         t.getonegoods(type)
+                    },
+                    Error(code) {
+                        switch (parseInt(code)) {
+                            case 3001:
+                                alert('图片类型有误')
+                                break;
+                            case 3002:
+                                alert('商品id只能是数字')
+                                break;
+                            case 3003:
+                                alert('图片不能空')
+                                break;
+                            case 3004:
+                                alert('商品id不存在')
+                                break;
+                            case 3005:
+                                alert('图片没有上传过')
+                                break;
+                            case 3006:
+                                alert('上传失败')
+                                break;
+                            default:
+                                alert('意料之外的错误')
+                                break;
+                        }
                     }
                 })
             },
@@ -230,7 +284,7 @@
                     el: '#selpicure1',
                     images: [{ image: img }],
                     imgChange: function(images) {
-                        t.goodImg = images[0]
+                        t.goodImg = images[0].image
                     }
                 })
 
@@ -312,6 +366,31 @@
                     success: function(res) {
                         t.getgoodssubject(1)
                         t.subjectNew.classList.add('hide')
+                    },
+                    Error(code) {
+                        switch (parseInt(code)) {
+                            case 3001:
+                                alert('商品id必须是数字')
+                                break;
+                            case 3002:
+                                alert('专题id必须是数字')
+                                break;
+                            case 3003:
+                                alert('商品不存在')
+                                break;
+                            case 3004:
+                                alert('专题不存在')
+                                break;
+                            case 3005:
+                                alert('已经关联')
+                                break;
+                            case 3006:
+                                alert('保存失败')
+                                break;
+                            default:
+                                alert('意料之外的错误')
+                                break;
+                        }
                     }
                 })
             },
@@ -379,6 +458,25 @@
                     },
                     success: function(res) {
                         t.getgoodssubject(1)
+                    },
+                    Error(code) {
+                        switch (parseInt(code)) {
+                            case 3001:
+                                alert('商品id必须数字')
+                                break;
+                            case 3002:
+                                alert('专题id必须数字')
+                                break;
+                            case 3003:
+                                alert('商品和专题没有关联')
+                                break;
+                            case 3004:
+                                alert('取消失败')
+                                break;
+                            default:
+                                alert('意料之外的错误')
+                                break;
+                        }
                     }
                 })
             },
@@ -395,6 +493,28 @@
                     url: 'uploadmultifile',
                     success: function(res) {
                         t.disDetatilimages(res.data)
+                    },
+                    Error(code) {
+                        switch (parseInt(code)) {
+                            case 3001:
+                                alert('上传的不是图片')
+                                break;
+                            case 3002:
+                                alert('上传图片不能超过2M')
+                                break;
+                            case 3003:
+                                alert('上传失败')
+                                break;
+                            case 3004:
+                                alert('上传文件不能为空')
+                                break;
+                            case 3005:
+                                alert('上传文件不能为空')
+                                break;
+                            default:
+                                alert('意料之外的错误')
+                                break;
+                        }
                     }
                 })
             },
@@ -479,6 +599,43 @@
                     success: function(res) {
                         alert('修改成功')
                         document.location.reload()
+                    },
+                    Error(code) {
+                        switch (parseInt(code)) {
+                            case 3001:
+                                alert('供应商id必须是数字')
+                                break;
+                            case 3002:
+                                alert('分类id只能为数字')
+                                break;
+                            case 3003:
+                                alert('商品名称不能空')
+                                break;
+                            case 3004:
+                                alert('标题图不能空')
+                                break;
+                            case 3005:
+                                alert('商品类型只能为数字')
+                                break;
+                            case 3006:
+                                alert('商品名称重复')
+                                break;
+                            case 3007:
+                                alert('提交的分类id不是三级分类')
+                                break;
+                            case 3008:
+                                alert('供应商不存在')
+                                break;
+                            case 3009:
+                                alert('修改失败')
+                                break;
+                            case 3010:
+                                alert('图片没有上传过')
+                                break;
+                            default:
+                                alert('意料之外的错误')
+                                break;
+                        }
                     }
                 })
             },
@@ -499,7 +656,47 @@
                         subtitle: goodsSubtitle,
                         image: t.goodImg
                     },
-                    success: function(res) {}
+                    success: function(res) {
+                        t.id = res.goods_id
+                        alert('保存商品成功')
+                    },
+                    Error(code) {
+                        switch (parseInt(code)) {
+                            case 3001:
+                                alert('供应商id必须是数字')
+                                break;
+                            case 3002:
+                                alert('分类id只能为数字')
+                                break;
+                            case 3003:
+                                alert('商品名称不能空')
+                                break;
+                            case 3004:
+                                alert('标题图不能空')
+                                break;
+                            case 3005:
+                                alert('商品类型只能为数字')
+                                break;
+                            case 3006:
+                                alert('商品名称重复')
+                                break;
+                            case 3007:
+                                alert('提交的分类id不是三级分类')
+                                break;
+                            case 3008:
+                                alert('供应商不存在')
+                                break;
+                            case 3009:
+                                alert('添加失败')
+                                break;
+                            case 3010:
+                                alert('图片没有上传过')
+                                break;
+                            default:
+                                alert('意料之外的错误')
+                                break;
+                        }
+                    }
                 })
             },
             allCateList: function() { //获取所有分类
@@ -514,6 +711,16 @@
                             name: 'type_name',
                             data: res.data
                         })
+                    },
+                    Error(code) {
+                        switch (parseInt(code)) {
+                            case 3001:
+                                alert('状态参数错误')
+                                break;
+                            default:
+                                alert('意料之外的错误')
+                                break;
+                        }
                     }
                 })
             },
@@ -532,6 +739,19 @@
                             data: t.dataAttr
                         })
                         t.setsiteclick()
+                    },
+                    Error(code) {
+                        switch (parseInt(code)) {
+                            case 3001:
+                                alert('保存失败')
+                                break;
+                            case 3002:
+                                alert('参数错误')
+                                break;
+                            default:
+                                alert('意料之外的错误')
+                                break;
+                        }
                     }
                 })
             },
@@ -576,6 +796,40 @@
                         t.attributeNew.classList.add('hide')
                         t.getonegoods(2)
                         t.getonegoods(4)
+                    },
+                    Error(code) {
+                        switch (parseInt(code)) {
+                            case 3001:
+                                alert('属性id必须为数字')
+                                break;
+                            case 3002:
+                                alert('商品id必须为数字')
+                                break;
+                            case 3003:
+                                alert('属性不存在')
+                                break;
+                            case 3004:
+                                alert('商品不存在')
+                                break;
+                            case 3005:
+                                alert('规格不能为空')
+                                break;
+                            case 3006:
+                                alert('商品已有该规格属性 ')
+                                break;
+                            case 3007:
+                                alert('提交失败')
+                                break;
+                            case 3008:
+                                alert('没有任何操作')
+                                break;
+                            case 3009:
+                                alert('提交的属性分类和商品分类不同')
+                                break;
+                            default:
+                                alert('意料之外的错误')
+                                break;
+                        }
                     }
                 })
             },
@@ -615,6 +869,40 @@
                     success: function(res) {
                         t.getonegoods(2)
                         t.getonegoods(4)
+                    },
+                    Error(code) {
+                        switch (parseInt(code)) {
+                            case 3001:
+                                alert('属性id必须为数字')
+                                break;
+                            case 3002:
+                                alert('商品id必须为数字')
+                                break;
+                            case 3003:
+                                alert('属性不存在')
+                                break;
+                            case 3004:
+                                alert('商品不存在')
+                                break;
+                            case 3005:
+                                alert('规格不能为空')
+                                break;
+                            case 3006:
+                                alert('该商品未绑定这个属性')
+                                break;
+                            case 3007:
+                                alert('提交失败')
+                                break;
+                            case 3008:
+                                alert('没有任何操作')
+                                break;
+                            case 3009:
+                                alert('提交的属性分类和商品分类不同')
+                                break;
+                            default:
+                                alert('意料之外的错误')
+                                break;
+                        }
                     }
                 })
             },
@@ -755,6 +1043,53 @@
                     success: function(res) {
                         t.getonegoods(4)
                         t.amendAttribute.classList.add('hide')
+                    },
+                    Error(code) {
+                        switch (parseInt(code)) {
+                            case 3001:
+                                alert('id必须为数字')
+                                break;
+                            case 3002:
+                                alert('库存必须为大于或等于0的数字')
+                                break;
+                            case 3003:
+                                alert('价格必须为大于或等于0的数字')
+                                break;
+                            case 3004:
+                                alert('积分必须为大于或等于0的数字')
+                                break;
+                            case 3005:
+                                alert('图片没有上传过')
+                                break;
+                            case 3006:
+                                alert('零售价不能小于成本价')
+                                break;
+                            case 3007:
+                                alert('skuid不存在')
+                                break;
+                            case 3008:
+                                alert('编辑失败')
+                                break;
+                            case 3009:
+                                alert('选择的供应山id有误')
+                                break;
+                            case 3010:
+                                alert('请填写零售价和成本价')
+                                break;
+                            case 3011:
+                                alert('选择重量模版必须填写重量')
+                                break;
+                            case 3012:
+                                alert('选择体积模版必须填写体积')
+                                break;
+                            case 3013:
+                                alert('商品下架才能编辑')
+                                break;
+
+                            default:
+                                alert('意料之外的错误')
+                                break;
+                        }
                     }
                 })
             },
