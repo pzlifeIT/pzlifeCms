@@ -38,7 +38,7 @@
                 data: {
                     type: 3
                 },
-                url: '',
+                url: 'allCateList',
                 success: function(res) {
                     t.setglul(res.data);
                     t.comp()
