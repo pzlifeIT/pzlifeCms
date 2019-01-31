@@ -72,7 +72,7 @@
                     if (data[i].status == 1) {
                         checked = 'ant-switch-checked'
                     }
-                    str += '<li><span class="col-md-1 bot-bor subli">' + data[i].id + '</span>'
+                    str += '<div class="table-tr"><span class="col-md-1 bot-bor subli">' + data[i].id + '</span>'
                     str += '<span class="col-md-2 bot-bor subli">图片</span>'
                     str += '<span class="col-md-1 bot-bor subli">' + data[i].goods_name + '</span>'
                     str += '<span class="col-md-1 bot-bor subli">' + this.getgoods_type(data[i].goods_type) + '</span>'
@@ -83,7 +83,7 @@
                     str += '<span class="col-md-1 bot-bor subli"><span class="ant-switch up-down ' + checked + '" data-id="' + data[i].id + '" data-type="' + data[i].status + '" ></span></span>'
                     str += '<span class="col-md-2 bot-bor subli"><a class="pz-btn btn-amend" href="goodsoperation/goodsoperation.html?id=' + data[i].id + '">编辑</a>\
                     <div class="pz-btn btn-del" href="#">删除</div></span>'
-                    str += '</li>'
+                    str += '</div>'
                 }
                 this.goodlist.innerHTML = str
                 this.updowngoods()

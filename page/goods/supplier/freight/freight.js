@@ -3,6 +3,8 @@
     pz.freight = (function() {
         function _FH(o) {
             this.FhId = pz.geturl().id
+            this.mode = pz.geturl().mode
+            console.log(this.mode)
             this.id = ''
             this.addfreight = document.querySelector('.addfreight')
             this.eeCancel = document.querySelector('#eeCancel')
@@ -20,6 +22,17 @@
             this.getfreight()
             this.elClick()
             this.addEE()
+            this.setMode()
+        }
+        _FH.prototype.setMode = function() {
+            let freightMode = document.querySelector('#freightMode')
+            if (this.mode == 1) {
+                freightMode.innerHTML = '件'
+            } else if (this.mode == 2) {
+                freightMode.innerHTML = 'kg'
+            } else if (this.mode == 3) {
+                freightMode.innerHTML = 'm³'
+            }
         }
         _FH.prototype.elClick = function() {
             let t = this
@@ -66,10 +79,11 @@
             for (i = 0; i < len; i++) {
                 str += '<li> \
               <div class = "col-md-2 bot-bor subli" ><span>' + data[i].id + '</span> </div> \
+              <div class = "col-md-2 bot-bor subli" ><span>' + data[i].unit_price + ' </span></div> \
               <div class = "col-md-2 bot-bor subli" ><span>' + data[i].price + ' </span></div> \
               <div class = "col-md-2 bot-bor subli" ><span>' + data[i].after_price + '</span></div> \
-              <div class = "col-md-3 bot-bor subli" ><span>' + data[i].total_price + '</span></div> \
-              <div class = "col-md-3 bot-bor subli" >\
+              <div class = "col-md-2 bot-bor subli" ><span>' + data[i].total_price + '</span></div> \
+              <div class = "col-md-2 bot-bor subli" >\
               <div class = "pz-btn btn-amend examine" data-id="' + data[i].id + '" > 地址 </div> \
                   <div class = "pz-btn btn-amend redact" data-id="' + data[i].id + '" > 编辑 </div> \
               <div class = "pz-btn btn-del" data-id="' + data[i].id + '" > 删除 </div> </div></li>'
@@ -347,16 +361,19 @@
                 fhPrice = document.querySelector('#fhPrice'),
                 fhAfter = document.querySelector('#fhAfter'),
                 fhTotal = document.querySelector('#fhTotal');
+            countPinkage = document.querySelector('#countPinkage');
             if (data) {
                 t.id = data.id
                 fhPrice.value = data.price
                 fhAfter.value = data.after_price
                 fhTotal.value = data.total_price
+                countPinkage.value = data.unit_price
             } else {
                 t.id = ''
                 fhPrice.value = ''
                 fhAfter.value = ''
                 fhTotal.value = ''
+                countPinkage.value = ''
             }
         }
         _FH.prototype.saveEE = function() {
@@ -364,17 +381,20 @@
                 fhPrice = document.querySelector('#fhPrice').value,
                 fhAfter = document.querySelector('#fhAfter').value,
                 fhTotal = document.querySelector('#fhTotal').value;
+            countPinkage = document.querySelector('#countPinkage').value;
             if (t.id == '') {
                 if (fhPrice == '') return
                 if (fhAfter == '') return
                 if (fhTotal == '') return
+                if (countPinkage == '') return
                 quest.requests({
                     url: 'addSupplierFreightdetail',
                     data: {
                         freight_id: t.FhId,
                         price: fhPrice,
                         after_price: fhAfter,
-                        total_price: fhTotal
+                        total_price: fhTotal,
+                        unit_price: countPinkage
                     },
                     success: function(res) {
                         t.getfreight()
@@ -388,7 +408,8 @@
                         freight_detail_id: t.id,
                         price: fhPrice,
                         after_price: fhAfter,
-                        total_price: fhTotal
+                        total_price: fhTotal,
+                        unit_price: countPinkage
                     },
                     success: function(res) {
                         t.getfreight()

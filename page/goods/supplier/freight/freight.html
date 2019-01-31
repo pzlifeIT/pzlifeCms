@@ -29,18 +29,24 @@
         </div>
         <div class="gl-title">
             <div class="col-md-2 bot-bor subli">ID</div>
+            <div class="col-md-2 bot-bor subli">计价单位</div>
             <div class="col-md-2 bot-bor subli">邮费单价</div>
             <div class="col-md-2 bot-bor subli">续件价格</div>
-            <div class="col-md-3 bot-bor subli">包邮价格</div>
-            <div class="col-md-3 bot-bor subli">管理</div>
+            <div class="col-md-2 bot-bor subli">包邮价格</div>
+            <div class="col-md-2 bot-bor subli">管理</div>
         </div>
-        <ul class="gl-ul" id="freightlist"></ul>
+        <ul class="table" id="freightlist"></ul>
     </div>
     <div class="pz-modal hide" id="eeAmend">
         <div class="pz-modal-content">
             <div class="pz-modal-header">编辑运费模板
             </div>
             <div class="pz-spin-container">
+                <div class="dl-show">
+                    <span class="dl-title">计价单位:</span>
+                    <input class="dl-info" id="countPinkage" placeholder="计价单位" value="" type="text">
+                    <span class="freightMode" id="freightMode">kg</span>
+                </div>
                 <div class="dl-show">
                     <span class="dl-title">邮费单价:</span>
                     <input class="dl-info" id="fhPrice" placeholder="邮费单价" value="" type="text">

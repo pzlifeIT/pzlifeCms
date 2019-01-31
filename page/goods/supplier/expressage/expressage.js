@@ -59,7 +59,7 @@
               <div class = "col-md-2 bot-bor subli" ><span>' + data[i].title + '</span></div> \
               <div class = "col-md-3 bot-bor subli desc" ><span>' + data[i].desc + '</span></div> \
               <div class = "col-md-3 bot-bor subli" >\
-              <a class="pz-btn btn-amend" href="../freight/freight.html?id=' + data[i].id + '">运费模板</a>\
+              <a class="pz-btn btn-amend" href="../freight/freight.html?id=' + data[i].id + '&mode=' + data[i].stype + '">运费模板</a>\
                   <div class = "pz-btn btn-amend redact" data-id="' + data[i].id + '" > 编辑 </div> \
               </li>'
             }
