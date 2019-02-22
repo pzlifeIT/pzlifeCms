@@ -77,7 +77,7 @@
                 i,
                 str = ''
             for (i = 0; i < len; i++) {
-                str += '<li> \
+                str += '<div class="table-tr"> \
               <div class = "col-md-2 bot-bor subli" ><span>' + data[i].id + '</span> </div> \
               <div class = "col-md-2 bot-bor subli" ><span>' + data[i].unit_price + ' </span></div> \
               <div class = "col-md-2 bot-bor subli" ><span>' + data[i].price + ' </span></div> \
@@ -86,7 +86,7 @@
               <div class = "col-md-2 bot-bor subli" >\
               <div class = "pz-btn btn-amend examine" data-id="' + data[i].id + '" > 地址 </div> \
                   <div class = "pz-btn btn-amend redact" data-id="' + data[i].id + '" > 编辑 </div> \
-              <div class = "pz-btn btn-del" data-id="' + data[i].id + '" > 删除 </div> </div></li>'
+              <div class = "pz-btn btn-del" data-id="' + data[i].id + '" > 删除 </div> </div></div>'
             }
             this.eelist.innerHTML = str
             this.examine()

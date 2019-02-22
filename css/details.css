@@ -401,3 +401,73 @@
     width: 100%;
     height: 40px;
 }
+
+.list {
+    width: 90%;
+    margin: 0 auto;
+    border-top: 1px solid #dcdcdc;
+    border-left: 1px solid #dcdcdc;
+    overflow: auto;
+}
+
+.list-heared {
+    border-bottom: 1px solid #dcdcdc;
+    overflow: auto;
+}
+
+.mt15 {
+    margin-top: 15px;
+}
+
+.mm300 {
+    margin-bottom: 300px;
+}
+
+.logistics {
+    width: 100%;
+    margin: 0 auto;
+    overflow: auto;
+}
+
+.logistics-sub {
+    width: 450px;
+    margin: 15px;
+    padding: 15px;
+    border: 1px solid #dcdcdc;
+    overflow: auto;
+}
+
+.ls-li {
+    /* margin-top: 15px; */
+    line-height: 50px;
+}
+
+.ls-li-name {
+    display: inline-block;
+    float: left;
+    width: 90px;
+    text-align: right;
+}
+
+.ls-odd {
+    width: 285px;
+    padding: 7px;
+    border: 1px solid #dcdcdc;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+.ls-btn {
+    display: block;
+    width: 200px;
+    margin: 0 auto;
+}
+
+.no-deliver {
+    margin-left: 20px;
+    font-size: 16px;
+}
+
+.no-deliver span {
+    color: #e61f18;
+}

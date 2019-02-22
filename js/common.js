@@ -39,6 +39,7 @@
     }
     window.pages = (function() {
         function _page(obj) {
+            console.log(obj)
             this.floorpages = doc.querySelector(obj.el)
             this.num = obj.pagenumber
             this.fn = obj.fn
@@ -91,16 +92,18 @@
         _page.prototype.setcurrent = function() { //设置当前页面页码
             let that = this,
                 lis = this.fglist.querySelectorAll('li')
+            console.log(lis)
             lis.forEach(function(li) {
                 li.addEventListener('click', function(e) {
                     that.current = parseInt(li.getAttribute('data-page'))
+                    console.log('2212')
                     that.setstart()
 
                 })
             })
         }
         _page.prototype.setstart = function() { //设置页码开始值
-            if (this.num <= this.pagelen) return
+            // if (this.num <= this.pagelen) return
             if (this.current <= 3) {
                 this.start = 1
             } else if ((this.current + 2) >= this.num) {
@@ -112,6 +115,7 @@
             this.setcolor()
 
             if (typeof this.fn == 'function') {
+                console.log(this.current)
                 this.fn(this.current)
             }
         }

@@ -23,8 +23,8 @@ select {
 }
 
 body {
-    font: 12px "宋体", "Arial Narrow", HELVETICA;
-    family: "Microsoft YaHei";
+    font: 12px "Microsoft YaHei", "Arial Narrow", HELVETICA;
+    font-family: "Microsoft YaHei";
     background: #fff;
     -webkit-text-size-adjust: 100%;
 }
@@ -462,7 +462,7 @@ input {
     position: fixed;
     /* display: none; */
     width: 100%;
-    max-height: 500px;
+    max-height: 400px;
     background-color: #fff;
     box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
     border-radius: 4px;

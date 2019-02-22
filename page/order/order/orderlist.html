@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>订单列表</title>
-    <link rel="stylesheet" href="../../css/style.css">
-    <link rel="stylesheet" href="../../css/bootstrap.css">
-    <link rel="stylesheet" href="../../css/list.css">
-    <link rel="stylesheet" href="../../css/data.css">
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../../css/list.css">
+    <link rel="stylesheet" href="../../../css/data.css">
 </head>
 
 <body>
@@ -21,7 +21,7 @@
       </span>
         </div>
         <div class="refresh topbtn din fl" onclick="document.location.reload()">
-            <img src="../../images/sx.png" alt="">
+            <img src="../../../images/sx.png" alt="">
         </div>
         <!-- <div class="addgoods topbtn din fl">
             <img src="../../images/jia.png" alt="">
@@ -74,45 +74,27 @@
             <span>商品列表</span>
         </div>
         <div class="gl-title">
-            <span class="col-md-2 bot-bor subli">ID</span>
-            <span class="col-md-2 bot-bor subli">图片</span>
-            <span class="col-md-2 bot-bor subli">商品名称</span>
-            <span class="col-md-2 bot-bor subli">价格</span>
-            <span class="col-md-2 bot-bor subli">状态</span>
+            <span class="col-md-2 bot-bor subli">订单号</span>
+            <span class="col-md-1 bot-bor subli">用户id</span>
+            <span class="col-md-1 bot-bor subli">订单金额</span>
+            <span class="col-md-1 bot-bor subli">商票抵扣金额</span>
+            <span class="col-md-1 bot-bor subli">实际支付</span>
+            <span class="col-md-1 bot-bor subli">商品金额</span>
+            <span class="col-md-1 bot-bor subli">优惠金额</span>
+            <span class="col-md-2 bot-bor subli">订单状态</span>
             <span class="col-md-2 bot-bor subli">管理</span>
         </div>
-        <ul class="table">
-            <li>
-                <span class=" col-md-2 bot-bor subli">1181</span>
-                <span class="col-md-2 bot-bor subli"><img src="http://www.inweeye.cn/image/cache/catalog/201812/goods/TIM截图20181210200811-40x40.png" alt=""></span>
-                <span class="col-md-2 bot-bor subli">萌宠系列手机壳</span>
-                <span class="col-md-2 bot-bor subli">68.00 ~ 68.00</span>
-                <span class="col-md-2 bot-bor subli"></span>
-                <span class="col-md-2 bot-bor subli"><a class="pz-btn btn-amend" href="orderdetails.html">查看</a></span>
-            </li>
-            <li>
-                <span class="col-md-2 bot-bor subli">1181</span>
-                <span class="col-md-2 bot-bor subli"><img src="http://www.inweeye.cn/image/cache/catalog/201812/goods/TIM截图20181210200811-40x40.png" alt=""></span>
-                <span class="col-md-2 bot-bor subli">萌宠系列手机壳</span>
-                <span class="col-md-2 bot-bor subli">68.00 ~ 68.00</span>
-                <span class="col-md-2 bot-bor subli">
-            </span>
-                <span class="col-md-2 bot-bor subli"><a class="pz-btn btn-amend" href="orderdetails.html">查看</a></span>
-            </li>
-        </ul>
+        <div class="table" id="orderlist"></div>
         <div class="w-floor-page">
             <div class="floor-page" id="floorpages"></div>
         </div>
     </div>
 </body>
-<script src="../../js/common.js"></script>
-<script src="../../js/data.js"></script>
+<script src="../../../js/common.js"></script>
+<script src="../../../js/data.js"></script>
+<script src="../../../js/ajax.js"></script>
+<script src="orderlist.js"></script>
 <script>
-    pages.init({
-        el: '#floorpages',
-        pagenumber: 60
-    })
-
     calender('#calend').init({
         format: 'yyyy-MM-dd',
         date: [2018, 5, 12]
@@ -129,12 +111,13 @@
         el: '#combobox1',
         data: [{
             id: 1,
-            text: '捷克蛋糕'
+            type_name: '捷克蛋糕'
         }, {
             id: 2,
-            text: '爆米花'
+            type_name: '爆米花'
         }]
     })
+    pz.order.init()
 </script>
 
 </html>

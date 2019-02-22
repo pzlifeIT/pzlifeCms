@@ -81,7 +81,7 @@
                     } else {
                         ullist[i].subject = '├&nbsp;' + ullist[i].subject
                     }
-                    str += ' <li>\
+                    str += ' <div class="table-tr">\
               <span class="col-md-1 bot-bor subli">' + ullist[i].id + '</span>\
               <span class="col-md-2 bot-bor subli"><image class="stImg" src="' + ullist[i].subject_image + '"/></span>\
               <span class="col-md-1 bot-bor subli">' + ullist[i].pid + '</span>\
@@ -93,7 +93,7 @@
               </span>\
               <span class="col-md-2 bot-bor subli">\
               <a class="pz-btn btn-amend " data-id="' + ullist[i].id + '">编辑</a></span>\
-          </li>'
+          </div>'
                 };
                 this.getalllist.innerHTML = str
                 this.compileSubject()

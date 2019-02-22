@@ -53,7 +53,7 @@
                 i,
                 str = ''
             for (i = 0; i < len; i++) {
-                str += '<li> \
+                str += '<div class="table-tr"> \
               <div class = "col-md-2 bot-bor subli" ><span>' + data[i].id + '</span> </div> \
               <div class = "col-md-2 bot-bor subli" ><span>' + pz.getPriceType(data[i].stype) + ' </span></div> \
               <div class = "col-md-2 bot-bor subli" ><span>' + data[i].title + '</span></div> \
@@ -61,7 +61,8 @@
               <div class = "col-md-3 bot-bor subli" >\
               <a class="pz-btn btn-amend" href="../freight/freight.html?id=' + data[i].id + '&mode=' + data[i].stype + '">运费模板</a>\
                   <div class = "pz-btn btn-amend redact" data-id="' + data[i].id + '" > 编辑 </div> \
-              </li>'
+              </div>'
+                str += '</div>'
             }
             this.eelist.innerHTML = str
             this.del()

@@ -248,7 +248,7 @@
                 } else {
                     ullist[i].type_name = '├&nbsp;' + ullist[i].type_name
                 }
-                str += ' <li>\
+                str += ' <div class="table-tr">\
             <span class="col-md-2 bot-bor subli">' + ullist[i].id + '</span>\
             <span class="col-md-2 bot-bor subli">' + ullist[i].pid + '</span>\
             <span class="col-md-2 bot-bor subli tl ">' + ullist[i].type_name + '</span>\
@@ -258,7 +258,7 @@
             </span>\
             <span class="col-md-2 bot-bor subli">\
             <a class="pz-btn btn-amend " data-id="' + ullist[i].id + '">编辑</a></span>\
-        </li>'
+        </div>'
             };
             ul.innerHTML = str
             this.stopOpen()

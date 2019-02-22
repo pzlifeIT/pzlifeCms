@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>订单详情</title>
-    <link rel="stylesheet" href="../../css/style.css">
-    <link rel="stylesheet" href="../../css/bootstrap.css">
-    <link rel="stylesheet" href="../../css/details.css">
+    <link rel="stylesheet" href="../../../../css/style.css">
+    <link rel="stylesheet" href="../../../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../../../css/details.css">
+    <link rel="stylesheet" href="../../../../css/list.css">
 </head>
 
 <body>
@@ -20,7 +21,7 @@
       </span>
         </div>
         <div class="refresh topbtn din fl" onclick="document.location.reload()">
-            <img src="../../images/sx.png" alt="">
+            <img src="../../../../images/sx.png" alt="">
         </div>
         <!-- <div class="addgoods topbtn din fl">
             <img src="../../images/jia.png" alt="">
@@ -30,129 +31,123 @@
     <div class="details">
         <div class="dl-header">
             <span class="dl-name">订单详情</span>
-            <input type="button" value="订单退款" class="btn btn-danger radius fr"></input>
-            <input type="button" value="发货" class="btn btn-primary radius fr"></input>
+            <!-- <input type="button" value="订单退款" class="btn btn-danger radius fr"></input> -->
+            <!-- <input type="button" value="发货" class="btn btn-primary radius fr"></input> -->
         </div>
         <div class="dl-con">
             <ul class="dl-nav" id="dlnav">
                 <li>订单详情</li>
                 <li>商品清单</li>
                 <li>邮寄信息</li>
-                <li>订单日志</li>
+                <li>物流信息</li>
+                <!-- <li>订单日志</li> -->
             </ul>
             <div class="dlnav-con dl-1">
                 <div class="dl-show">
                     <span class="dl-title">订单号:</span>
-                    <span class="dl-text">SN201812171200316164</span>
+                    <span class="dl-text" id="order_no"></span>
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">下单日期:</span>
-                    <span class="dl-text">2018-12-17 12:00:31</span>
+                    <span class="dl-text" id="create_time"></span>
                 </div>
                 <div class="dl-show">
-                    <span class="dl-title">价格:</span>
-                    <span class="dl-text">67.00</span>
+                    <span class="dl-title ">订单金额:</span>
+                    <span class="dl-text" id="order_money"></span>
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">商票抵扣金额:</span>
+                    <span class="dl-text" id="deduction_money"></span>
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">实际支付:</span>
+                    <span class="dl-text" id="pay_money"></span>
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">商品金额:</span>
+                    <span class="dl-text" id="goods_money"></span>
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">优惠金额:</span>
+                    <span class="dl-text" id="discount_money"></span>
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">运费:</span>
                     <span class="dl-text">0</span>
                 </div>
+
                 <div class="dl-show">
-                    <span class="dl-title">订单当前状态:</span>
-                    <span class="dl-text">已付款</span>
+                    <span class="dl-title">支付类型:</span>
+                    <span class="dl-text" id="pay_type"></span>
                 </div>
                 <div class="dl-show">
-                    <span class="dl-title">订单完整状态:</span>
-                    <span class="dl-text">订单已支付,</span>
+                    <span class="dl-title">第三方支付金额:</span>
+                    <span class="dl-text" id="third_money"></span>
                 </div>
                 <div class="dl-show">
-                    <span class="dl-title">支付方式:</span>
-                    <span class="dl-text">红包支付 67.00 元 </span>
+                    <span class="dl-title">第三方支付类型:</span>
+                    <span class="dl-text" id="third_pay_type"></span>
                 </div>
                 <div class="dl-show">
-                    <span class="dl-title">优惠金额 :</span>
-                    <span class="dl-text">1.00 元</span>
+                    <span class="dl-title">订单状态:</span>
+                    <span class="dl-text" id="order_status"></span>
                 </div>
             </div>
-            <div class="dlnav-con dl-2">
-                <ul class="d2-list">
-                    <li>
-                        <span class="col-md-2">商品图片</span>
-                        <span class="col-md-2">商品名称</span>
-                        <span class="col-md-2">商品规格</span>
-                        <span class="col-md-2">购买数量</span>
-                        <span class="col-md-2">赠送积分</span>
-                        <span class="col-md-1">返利金额</span>
-                        <span class="col-md-1">BOSS奖金</span>
-                    </li>
-                    <li>
-                        <span class="col-md-2">商品图片</span>
-                        <span class="col-md-2">	星羽炫彩系列手机壳</span>
-                        <span class="col-md-2">幸运星光IPX-036,iphone xr</span>
-                        <span class="col-md-2">1 件</span>
-                        <span class="col-md-2">	54 分</span>
-                        <span class="col-md-1">	17.47 元</span>
-                        <span class="col-md-1">2.62 元
-                          </span>
-                    </li>
-                    <li>
-                        <span class="col-md-2">商品图片</span>
-                        <span class="col-md-2">	星羽炫彩系列手机壳</span>
-                        <span class="col-md-2">幸运星光IPX-036,iphone xr</span>
-                        <span class="col-md-2">1 件</span>
-                        <span class="col-md-2">	54 分</span>
-                        <span class="col-md-1">	17.47 元</span>
-                        <span class="col-md-1">2.62 元
-                          </span>
-                    </li>
-                    <li>
-                        <span class="col-md-2">商品图片</span>
-                        <span class="col-md-2">	星羽炫彩系列手机壳</span>
-                        <span class="col-md-2">幸运星光IPX-036,iphone xr</span>
-                        <span class="col-md-2">1 件</span>
-                        <span class="col-md-2">	54 分</span>
-                        <span class="col-md-1">	17.47 元</span>
-                        <span class="col-md-1">2.62 元
-                          </span>
-                    </li>
-                    <li>
-                        <span class="col-md-2">商品图片</span>
-                        <span class="col-md-2">	星羽炫彩系列手机壳</span>
-                        <span class="col-md-2">幸运星光IPX-036,iphone xr</span>
-                        <span class="col-md-2">1 件</span>
-                        <span class="col-md-2">	54 分</span>
-                        <span class="col-md-1">	17.47 元</span>
-                        <span class="col-md-1">2.62 元
-                          </span>
-                    </li>
-                    <li>
-                        <span class="col-md-2">商品图片</span>
-                        <span class="col-md-2">	星羽炫彩系列手机壳</span>
-                        <span class="col-md-2">幸运星光IPX-036,iphone xr</span>
-                        <span class="col-md-2">1 件</span>
-                        <span class="col-md-2">	54 分</span>
-                        <span class="col-md-1">	17.47 元</span>
-                        <span class="col-md-1">2.62 元
-                          </span>
-                    </li>
-                </ul>
+            <div class="dlnav-con dl-2 mt15">
+                <div class="list">
+                    <div class="list-heared">
+                        <span class="col-md-2 bot-bor subli">商品名称</span>
+                        <span class="col-md-2 bot-bor subli">商品规格</span>
+                        <span class="col-md-2 bot-bor subli">商品价格</span>
+                        <span class="col-md-2 bot-bor subli">购买数量</span>
+                        <span class="col-md-2 bot-bor subli">赠送积分</span>
+                        <span class="col-md-2 bot-bor subli">返利金额</span>
+                    </div>
+                    <div class="table" id="goodlist">
+
+                    </div>
+                </div>
             </div>
             <div class="dlnav-con dl-1">
                 <div class="dl-show">
                     <span class="dl-title">收件人:</span>
-                    <span class="dl-text">肯德基</span>
+                    <span class="dl-text" id="linkman"></span>
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">联系电话:</span>
-                    <span class="dl-text">15739774582</span>
+                    <span class="dl-text" id="linkphone"></span>
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">收货地址:</span>
-                    <span class="dl-text">上海市 市辖区 闵行区 大师傅</span>
+                    <span class="dl-text" id="address"></span>
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">留言信息:</span>
-                    <span class="dl-text">kdjfkdjf</span>
+                    <span class="dl-text" id="message"></span>
+                </div>
+            </div>
+            <div class="dlnav-con dl-2 mt15 mm300">
+                <div class="no-deliver">还有<span id="no_deliver_goods_num">0</span>个商品未发货</div>
+                <div class="logistics" id="logistics">
+                    <!-- <div class="logistics-sub">
+                        <div class="ls-li">
+                            <span class="ls-li-name">商品名称：</span>
+                            <span>14-天然碱性苏打水5</span>
+                        </div>
+                        <div class="ls-li">
+                            <span class="ls-li-name">快递公司：</span>
+                            <div class="combobox din" id="combobox1">
+                                <div class="ant-select">
+                                    <div class="ant-select-selection">请选择</div>
+                                    <span class="ant-select-arrow"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ls-li">
+                            <span class="ls-li-name">快递单号：</span>
+                            <input class="ls-odd" type="text" placeholder="快递单号">
+                        </div>
+                    </div> -->
                 </div>
             </div>
             <div class="dlnav-con dl-2">
@@ -206,12 +201,16 @@
     </div>
     </div>
 </body>
-<script src="../../js/common.js"></script>
+<script src="../../../../js/common.js"></script>
+<script src="../../../../js/ajax.js"></script>
+<script src="orderdetails.js"></script>
 <script>
     tab({
         head: '#dlnav',
-        con: '.dlnav-con'
+        con: '.dlnav-con',
+        num: 4
     })
+    pz.orderdetail.init()
 </script>
 
 </html>

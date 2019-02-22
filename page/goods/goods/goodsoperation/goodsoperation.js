@@ -19,7 +19,7 @@
             this.goodImg = '' //产品标题图
             this.sku_image = '' //产品规格图
             this.images_carousel = []
-            this.goodInfo = ''
+            this.goodInfo = {}
             this.dataAttr = []
             this.skuid = ''
 
@@ -54,20 +54,25 @@
                         get_type: gtype
                     },
                     success: function(res) {
-                        t.goodInfo = res
                         if (get_type == 1 || get_type == '') {
+                            t.goodInfo.goods_data = res.goods_data;
+                            console.log(t.goodInfo.goods_data)
                             t.isNewAmend(t.goodInfo.goods_data)
                         }
                         if (get_type == 2 || get_type == '') {
+                            t.goodInfo.spec_attr = res.spec_attr;
                             t.setattributeList(t.goodInfo.spec_attr)
                         }
                         if (get_type == 3 || get_type == '') {
+                            t.goodInfo.images_carousel = res.images_carousel;
                             t.setimages(t.goodInfo.images_carousel)
                         }
                         if (get_type == 4 || get_type == '') {
+                            t.goodInfo.sku = res.sku;
                             t.setgoodattributeList(t.goodInfo.sku)
                         }
                         if (get_type == 5 || get_type == '') {
+                            t.goodInfo.images_detatil = res.images_detatil;
                             t.setImgsDetatil(t.goodInfo.images_detatil)
                             t.previewDetatil(t.goodInfo.images_detatil)
                         }
@@ -89,6 +94,7 @@
                 })
             },
             isNewAmend: function(data) { //商品类型:供应商:三级分类:是否已经选择
+                console.log(data)
                 if (data.cate_id == 0 || data.cate_id == '') {
                     this.allCateList()
                     this.elremovehide('.cateIdNew')
@@ -658,6 +664,7 @@
                     },
                     success: function(res) {
                         t.id = res.goods_id
+                        location.href = 'goodsoperation.html?id=' + t.id
                         alert('保存商品成功')
                     },
                     Error(code) {
@@ -927,8 +934,8 @@
                     str += '<span class="col-md-1">' + data[i].retail_price + '</span>'
                     str += '<span class="col-md-1">' + data[i].cost_price + '</span>'
                     str += '<span class="col-md-1">' + data[i].margin_price + '</span>'
-                    str += '<span class="col-md-05">' + data[i].integral_price + '</span>'
-                    str += '<span class="col-md-05">' + data[i].integral_active + '</span>'
+                    str += '<span class="col-md-1">' + data[i].integral_price + '</span>'
+                        // str += '<span class="col-md-05">' + data[i].integral_active + '</span>'
                     str += '<span class="col-md-1">' + data[i].weight + '</span>'
                     str += '<span class="col-md-1">' + data[i].volume + '</span>'
                     str += '<span class="col-md-1">' + data[i].freight_title + '</span>'
@@ -972,7 +979,7 @@
                     cost_price = document.querySelector('#cost_price'),
                     margin_price = document.querySelector('#margin_price'),
                     integral_price = document.querySelector('#integral_price'),
-                    integral_active = document.querySelector('#integral_active'),
+                    // integral_active = document.querySelector('#integral_active'),
                     weight = document.querySelector('#weight'),
                     volume = document.querySelector('#volume'),
                     freight_id = t.freight.querySelector('.ant-select-selection'),
@@ -990,7 +997,7 @@
                 cost_price.value = data.cost_price
                 margin_price.value = data.margin_price
                 integral_price.value = data.integral_price
-                integral_active.value = data.integral_active
+                    // integral_active.value = data.integral_active
                 weight.value = data.weight
                 volume.value = data.volume
                 t.sku_image = ''
@@ -1020,7 +1027,7 @@
                     cost_price = document.querySelector('#cost_price').value,
                     margin_price = document.querySelector('#margin_price').value,
                     integral_price = document.querySelector('#integral_price').value,
-                    integral_active = document.querySelector('#integral_active').value,
+                    // integral_active = document.querySelector('#integral_active').value,
                     weight = document.querySelector('#weight').value,
                     volume = document.querySelector('#volume').value,
                     freight_id = t.freight.querySelector('.ant-select-selection').getAttribute('data-id');
@@ -1034,7 +1041,7 @@
                         cost_price: cost_price,
                         margin_price: margin_price,
                         integral_price: integral_price,
-                        integral_active: integral_active,
+                        // integral_active: integral_active,
                         sku_image: t.sku_image,
                         freight_id: freight_id,
                         weight: weight,

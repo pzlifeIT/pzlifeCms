@@ -63,6 +63,9 @@
         }
     }
     quest.questurl = {
+        getOrders: 'admin/Order/getOrders', //获取订单列表
+        getOrderInfo: 'admin/Order/getOrderInfo', //获取订单详情
+        deliverOrderGoods: 'admin/Order/deliverOrderGoods', //订单发货
         updateSupplier: 'admin/suppliers/updateSupplier', //修改供应商
         updateSupplierFreight: 'admin/suppliers/updateSupplierFreight', //修改供应商快递模板
         editsupplierfreightdetail: 'admin/suppliers/editsupplierfreightdetail', //修改供应商快递模板运费

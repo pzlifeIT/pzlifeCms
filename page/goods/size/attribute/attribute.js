@@ -94,14 +94,14 @@
                 i,
                 str = ''
             for (i = 0; i < len; i++) {
-                str += '<li> \
+                str += '<div class="table-tr"> \
               <div class = "col-md-3 bot-bor subli" ><span>' + (i + 1) + '</span> </div> \
               <div class = "col-md-3 bot-bor subli" ><span>' + name + ' </span></div> \
               <div class = "col-md-3 bot-bor subli" ><span>' + data[i].attr_name + '</span></div> \
               <div class = "col-md-3 bot-bor subli" >\
                   <a class = "pz-btn btn-amend seamend" \
               href = "javascript:;" data-id="' + data[i].id + '" > 编辑 </a> \
-              <a class = "pz-btn btn-del" data-id="' + data[i].id + '" href = "#" > 删除 </a> </div></li>'
+              <a class = "pz-btn btn-del" data-id="' + data[i].id + '" href = "#" > 删除 </a> </div></div>'
             }
             this.ablist.innerHTML = str
             this.delSize()
@@ -124,7 +124,7 @@
             dels.forEach(function(li) {
                 li.addEventListener('click', function(e) {
                     let id = li.getAttribute('data-id')
-                    t.delSpecAttr(id)
+                        // t.delSpecAttr(id)
                 })
             })
         }

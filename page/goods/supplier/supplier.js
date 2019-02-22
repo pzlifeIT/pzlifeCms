@@ -26,7 +26,7 @@
                 i,
                 str = ''
             for (i = 0; i < len; i++) {
-                str += '<li> \
+                str += '<div class="table-tr"> \
                 <div class = "col-md-2 bot-bor subli" ><span>' + data[i].id + '</span> </div> \
                 <div class = "col-md-2 bot-bor subli " ><span> <img class="liimg" src = "' + data[i].image + '"\
                 alt = "" > </span></div> \
@@ -36,7 +36,7 @@
                 <div class = "col-md-2 bot-bor subli" >\
                 <a class="pz-btn btn-amend" href="expressage/expressage.html?id=' + data[i].id + '">快递模板</a>\
                     <div class = "pz-btn btn-amend redact" data-id="' + data[i].id + '" > 编辑 </div> \
-                <div class = "pz-btn btn-del" data-id="' + data[i].id + '" > 删除 </div> </div></li>'
+                <div class = "pz-btn btn-del" data-id="' + data[i].id + '" > 删除 </div> </div></div>'
             }
             this.srlist.innerHTML = str
             this.del()
