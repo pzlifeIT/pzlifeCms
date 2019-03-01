@@ -89,13 +89,15 @@
                         str += '<div class="ls-li">\
                         <span class="ls-li-name">快递单号：</span>\
                         <input class="ls-odd" type="text" value="' + deliver.express_no + '" placeholder="快递单号"></div>'
-                        str += '<input type="button" class="pz-btn btn-amend ls-btn" value="发货" data-id="logistics' + data[i].order_goods[x].id + '"></div>'
+                        str += '<input type="button" class="pz-btn btn-amend ls-btn fl" value="发货" data-id="logistics' + data[i].order_goods[x].id + '">'
+                        str += '<input type="button" class="pz-btn btn-amend ls-amend fl" value="修改" data-t="' + t + '" data-id="logistics' + data[i].order_goods[x].id + '"></div>'
                         str += '</div>'
                     }
                 }
                 document.querySelector('#logistics').innerHTML = str
                 this.logisticscompany(data)
                 this.shipmentsbtn()
+                this.amend()
             },
             shipmentsbtn: function() {
                 let that = this,
@@ -113,6 +115,50 @@
                             express_key: express_key
                         })
                     })
+                })
+            },
+            amend: function() {
+                let that = this,
+                    lsbtn = document.querySelectorAll('.ls-amend')
+                lsbtn.forEach(function(ls) {
+                    ls.addEventListener('click', function(e) {
+                        let id = ls.getAttribute('data-id'),
+                            t = ls.getAttribute('data-t'),
+                            tr = document.querySelector('#' + id)
+                        if (t == 'false') return
+                        let goods_id = tr.querySelector('.name-text').getAttribute('data-id'),
+                            express_key = tr.querySelector('.ant-select-selection').getAttribute('data-id')
+                        express_no = tr.querySelector('.ls-odd').value
+                        that.updateDeliverOrderGoods({
+                            order_goods_id: goods_id,
+                            express_no: express_no,
+                            express_key: express_key
+                        })
+                    })
+                })
+            },
+            updateDeliverOrderGoods: function(data) {
+                let that = this
+                quest.requests({
+                    url: 'updateDeliverOrderGoods',
+                    data: {
+                        order_goods_id: data.order_goods_id,
+                        express_no: data.express_no,
+                        express_key: data.express_key
+                    },
+                    success: function(res) {
+                        alert('修改成功')
+                    },
+                    Error(code) {
+                        switch (parseInt(code)) {
+                            case 3005:
+                                alert('商品已发货')
+                                break;
+                            default:
+                                alert('意料之外的错误')
+                                break;
+                        }
+                    }
                 })
             },
             deliverOrderGoods: function(data) {

@@ -28,7 +28,7 @@
         </div> -->
 
     </div>
-    <div class="gs-screen panel-default">
+    <!-- <div class="gs-screen panel-default">
         <div class="gs-header panel-heading">
             <span class="din fl">筛选</span>
             <input type="button" value="导出" class="btn btn-danger radius fr"></input>
@@ -68,14 +68,14 @@
                 </li>
             </ul>
         </div>
-    </div>
+    </div> -->
     <div class="gs-list panel-default">
         <div class="gl-head panel-heading ">
             <span>商品列表</span>
         </div>
         <div class="gl-title">
             <span class="col-md-2 bot-bor subli">订单号</span>
-            <span class="col-md-1 bot-bor subli">用户id</span>
+            <span class="col-md-1 bot-bor subli">用户昵称</span>
             <span class="col-md-1 bot-bor subli">订单金额</span>
             <span class="col-md-1 bot-bor subli">商票抵扣金额</span>
             <span class="col-md-1 bot-bor subli">实际支付</span>
@@ -91,32 +91,32 @@
     </div>
 </body>
 <script src="../../../js/common.js"></script>
-<script src="../../../js/data.js"></script>
+<!-- <script src="../../../js/data.js"></script> -->
 <script src="../../../js/ajax.js"></script>
-<script src="orderlist.js"></script>
+<script src="orderlist.js?1.0.1"></script>
 <script>
-    calender('#calend').init({
-        format: 'yyyy-MM-dd',
-        date: [2018, 5, 12]
-    }, function(date) {
-        this.value = date
-    })
-    calender('#calend1').init({
-        format: 'yyyy-MM-dd',
-        date: [2018, 5, 12]
-    }, function(date) {
-        this.value = date
-    })
-    select({
-        el: '#combobox1',
-        data: [{
-            id: 1,
-            type_name: '捷克蛋糕'
-        }, {
-            id: 2,
-            type_name: '爆米花'
-        }]
-    })
+    // calender('#calend').init({
+    //     format: 'yyyy-MM-dd',
+    //     date: [2018, 5, 12]
+    // }, function(date) {
+    //     this.value = date
+    // })
+    // calender('#calend1').init({
+    //     format: 'yyyy-MM-dd',
+    //     date: [2018, 5, 12]
+    // }, function(date) {
+    //     this.value = date
+    // })
+    // select({
+    //     el: '#combobox1',
+    //     data: [{
+    //         id: 1,
+    //         type_name: '捷克蛋糕'
+    //     }, {
+    //         id: 2,
+    //         type_name: '爆米花'
+    //     }]
+    // })
     pz.order.init()
 </script>
 

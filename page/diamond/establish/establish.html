@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../../css/list.css">
+    <link rel="stylesheet" href="../../../css/details.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="iframenav">
+        <div class="refresh topbtn din fl" onclick="document.location.reload()">
+            <img src="../../../images/sx.png" alt="">
+        </div>
+        <a href="goodsoperation/goodsoperation.html">
+            <div class="add addgoods topbtn din fl">
+                <img src="../../../images/jia.png" alt="">
+            </div>
+        </a>
+    </div>
+    <div class="details">
+        <div class="dl-header">
+            <span class="dl-name">商品详情</span>
+        </div>
+        <div class="dl-con">
+            <ul class="dl-nav" id="dlnav">
+                <li>基本信息</li>
+            </ul>
+            <div class="dlnav-con dl-1">
+                <div class="dl-show">
+                    <span class="dl-title">会员手机号:</span>
+                    <input class="dl-info" id="mobile" value="" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">会员姓名:</span>
+                    <input class="dl-info" id="linkman" value="" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">分享数量:</span>
+                    <input class="dl-info" id="stock" value="" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">分享金额:</span>
+                    <input class="dl-info" id="couponMoney" value="" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">商票状态:</span>
+                    <div class="din combobox" id="redmoneyStatus">
+                        <div class="ant-select">
+                            <div class="ant-select-selection">请选择</div>
+                            <span class="ant-select-arrow"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">使用类型 :</span>
+                    <div class="din combobox" id="type">
+                        <div class="ant-select">
+                            <div class="ant-select-selection">请选择</div>
+                            <span class="ant-select-arrow"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="dl-show flexcenter">
+                    <input type="button" value="保存" id="SaveNew" class="pz-btn btn-amend">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../../../../js/ajax.js?1.0.1"></script>
+<script src="../../../../js/common.js?1.0.1"></script>
+<script src="establish.js"></script>
+<script>
+    tab({
+        head: '#dlnav',
+        con: '.dlnav-con',
+        num: 1
+    })
+    select({
+        el: '#redmoneyStatus',
+        data: [{
+            id: 1,
+            type_name: '直接领取'
+        }, {
+            id: 2,
+            type_name: '分享激活后获得'
+        }]
+    })
+    select({
+        el: '#type',
+        data: [{
+            id: 1,
+            type_name: '分享使用'
+        }, {
+            id: 2,
+            type_name: '绑定二维码链接'
+        }]
+    })
+    pz.establish.init()
+</script>
+
+</html>

@@ -59,7 +59,7 @@
                     data[i].order_status_text = this.getStatusText(data[i].order_status)
                     str += '<div class="table-tr">'
                     str += '<span class=" col-md-2 bot-bor subli">' + data[i].order_no + '</span>'
-                    str += '<span class=" col-md-1 bot-bor subli">' + data[i].uid + '</span>'
+                    str += '<span class=" col-md-1 bot-bor subli">' + data[i].nick_name + '</span>'
                     str += '<span class=" col-md-1 bot-bor subli">' + data[i].order_money + '</span>'
                     str += '<span class=" col-md-1 bot-bor subli">' + data[i].deduction_money + '</span>'
                     str += '<span class=" col-md-1 bot-bor subli">' + data[i].pay_money + '</span>'

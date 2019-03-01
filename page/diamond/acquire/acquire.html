@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../../css/list.css">
+    <title>BOSS分享钻石卡</title>
+
+</head>
+
+<body>
+    <div class="iframenav">
+        <div class="refresh topbtn din fl" onclick="document.location.reload()">
+            <img src="../../../images/sx.png" alt="">
+        </div>
+        <a href="../establish/establish.html">
+            <div class="add addgoods topbtn din fl">
+                <img src="../../../images/jia.png" alt="">
+            </div>
+        </a>
+    </div>
+    <div class="gs-list panel-default">
+        <div class="gl-head panel-heading ">
+            <span>商品列表</span>
+        </div>
+        <div class="gl-title">
+            <span class="col-md-1 bot-bor subli">ID</span>
+            <span class="col-md-1 bot-bor subli">BOSS名称</span>
+            <span class="col-md-1 bot-bor subli">店铺ID</span>
+            <span class="col-md-1 bot-bor subli">分享数量</span>
+            <span class="col-md-1 bot-bor subli">已领数量</span>
+            <span class="col-md-1 bot-bor subli">商品金额</span>
+            <span class="col-md-1 bot-bor subli">商品状态</span>
+            <span class="col-md-1 bot-bor subli">使用类型</span>
+            <span class="col-md-1 bot-bor subli">创建时间</span>
+            <span class="col-md-1 bot-bor subli">状态</span>
+            <span class="col-md-2 bot-bor subli">管理</span>
+        </div>
+        <div class="table" id="aelist">
+            <!-- <li>
+          <span class="col-md-1 bot-bor subli">ID</span>
+          <span class="col-md-2 bot-bor subli">图片</span>
+          <span class="col-md-1 bot-bor subli">商品名称</span>
+          <span class="col-md-1 bot-bor subli">商品属性</span>
+          <span class="col-md-2 bot-bor subli">供应商名称</span>
+          <span class="col-md-1 bot-bor subli">分类名称</span>
+          <span class="col-md-2 bot-bor subli">
+            <span class="ant-switch ant-switch-checked"></span>
+          </span>
+          <span class="col-md-2 bot-bor subli">
+            <input type="button" value="取消" class="pz-btn btn-cancel" id="eeCancel">
+              <input type="button" value="保存" id="eeSave" class="pz-btn btn-amend">
+          </span>
+      </li> -->
+        </div>
+        <div class="w-floor-page">
+            <div class="floor-page" id="floorpages"></div>
+        </div>
+    </div>
+</body>
+<script src="../../../js/ajax.js"></script>
+<script src="../../../js/common.js"></script>
+<script src="acquire.js?1.0.2"></script>
+<script>
+    console.log(pz)
+    pz.acquire.init()
+</script>
+
+</html>

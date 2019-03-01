@@ -458,9 +458,9 @@
 }
 
 .ls-btn {
-    display: block;
-    width: 200px;
-    margin: 0 auto;
+    display: inline-block;
+    width: 150px;
+    margin-left: 80px;
 }
 
 .no-deliver {
@@ -470,4 +470,10 @@
 
 .no-deliver span {
     color: #e61f18;
+}
+
+.ls-amend {
+    display: inline-block;
+    width: 150px;
+    background-color: #dd514c;
 }

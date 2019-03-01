@@ -64,8 +64,12 @@
     }
     quest.questurl = {
         getOrders: 'admin/Order/getOrders', //获取订单列表
+        updateDeliverOrderGoods: 'admin/Order/updateDeliverOrderGoods', //获取订单列表
         getOrderInfo: 'admin/Order/getOrderInfo', //获取订单详情
         deliverOrderGoods: 'admin/Order/deliverOrderGoods', //订单发货
+        getBossShareDiamondvip: 'admin/Rights/getBossShareDiamondvip', //获取合伙人BOSS分享钻石会员机会
+        passBossShareDiamondvip: 'admin/Rights/passBossShareDiamondvip', //审核钻石卡分享机会
+        creatBossShareDiamondvip: 'admin/Rights/creatBossShareDiamondvip', //创建合伙人BOSS分享钻石会员机会
         updateSupplier: 'admin/suppliers/updateSupplier', //修改供应商
         updateSupplierFreight: 'admin/suppliers/updateSupplierFreight', //修改供应商快递模板
         editsupplierfreightdetail: 'admin/suppliers/editsupplierfreightdetail', //修改供应商快递模板运费
