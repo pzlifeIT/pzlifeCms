@@ -15,7 +15,7 @@
             xhr = new ActiveXObject('Microsoft.XMLHTTP')
         }
         if ('withCredentials' in xhr) {}
-        let url = 'https://admindev.pzlive.vip/'
+        let url = 'https://wwwapi.pzlive.vip/'
         url += params.url
         let type = params.type || 'post'
         type = type.toUpperCase();
