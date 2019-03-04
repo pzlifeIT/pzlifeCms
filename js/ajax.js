@@ -1,6 +1,6 @@
 ;
 (function() {
-
+    let apiurl = window.apiurl.apiHost
     window.quest = function() {
 
     }
@@ -15,7 +15,9 @@
             xhr = new ActiveXObject('Microsoft.XMLHTTP')
         }
         if ('withCredentials' in xhr) {}
-        let url = 'https://wwwapi.pzlive.vip/admin/'
+        let url = apiurl
+            // let url = 'https://wwwapi.pzlive.vip/admin/'
+            // let url = 'https://adminapi.pzlive.vip/'
         url += params.url
         let type = params.type || 'post'
         type = type.toUpperCase();
