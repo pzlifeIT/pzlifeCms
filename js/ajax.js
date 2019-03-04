@@ -1,6 +1,8 @@
 ;
 (function() {
+    console.log(window.apiurl)
     let apiurl = window.apiurl.apiHost
+
     window.quest = function() {
 
     }

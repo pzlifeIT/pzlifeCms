@@ -11,6 +11,8 @@
             this.compileNew = document.querySelector('#compileNew')
             this.addsize = document.querySelector('.addsize')
             this.id = ''
+            this.page = 1
+            this.total = 0
             this.init()
         }
         _SE.prototype.init = function() {
@@ -95,6 +97,24 @@
                 url: 'getSpecList',
                 success: function(res) {
                     t.setGlul(res.data)
+                    console.log(res.total)
+                    if (t.total == res.total) return
+                    t.total = res.total
+                    t.setpage()
+                }
+            })
+        }
+        _SE.prototype.setpage = function() {
+            let t = this,
+                total = Math.ceil(parseInt(t.total) / 10)
+            pages.init({
+                el: '#floorpages',
+                pagenumber: total,
+                fn: function(n) {
+                    t.page = n
+                    t.getSpecList({
+                        page: n
+                    })
                 }
             })
         }

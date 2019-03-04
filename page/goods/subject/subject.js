@@ -61,7 +61,7 @@
                         stype: 1
                     },
                     success: function(res) {
-                        t.setglul(t.dissubject(res.data))
+                        t.setglul(t.dissubject(res.data || []))
                     },
                     Error: function(res) {
 
@@ -248,6 +248,7 @@
                 })
             },
             dissubject: function(data) { //整理专题列表
+                if (!data) return
                 let i,
                     x,
                     y,
@@ -293,7 +294,7 @@
                         stype: 2
                     },
                     success: function(res) {
-                        t.stMultistage(t.distwocategory(res.data))
+                        t.stMultistage(t.distwocategory(res.data || []))
                     },
                     Error: function(res) {
                         t.stMultistage(t.distwocategory([]))

@@ -56,7 +56,7 @@
                         el: '#selClass',
                         ellink: '.linkage',
                         name: 'type_name',
-                        data: distwocategory(res.data)
+                        data: distwocategory(res.data || [])
                     })
                 }
             })

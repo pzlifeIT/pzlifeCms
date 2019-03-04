@@ -41,7 +41,7 @@
         function _page(obj) {
             console.log(obj)
             this.floorpages = doc.querySelector(obj.el)
-            this.num = obj.pagenumber
+            this.num = obj.pagenumber || 1
             this.fn = obj.fn
             this.floorpages.innerHTML = "<span  id=\"firstprev\"  class=\"din fl\">首页</span><span  id=\"prev\" class=\"din fl\">上一页</span><ul class=\"fg-list din fl\" id=\"fglist\"></ul><span class=\"din fl\" id=\"next\" >下一页</span><span class=\"din fl\" id=\"lastnext\">尾页</span>"
             this.init()
