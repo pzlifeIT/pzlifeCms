@@ -1,0 +1,22 @@
+.header-info {
+    display: inline-block;
+    float: left;
+    width: 550px;
+}
+
+.info-list {
+    display: inline-block;
+    float: left;
+    width: calc(100% - 550px);
+    min-width: 800px;
+}
+
+.info-list .d2-list {
+    margin-top: 0;
+}
+
+.abbtn {
+    display: block;
+    overflow: auto;
+    margin-bottom: 15px;
+}

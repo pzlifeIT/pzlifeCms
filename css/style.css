@@ -411,6 +411,12 @@ input {
     content: '\9884\89c8';
 }
 
+.addbanner:hover::after {
+    width: 90px;
+    right: -98px;
+    content: '\6dfb\52a0\8f6e\64ad\56fe\000d\000a'
+}
+
 
 /* 通用按钮 */
 

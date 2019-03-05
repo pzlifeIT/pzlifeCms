@@ -39,7 +39,6 @@
     }
     window.pages = (function() {
         function _page(obj) {
-            console.log(obj)
             this.floorpages = doc.querySelector(obj.el)
             this.num = obj.pagenumber || 1
             this.fn = obj.fn
@@ -92,11 +91,9 @@
         _page.prototype.setcurrent = function() { //设置当前页面页码
             let that = this,
                 lis = this.fglist.querySelectorAll('li')
-            console.log(lis)
             lis.forEach(function(li) {
                 li.addEventListener('click', function(e) {
                     that.current = parseInt(li.getAttribute('data-page'))
-                    console.log('2212')
                     that.setstart()
 
                 })
@@ -115,7 +112,6 @@
             this.setcolor()
 
             if (typeof this.fn == 'function') {
-                console.log(this.current)
                 this.fn(this.current)
             }
         }
@@ -518,10 +514,8 @@
                 e.stopPropagation()
                 if (t.ellink.classList.contains('hide')) {
                     t.place()
-                    console.log('remove')
                     t.ellink.classList.remove('hide', false)
                 } else {
-                    console.log('add')
                     t.ellink.classList.add('hide')
                 }
             };
@@ -576,7 +570,6 @@
             if (this.type.indexOf('3') != -1 || this.type == '0') {
                 this.clickel('.noafter')
             }
-            console.log('type', this.type)
         }
         _ME.prototype.clickel = function(name) {
             let t = this,

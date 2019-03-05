@@ -48,7 +48,6 @@
                     el: '#selpicure1',
                     images: [],
                     imgChange: function(images) {
-                        console.log(images)
                         t.newImg = images[0].image;
                     }
                 })
@@ -153,7 +152,6 @@
                     el: '#selpicure2',
                     images: [{ image: data.subject_image }],
                     imgChange: function(images) {
-                        console.log(images)
                         t.amendImg = images[0].image;
                     }
                 })
@@ -279,13 +277,11 @@
                 t.combobox_class.setAttribute('data-id', '');
                 t.combobox_class.innerHTML = '请选择';
                 t.nameNew.value = '';
-                console.log('selpicure2')
                 selpicure({
                     el: '#selpicure1',
                     images: [],
                     imgChange: function(images) {
-                        console.log(images)
-                        t.amendImg = images[0].image;
+                        t.newImg = images[0].image;
                     }
                 })
                 quest.requests({
@@ -302,7 +298,6 @@
                 })
             },
             stMultistage: function(data) { //选择专题
-                console.log('运行')
                 pz.multistage.init({
                     el: '#combobox_class',
                     ellink: '.linkage',

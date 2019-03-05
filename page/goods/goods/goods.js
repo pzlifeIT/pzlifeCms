@@ -79,7 +79,6 @@
                     str += '<span class="col-md-2 bot-bor subli">' + data[i].subtitle + '</span>'
                     str += '<span class="col-md-1 bot-bor subli">' + data[i].supplier + '</span>'
                     str += '<span class="col-md-1 bot-bor subli">' + data[i].cate + '</span>'
-
                     str += '<span class="col-md-1 bot-bor subli"><span class="ant-switch up-down ' + checked + '" data-id="' + data[i].id + '" data-type="' + data[i].status + '" ></span></span>'
                     str += '<span class="col-md-2 bot-bor subli"><a class="pz-btn btn-amend" href="goodsoperation/goodsoperation.html?id=' + data[i].id + '">编辑</a>\
                     <div class="pz-btn btn-del" href="#">删除</div></span>'

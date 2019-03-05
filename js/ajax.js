@@ -1,6 +1,5 @@
 ;
 (function() {
-    console.log(window.apiurl)
     let apiurl = window.apiurl.apiHost
 
     window.quest = function() {
@@ -55,6 +54,7 @@
 
         // 处理返回数据
         xhr.onreadystatechange = function() {
+            // console.log(xhr)
             if (xhr.readyState == 4) {
                 if (xhr.status == 200) {
                     params.success(JSON.parse(xhr.responseText));
@@ -148,128 +148,11 @@
                         params.Error(res.code)
                     }
                 }
-            }
-        })
-    }
-    quest.getcatelist = function(params) { //分类列表
-        this.Ajax({
-            data: params.data,
-            url: 'category/getcatelist',
-            success: function(res) {
-                if (res.code == '200') {
-                    params.success(res)
-                }
-            }
-        })
-    }
-    quest.saveaddcate = function(params) { //添加分类
-        this.Ajax({
-            data: params.data,
-            url: 'category/saveaddcate',
-            success: function(res) {
-                if (res.code == '200') {
-                    params.success(res)
-                }
-            }
-        })
-    }
-    quest.editcatepage = function(params) { //编辑分类页面
-        this.Ajax({
-            data: params.data,
-            url: 'category/editcatepage',
-            success: function(res) {
-                if (res.code == '200') {
-                    params.success(res)
-                }
-            }
-        })
-    }
+            },
+            failed: function(code) {
 
-    quest.getProvinceCity = function(params) {
-        this.Ajax({
-            url: 'index/getProvinceCity',
-            success: function(res) {
-                if (res.code == '200') {
-                    params.success(res)
-                }
             }
         })
-    }
-    quest.suppliers = {
-        updateSupplier: function(params) {
-            quest.Ajax({
-                data: params.data || '',
-                url: 'suppliers/updateSupplier',
-                success: function(res) {
-                    if (res.code == '200') {
-                        params.success(res)
-                    }
-                }
-            })
-        },
-        addsupplier: function(params) { //
-            quest.Ajax({
-                data: params.data || '',
-                url: 'suppliers/addsupplier',
-                success: function(res) {
-                    if (res.code == '200') {
-                        params.success(res)
-                    }
-                }
-            })
-        },
-        addsupplierfreight: function(params) {
-            quest.Ajax({
-                url: 'suppliers/addsupplierfreight',
-                success: function(res) {
-                    if (res.code == '200') {
-                        params.success(res)
-                    }
-                }
-            })
-        },
-        getsuppliers: function(params) {
-            quest.Ajax({
-                data: params.data || '',
-                url: 'suppliers/getsuppliers',
-                success: function(res) {
-                    if (res.code == '200') {
-                        params.success(res)
-                    }
-                }
-            })
-        },
-        getsupplierfreights: function() {
-            quest.Ajax({
-                url: 'suppliers/getsupplierfreights',
-                success: function(res) {
-                    if (res.code == '200') {
-                        params.success(res)
-                    }
-                }
-            })
-        },
-        getsupplierfreightdetail: function() {
-            quest.Ajax({
-                url: 'suppliers/getsupplierfreightdetail',
-                success: function(res) {
-                    if (res.code == '200') {
-                        params.success(res)
-                    }
-                }
-            })
-        },
-        getsupplierdata: function(params) { //获取供应商详情
-            quest.Ajax({
-                data: params.data || '',
-                url: 'suppliers/getsupplierdata',
-                success: function(res) {
-                    if (res.code == '200') {
-                        params.success(res)
-                    }
-                }
-            })
-        }
     }
 
 })()

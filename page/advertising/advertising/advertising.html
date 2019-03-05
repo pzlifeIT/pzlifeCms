@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>订单详情</title>
+    <link rel="stylesheet" href="../../../css/style.css?1.0.1">
+    <link rel="stylesheet" href="../../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../../css/details.css">
+    <link rel="stylesheet" href="../../../css/list.css">
+    <link rel="stylesheet" href="advertising.css?1.0.1">
+</head>
+
+<body>
+    <div class="iframenav">
+        <!-- <button class="">刷新</button> -->
+        <div class="din fl">
+            <span>
+        
+      </span>
+        </div>
+        <div class="refresh topbtn din fl" onclick="document.location.reload()">
+            <img src="../../../images/sx.png" alt="">
+        </div>
+        <!-- <div class="addgoods topbtn din fl">
+            <img src="../../images/jia.png" alt="">
+        </div> -->
+
+    </div>
+    <div class="details">
+        <div class="dl-header">
+            <span class="dl-name">订单详情</span>
+            <!-- <input type="button" value="订单退款" class="btn btn-danger radius fr"></input> -->
+            <!-- <input type="button" value="发货" class="btn btn-primary radius fr"></input> -->
+        </div>
+        <div class="dl-con">
+            <ul class="dl-nav" id="dlnav">
+                <li>轮播图</li>
+                <li>标题图标</li>
+                <li>活动</li>
+                <li>推荐一</li>
+                <li>星期活动</li>
+                <li>推荐二</li>
+                <li>推荐三</li>
+                <li>推荐四</li>
+                <li>推荐五</li>
+                <li>专题推荐</li>
+            </ul>
+            <div class="dlnav-con dl-1">
+                <div>
+                    <div id="addbanner" class="add addbanner topbtn din fl">
+                        <img src="../../../../images/jia.png" alt="">
+                    </div>
+                </div>
+
+                <div class="d2-list">
+                    <div class="list-header">
+                        <span class="col-md-1">序号</span>
+                        <span class="col-md-3">图片</span>
+                        <span class="col-md-3">标题</span>
+                        <span class="col-md-2">排序</span>
+                        <span class="col-md-3">管理</span>
+                    </div>
+                    <div class="table" id="goodlist">
+                        <!-- <li>
+                          <span class="col-md-1">序号</span>
+                          <span class="col-md-2">商品规格名称</span>
+                          <span class="col-md-2">规格图</span>
+                          <span class="col-md-1">库存</span>
+                          <span class="col-md-1">市场价</span>
+                          <span class="col-md-1">零售价</span>
+                          <span class="col-md-1">其他运费成本</span>
+                          <span class="col-md-1">积分赠送</span>
+                          <span class="col-md-1">运费</span>
+                          <span class="col-md-1">
+                              <div class="pz-btn btn-amend">编辑</div>
+                          </span>
+                      </li> -->
+                    </div>
+                </div>
+            </div>
+            <div class="dlnav-con dl-2 mt15">
+                <div>
+                    <div id="addIcon" class="add addattribute topbtn din fl">
+                        <img src="../../../../images/jia.png" alt="">
+                    </div>
+                </div>
+                <div class="d2-list">
+                    <div class="list-header">
+                        <span class="col-md-1">序号</span>
+                        <span class="col-md-3">图片</span>
+                        <span class="col-md-3">标题</span>
+                        <span class="col-md-2">排序</span>
+                        <span class="col-md-3">管理</span>
+                    </div>
+                    <div class="table" id="goodlist">
+                        <!-- <li>
+                      <span class="col-md-1">序号</span>
+                      <span class="col-md-2">商品规格名称</span>
+                      <span class="col-md-2">规格图</span>
+                      <span class="col-md-1">库存</span>
+                      <span class="col-md-1">市场价</span>
+                      <span class="col-md-1">零售价</span>
+                      <span class="col-md-1">其他运费成本</span>
+                      <span class="col-md-1">积分赠送</span>
+                      <span class="col-md-1">运费</span>
+                      <span class="col-md-1">
+                          <div class="pz-btn btn-amend">编辑</div>
+                      </span>
+                  </li> -->
+                    </div>
+                </div>
+            </div>
+            <div class="dlnav-con dl-1">
+                <div>
+                    <div id="addActivity" class="add addattribute topbtn din fl">
+                        <img src="../../../../images/jia.png" alt="">
+                    </div>
+                </div>
+                <div class="d2-list">
+                    <div class="list-header">
+                        <span class="col-md-1">序号</span>
+                        <span class="col-md-3">图片</span>
+                        <span class="col-md-3">标题</span>
+                        <span class="col-md-2">排序</span>
+                        <span class="col-md-3">管理</span>
+                    </div>
+                    <div class="table" id="goodlist">
+                        <!-- <li>
+                      <span class="col-md-1">序号</span>
+                      <span class="col-md-2">商品规格名称</span>
+                      <span class="col-md-2">规格图</span>
+                      <span class="col-md-1">库存</span>
+                      <span class="col-md-1">市场价</span>
+                      <span class="col-md-1">零售价</span>
+                      <span class="col-md-1">其他运费成本</span>
+                      <span class="col-md-1">积分赠送</span>
+                      <span class="col-md-1">运费</span>
+                      <span class="col-md-1">
+                          <div class="pz-btn btn-amend">编辑</div>
+                      </span>
+                  </li> -->
+                    </div>
+                </div>
+            </div>
+            <div class="dlnav-con dl-1 ">
+                <div class="header-info">
+                    <div class="dl-show">
+                        <span class="dl-title">标题:</span>
+                        <input class="dl-info" id="goodsNameNew" value="" type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">排序:</span>
+                        <input class="dl-info" id="goodsNameNew" value="" type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">专题id:</span>
+                        <input class="dl-info" id="goodsNameNew" value="" type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">图片:</span>
+                        <div class="selpicure" id="selpicure1">
+                            <div class="selfile fr"></div>
+                        </div>
+                    </div>
+                    <div class="dl-show flexcenter">
+                        <input type="button" value="保存" id="saveNew" class="pz-btn btn-amend">
+                    </div>
+                </div>
+                <div class="info-list">
+                    <div class="abbtn">
+                        <div id="addrecommend1" class="add addattribute topbtn din fl">
+                            <img src="../../../../images/jia.png" alt="">
+                        </div>
+                    </div>
+                    <div class="d2-list">
+                        <div class="list-header">
+                            <span class="col-md-1">序号</span>
+                            <span class="col-md-3">图片</span>
+                            <span class="col-md-3">标题</span>
+                            <span class="col-md-2">排序</span>
+                            <span class="col-md-3">管理</span>
+                        </div>
+                        <div class="table" id="goodlist">
+                            <!-- <li>
+                          <span class="col-md-1">序号</span>
+                          <span class="col-md-2">商品规格名称</span>
+                          <span class="col-md-2">规格图</span>
+                          <span class="col-md-1">库存</span>
+                          <span class="col-md-1">市场价</span>
+                          <span class="col-md-1">零售价</span>
+                          <span class="col-md-1">其他运费成本</span>
+                          <span class="col-md-1">积分赠送</span>
+                          <span class="col-md-1">运费</span>
+                          <span class="col-md-1">
+                              <div class="pz-btn btn-amend">编辑</div>
+                          </span>
+                      </li> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dlnav-con dl-1">
+                <div>
+                    <div id="addweek" class="add addattribute topbtn din fl">
+                        <img src="../../../../images/jia.png" alt="">
+                    </div>
+                </div>
+
+                <div class="d2-list ">
+                    <div class="list-header">
+                        <span class="col-md-1">序号</span>
+                        <span class="col-md-3">图片</span>
+                        <span class="col-md-3">标题</span>
+                        <span class="col-md-2">排序</span>
+                        <span class="col-md-3">管理</span>
+                    </div>
+                    <div class="table" id="goodlist">
+                        <!-- <li>
+                          <span class="col-md-1">序号</span>
+                          <span class="col-md-2">商品规格名称</span>
+                          <span class="col-md-2">规格图</span>
+                          <span class="col-md-1">库存</span>
+                          <span class="col-md-1">市场价</span>
+                          <span class="col-md-1">零售价</span>
+                          <span class="col-md-1">其他运费成本</span>
+                          <span class="col-md-1">积分赠送</span>
+                          <span class="col-md-1">运费</span>
+                          <span class="col-md-1">
+                              <div class="pz-btn btn-amend">编辑</div>
+                          </span>
+                      </li> -->
+                    </div>
+                </div>
+            </div>
+            <div class="dlnav-con dl-1">
+                <div class="header-info">
+                    <div class="dl-show">
+                        <span class="dl-title">标题:</span>
+                        <input class="dl-info" id="goodsNameNew" value="" type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">排序:</span>
+                        <input class="dl-info" id="goodsNameNew" value="" type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">专题id:</span>
+                        <input class="dl-info" id="goodsNameNew" value="" type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">图片:</span>
+                        <div class="selpicure" id="selpicure1">
+                            <div class="selfile fr"></div>
+                        </div>
+                    </div>
+                    <div class="dl-show flexcenter">
+                        <input type="button" value="保存" id="saveNew" class="pz-btn btn-amend">
+                    </div>
+                </div>
+                <div class="info-list">
+                    <div class="abbtn">
+                        <div id="addrecommend2" class="add addattribute topbtn din fl">
+                            <img src="../../../../images/jia.png" alt="">
+                        </div>
+                    </div>
+                    <div class="d2-list">
+                        <div class="list-header">
+                            <span class="col-md-1">序号</span>
+                            <span class="col-md-3">图片</span>
+                            <span class="col-md-3">标题</span>
+                            <span class="col-md-2">排序</span>
+                            <span class="col-md-3">管理</span>
+                        </div>
+                        <div class="table" id="goodlist">
+                            <!-- <li>
+                          <span class="col-md-1">序号</span>
+                          <span class="col-md-2">商品规格名称</span>
+                          <span class="col-md-2">规格图</span>
+                          <span class="col-md-1">库存</span>
+                          <span class="col-md-1">市场价</span>
+                          <span class="col-md-1">零售价</span>
+                          <span class="col-md-1">其他运费成本</span>
+                          <span class="col-md-1">积分赠送</span>
+                          <span class="col-md-1">运费</span>
+                          <span class="col-md-1">
+                              <div class="pz-btn btn-amend">编辑</div>
+                          </span>
+                      </li> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dlnav-con dl-1">
+                <div class="header-info">
+                    <div class="dl-show">
+                        <span class="dl-title">标题:</span>
+                        <input class="dl-info" id="goodsNameNew" value="" type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">排序:</span>
+                        <input class="dl-info" id="goodsNameNew" value="" type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">专题id:</span>
+                        <input class="dl-info" id="goodsNameNew" value="" type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">图片:</span>
+                        <div class="selpicure" id="selpicure1">
+                            <div class="selfile fr"></div>
+                        </div>
+                    </div>
+                    <div class="dl-show flexcenter">
+                        <input type="button" value="保存" id="saveNew" class="pz-btn btn-amend">
+                    </div>
+                </div>
+                <div class="info-list">
+                    <div class="abbtn">
+                        <div id="addrecommend3" class="add addattribute topbtn din fl">
+                            <img src="../../../../images/jia.png" alt="">
+                        </div>
+                    </div>
+                    <div class="d2-list">
+                        <div class="list-header">
+                            <span class="col-md-1">序号</span>
+                            <span class="col-md-3">图片</span>
+                            <span class="col-md-3">标题</span>
+                            <span class="col-md-2">排序</span>
+                            <span class="col-md-3">管理</span>
+                        </div>
+                        <div class="table" id="goodlist">
+                            <!-- <li>
+                          <span class="col-md-1">序号</span>
+                          <span class="col-md-2">商品规格名称</span>
+                          <span class="col-md-2">规格图</span>
+                          <span class="col-md-1">库存</span>
+                          <span class="col-md-1">市场价</span>
+                          <span class="col-md-1">零售价</span>
+                          <span class="col-md-1">其他运费成本</span>
+                          <span class="col-md-1">积分赠送</span>
+                          <span class="col-md-1">运费</span>
+                          <span class="col-md-1">
+                              <div class="pz-btn btn-amend">编辑</div>
+                          </span>
+                      </li> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dlnav-con dl-1">
+                <div class="header-info">
+                    <div class="dl-show">
+                        <span class="dl-title">标题:</span>
+                        <input class="dl-info" id="goodsNameNew" value="" type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">排序:</span>
+                        <input class="dl-info" id="goodsNameNew" value="" type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">专题id:</span>
+                        <input class="dl-info" id="goodsNameNew" value="" type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">图片:</span>
+                        <div class="selpicure" id="selpicure1">
+                            <div class="selfile fr"></div>
+                        </div>
+                    </div>
+                    <div class="dl-show flexcenter">
+                        <input type="button" value="保存" id="saveNew" class="pz-btn btn-amend">
+                    </div>
+                </div>
+                <div class="info-list">
+                    <div class="abbtn">
+                        <div id="addrecommend4" class="add addattribute topbtn din fl">
+                            <img src="../../../../images/jia.png" alt="">
+                        </div>
+                    </div>
+                    <div class="d2-list">
+                        <div class="list-header">
+                            <span class="col-md-1">序号</span>
+                            <span class="col-md-3">图片</span>
+                            <span class="col-md-3">标题</span>
+                            <span class="col-md-2">排序</span>
+                            <span class="col-md-3">管理</span>
+                        </div>
+                        <div class="table" id="goodlist">
+                            <!-- <li>
+                          <span class="col-md-1">序号</span>
+                          <span class="col-md-2">商品规格名称</span>
+                          <span class="col-md-2">规格图</span>
+                          <span class="col-md-1">库存</span>
+                          <span class="col-md-1">市场价</span>
+                          <span class="col-md-1">零售价</span>
+                          <span class="col-md-1">其他运费成本</span>
+                          <span class="col-md-1">积分赠送</span>
+                          <span class="col-md-1">运费</span>
+                          <span class="col-md-1">
+                              <div class="pz-btn btn-amend">编辑</div>
+                          </span>
+                      </li> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dlnav-con dl-1">
+                <div class="header-info">
+                    <div class="dl-show">
+                        <span class="dl-title">标题:</span>
+                        <input class="dl-info" id="goodsNameNew" value="" type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">排序:</span>
+                        <input class="dl-info" id="goodsNameNew" value="" type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">专题id:</span>
+                        <input class="dl-info" id="goodsNameNew" value="" type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">图片:</span>
+                        <div class="selpicure" id="selpicure1">
+                            <div class="selfile fr"></div>
+                        </div>
+                    </div>
+                    <div class="dl-show flexcenter">
+                        <input type="button" value="保存" id="saveNew" class="pz-btn btn-amend">
+                    </div>
+                </div>
+                <div class="info-list">
+                    <div class="abbtn">
+                        <div id="addrecommend5" class="add addattribute topbtn din fl">
+                            <img src="../../../../images/jia.png" alt="">
+                        </div>
+                    </div>
+                    <div class="d2-list">
+                        <div class="list-header">
+                            <span class="col-md-1">序号</span>
+                            <span class="col-md-3">图片</span>
+                            <span class="col-md-3">标题</span>
+                            <span class="col-md-2">排序</span>
+                            <span class="col-md-3">管理</span>
+                        </div>
+                        <div class="table" id="goodlist">
+                            <!-- <li>
+                          <span class="col-md-1">序号</span>
+                          <span class="col-md-2">商品规格名称</span>
+                          <span class="col-md-2">规格图</span>
+                          <span class="col-md-1">库存</span>
+                          <span class="col-md-1">市场价</span>
+                          <span class="col-md-1">零售价</span>
+                          <span class="col-md-1">其他运费成本</span>
+                          <span class="col-md-1">积分赠送</span>
+                          <span class="col-md-1">运费</span>
+                          <span class="col-md-1">
+                              <div class="pz-btn btn-amend">编辑</div>
+                          </span>
+                      </li> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dlnav-con dl-1">
+                <div>
+                    <div id="addProject" class="add addattribute topbtn din fl">
+                        <img src="../../../../images/jia.png" alt="">
+                    </div>
+                </div>
+                <div class="d2-list">
+                    <div class="list-header">
+                        <span class="col-md-1">序号</span>
+                        <span class="col-md-3">图片</span>
+                        <span class="col-md-3">标题</span>
+                        <span class="col-md-2">排序</span>
+                        <span class="col-md-3">管理</span>
+                    </div>
+                    <div class="table" id="goodlist">
+                        <!-- <li>
+                      <span class="col-md-1">序号</span>
+                      <span class="col-md-2">商品规格名称</span>
+                      <span class="col-md-2">规格图</span>
+                      <span class="col-md-1">库存</span>
+                      <span class="col-md-1">市场价</span>
+                      <span class="col-md-1">零售价</span>
+                      <span class="col-md-1">其他运费成本</span>
+                      <span class="col-md-1">积分赠送</span>
+                      <span class="col-md-1">运费</span>
+                      <span class="col-md-1">
+                          <div class="pz-btn btn-amend">编辑</div>
+                      </span>
+                  </li> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="pz-modal hide" id="agadd">
+        <div class="pz-modal-content">
+            <div class="pz-modal-header">banner</div>
+            <div class="pz-spin-container">
+                <div class="dl-show">
+                    <span class="dl-title">标题:</span>
+                    <input class="dl-info" placeholder="标题" id="nameNew" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">排序:</span>
+                    <input class="dl-info" placeholder="排序" id="nameNew" type="text">
+                </div>
+
+                <div class="dl-show">
+                    <span class="dl-title">类型:</span>
+                    <div class="ant-radio-group">
+                        <label data-status="1" class="ant-radio-wrapper ant-radio-checked">
+                        <span class="ant-radio-inner"></span>
+                        <span class="din fl">专题ID</span>
+                      </label>
+                        <label data-status="2" class="ant-radio-wrapper">
+                        <span class="ant-radio-inner"></span>
+                        <span class="din fl">商品图片ID</span>
+                      </label>
+                        <label data-status="3" class="ant-radio-wrapper">
+                        <span class="ant-radio-inner"></span>
+                        <span class="din fl">跳转链接</span>
+                      </label>
+                        <label data-status="4" class="ant-radio-wrapper">
+                        <span class="ant-radio-inner"></span>
+                        <span class="din fl">商品信息ID</span>
+                      </label>
+                    </div>
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">类型内容:</span>
+                    <input class="dl-info" id="nameNew" type="text">
+                </div>
+                <div class="dl-show">
+                    <span class="dl-title">图片:</span>
+                    <div class="selpicure" id="selpicure1">
+                        <div class="selfile fr"></div>
+                    </div>
+                </div>
+                <div class="dl-show flexcenter">
+                    <input type="button" value="取消" id="cancelNew" class="pz-btn btn-cancel">
+                    <input type="button" value="保存" id="saveNew" class="pz-btn btn-amend">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../../../config/config.js"></script>
+<script src="../../../js/common.js"></script>
+<script src="../../../js/ajax.js"></script>
+<script src="advertising.js"></script>
+<script>
+    tab({
+        head: '#dlnav',
+        con: '.dlnav-con',
+        num: 4
+    })
+    pz.advertising.init()
+</script>
+
+</html>
