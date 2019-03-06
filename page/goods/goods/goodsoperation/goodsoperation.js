@@ -927,7 +927,7 @@
                     s = s.substr(0, s.length - 1);
                     str += '<li>'
                     str += '<span class="col-md-05">' + (i + 1) + '</span>'
-                    str += '<span class="col-md-1">' + s + '</span>'
+                    str += '<span class="col-md-1 sizeauto">' + s + '</span>'
                     str += '<span class="col-md-1"><img class="attrImg" src="' + data[i].sku_image + '" /></span>'
                     str += '<span class="col-md-05">' + data[i].stock + '</span>'
                     str += '<span class="col-md-1">' + data[i].market_price + '</span>'

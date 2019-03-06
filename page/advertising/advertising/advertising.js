@@ -13,72 +13,72 @@
             },
             elclick: function() {
                 let t = this
-                document.querySelector('#addbanner').onclick = function(e) {
-                    t.templateId = 1
-                    t.agadd.classList.remove('hide')
-                }
-                document.querySelector('#addIcon').onclick = function(e) {
-                    t.templateId = 2
-                    t.agadd.classList.remove('hide')
-                }
-                document.querySelector('#addActivity').onclick = function(e) {
-                    t.templateId = 3
-                    t.agadd.classList.remove('hide')
-                }
-
-                document.querySelector('#addrecommend1').onclick = function(e) {
-                    t.templateId = 4
-                }
-                document.querySelector('#addweek').onclick = function(e) {
-                    t.templateId = 5
-                }
-                document.querySelector('#addrecommend2').onclick = function(e) {
-                    t.templateId = 6
-                }
-                document.querySelector('#addrecommend3').onclick = function(e) {
-                    t.templateId = 7
-                }
-                document.querySelector('#addrecommend4').onclick = function(e) {
-                    t.templateId = 8
-                }
-                document.querySelector('#addrecommend5').onclick = function(e) {
-                    t.templateId = 9
-                }
-                document.querySelector('#addProject').onclick = function(e) {
-                    t.templateId = 10
-                }
                 document.querySelector('#cancelNew').onclick = function(e) {
                     t.agadd.classList.add('hide')
                 }
                 document.querySelector('#saveNew').onclick = function(e) {
 
                 }
-                document.querySelector('#bannerSave').onclick = function(e) {
-                    t.getInfo({
-                        model_id: 1,
-                        name: 'banner'
-                    })
-                }
-                document.querySelector('#iconSave').onclick = function(e) {
-
-                }
-                document.querySelector('#activitySave').onclick = function(e) {
-
-                }
-                document.querySelector('#weekSave').onclick = function(e) {
-
-                }
-                document.querySelector('#projectSave').onclick = function(e) {
-
-                }
+                let arr = [{
+                    model_id: 1,
+                    name: 'banner'
+                }, {
+                    model_id: 2,
+                    name: 'icon'
+                }, {
+                    model_id: 3,
+                    name: 'activity'
+                }, {
+                    model_id: 4,
+                    name: 'recommend1',
+                    re: true
+                }, {
+                    model_id: 5,
+                    name: 'week'
+                }, {
+                    model_id: 6,
+                    name: 'recommend2',
+                    re: true
+                }, {
+                    model_id: 7,
+                    name: 'recommend3',
+                    re: true
+                }, {
+                    model_id: 8,
+                    name: 'recommend4',
+                    re: true
+                }, {
+                    model_id: 9,
+                    name: 'recommend5',
+                    re: true
+                }, {
+                    model_id: 10,
+                    name: 'project',
+                    noadd: true
+                }]
+                arr.forEach(function(li) {
+                    let elSave = document.querySelector('#' + li.name + 'Save')
+                    elSave.onclick = function(e) {
+                        t.getmodelInfo({
+                            model_id: li.model_id,
+                            name: li.name,
+                            re: li.re || false
+                        })
+                    }
+                    if (li.noadd) continue
+                    let elAdd = document.querySelector('#add' + li.name)
+                    elAdd.onclick = function(e) {
+                        t.templateId = 1
+                        t.agadd.classList.remove('hide')
+                    }
+                })
             },
-            getInfo(data) {
+            getmodelInfo(data) {
                 let tit = document.querySelector('#' + data.name + 'Tit').value,
                     sort = document.querySelector('#' + data.name + 'Sort').value,
                     jump_type = '',
                     jump_content = '',
                     image_path = '';
-                console.log()
                 if (data.re) {
                     jump_type = 1
                     jump_content = document.querySelector('#' + data.name + 'Id').value

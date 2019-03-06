@@ -765,3 +765,14 @@ input {
 .noafter::after {
     display: none;
 }
+
+.sizehid {
+    height: 40px;
+    overflow: auto;
+}
+
+.sizeauto {
+    line-height: 25px;
+    font-size: 12px;
+    overflow: auto;
+}
