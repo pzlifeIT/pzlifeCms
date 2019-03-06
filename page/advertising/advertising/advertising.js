@@ -54,15 +54,16 @@
 
                 }
                 document.querySelector('#bannerSave').onclick = function(e) {
-
+                    t.getInfo({
+                        model_id: 1,
+                        name: 'banner'
+                    })
                 }
                 document.querySelector('#iconSave').onclick = function(e) {
 
                 }
                 document.querySelector('#activitySave').onclick = function(e) {
-                    t.getInfo({
 
-                    })
                 }
                 document.querySelector('#weekSave').onclick = function(e) {
 
@@ -72,14 +73,15 @@
                 }
             },
             getInfo(data) {
-                let tit = ddocument.querySelector('#' + data.name + 'Tit'),
-                    sort = ddocument.querySelector('#' + data.name + 'Sort'),
+                let tit = document.querySelector('#' + data.name + 'Tit').value,
+                    sort = document.querySelector('#' + data.name + 'Sort').value,
                     jump_type = '',
                     jump_content = '',
                     image_path = '';
+                console.log()
                 if (data.re) {
                     jump_type = 1
-                    jump_content = document.querySelector('#' + data.name + 'Id')
+                    jump_content = document.querySelector('#' + data.name + 'Id').value
                     image_path = ''
                 }
                 this.addRecommend({
