@@ -242,9 +242,9 @@
                 len = ullist.length;
             for (i = 0; i < len; i++) {
                 if (ullist[i].tier == 2) {
-                    ullist[i].type_name = '&nbsp;&nbsp;├&nbsp;' + ullist[i].type_name
+                    ullist[i].type_name = '&emsp;&emsp;&emsp;├&nbsp;' + ullist[i].type_name
                 } else if (ullist[i].tier == 3) {
-                    ullist[i].type_name = '&nbsp;&nbsp;&nbsp;&nbsp;├&nbsp;' + ullist[i].type_name
+                    ullist[i].type_name = '&emsp;&emsp;&emsp;&emsp;&emsp;├&nbsp;' + ullist[i].type_name
                 } else {
                     ullist[i].type_name = '├&nbsp;' + ullist[i].type_name
                 }

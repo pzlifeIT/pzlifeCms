@@ -74,9 +74,9 @@
                     len = ullist.length;
                 for (i = 0; i < len; i++) {
                     if (ullist[i].tier == 2) {
-                        ullist[i].subject = '&nbsp;&nbsp;├&nbsp;' + ullist[i].subject
+                        ullist[i].subject = '&emsp;&emsp;&emsp;├&nbsp;' + ullist[i].subject
                     } else if (ullist[i].tier == 3) {
-                        ullist[i].subject = '&nbsp;&nbsp;&nbsp;&nbsp;├&nbsp;' + ullist[i].subject
+                        ullist[i].subject = '&emsp;&emsp;&emsp;&emsp;&emsp;├&nbsp;' + ullist[i].subject
                     } else {
                         ullist[i].subject = '├&nbsp;' + ullist[i].subject
                     }
