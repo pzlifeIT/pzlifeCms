@@ -616,6 +616,8 @@
                             id: t.ids[parseInt(data.model_id) - 1],
                             model_id: data.model_id
                         })
+                        t.type1Img = ''
+                        t.type2Img = ''
                     },
                     error(code) {
                         switch (parseInt(code)) {
