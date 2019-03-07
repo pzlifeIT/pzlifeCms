@@ -191,6 +191,11 @@
                 data.model_id = t.templateId
                 data.parent_id = t.ids[parseInt(t.templateId) - 1]
                 data.image_path = t.type1Img
+                if (data.model_id == 7 || data.model_id == 8) {
+                    data.image_path = t.agImage
+                } else {
+                    data.image_path = t.type1Img
+                }
                 data.id = t.type1Id
                 if (t.type1Id) {
                     data.uploadtype = 'update'
@@ -694,7 +699,7 @@
                     el: data.el,
                     images: [{ image: data.img }],
                     imgChange: function(images) {
-                        t.agImage[data.name] = images[0].image
+                        t.agImage = images[0].image
                     }
                 })
             },
