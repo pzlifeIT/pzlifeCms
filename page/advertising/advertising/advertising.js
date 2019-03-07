@@ -90,7 +90,8 @@
                             t.getmodelInfo({
                                 model_id: info.model_id,
                                 name: info.name,
-                                re: info.re || false
+                                re: info.re || false,
+                                img: info.img
                             })
                         }
                     })(arr[i])
@@ -191,11 +192,11 @@
                 data.model_id = t.templateId
                 data.parent_id = t.ids[parseInt(t.templateId) - 1]
                 data.image_path = t.type1Img
-                if (data.model_id == 7 || data.model_id == 8) {
-                    data.image_path = t.agImage
-                } else {
-                    data.image_path = t.type1Img
-                }
+                    // if (data.model_id == 7 || data.model_id == 8) {
+                    //     data.image_path = t.agImage
+                    // } else {
+                    //     data.image_path = t.type1Img
+                    // }
                 data.id = t.type1Id
                 if (t.type1Id) {
                     data.uploadtype = 'update'
@@ -542,6 +543,7 @@
                 return info
             },
             getmodelInfo(data) {
+                console.log(data)
                 let t = this,
                     tit = document.querySelector('#' + data.name + 'Tit').value,
                     sort = document.querySelector('#' + data.name + 'Sort').value,
@@ -554,11 +556,12 @@
                     jump_content = document.querySelector('#' + data.name + 'Id').value
                 }
                 if (data.img) {
-                    imgInp = document.querySelector('#' + data.name + 'Img')
-                    ulli = imgInp.querySelectorAll('li')[0]
-                    if (ulli) {
-                        image_path = ulli.querySelector('img').getAttribute('src')
-                    }
+                    // imgInp = document.querySelector('#' + data.name + 'Img')
+                    // ulli = imgInp.querySelectorAll('li')[0]
+                    // if (ulli) {
+                    //     image_path = ulli.querySelector('img').getAttribute('src')
+                    // }
+                    image_path = t.agImage
                 }
                 let id = t.ids[parseInt(data.model_id) - 1] || '',
                     uploadtype = '';
@@ -699,6 +702,7 @@
                     el: data.el,
                     images: [{ image: data.img }],
                     imgChange: function(images) {
+                        console.log(images)
                         t.agImage = images[0].image
                     }
                 })
