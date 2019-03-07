@@ -5,11 +5,20 @@
             this.goodlist = document.querySelector('#goodlist')
             this.page = 1
             this.totle = 0
+            this.goodName = ''
             this.init()
         }
         _GD.prototype = {
             init: function() {
+                this.elclick()
                 this.getgoodslist({})
+            },
+            elclick() {
+                let t = this
+                document.querySelector('#search').onclick = function(e) {
+                    t.goodName = document.querySelector('#goodName').value
+                    t.getgoodslist({})
+                }
             },
             getgoodslist: function(o) {
                 let t = this
@@ -17,7 +26,8 @@
                     url: 'getgoodslist',
                     data: {
                         page: o.page || 1,
-                        pagenum: o.pagenum || 10
+                        pagenum: o.pagenum || 10,
+                        goods_name: t.goodName || ''
                     },
                     success: function(res) {
                         t.setGlul(res.data)
@@ -64,6 +74,8 @@
                 })
             },
             setGlul: function(data) {
+                if (!data) return
+                if (data.length < 1) return
                 let len = data.length,
                     i, str = '',
                     checked = ''
