@@ -18,7 +18,7 @@
             },
             elclick: function() {
                 let t = this
-                document.querySelector('#SaveNew').onclick = function() {
+                document.querySelector('#saveNew').onclick = function() {
                     t.getdata()
                 }
             },

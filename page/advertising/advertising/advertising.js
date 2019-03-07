@@ -142,7 +142,6 @@
                 this.settype1images({
                     img: data.image_path || ''
                 })
-                t.type1Img = data.image_path || ''
             },
             showtype2(data) {
                 let t = this
