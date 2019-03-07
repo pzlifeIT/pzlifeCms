@@ -186,6 +186,9 @@
                 data.tier = 2
                 data.jump_type = typeId.jump
                 data.show_type = typeId.show
+                if (data.show_type == 2) {
+                    data.show_data = typeId.show
+                }
                 data.model_id = t.templateId
                 data.parent_id = t.ids[parseInt(t.templateId) - 1]
                 data.image_path = t.type1Img
