@@ -192,7 +192,7 @@
                 data.model_id = t.templateId
                 data.parent_id = t.ids[parseInt(t.templateId) - 1]
                 data.image_path = t.type1Img
-                data.id = t.type2Id
+                data.id = t.type1Id
                 if (t.type1Id) {
                     data.uploadtype = 'update'
                 } else {
