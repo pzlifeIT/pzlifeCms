@@ -71,7 +71,12 @@
         updateDeliverOrderGoods: 'Order/updateDeliverOrderGoods', //获取订单列表
         getOrderInfo: 'Order/getOrderInfo', //获取订单详情
         deliverOrderGoods: 'Order/deliverOrderGoods', //订单发货
+        updateRecommend: 'Recommend/updateRecommend', //修改推荐
         addRecommend: 'Recommend/addRecommend', //添加推荐
+        delRecommend: 'Recommend/delRecommend', //添加推荐
+        getRecommendId: 'Recommend/getRecommendId', //获取推荐ID
+        getRecommend: 'Recommend/getRecommend', //获取推荐信息
+        getRecommendInfo: 'Recommend/getRecommendInfo', //获取推荐详情
         getBossShareDiamondvip: 'Rights/getBossShareDiamondvip', //获取合伙人BOSS分享钻石会员机会
         passBossShareDiamondvip: 'Rights/passBossShareDiamondvip', //审核钻石卡分享机会
         creatBossShareDiamondvip: 'Rights/creatBossShareDiamondvip', //创建合伙人BOSS分享钻石会员机会

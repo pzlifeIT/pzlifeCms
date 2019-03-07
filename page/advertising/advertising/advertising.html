@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../../../css/bootstrap.css">
     <link rel="stylesheet" href="../../../css/details.css">
     <link rel="stylesheet" href="../../../css/list.css">
-    <link rel="stylesheet" href="advertising.css?1.0.1">
+    <link rel="stylesheet" href="advertising.css?1.0.2">
 </head>
 
 <body>
@@ -58,6 +58,15 @@
                         <span class="dl-title">排序:</span>
                         <input class="dl-info" id="bannerSort" value="" type="text">
                     </div>
+                    <div class="dl-show">
+                        <span class="dl-title">是否显示:</span>
+                        <div class="combobox" id="bannerShow">
+                            <div class="ant-select">
+                                <div class="ant-select-selection">请选择</div>
+                                <span class="ant-select-arrow"></span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="dl-show flexcenter">
                         <input type="button" value="保存" id="bannerSave" class="pz-btn btn-amend">
                     </div>
@@ -71,12 +80,14 @@
                     <div class="d2-list">
                         <div class="list-header">
                             <span class="col-md-1">序号</span>
-                            <span class="col-md-3">图片</span>
-                            <span class="col-md-3">标题</span>
-                            <span class="col-md-2">排序</span>
-                            <span class="col-md-3">管理</span>
+                            <span class="col-md-2">图片</span>
+                            <span class="col-md-2">标题</span>
+                            <span class="col-md-2">跳转类型</span>
+                            <span class="col-md-2">跳转内容</span>
+                            <span class="col-md-1">排序</span>
+                            <span class="col-md-2">管理</span>
                         </div>
-                        <div class="table" id="goodlist">
+                        <div class="table" id="bannerlist">
                             <!-- <li>
                           <span class="col-md-1">序号</span>
                           <span class="col-md-2">商品规格名称</span>
@@ -105,6 +116,15 @@
                         <span class="dl-title">排序:</span>
                         <input class="dl-info" id="iconSort" value="" type="text">
                     </div>
+                    <div class="dl-show">
+                        <span class="dl-title">是否显示:</span>
+                        <div class="combobox" id="iconShow">
+                            <div class="ant-select">
+                                <div class="ant-select-selection">请选择</div>
+                                <span class="ant-select-arrow"></span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="dl-show flexcenter">
                         <input type="button" value="保存" id="iconSave" class="pz-btn btn-amend">
                     </div>
@@ -118,12 +138,14 @@
                     <div class="d2-list">
                         <div class="list-header">
                             <span class="col-md-1">序号</span>
-                            <span class="col-md-3">图片</span>
-                            <span class="col-md-3">标题</span>
-                            <span class="col-md-2">排序</span>
-                            <span class="col-md-3">管理</span>
+                            <span class="col-md-2">图片</span>
+                            <span class="col-md-2">标题</span>
+                            <span class="col-md-2">跳转类型</span>
+                            <span class="col-md-2">跳转内容</span>
+                            <span class="col-md-1">排序</span>
+                            <span class="col-md-2">管理</span>
                         </div>
-                        <div class="table" id="goodlist">
+                        <div class="table" id="iconlist">
                             <!-- <li>
                           <span class="col-md-1">序号</span>
                           <span class="col-md-2">商品规格名称</span>
@@ -152,6 +174,15 @@
                         <span class="dl-title">排序:</span>
                         <input class="dl-info" id="activitySort" value="" type="text">
                     </div>
+                    <div class="dl-show">
+                        <span class="dl-title">是否显示:</span>
+                        <div class="combobox" id="activityShow">
+                            <div class="ant-select">
+                                <div class="ant-select-selection">请选择</div>
+                                <span class="ant-select-arrow"></span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="dl-show flexcenter">
                         <input type="button" value="保存" id="activitySave" class="pz-btn btn-amend">
                     </div>
@@ -165,12 +196,14 @@
                     <div class="d2-list">
                         <div class="list-header">
                             <span class="col-md-1">序号</span>
-                            <span class="col-md-3">图片</span>
-                            <span class="col-md-3">标题</span>
-                            <span class="col-md-2">排序</span>
-                            <span class="col-md-3">管理</span>
+                            <span class="col-md-2">图片</span>
+                            <span class="col-md-2">标题</span>
+                            <span class="col-md-2">跳转类型</span>
+                            <span class="col-md-2">跳转内容</span>
+                            <span class="col-md-1">排序</span>
+                            <span class="col-md-2">管理</span>
                         </div>
-                        <div class="table" id="goodlist">
+                        <div class="table" id="activitylist">
                             <!-- <li>
                           <span class="col-md-1">序号</span>
                           <span class="col-md-2">商品规格名称</span>
@@ -204,9 +237,12 @@
                         <input class="dl-info" id="recommend1Id" value="" type="text">
                     </div>
                     <div class="dl-show">
-                        <span class="dl-title">图片:</span>
-                        <div class="selpicure" id="recommend1Img">
-                            <div class="selfile fr"></div>
+                        <span class="dl-title">是否显示:</span>
+                        <div class="combobox" id="recommend1Show">
+                            <div class="ant-select">
+                                <div class="ant-select-selection">请选择</div>
+                                <span class="ant-select-arrow"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="dl-show flexcenter">
@@ -222,12 +258,14 @@
                     <div class="d2-list">
                         <div class="list-header">
                             <span class="col-md-1">序号</span>
-                            <span class="col-md-3">图片</span>
-                            <span class="col-md-3">标题</span>
-                            <span class="col-md-2">排序</span>
-                            <span class="col-md-3">管理</span>
+                            <span class="col-md-2">图片</span>
+                            <span class="col-md-2">标题</span>
+                            <span class="col-md-2">跳转类型</span>
+                            <span class="col-md-2">跳转内容</span>
+                            <span class="col-md-1">排序</span>
+                            <span class="col-md-2">管理</span>
                         </div>
-                        <div class="table" id="goodlist">
+                        <div class="table" id="recommend1list">
                             <!-- <li>
                           <span class="col-md-1">序号</span>
                           <span class="col-md-2">商品规格名称</span>
@@ -256,6 +294,15 @@
                         <span class="dl-title">排序:</span>
                         <input class="dl-info" id="weekSort" value="" type="text">
                     </div>
+                    <div class="dl-show">
+                        <span class="dl-title">是否显示:</span>
+                        <div class="combobox" id="weekShow">
+                            <div class="ant-select">
+                                <div class="ant-select-selection">请选择</div>
+                                <span class="ant-select-arrow"></span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="dl-show flexcenter">
                         <input type="button" value="保存" id="weekSave" class="pz-btn btn-amend">
                     </div>
@@ -269,12 +316,15 @@
                     <div class="d2-list">
                         <div class="list-header">
                             <span class="col-md-1">序号</span>
-                            <span class="col-md-3">图片</span>
-                            <span class="col-md-3">标题</span>
-                            <span class="col-md-2">排序</span>
-                            <span class="col-md-3">管理</span>
+                            <span class="col-md-2">图片</span>
+                            <span class="col-md-2">标题</span>
+                            <span class="col-md-1">星期</span>
+                            <span class="col-md-1">跳转类型</span>
+                            <span class="col-md-2">跳转内容</span>
+                            <span class="col-md-1">排序</span>
+                            <span class="col-md-2">管理</span>
                         </div>
-                        <div class="table" id="goodlist">
+                        <div class="table" id="weeklist">
                             <!-- <li>
                           <span class="col-md-1">序号</span>
                           <span class="col-md-2">商品规格名称</span>
@@ -308,9 +358,12 @@
                         <input class="dl-info" id="recommend2Id" value="" type="text">
                     </div>
                     <div class="dl-show">
-                        <span class="dl-title">图片:</span>
-                        <div class="selpicure" id="recommend2Img">
-                            <div class="selfile fr"></div>
+                        <span class="dl-title">是否显示:</span>
+                        <div class="combobox" id="recommend2Show">
+                            <div class="ant-select">
+                                <div class="ant-select-selection">请选择</div>
+                                <span class="ant-select-arrow"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="dl-show flexcenter">
@@ -326,12 +379,14 @@
                     <div class="d2-list">
                         <div class="list-header">
                             <span class="col-md-1">序号</span>
-                            <span class="col-md-3">图片</span>
-                            <span class="col-md-3">标题</span>
-                            <span class="col-md-2">排序</span>
-                            <span class="col-md-3">管理</span>
+                            <span class="col-md-2">图片</span>
+                            <span class="col-md-2">标题</span>
+                            <span class="col-md-2">跳转类型</span>
+                            <span class="col-md-2">跳转内容</span>
+                            <span class="col-md-1">排序</span>
+                            <span class="col-md-2">管理</span>
                         </div>
-                        <div class="table" id="goodlist">
+                        <div class="table" id="recommend2list">
                             <!-- <li>
                           <span class="col-md-1">序号</span>
                           <span class="col-md-2">商品规格名称</span>
@@ -365,6 +420,15 @@
                         <input class="dl-info" id="recommend3Id" value="" type="text">
                     </div>
                     <div class="dl-show">
+                        <span class="dl-title">是否显示:</span>
+                        <div class="combobox" id="recommend3Show">
+                            <div class="ant-select">
+                                <div class="ant-select-selection">请选择</div>
+                                <span class="ant-select-arrow"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dl-show">
                         <span class="dl-title">图片:</span>
                         <div class="selpicure" id="recommend3Img">
                             <div class="selfile fr"></div>
@@ -383,12 +447,14 @@
                     <div class="d2-list">
                         <div class="list-header">
                             <span class="col-md-1">序号</span>
-                            <span class="col-md-3">图片</span>
-                            <span class="col-md-3">标题</span>
-                            <span class="col-md-2">排序</span>
-                            <span class="col-md-3">管理</span>
+                            <span class="col-md-2">图片</span>
+                            <span class="col-md-2">标题</span>
+                            <span class="col-md-2">跳转类型</span>
+                            <span class="col-md-2">跳转内容</span>
+                            <span class="col-md-1">排序</span>
+                            <span class="col-md-2">管理</span>
                         </div>
-                        <div class="table" id="goodlist">
+                        <div class="table" id="recommend3list">
                             <!-- <li>
                           <span class="col-md-1">序号</span>
                           <span class="col-md-2">商品规格名称</span>
@@ -422,6 +488,15 @@
                         <input class="dl-info" id="recommend4Id" value="" type="text">
                     </div>
                     <div class="dl-show">
+                        <span class="dl-title">是否显示:</span>
+                        <div class="combobox" id="recommend4Show">
+                            <div class="ant-select">
+                                <div class="ant-select-selection">请选择</div>
+                                <span class="ant-select-arrow"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dl-show">
                         <span class="dl-title">图片:</span>
                         <div class="selpicure" id="recommend4Img">
                             <div class="selfile fr"></div>
@@ -440,12 +515,14 @@
                     <div class="d2-list">
                         <div class="list-header">
                             <span class="col-md-1">序号</span>
-                            <span class="col-md-3">图片</span>
-                            <span class="col-md-3">标题</span>
-                            <span class="col-md-2">排序</span>
-                            <span class="col-md-3">管理</span>
+                            <span class="col-md-2">图片</span>
+                            <span class="col-md-2">标题</span>
+                            <span class="col-md-2">跳转类型</span>
+                            <span class="col-md-2">跳转内容</span>
+                            <span class="col-md-1">排序</span>
+                            <span class="col-md-2">管理</span>
                         </div>
-                        <div class="table" id="goodlist">
+                        <div class="table" id="recommend4list">
                             <!-- <li>
                           <span class="col-md-1">序号</span>
                           <span class="col-md-2">商品规格名称</span>
@@ -479,9 +556,12 @@
                         <input class="dl-info" id="recommend5Id" value="" type="text">
                     </div>
                     <div class="dl-show">
-                        <span class="dl-title">图片:</span>
-                        <div class="selpicure" id="recommend5Img">
-                            <div class="selfile fr"></div>
+                        <span class="dl-title">是否显示:</span>
+                        <div class="combobox" id="recommend5Show">
+                            <div class="ant-select">
+                                <div class="ant-select-selection">请选择</div>
+                                <span class="ant-select-arrow"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="dl-show flexcenter">
@@ -497,12 +577,14 @@
                     <div class="d2-list">
                         <div class="list-header">
                             <span class="col-md-1">序号</span>
-                            <span class="col-md-3">图片</span>
-                            <span class="col-md-3">标题</span>
-                            <span class="col-md-2">排序</span>
-                            <span class="col-md-3">管理</span>
+                            <span class="col-md-2">图片</span>
+                            <span class="col-md-2">标题</span>
+                            <span class="col-md-2">跳转类型</span>
+                            <span class="col-md-2">跳转内容</span>
+                            <span class="col-md-1">排序</span>
+                            <span class="col-md-2">管理</span>
                         </div>
-                        <div class="table" id="goodlist">
+                        <div class="table" id="recommend5list">
                             <!-- <li>
                           <span class="col-md-1">序号</span>
                           <span class="col-md-2">商品规格名称</span>
@@ -531,11 +613,20 @@
                         <span class="dl-title">排序:</span>
                         <input class="dl-info" id="projectSort" value="" type="text">
                     </div>
+                    <div class="dl-show">
+                        <span class="dl-title">是否显示:</span>
+                        <div class="combobox" id="projectShow">
+                            <div class="ant-select">
+                                <div class="ant-select-selection">请选择</div>
+                                <span class="ant-select-arrow"></span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="dl-show flexcenter">
                         <input type="button" value="保存" id="projectSave" class="pz-btn btn-amend">
                     </div>
                 </div>
-                <div class="info-list">
+                <div class="info-list wid">
                     <div class="abbtn">
                         <div id="addproject" class="add addattribute topbtn din fl">
                             <img src="../../../../images/jia.png" alt="">
@@ -544,12 +635,15 @@
                     <div class="d2-list">
                         <div class="list-header">
                             <span class="col-md-1">序号</span>
-                            <span class="col-md-3">图片</span>
-                            <span class="col-md-3">标题</span>
-                            <span class="col-md-2">排序</span>
-                            <span class="col-md-3">管理</span>
+                            <span class="col-md-2">图片</span>
+                            <span class="col-md-2">标题</span>
+                            <span class="col-md-1">层级--上级id</span>
+                            <span class="col-md-1">跳转类型</span>
+                            <span class="col-md-2">跳转内容</span>
+                            <span class="col-md-1">排序</span>
+                            <span class="col-md-2">管理</span>
                         </div>
-                        <div class="table" id="goodlist">
+                        <div class="table" id="projectlist">
                             <!-- <li>
                           <span class="col-md-1">序号</span>
                           <span class="col-md-2">商品规格名称</span>
@@ -574,62 +668,53 @@
     </div>
     <div class="pz-modal hide" id="agadd">
         <div class="pz-modal-content">
-            <div class="pz-modal-header">banner</div>
+            <div class="pz-modal-header">设置</div>
             <div class="pz-spin-container">
                 <div class="dl-show">
                     <span class="dl-title">标题:</span>
-                    <input class="dl-info" placeholder="标题" id="nameNew" type="text">
+                    <input class="dl-info" placeholder="标题" id="agaddTit" type="text">
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">排序:</span>
-                    <input class="dl-info" placeholder="排序" id="nameNew" type="text">
+                    <input class="dl-info" placeholder="排序" id="agaddSort" type="text">
                 </div>
-
+                <div class="dl-show" id="weekcontrol">
+                    <span class="dl-title">星期:</span>
+                    <input class="dl-info" placeholder="星期几(1:周一，2:周二...,7:周日)" id="agaddWeek" type="text">
+                </div>
                 <div class="dl-show">
                     <span class="dl-title">类型:</span>
-                    <div class="ant-radio-group">
-                        <label data-status="1" class="ant-radio-wrapper ant-radio-checked">
-                        <span class="ant-radio-inner"></span>
-                        <span class="din fl">专题ID</span>
-                      </label>
-                        <label data-status="2" class="ant-radio-wrapper">
-                        <span class="ant-radio-inner"></span>
-                        <span class="din fl">商品图片ID</span>
-                      </label>
-                        <label data-status="3" class="ant-radio-wrapper">
-                        <span class="ant-radio-inner"></span>
-                        <span class="din fl">跳转链接</span>
-                      </label>
-                        <label data-status="4" class="ant-radio-wrapper">
-                        <span class="ant-radio-inner"></span>
-                        <span class="din fl">商品信息ID</span>
-                      </label>
+                    <div class="din combobox addcombobox" id="agaddType">
+                        <div class="ant-select">
+                            <div class="ant-select-selection">请选择</div>
+                            <span class="ant-select-arrow"></span>
+                        </div>
                     </div>
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">类型内容:</span>
-                    <input class="dl-info" id="nameNew" type="text">
+                    <input class="dl-info" id="agaddContent" type="text">
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">图片:</span>
-                    <div class="selpicure" id="selpicure1">
+                    <div class="selpicure" id="agaddImg">
                         <div class="selfile fr"></div>
                     </div>
                 </div>
                 <div class="dl-show flexcenter">
-                    <input type="button" value="取消" id="cancelNew" class="pz-btn btn-cancel">
-                    <input type="button" value="保存" id="saveNew" class="pz-btn btn-amend">
+                    <input type="button" value="取消" id="agaddcancel" class="pz-btn btn-cancel">
+                    <input type="button" value="保存" id="agaddSave" class="pz-btn btn-amend">
                 </div>
             </div>
         </div>
     </div>
     <div class="pz-modal hide" id="projectadd">
         <div class="pz-modal-content">
-            <div class="pz-modal-header">banner</div>
+            <div class="pz-modal-header">设置</div>
             <div class="pz-spin-container">
-                <div class="dl-show">
-                    <span class="dl-title">标题:</span>
-                    <div class="combobox" id="combobox1">
+                <div class="dl-show" id="projectaddId">
+                    <span class="dl-title">上级:</span>
+                    <div class="combobox agpupcombobox" id="projectSuberior">
                         <div class="ant-select">
                             <div class="ant-select-selection">请选择</div>
                             <span class="ant-select-arrow"></span>
@@ -638,47 +723,34 @@
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">标题:</span>
-                    <input class="dl-info" placeholder="标题" id="nameNew" type="text">
+                    <input class="dl-info" placeholder="标题" id="projectTit2" type="text">
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">排序:</span>
-                    <input class="dl-info" placeholder="排序" id="nameNew" type="text">
+                    <input class="dl-info" placeholder="排序" id="projectSort2" type="text">
                 </div>
-
                 <div class="dl-show">
                     <span class="dl-title">类型:</span>
-                    <div class="ant-radio-group">
-                        <label data-status="1" class="ant-radio-wrapper ant-radio-checked">
-                        <span class="ant-radio-inner"></span>
-                        <span class="din fl">专题ID</span>
-                      </label>
-                        <label data-status="2" class="ant-radio-wrapper">
-                        <span class="ant-radio-inner"></span>
-                        <span class="din fl">商品图片ID</span>
-                      </label>
-                        <label data-status="3" class="ant-radio-wrapper">
-                        <span class="ant-radio-inner"></span>
-                        <span class="din fl">跳转链接</span>
-                      </label>
-                        <label data-status="4" class="ant-radio-wrapper">
-                        <span class="ant-radio-inner"></span>
-                        <span class="din fl">商品信息ID</span>
-                      </label>
+                    <div class="combobox agpupcombobox" id="projectType2">
+                        <div class="ant-select">
+                            <div class="ant-select-selection">请选择</div>
+                            <span class="ant-select-arrow"></span>
+                        </div>
                     </div>
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">类型内容:</span>
-                    <input class="dl-info" id="nameNew" type="text">
+                    <input class="dl-info" id="projectContent2" type="text">
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">图片:</span>
-                    <div class="selpicure" id="selpicure1">
+                    <div class="selpicure" id="projectImg">
                         <div class="selfile fr"></div>
                     </div>
                 </div>
                 <div class="dl-show flexcenter">
-                    <input type="button" value="取消" id="cancelNew" class="pz-btn btn-cancel">
-                    <input type="button" value="保存" id="saveNew" class="pz-btn btn-amend">
+                    <input type="button" value="取消" id="projectCancel" class="pz-btn btn-cancel">
+                    <input type="button" value="保存" id="addprojectSave" class="pz-btn btn-amend">
                 </div>
             </div>
         </div>
@@ -686,13 +758,42 @@
 </body>
 <script src="../../../config/config.js"></script>
 <script src="../../../js/common.js"></script>
-<script src="../../../js/ajax.js"></script>
-<script src="advertising.js"></script>
+<script src="../../../js/ajax.js?1.0.1"></script>
+<script src="advertising.js?1.0.1"></script>
 <script>
     tab({
         head: '#dlnav',
         con: '.dlnav-con',
         num: 1
+    })
+    select({
+        el: '#agaddType',
+        data: [{
+            id: 1,
+            type_name: '专题'
+        }, {
+            id: 21,
+            type_name: '商品图片'
+        }, {
+            id: 22,
+            type_name: '商品信息'
+        }, {
+            id: 3,
+            type_name: '跳转路径'
+        }]
+    })
+    select({
+        el: '#projectType2',
+        data: [{
+            id: 1,
+            type_name: '专题'
+        }, {
+            id: 22,
+            type_name: '商品信息'
+        }, {
+            id: 3,
+            type_name: '跳转路径'
+        }]
     })
     pz.advertising.init()
 </script>

@@ -1,14 +1,14 @@
 .header-info {
     display: inline-block;
     float: left;
-    width: 550px;
+    /* width: 550px; */
 }
 
 .info-list {
     display: inline-block;
     float: left;
-    width: calc(100% - 550px);
-    min-width: 800px;
+    width: 100%;
+    /* min-width: 800px; */
 }
 
 .info-list .d2-list {
@@ -19,4 +19,20 @@
     display: block;
     overflow: auto;
     margin-bottom: 15px;
+}
+
+.combobox {
+    margin-left: 160px;
+}
+
+.addcombobox {
+    margin-left: 0;
+}
+
+.agpupcombobox {
+    margin-left: 130px;
+}
+
+.wid {
+    width: 100%;
 }
