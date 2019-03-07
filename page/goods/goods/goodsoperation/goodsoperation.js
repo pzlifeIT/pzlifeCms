@@ -1051,7 +1051,7 @@
                         t.getonegoods(4)
                         t.amendAttribute.classList.add('hide')
                     },
-                    Error(code) {
+                    error(code) {
                         switch (parseInt(code)) {
                             case 3001:
                                 alert('id必须为数字')

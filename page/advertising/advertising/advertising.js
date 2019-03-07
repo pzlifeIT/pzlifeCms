@@ -427,6 +427,11 @@
                             id: t.ids[parseInt(t.templateId) - 1],
                             model_id: t.templateId
                         })
+                    },
+                    error(code) {
+                        if (code == 3002) {
+                            alert('请先删除下级推荐')
+                        }
                     }
                 })
             },
@@ -614,7 +619,51 @@
                         })
                     },
                     error(code) {
+                        switch (parseInt(code)) {
+                            case 3001:
+                                alert('添加失败')
+                                break;
+                            case 3002:
+                                alert('添加失败')
+                                break;
+                            case 3003:
+                                alert('信息未填写完整')
+                                break;
+                            case 3004:
+                                alert('请上传图片(选择商品图片)')
+                                break;
+                            case 3005:
+                                alert('未设置显示星期')
+                                break;
+                            case 3006:
+                                alert('添加失败')
+                                break;
+                            case 3007:
+                                alert('添加失败')
+                                break;
+                            case 3008:
+                                alert('添加失败')
+                                break;
+                            case 3009:
+                                alert('超出添加数量')
+                                break;
+                            case 3010:
+                                alert('图片没有上传')
+                                break;
+                            case 3011:
+                                alert('添加失败')
+                                break;
+                            case 3012:
+                                alert('上级未选择')
+                                break;
+                            case 3013:
+                                alert('添加失败')
+                                break;
 
+                            default:
+                                alert('意料之外的错误')
+                                break;
+                        }
                     }
                 })
             },
