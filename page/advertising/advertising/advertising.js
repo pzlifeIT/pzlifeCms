@@ -36,7 +36,7 @@
                 }
                 document.querySelector('#addproject').onclick = function(e) {
                     t.templateId = 10;
-                    t.type1Id = ''
+                    t.type2Id = ''
                     t.projectadd.classList.remove('hide')
                     t.showtype2({})
                 }
@@ -150,9 +150,12 @@
                     el: '#projectSuberior',
                     data: t.selArr
                 })
-                console.log(data.type)
                 if (data.type) {
                     document.querySelector('#projectaddId').classList.add('hide')
+                    let selection = document.querySelector('#projectSuberior').querySelector('.ant-select-selection')
+                    selection.setAttribute('data-id', '')
+                    selection.setAttribute('data-value', '')
+                    selection.innerHTML = '请选择'
                 } else {
                     document.querySelector('#projectaddId').classList.remove('hide')
                 }
@@ -225,9 +228,11 @@
                 data.model_id = '10'
                 data.parent_id = suberiorid[1]
                 data.image_path = t.type2Img
+                console.log(t.type2Id)
                 data.id = t.type2Id
                 if (t.type2Id) {
                     data.uploadtype = 'update'
+                    data.tier = ''
                 } else {
                     data.uploadtype = 'add'
                 }
@@ -448,6 +453,7 @@
                     success(res) {
                         if (t.templateId == 10) {
                             t.type2Id = res.recommends_info.id
+                            console.log(t.type2Id)
                             t.projectadd.classList.remove('hide')
                             t.showtype2(t.distype1Info(res.recommends_info))
 

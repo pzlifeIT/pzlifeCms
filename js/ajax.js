@@ -55,9 +55,10 @@
                 // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded", "charset=utf-8");
                 // xhr.setRequestHeader("Content-type", "application/json", "charset=utf-8");
                 xhr.setRequestHeader("Content-type", "text/plain", "charset=utf-8");
+                params.data = JSON.stringify(params.data);
             }
             // console.log()
-            params.data = JSON.stringify(params.data);
+
             // console.log(params.data)
             xhr.send(params.data);
         }
