@@ -24,15 +24,21 @@
         type = type.toUpperCase();
         // 用于清除缓存
         let random = Math.random();
-        params.data = params.data || ''
-        if (!(params.data instanceof FormData) & typeof params.data == 'object') {
+        params.data = params.data || '';
+        // if (!(params.data instanceof FormData) & typeof params.data == 'object') {
+        //     let str = '';
+        //     for (let key in params.data) {
+        //         str += key + '=' + params.data[key] + '&';
+        //     }
+        //     params.data = str.replace(/&$/, '');
+        // }
+        if (type == 'GET') {
             let str = '';
             for (let key in params.data) {
                 str += key + '=' + params.data[key] + '&';
             }
             params.data = str.replace(/&$/, '');
         }
-
         if (type == 'GET') {
             if (params.data) {
                 xhr.open('GET', url + '?' + params.data, true);
@@ -43,12 +49,16 @@
 
         } else if (type == 'POST') {
             xhr.open('POST', url, true);
-
             if (params.data instanceof FormData) {
                 // xhr.setRequestHeader("Content-type", "multipart/form-data;");
             } else {
-                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded", "charset=utf-8");
+                // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded", "charset=utf-8");
+                // xhr.setRequestHeader("Content-type", "application/json", "charset=utf-8");
+                xhr.setRequestHeader("Content-type", "text/plain", "charset=utf-8");
             }
+            // console.log()
+            params.data = JSON.stringify(params.data);
+            // console.log(params.data)
             xhr.send(params.data);
         }
 
