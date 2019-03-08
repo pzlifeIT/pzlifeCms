@@ -686,10 +686,10 @@
                         if (data.model_id == 10) {
                             let son = t.disInfo(res.recommends_info.son)
                             t.setImgList(son, t.getmodelText(data.model_id).text)
+                            t.setselArr(res.recommends_info.son)
                         } else {
                             t.setImgList(res.recommends_info.son, t.getmodelText(data.model_id).text)
                         }
-                        t.setselArr(res.recommends_info.son)
                     },
                     error(code) {
 
