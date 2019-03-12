@@ -3,7 +3,7 @@
     pz.goods = (function() {
         function _GD(o) {
             this.goodlist = document.querySelector('#goodlist')
-            this.page = 1
+            this.page = parseInt(localStorage.getItem("goodList")) || 1
             this.totle = 0
             this.goodName = ''
             this.init()
@@ -11,7 +11,9 @@
         _GD.prototype = {
             init: function() {
                 this.elclick()
-                this.getgoodslist({})
+                this.getgoodslist({
+                    page: this.page
+                })
             },
             elclick() {
                 let t = this
@@ -30,6 +32,7 @@
                         goods_name: t.goodName || ''
                     },
                     success: function(res) {
+                        localStorage.setItem("goodList", o.page)
                         t.setGlul(res.data)
                         if (t.totle == res.total) return
                         t.totle = res.total
@@ -64,6 +67,7 @@
                     totle = Math.ceil(parseInt(t.totle) / 10)
                 pages.init({
                     el: '#floorpages',
+                    current: this.page,
                     pagenumber: totle,
                     fn: function(n) {
                         t.page = n

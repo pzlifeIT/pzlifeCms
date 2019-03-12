@@ -41,6 +41,7 @@
         function _page(obj) {
             this.floorpages = doc.querySelector(obj.el)
             this.num = obj.pagenumber || 1
+            this.current = obj.current || 1 //当前页面页码
             this.fn = obj.fn
             this.floorpages.innerHTML = "<span  id=\"firstprev\"  class=\"din fl\">首页</span><span  id=\"prev\" class=\"din fl\">上一页</span><ul class=\"fg-list din fl\" id=\"fglist\"></ul><span class=\"din fl\" id=\"next\" >下一页</span><span class=\"din fl\" id=\"lastnext\">尾页</span>"
             this.init()
@@ -51,7 +52,6 @@
             this.next = this.floorpages.querySelector('#next')
             this.lastnext = this.floorpages.querySelector('#lastnext')
             this.fglist = this.floorpages.querySelector('#fglist')
-            this.current = 1 //当前页面页码
             this.start = 1 //页码开始值
             this.pagelen = 5 //页码长度
             if (this.num <= this.pagelen) {
@@ -60,10 +60,12 @@
             this.bind()
         }
         _page.prototype.bind = function() {
-            this.setli()
-            this.setcolor()
+            // this.setli()
+            // this.setcolor()
+            this.setstart()
             this.setcurrent()
             this.spanclick()
+
         }
         _page.prototype.spanclick = function() {
             let that = this
@@ -492,64 +494,66 @@
         return s
     }())
     pz.multistage = (function() {
-        function _ME(o) {
-            this.el = ''
-            this.ellink = ''
-            this.el = document.querySelector(o.el)
-            this.ellink = document.querySelector(o.ellink)
-            this.data = o.data
-            this.type = o.type || '0'
-            this.name = o.name || 'name'
-            this.init()
-        }
-        _ME.prototype.init = function() {
-            this.setlist(this.data)
-            this.elclick()
-            this.place()
-        }
-        _ME.prototype.elclick = function() {
-            let t = this
-                // t.el.removeEventListener('click', function(e) {})
-            t.el.onclick = function(e) {
-                e.stopPropagation()
-                if (t.ellink.classList.contains('hide')) {
-                    t.place()
-                    t.ellink.classList.remove('hide', false)
-                } else {
+            function _ME(o) {
+                this.el = ''
+                this.ellink = ''
+                this.el = document.querySelector(o.el)
+                this.ellink = document.querySelector(o.ellink)
+                this.data = o.data
+                this.type = o.type || '0'
+                this.name = o.name || 'name'
+                this.init()
+            }
+            _ME.prototype.init = function() {
+                this.setlist(this.data)
+                this.elclick()
+                this.place()
+            }
+            _ME.prototype.elclick = function() {
+                let t = this
+                    // t.el.removeEventListener('click', function(e) {})
+                t.el.onclick = function(e) {
+                    e.stopPropagation()
+                    if (t.ellink.classList.contains('hide')) {
+                        t.place()
+                        t.ellink.classList.remove('hide', false)
+                    } else {
+                        t.ellink.classList.add('hide')
+                    }
+                };
+                document.querySelector('body').onclick = function(e) {
                     t.ellink.classList.add('hide')
                 }
-            };
-            document.querySelector('body').onclick = function(e) {
-                t.ellink.classList.add('hide')
+                t.ellink.onclick = function(e) {
+                    e.stopPropagation()
+                }
             }
-            t.ellink.onclick = function(e) {
-                e.stopPropagation()
+            _ME.prototype.place = function() {
+                let rect = this.el.getBoundingClientRect()
+                this.ellink.style.top = rect.top + rect.height + 'px'
+                this.ellink.style.left = rect.left + 'px'
             }
-        }
-        _ME.prototype.place = function() {
-            let rect = this.el.getBoundingClientRect()
-            this.ellink.style.top = rect.top + rect.height + 'px'
-            this.ellink.style.left = rect.left + 'px'
-        }
-        _ME.prototype.setlist = function(data) { //循环输出数据
-            let str = '',
-                len = data.length,
-                len1, len2, i, x, y
-            for (i = 0; i < len; i++) {
-                str += '<div class="one-li">'
-                str += '<span class="one-text le-text" data-id="' + data[i].id + '" >' + data[i][this.name] + '</span>'
-                if (data[i].hasOwnProperty('_child')) {
-                    len1 = data[i]._child.length
-                    str += '<div class="le-two">'
-                    for (x = 0; x < len1; x++) {
-                        str += '<div class="two-li">'
-                        str += '<span class="two-text le-text" data-id="' + data[i]._child[x].id + '" >' + data[i]._child[x][this.name] + '</span>'
-                        if (data[i]._child[x].hasOwnProperty('_child')) {
-                            len2 = data[i]._child[x]._child.length
-                            str += '<div class="le-three">'
-                            for (y = 0; y < len2; y++) {
-                                str += '<div class="">'
-                                str += '<span class="le-text noafter" data-id="' + data[i]._child[x]._child[y].id + '" >' + data[i]._child[x]._child[y][this.name] + '</span>'
+            _ME.prototype.setlist = function(data) { //循环输出数据
+                let str = '',
+                    len = data.length,
+                    len1, len2, i, x, y
+                for (i = 0; i < len; i++) {
+                    str += '<div class="one-li">'
+                    str += '<span class="one-text le-text" data-id="' + data[i].id + '" >' + data[i][this.name] + '</span>'
+                    if (data[i].hasOwnProperty('_child')) {
+                        len1 = data[i]._child.length
+                        str += '<div class="le-two">'
+                        for (x = 0; x < len1; x++) {
+                            str += '<div class="two-li">'
+                            str += '<span class="two-text le-text" data-id="' + data[i]._child[x].id + '" >' + data[i]._child[x][this.name] + '</span>'
+                            if (data[i]._child[x].hasOwnProperty('_child')) {
+                                len2 = data[i]._child[x]._child.length
+                                str += '<div class="le-three">'
+                                for (y = 0; y < len2; y++) {
+                                    str += '<div class="">'
+                                    str += '<span class="le-text noafter" data-id="' + data[i]._child[x]._child[y].id + '" >' + data[i]._child[x]._child[y][this.name] + '</span>'
+                                    str += '</div>'
+                                }
                                 str += '</div>'
                             }
                             str += '</div>'
@@ -558,35 +562,34 @@
                     }
                     str += '</div>'
                 }
-                str += '</div>'
+                this.ellink.innerHTML = str;
+                if (this.type.indexOf('1') != -1 || this.type == '0') {
+                    this.clickel('.one-text')
+                }
+                if (this.type.indexOf('2') != -1 || this.type == '0') {
+                    this.clickel('.two-text')
+                }
+                if (this.type.indexOf('3') != -1 || this.type == '0') {
+                    this.clickel('.noafter')
+                }
             }
-            this.ellink.innerHTML = str;
-            if (this.type.indexOf('1') != -1 || this.type == '0') {
-                this.clickel('.one-text')
-            }
-            if (this.type.indexOf('2') != -1 || this.type == '0') {
-                this.clickel('.two-text')
-            }
-            if (this.type.indexOf('3') != -1 || this.type == '0') {
-                this.clickel('.noafter')
-            }
-        }
-        _ME.prototype.clickel = function(name) {
-            let t = this,
-                sels = t.ellink.querySelectorAll(name);
-            if (!sels) return
-            sels.forEach(function(li) {
-                li.addEventListener('click', function(e) {
-                    t.el.setAttribute('data-id', li.getAttribute('data-id'))
-                    t.el.innerHTML = li.innerHTML
-                    t.ellink.classList.add('hide')
+            _ME.prototype.clickel = function(name) {
+                let t = this,
+                    sels = t.ellink.querySelectorAll(name);
+                if (!sels) return
+                sels.forEach(function(li) {
+                    li.addEventListener('click', function(e) {
+                        t.el.setAttribute('data-id', li.getAttribute('data-id'))
+                        t.el.innerHTML = li.innerHTML
+                        t.ellink.classList.add('hide')
+                    })
                 })
-            })
-        }
-        return {
-            init: function(o) {
-                new _ME(o)
             }
-        }
-    })()
+            return {
+                init: function(o) {
+                    new _ME(o)
+                }
+            }
+        })()
+        // window.showToast = function
 })(window, document)

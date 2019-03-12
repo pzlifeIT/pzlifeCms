@@ -28,10 +28,11 @@
             for (i = 0; i < len; i++) {
                 str += '<div class="table-tr"> \
                 <div class = "col-md-2 bot-bor subli" ><span>' + data[i].id + '</span> </div> \
-                <div class = "col-md-2 bot-bor subli " ><span> <img class="liimg" src = "' + data[i].image + '"\
+                <div class = "col-md-1 bot-bor subli " ><span> <img class="liimg" src = "' + data[i].image + '"\
                 alt = "" > </span></div> \
                 <div class = "col-md-2 bot-bor subli" ><span>' + data[i].name + ' </span></div> \
-                <div class = "col-md-2 bot-bor subli" ><span>' + data[i].tel + '</span></div> \
+                <div class = "col-md-2 bot-bor subli" ><span>' + data[i].title + ' </span></div> \
+                <div class = "col-md-1 bot-bor subli" ><span>' + data[i].tel + '</span></div> \
                 <div class = "col-md-2 bot-bor subli desc" ><span>' + data[i].desc + '</span></div> \
                 <div class = "col-md-2 bot-bor subli" >\
                 <a class="pz-btn btn-amend" href="expressage/expressage.html?id=' + data[i].id + '">快递模板</a>\

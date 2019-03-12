@@ -44,9 +44,10 @@
         </div>
         <div class="gl-title">
             <div class="col-md-2 bot-bor subli">ID</div>
-            <div class="col-md-2 bot-bor subli">供应商图片</div>
-            <div class="col-md-2 bot-bor subli">供应商名称</div>
-            <div class="col-md-2 bot-bor subli">供应商客服</div>
+            <div class="col-md-1 bot-bor subli">供应商图片</div>
+            <div class="col-md-2 bot-bor subli">前端供应商名称</div>
+            <div class="col-md-2 bot-bor subli">后端供应商名称</div>
+            <div class="col-md-1 bot-bor subli">供应商客服</div>
             <div class="col-md-2 bot-bor subli">供应商描述</div>
             <div class="col-md-2 bot-bor subli">管理</div>
         </div>
@@ -73,20 +74,20 @@
             <div class="pz-modal-header">编辑供应商</div>
             <div class="pz-spin-container">
                 <div class="dl-show">
-                    <span class="dl-title">供应商名称:</span>
-                    <input class="dl-info" id="srName" placeholder="请输入供应商名称" value="" type="text">
+                    <span class="dl-title">前端供应商名称:</span>
+                    <input class="dl-info" id="srName" placeholder="请输入前端供应商名称" value="" type="text">
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">供应商客服:</span>
-                    <input class="dl-info" id="srTel" placeholder="供应商客服" value="" type="text">
+                    <input class="dl-info" id="srTel" placeholder="请输入供应商客服" value="" type="text">
                 </div>
                 <div class="dl-show">
-                    <span class="dl-title">供应商标题:</span>
-                    <textarea class="dl-area" id="srTitle" placeholder="供应商标题" name="" id="" rows="3"></textarea>
+                    <span class="dl-title">后端供应商名称:</span>
+                    <textarea class="dl-area" id="srTitle" placeholder="请输入前端供应商名称+***有限公司" name="" id="" rows="3"></textarea>
                 </div>
                 <div class="dl-show">
-                    <span class="dl-title">供应商快递描述:</span>
-                    <textarea class="dl-area" id="srDesc" placeholder="供应商快递描述" name="" id="" rows="3"></textarea>
+                    <span class="dl-title">供应商前端运费描述:</span>
+                    <textarea class="dl-area" id="srDesc" placeholder="请输入供应商前端运费描述" name="" id="" rows="3"></textarea>
                 </div>
                 <div class="dl-show">
                     <span class="dl-title">供应商图片:</span>
@@ -113,7 +114,7 @@
 <script src="../../../js/jq.js"></script>
 <script src="../../../js/ajax.js"></script>
 <script src="../../../js/common.js"></script>
-<script src="supplier.js"></script>
+<script src="supplier.js?1.0.1"></script>
 <script>
     pz.supplier.init({})
 </script>
