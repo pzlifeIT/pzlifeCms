@@ -128,7 +128,7 @@
                 t.id = data.id
                 eeType.classList.add('already-select')
                 eeType.setAttribute('data-id', data.stype)
-                let type = pz.getPriceType(data.stype)
+                let type = t.getPriceType(data.stype)
                 eeType.setAttribute('data-value', type)
                 eeType.innerHTML = type
                 eeTitle.value = data.title
@@ -142,6 +142,14 @@
                 eeTitle.value = ''
                 eeDesc.value = ''
             }
+        }
+        _EE.prototype.getPriceType = function(n) {
+            let data = {
+                '1': '件数',
+                '2': '重量',
+                '3': '体积'
+            }
+            return data[n]
         }
         _EE.prototype.saveEE = function() {
             let t = this,

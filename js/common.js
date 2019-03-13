@@ -23,14 +23,7 @@
         }
         return list
     }
-    pz.getPriceType = function(n) {
-        let data = {
-            '1': '件数',
-            '2': '重量',
-            '3': '体积'
-        }
-        return data[n]
-    }
+
     pz.getEl = function(o) {
         return document.querySelector(o)
     }
@@ -476,17 +469,6 @@
                     })
                 })
             }
-            // S.prototype.getObjectURL = function(file) {
-            //     var url = null
-            //     if (window.createObjectURL != undefined) { // basic  
-            //         url = window.createObjectURL(file)
-            //     } else if (window.URL != undefined) { // mozilla(firefox)  
-            //         url = window.URL.createObjectURL(file)
-            //     } else if (window.webkitURL != undefined) { // webkit or chrome  
-            //         url = window.webkitURL.createObjectURL(file)
-            //     }
-            //     return url
-            // }
 
         function s(o) {
             return new S(o)
