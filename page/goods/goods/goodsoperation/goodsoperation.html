@@ -250,6 +250,21 @@
             </div>
         </div>
     </div>
+    <div class="pz-modal hide" id="sortimages">
+        <div class="pz-modal-content">
+            <div class="pz-modal-header">图片排序</div>
+            <div class="pz-spin-container">
+                <div class="dl-show">
+                    <span class="dl-title">排序:</span>
+                    <input id="sortval" class="dl-info" type="text">
+                </div>
+                <div class="dl-show flexcenter">
+                    <input type="button" value="取消" class="pz-btn btn-cancel" id="cancelSort">
+                    <input type="button" value="保存" id="saveSort" class="pz-btn btn-amend">
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="pz-modal hide" id="attributeNew">
         <div class="pz-modal-content">
             <div class="pz-modal-header">添加属性</div>
@@ -350,7 +365,7 @@
 <script src="../../../../config/config.js"></script>
 <script src="../../../../js/ajax.js?1.0.1"></script>
 <script src="../../../../js/common.js?1.0.1"></script>
-<script src="goodsoperation.js?1.0.2"></script>
+<script src="goodsoperation.js?1.0.3"></script>
 <script>
     tab({
         head: '#dlnav',

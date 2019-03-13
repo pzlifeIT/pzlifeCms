@@ -125,6 +125,7 @@
         getgoodssku: 'goods/getgoodssku', //获取一个sku信息
         editgoodssku: 'goods/editgoodssku', //获取一个sku信息
         getonegoods: 'goods/getOneGoods', //获取一个商品数据
+        sortimagedetail: 'goods/sortimagedetail', //对商品图进行排序
         getProvinceCity: 'provinces/getProvinceCity', //省市列表
         getArea: 'provinces/getArea', //获取区级列表
         getCity: 'provinces/getCity', //获取市级列表
