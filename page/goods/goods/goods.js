@@ -19,7 +19,12 @@
                 let t = this
                 document.querySelector('#search').onclick = function(e) {
                     t.goodName = document.querySelector('#goodName').value
-                    t.getgoodslist({})
+                    localStorage.setItem("goodList", 1)
+                    t.page = 1
+                    t.getgoodslist({
+                        page: 1,
+                        search: true
+                    })
                 }
             },
             getgoodslist: function(o) {
@@ -34,6 +39,7 @@
                     success: function(res) {
                         localStorage.setItem("goodList", o.page)
                         t.setGlul(res.data)
+                        if (o.search) { t.setpage() }
                         if (t.totle == res.total) return
                         t.totle = res.total
                         t.setpage()
@@ -58,6 +64,7 @@
                             default:
                                 alert('意料之外的错误')
                                 break;
+
                         }
                     }
                 })

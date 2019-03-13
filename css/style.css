@@ -776,3 +776,69 @@ input {
     font-size: 12px;
     overflow: auto;
 }
+
+.showToast {
+    position: fixed;
+    top: 10px;
+    left: calc(50% - 100px);
+    width: 200px;
+    height: 50px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px #888888;
+}
+
+.showToast .text {
+    margin-left: 50px;
+    color: #fff;
+    font-size: 18px;
+    line-height: 50px;
+}
+
+.showToast.success {
+    background-color: #75b675;
+}
+
+.showToast.error {
+    background-color: #cb5e58;
+}
+
+.showToast.warn {
+    background-color: #f9aa35;
+}
+
+.showToast.hint {
+    background-color: #58acc4;
+}
+
+.showToast.success::after,
+.showToast.error::after,
+.showToast.warn::after,
+.showToast.hint::after {
+    position: absolute;
+    content: "";
+    display: block;
+    top: 13px;
+    left: 13px;
+    width: 28px;
+    height: 28px;
+}
+
+.showToast.success::after {
+    background: url(../images/success.png) no-repeat center;
+    background-size: 100%;
+}
+
+.showToast.error::after {
+    background: url(../images/error.png) no-repeat center;
+    background-size: 100%;
+}
+
+.showToast.warn::after {
+    background: url(../images/warn.png) no-repeat center;
+    background-size: 100%;
+}
+
+.showToast.hint::after {
+    background: url(../images/hint.png) no-repeat center;
+    background-size: 100%;
+}
