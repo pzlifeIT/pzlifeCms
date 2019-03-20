@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../../../css/list.css">
 </head>
 
-<body>
+<body id="wrap">
 
     <div class="iframenav">
         <!-- <button class="">刷新</button> -->
@@ -53,10 +53,10 @@
                 <li class="gs-li col-md-3 col-sm-6  col-xs-12">
                     <p class="gs-name">状态</p>
                     <div class="combobox" id="combobox1">
-                        <!-- <div class="ant-select"> -->
-                        <div class="ant-select-selection">请选择</div>
-                        <!-- <span class="ant-select-arrow"></span>
-                        </div> -->
+                        <div class="ant-select">
+                            <div class="ant-select-selection">请选择</div>
+                            <span class="ant-select-arrow"></span>
+                        </div>
                     </div>
                 </li>
 
@@ -80,7 +80,7 @@
             <span class="col-md-2 bot-bor subli">管理</span>
         </div>
         <div class="table" id="goodlist">
-            <!-- <li>
+            <li class="table-tr" v-for="">
                 <span class="col-md-1 bot-bor subli">ID</span>
                 <span class="col-md-2 bot-bor subli">图片</span>
                 <span class="col-md-1 bot-bor subli">商品名称</span>
@@ -94,7 +94,7 @@
                   <input type="button" value="取消" class="pz-btn btn-cancel" id="eeCancel">
                     <input type="button" value="保存" id="eeSave" class="pz-btn btn-amend">
                 </span>
-            </li> -->
+            </li>
         </div>
         <div class="w-floor-page">
             <div class="floor-page" id="floorpages"></div>
@@ -102,10 +102,9 @@
     </div>
 
 </body>
-<script src="../../../config/config.js"></script>
-<script src="../../../js/ajax.js"></script>
 <script src="../../../js/common.js?1.0.1"></script>
-<script src="goods.js?1.0.7"></script>
+<script src="../../../js/vue.js"></script>
+<script type="module" src="goods.js?1.0.9"></script>
 <script>
     select({
         el: '#combobox1',
@@ -120,7 +119,7 @@
             type_name: '不限制'
         }]
     })
-    pz.goods.init()
+    console.log(pz)
 </script>
 
 </html>

@@ -71,3 +71,6 @@ var utils = {
         window.location.href = uri + window.btoa(unescape(encodeURIComponent(template)))
     }
 }
+export {
+    utils
+}
