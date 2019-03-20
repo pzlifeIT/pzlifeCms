@@ -1,0 +1,67 @@
+.loginbody {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #3bb4f2;
+}
+
+.login {
+    position: relative;
+    top: calc(50% - 175px);
+    width: 400px;
+    height: 350px;
+    margin: 0 auto;
+    box-shadow: 6px 6px 10px #434343;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: auto;
+}
+
+.logImg {
+    display: block;
+    width: 100px;
+    margin: 30px auto 20px;
+}
+
+.ln-inp {
+    display: block;
+    width: 280px;
+    padding: 8px 13px;
+    margin: 0 auto 20px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.ln-inp:focus {
+    border: 1px solid #3bb4f2;
+}
+
+.ln-btn {
+    display: block;
+    width: 280px;
+    height: 40px;
+    line-height: 40px;
+    margin: 0 auto;
+    text-align: center;
+    background-color: #E61F18;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 6px;
+}
+
+.alterpwd {
+    display: inline-block;
+    float: right;
+    width: 100px;
+    margin-top: 10px;
+    margin-right: 25px;
+    color: #ccc;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.alpwd-box {
+    top: calc(50% - 230px);
+    height: 420px;
+}

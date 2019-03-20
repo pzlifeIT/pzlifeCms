@@ -112,7 +112,6 @@
             }
             this.setli()
             this.setcolor()
-
             if (typeof this.fn == 'function') {
                 this.fn(this.current)
             }

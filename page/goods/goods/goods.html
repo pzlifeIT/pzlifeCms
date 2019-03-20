@@ -43,8 +43,12 @@
                     <input id="goodName" class="gs-inp" type="text">
                 </li>
                 <li class="gs-li col-md-3 col-sm-6  col-xs-12">
-                    <p class="gs-name">销售价格</p>
-                    <input class="gs-inp" type="text">
+                    <p class="gs-name">前端供应商名称</p>
+                    <input class="gs-inp" id="suppliername" type="text">
+                </li>
+                <li class="gs-li col-md-3 col-sm-6  col-xs-12">
+                    <p class="gs-name">后端供应商名称</p>
+                    <input class="gs-inp" id="supplier_title" type="text">
                 </li>
                 <li class="gs-li col-md-3 col-sm-6  col-xs-12">
                     <p class="gs-name">状态</p>
@@ -55,10 +59,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="gs-li col-md-3 col-sm-6  col-xs-12">
-                    <p class="gs-name">库存数量</p>
-                    <input class="gs-inp" type="text">
-                </li>
+
             </ul>
         </div>
     </div>
@@ -68,11 +69,12 @@
         </div>
         <div class="gl-title">
             <span class="col-md-1 bot-bor subli">ID</span>
-            <span class="col-md-2 bot-bor subli">图片</span>
+            <span class="col-md-1 bot-bor subli">图片</span>
             <span class="col-md-1 bot-bor subli">商品名称</span>
             <span class="col-md-1 bot-bor subli">商品属性</span>
             <span class="col-md-2 bot-bor subli">商品标题</span>
-            <span class="col-md-1 bot-bor subli">供应商名称</span>
+            <span class="col-md-1 bot-bor subli">前端供应商名称</span>
+            <span class="col-md-1 bot-bor subli">后端供应商名称</span>
             <span class="col-md-1 bot-bor subli">分类名称</span>
             <span class="col-md-1 bot-bor subli">状态</span>
             <span class="col-md-2 bot-bor subli">管理</span>
@@ -103,7 +105,7 @@
 <script src="../../../config/config.js"></script>
 <script src="../../../js/ajax.js"></script>
 <script src="../../../js/common.js?1.0.1"></script>
-<script src="goods.js?1.0.6"></script>
+<script src="goods.js?1.0.7"></script>
 <script>
     select({
         el: '#combobox1',
@@ -114,7 +116,7 @@
             id: 2,
             type_name: '已下架'
         }, {
-            id: 3,
+            id: '',
             type_name: '不限制'
         }]
     })

@@ -4,8 +4,15 @@
         function _GD(o) {
             this.goodlist = document.querySelector('#goodlist')
             this.page = parseInt(localStorage.getItem("goodList")) || 1
+            this.elgoodName = document.querySelector('#goodName')
+            this.elsuppliername = document.querySelector('#suppliername')
+            this.elsupplier_title = document.querySelector('#supplier_title')
+            this.elstatus = document.querySelector('#combobox1').querySelector('.ant-select-selection')
             this.totle = 0
             this.goodName = ''
+            this.supplier_name = ''
+            this.status = ""
+            this.supplier_title = ""
             this.init()
         }
         _GD.prototype = {
@@ -18,7 +25,10 @@
             elclick() {
                 let t = this
                 document.querySelector('#search').onclick = function(e) {
-                    t.goodName = document.querySelector('#goodName').value
+                    t.goodName = t.elgoodName.value
+                    t.supplier_name = t.elsuppliername.value
+                    t.supplier_title = t.elsupplier_title.value
+                    t.status = t.elstatus.getAttribute('data-id') || ''
                     localStorage.setItem("goodList", 1)
                     t.page = 1
                     t.getgoodslist({
@@ -34,7 +44,10 @@
                     data: {
                         page: o.page || 1,
                         pagenum: o.pagenum || 10,
-                        goods_name: t.goodName || ''
+                        goods_name: t.goodName || '',
+                        supplier_name: t.supplier_name || '',
+                        status: t.status || '',
+                        supplier_title: t.supplier_title || ''
                     },
                     success: function(res) {
                         localStorage.setItem("goodList", o.page)
@@ -77,6 +90,7 @@
                     current: this.page,
                     pagenumber: totle,
                     fn: function(n) {
+                        if (t.page == n) return
                         t.page = n
                         t.getgoodslist({
                             page: n
@@ -96,11 +110,12 @@
                         checked = 'ant-switch-checked'
                     }
                     str += '<div class="table-tr"><span class="col-md-1 bot-bor subli">' + data[i].id + '</span>'
-                    str += '<span class="col-md-2 bot-bor subli">图片</span>'
+                    str += '<span class="col-md-1 bot-bor subli"><img class="stImg" src="' + data[i].image + '" /></span>'
                     str += '<span class="col-md-1 bot-bor subli">' + data[i].goods_name + '</span>'
                     str += '<span class="col-md-1 bot-bor subli">' + this.getgoods_type(data[i].goods_type) + '</span>'
                     str += '<span class="col-md-2 bot-bor subli">' + data[i].subtitle + '</span>'
                     str += '<span class="col-md-1 bot-bor subli">' + data[i].supplier + '</span>'
+                    str += '<span class="col-md-1 bot-bor subli">' + data[i].supplier_title + '</span>'
                     str += '<span class="col-md-1 bot-bor subli">' + data[i].cate + '</span>'
                     str += '<span class="col-md-1 bot-bor subli"><span class="ant-switch up-down ' + checked + '" data-id="' + data[i].id + '" data-type="' + data[i].status + '" ></span></span>'
                     str += '<span class="col-md-2 bot-bor subli"><a class="pz-btn btn-amend" href="goodsoperation/goodsoperation.html?id=' + data[i].id + '">编辑</a>\

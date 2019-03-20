@@ -157,6 +157,9 @@
                     len = data.length,
                     i, str = ""
                 for (i = 0; i < len; i++) {
+                    if ((i % 7) == 0) {
+                        str += '<span class="table-row"></span>'
+                    }
                     str += '<div class="pl-li table-cell">'
                     str += '<img class="pl-image" src="' + data[i].image_path + '" alt="">'
                     str += '<div class="hierarchy">' + data[i].order_by + '</div>'
