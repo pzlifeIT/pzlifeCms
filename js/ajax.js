@@ -1,7 +1,7 @@
 ;
 (function() {
     let apiurl = window.apiurl.apiHost
-
+    console.log(apiurl)
     window.quest = function() {
 
     }
@@ -39,6 +39,7 @@
             }
             params.data = str.replace(/&$/, '');
         }
+        console.log(url)
         if (type == 'GET') {
             if (params.data) {
                 xhr.open('GET', url + '?' + params.data, true);

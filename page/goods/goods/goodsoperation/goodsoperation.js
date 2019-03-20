@@ -157,8 +157,13 @@
                     len = data.length,
                     i, str = ""
                 for (i = 0; i < len; i++) {
+                    if((i + 1)%5 == 0){
+                        str+= '<span class="tr"></span>'
+                    }
+                    console.log((i + 1)%5)
                     str += '<div class="pl-li table-cell">'
                     str += '<img class="pl-image" src="' + data[i].image_path + '" alt="">'
+                    
                     str += '<div class="hierarchy">' + data[i].order_by + '</div>'
                     str += '<div class="pl-manage"><input class="imgDel" type="button" data-image="' + data[i].image_path + '" value="删除"><input type="button" class="imgsort" data-image="' + data[i].image_path + '" data-orderby="' + data[i].order_by + '" value="编辑"></div>'
                     str += '</div>'

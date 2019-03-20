@@ -848,9 +848,13 @@ input {
 }
 
 .table-row {
-    display: table-row!important;
+    display: table!important;
+    border-spacing:20px;
 }
 
 .table-cell {
     display: table-cell!important;
+}
+.tr{
+    display:table-row;
 }
