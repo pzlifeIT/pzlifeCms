@@ -127,7 +127,7 @@
                         text = '直接领取'
                         break;
                     case 2:
-                        text = '直接领取'
+                        text = '分享激活后获得'
                         break;
                     default:
                         text = '其他状态'

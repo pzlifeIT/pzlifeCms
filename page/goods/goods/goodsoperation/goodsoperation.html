@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>产品编辑</title>
-    <link rel="stylesheet" href="../../../../css/style.css?1.0.2">
-    <link rel="stylesheet" href="../../../../css/bootstrap.css">
-    <link rel="stylesheet" href="../../../../css/details.css?1.0.1">
-    <link rel="stylesheet" href="../../../../css/list.css">
+    <link rel="stylesheet" href="../../../../css/style.css?1.0.4">
+    <link rel="stylesheet" href="../../../../css/bootstrap.css?1.0.2">
+    <link rel="stylesheet" href="../../../../css/details.css?1.0.2">
+    <link rel="stylesheet" href="../../../../css/list.css?1.0.2">
 </head>
 <script>
     function back() {
@@ -198,7 +198,7 @@
                 </div>
                 <input id="imgDetatil" type="file" accept="image/*" multiple="multiple">
                 <div class="photolist din fl">
-                    <div id="imagesDetatil">
+                    <div id="imagesDetatil" class="table">
                         <!-- <div class="pl-li">
                             <img class="pl-image" src="http://imagecache.pzlife.vip/website/article/2018-12-29/1546071154674862.jpg" alt="">
                             <div class="hierarchy">10</div>
@@ -246,6 +246,21 @@
                 <div class="dl-show flexcenter">
                     <input type="button" value="取消" class="pz-btn btn-cancel" id="cancelSubject">
                     <input type="button" value="保存" id="saveSubject" class="pz-btn btn-amend">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pz-modal hide" id="sortimages">
+        <div class="pz-modal-content">
+            <div class="pz-modal-header">图片排序</div>
+            <div class="pz-spin-container">
+                <div class="dl-show">
+                    <span class="dl-title">排序:</span>
+                    <input id="sortval" class="dl-info" type="text">
+                </div>
+                <div class="dl-show flexcenter">
+                    <input type="button" value="取消" class="pz-btn btn-cancel" id="cancelSort">
+                    <input type="button" value="保存" id="saveSort" class="pz-btn btn-amend">
                 </div>
             </div>
         </div>
@@ -350,7 +365,7 @@
 <script src="../../../../config/config.js"></script>
 <script src="../../../../js/ajax.js?1.0.1"></script>
 <script src="../../../../js/common.js?1.0.1"></script>
-<script src="goodsoperation.js?1.0.2"></script>
+<script src="goodsoperation.js?1.0.3"></script>
 <script>
     tab({
         head: '#dlnav',

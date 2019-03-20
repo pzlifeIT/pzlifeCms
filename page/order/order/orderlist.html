@@ -28,33 +28,33 @@
         </div> -->
 
     </div>
-    <!-- <div class="gs-screen panel-default">
+    <div class="gs-screen panel-default">
         <div class="gs-header panel-heading">
             <span class="din fl">筛选</span>
             <input type="button" value="导出" class="btn btn-danger radius fr"></input>
-            <button class="btn btn-secondary radius din fr">筛选</button>
+            <button id="ordersearch" class="btn btn-secondary radius din fr">筛选</button>
             <div class="shrink"></div>
         </div>
         <div class="gs-con">
             <ul>
-                <li class="gs-li col-md-3 col-sm-6  col-xs-12">
+                <!-- <li class="gs-li col-md-3 col-sm-6  col-xs-12">
                     <p class="gs-name">商品名称</p>
                     <input class="gs-inp" type="text">
                 </li>
                 <li class="gs-li col-md-3 col-sm-6  col-xs-12">
                     <p class="gs-name">销售价格</p>
                     <input class="gs-inp" type="text">
-                </li>
+                </li> -->
                 <li class="gs-li col-md-3 col-sm-6  col-xs-12">
                     <p class="gs-name">状态</p>
-                    <div class="combobox" id="combobox1">
+                    <div class="combobox" id="order_status">
                         <div class="ant-select">
                             <div class="ant-select-selection">请选择</div>
                             <span class="ant-select-arrow"></span>
                         </div>
                     </div>
                 </li>
-                <li class="gs-li col-md-3 col-sm-6  col-xs-12">
+                <!-- <li class="gs-li col-md-3 col-sm-6  col-xs-12">
                     <p class="gs-name">库存数量</p>
                     <input class="gs-inp" type="text">
                 </li>
@@ -65,10 +65,10 @@
                 <li class="gs-li col-md-3 col-sm-6  col-xs-12">
                     <p class="gs-name">结束时间</p>
                     <input id="calend1" placeholder="结束时间" class="gs-inp"></input>
-                </li>
+                </li> -->
             </ul>
         </div>
-    </div> -->
+    </div>
     <div class="gs-list panel-default">
         <div class="gl-head panel-heading ">
             <span>商品列表</span>
@@ -81,7 +81,8 @@
             <span class="col-md-1 bot-bor subli">实际支付</span>
             <span class="col-md-1 bot-bor subli">商品金额</span>
             <span class="col-md-1 bot-bor subli">优惠金额</span>
-            <span class="col-md-2 bot-bor subli">订单状态</span>
+            <span class="col-md-1 bot-bor subli">微信支付金额</span>
+            <span class="col-md-1 bot-bor subli">订单状态</span>
             <span class="col-md-2 bot-bor subli">管理</span>
         </div>
         <div class="table" id="orderlist"></div>
@@ -92,6 +93,7 @@
 </body>
 <script src="../../../config/config.js"></script>
 <script src="../../../js/common.js"></script>
+<script src="../../../js/utils.js"></script>
 <!-- <script src="../../../js/data.js"></script> -->
 <script src="../../../js/ajax.js"></script>
 <script src="orderlist.js?1.0.1"></script>
@@ -108,16 +110,40 @@
     // }, function(date) {
     //     this.value = date
     // })
-    // select({
-    //     el: '#combobox1',
-    //     data: [{
-    //         id: 1,
-    //         type_name: '捷克蛋糕'
-    //     }, {
-    //         id: 2,
-    //         type_name: '爆米花'
-    //     }]
-    // })
+    select({
+        el: '#order_status',
+        data: [{
+            id: 1,
+            type_name: '待付款'
+        }, {
+            id: 2,
+            type_name: '取消订单'
+        }, {
+            id: 3,
+            type_name: '订单已关闭'
+        }, {
+            id: 4,
+            type_name: '订单已付款'
+        }, {
+            id: 5,
+            type_name: '订单已发货'
+        }, {
+            id: 6,
+            type_name: '订单已收货'
+        }, {
+            id: 7,
+            type_name: '待评价'
+        }, {
+            id: 8,
+            type_name: '退款申请确认'
+        }, {
+            id: 9,
+            type_name: '订单退款中'
+        }, {
+            id: 10,
+            type_name: '退款成功'
+        }]
+    })
     pz.order.init()
 </script>
 

@@ -7,19 +7,33 @@
             this.srCancel = document.querySelector('#srCancel')
             this.addsupplier = document.querySelector('.addsupplier')
             this.srcom = document.querySelector('#srcom')
-            this.page = 1
+            this.page = parseInt(localStorage.getItem("supplierList")) || 1
             this.totle = 0
+            this.supplierName = ''
             this.images = ''
             this.id = ''
             this.init()
         }
         _SR.prototype.init = function() { //初始化
+            this.elclick()
             this.getsuppliers({
                 page: this.page
             })
             this.saveClick()
             this.hidemodal()
             this.addsr()
+        }
+        _SR.prototype.elclick = function() {
+            let t = this
+            document.querySelector('#search').onclick = function(e) {
+                t.supplierName = document.querySelector('#suppliername').value
+                localStorage.setItem("supplierList", 1)
+                t.page = 1
+                t.getsuppliers({
+                    page: 1,
+                    search: true
+                })
+            }
         }
         _SR.prototype.setGlul = function(data) { //循环出供应商列表
             let len = data.length,
@@ -49,10 +63,13 @@
                 url: 'getsuppliers',
                 data: {
                     page: o.page || 1,
-                    pagenum: o.pagenum || 10
+                    pagenum: o.pagenum || 10,
+                    supplierName: t.supplierName
                 },
                 success: function(res) {
+                    localStorage.setItem("supplierList", o.page)
                     t.setGlul(res.data || [])
+                    if (o.search) { t.bottompage() }
                     let totle = Math.ceil(parseInt(res.totle) / 10)
                     if (t.totle == totle) return
                     t.totle = totle

@@ -16,13 +16,15 @@
             this.imagesDetatil = pz.getEl('#imagesDetatil') //详情图列表
             this.subjectNew = pz.getEl('#subjectNew') //专题弹窗
             this.preview = pz.getEl('#preview') //预览图片
+            this.sortimages = document.querySelector('#sortimages')
+            this.sortval = document.querySelector('#sortval')
             this.goodImg = '' //产品标题图
             this.sku_image = '' //产品规格图
             this.images_carousel = []
             this.goodInfo = {}
             this.dataAttr = []
             this.skuid = ''
-
+            this.sortImgpath = ''
             this.init()
         }
         _GO.prototype = {
@@ -150,18 +152,72 @@
                 })
             },
             setImgsDetatil: function(data) { //详情图输出
+                console.log(data)
                 let t = this,
                     len = data.length,
                     i, str = ""
                 for (i = 0; i < len; i++) {
-                    str += '<div class="pl-li">'
+                    if ((i % 7) == 0) {
+                        str += '<span class="table-row"></span>'
+                    }
+                    str += '<div class="pl-li table-cell">'
                     str += '<img class="pl-image" src="' + data[i].image_path + '" alt="">'
-                    str += '<div class="hierarchy">10</div>'
-                    str += '<div class="pl-manage"><input class="imgDel" type="button" data-image="' + data[i].image_path + '" value="删除"><input type="button" value="编辑"></div>'
+                    str += '<div class="hierarchy">' + data[i].order_by + '</div>'
+                    str += '<div class="pl-manage"><input class="imgDel" type="button" data-image="' + data[i].image_path + '" value="删除"><input type="button" class="imgsort" data-image="' + data[i].image_path + '" data-orderby="' + data[i].order_by + '" value="编辑"></div>'
                     str += '</div>'
                 }
                 t.imagesDetatil.innerHTML = str
                 t.delImgsDetatil()
+                t.imgsort()
+            },
+            imgsort: function() {
+                let t = this,
+                    lis = t.imagesDetatil.querySelectorAll('.pl-li')
+                lis.forEach(function(li) {
+                    let imgsort = li.querySelector('.imgsort')
+                    imgsort.addEventListener('click', function(e) {
+                        let image = imgsort.getAttribute('data-image'),
+                            orderby = imgsort.getAttribute('data-orderby')
+                        t.sortval.value = orderby
+                        t.sortImgpath = image
+                        t.sortimages.classList.remove('hide')
+                            // t.sortImg(image, 5)
+                    })
+                })
+            },
+
+            sortImg: function(order_by) { //商品详情图排序
+                let t = this;
+                quest.requests({
+                    url: 'sortimagedetail',
+                    data: {
+                        image_path: t.sortImgpath,
+                        order_by: order_by
+                    },
+                    success: function(res) {
+                        t.getonegoods(5)
+                        t.sortimages.classList.add('hide')
+                    },
+                    Error(code) {
+                        switch (parseInt(code)) {
+                            case 3001:
+                                alert('图片不能为空')
+                                break;
+                            case 3002:
+                                alert('图片不存在')
+                                break;
+                            case 3003:
+                                alert('排序字段只能为数字')
+                                break;
+                            case 3004:
+                                alert('上传失败')
+                                break;
+                            default:
+                                alert('意料之外的错误')
+                                break;
+                        }
+                    }
+                })
             },
             previewDetatil: function(data) { //预览图片
                 let t = this,
@@ -308,6 +364,17 @@
                 document.querySelector('#cancelNew').addEventListener('click', function(e) {
                     t.attributeNew.classList.add('hide')
                 });
+                document.querySelector('#cancelSort').onclick = function(e) {
+                    t.sortimages.classList.add('hide')
+                };
+                document.querySelector('#saveSort').onclick = function(e) {
+                    let sortNum = t.sortval.value
+                    if (sortNum == '') {
+                        alert('请填写排序')
+                        return
+                    }
+                    t.sortImg(sortNum)
+                };
                 //保存规格添加
                 document.querySelector('#saveNew').addEventListener('click', function(e) {
                     t.addgoodsspec()

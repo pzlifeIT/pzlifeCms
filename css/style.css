@@ -842,3 +842,15 @@ input {
     background: url(../images/hint.png) no-repeat center;
     background-size: 100%;
 }
+
+.table {
+    display: table!important;
+}
+
+.table-row {
+    display: table-row!important;
+}
+
+.table-cell {
+    display: table-cell!important;
+}

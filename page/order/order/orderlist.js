@@ -3,13 +3,31 @@
     pz.order = (function() {
         function _OL(o) {
             this.orderlist = document.querySelector('#orderlist')
-            this.page = 1
+            this.elorder_status = document.querySelector('#order_status').querySelector('.ant-select-selection')
+            this.order_status = ''
+            this.page = parseInt(localStorage.getItem("orderList")) || 1
             this.totle = 0
+            this.orderArr = []
             this.init()
         }
         _OL.prototype = {
             init: function() {
-                this.getorderlist({})
+                this.elclick()
+                this.getorderlist({
+                    page: this.page
+                })
+            },
+            elclick() {
+                let t = this
+                document.querySelector('#ordersearch').onclick = function(e) {
+                    t.order_status = t.elorder_status.getAttribute('data-id') || ''
+                    localStorage.setItem("orderList", 1)
+                    t.page = 1
+                    t.getorderlist({
+                        page: 1,
+                        search: true
+                    })
+                }
             },
             getorderlist: function(o) {
                 let t = this
@@ -17,10 +35,14 @@
                     url: 'getOrders',
                     data: {
                         page: o.page || 1,
-                        pagenum: o.pagenum || 10
+                        pagenum: o.pagenum || 10,
+                        order_status: t.order_status || ''
                     },
                     success: function(res) {
-                        t.setList(res.order_list)
+                        localStorage.setItem("orderList", o.page)
+                        t.orderArr = res.order_list
+                        t.setList(res.order_list || [])
+                        if (o.search) { t.setpage() }
                         if (t.totle == res.totle) return
                         t.totle = res.totle
                         t.setpage()
@@ -42,10 +64,11 @@
                     totle = Math.ceil(parseInt(t.totle) / 10)
                 pages.init({
                     el: '#floorpages',
+                    current: t.page,
                     pagenumber: totle,
                     fn: function(n) {
+                        if (t.page == n) return
                         t.page = n
-                        console.log(n)
                         t.getorderlist({
                             page: n
                         })
@@ -65,7 +88,8 @@
                     str += '<span class=" col-md-1 bot-bor subli">' + data[i].pay_money + '</span>'
                     str += '<span class=" col-md-1 bot-bor subli">' + data[i].goods_money + '</span>'
                     str += '<span class=" col-md-1 bot-bor subli">' + data[i].discount_money + '</span>'
-                    str += '<span class=" col-md-2 bot-bor subli">' + data[i].order_status_text + '</span>'
+                    str += '<span class=" col-md-1 bot-bor subli">' + data[i].third_money + '</span>'
+                    str += '<span class=" col-md-1 bot-bor subli">' + data[i].order_status_text + '</span>'
                     str += '<span class=" col-md-2 bot-bor subli"><a class="pz-btn btn-amend" href="orderdetails/orderdetails.html?id=' + data[i].id + '">查看</a>\</span>'
                     str += '</div>'
                 }
