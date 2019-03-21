@@ -15,11 +15,6 @@
 
     <div class="iframenav">
         <!-- <button class="">刷新</button> -->
-        <div class="din fl">
-            <span>
-            
-          </span>
-        </div>
         <div class="refresh topbtn din fl" onclick="document.location.reload()">
             <img src="../../../images/sx.png" alt="">
         </div>
@@ -102,25 +97,7 @@
     </div>
 
 </body>
-<script src="../../../config/config.js"></script>
-<script src="../../../js/ajax.js"></script>
-<script src="../../../js/common.js?1.0.1"></script>
-<script src="goods.js?1.0.7"></script>
-<script>
-    select({
-        el: '#combobox1',
-        data: [{
-            id: 1,
-            type_name: '已上架'
-        }, {
-            id: 2,
-            type_name: '已下架'
-        }, {
-            id: '',
-            type_name: '不限制'
-        }]
-    })
-    pz.goods.init()
-</script>
+<script type="module" src="../../../js/common.js?1.0.1"></script>
+<script type="module" src="goods.js?1.0.7"></script>
 
 </html>

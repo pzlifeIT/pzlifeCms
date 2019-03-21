@@ -1,5 +1,14 @@
-;
+import { requests } from '../../../js/ajax.js';
 (function(pz) {
+    tab({ head: '#dlnav', con: '.dlnav-con', num: 1 });
+    select({ el: '#agaddType', data: [{ id: 1, type_name: '专题' }, { id: 21, type_name: '商品图片' }, { id: 22, type_name: '商品信息' }, { id: 3, type_name: '跳转路径' }] });
+    select({
+        el: '#projectType2',
+        data: [{
+            id: 1,
+            type_name: '专题'
+        }, { id: 22, type_name: '商品信息' }, { id: 3, type_name: '跳转路径' }]
+    })
     pz.advertising = (function() {
         function _AG(o) {
             this.agadd = document.querySelector('#agadd')
@@ -241,7 +250,7 @@
             },
             getRecommend(data) {
                 let t = this
-                quest.requests({
+                requests({
                     url: 'getRecommend',
                     success(res) {
                         // t.ids = res.recommends_ids || []
@@ -428,7 +437,7 @@
             },
             delRecommend(id) {
                 let t = this
-                quest.requests({
+                requests({
                     url: 'delRecommend',
                     data: { id: id },
                     success(res) {
@@ -447,7 +456,7 @@
             },
             getRecommendInfo1(id) {
                 let t = this
-                quest.requests({
+                requests({
                     url: 'getRecommendInfo',
                     data: { id: id },
                     success(res) {
@@ -613,7 +622,7 @@
                 } else if (data.uploadtype === 'add') {
                     url = 'addRecommend'
                 }
-                quest.requests({
+                requests({
                     url: url,
                     data: params,
                     success(res) {
@@ -684,7 +693,7 @@
             },
             getRecommendInfo(data) {
                 let t = this
-                quest.requests({
+                requests({
                     url: 'getRecommendInfo',
                     data: { id: data.id },
                     success(res) {
@@ -811,4 +820,5 @@
             }
         }
     })()
+    pz.advertising.init()
 })(window.pz)

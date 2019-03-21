@@ -1,5 +1,8 @@
-;
+import { app, requests } from '../../../index.js';
 (function(pz) {
+    tab({ head: '#dlnav', con: '.dlnav-con', num: 1 });
+    select({ el: '#redmoneyStatus', data: [{ id: 1, type_name: '直接领取' }, { id: 2, type_name: '分享激活后获得' }] });
+    select({ el: '#type', data: [{ id: 1, type_name: '分享使用' }, { id: 2, type_name: '绑定二维码链接' }] });
     pz.acquire = (function() {
         function _AE(o) {
             this.page = 1
@@ -12,7 +15,7 @@
             },
             getBossShareDiamondvip: function(data) {
                 let t = this
-                quest.requests({
+                requests({
                     url: 'getBossShareDiamondvip',
                     data: {
                         page: data.page || 1,
@@ -104,7 +107,7 @@
             passBossShareDiamondvip: function(data) {
                 let t = this
                 if (data.id == '' || data.id == null) return
-                quest.requests({
+                requests({
                     url: 'passBossShareDiamondvip',
                     data: {
                         id: data.id,
@@ -178,4 +181,5 @@
             }
         }
     })()
+    pz.acquire.init()
 })(window.pz)

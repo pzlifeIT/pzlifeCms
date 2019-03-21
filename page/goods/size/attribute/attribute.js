@@ -1,4 +1,4 @@
-;
+import { app, requests } from '../../../../index.js';;
 (function(pz) {
     pz.size = (function() {
         function _SE(o) {
@@ -37,7 +37,7 @@
         _SE.prototype.saveAb = function() { //保存修改
             let t = this,
                 name = document.querySelector('#abName').value;
-            quest.requests({
+            requests({
                 data: {
                     id: t.id,
                     sa_name: name,
@@ -54,7 +54,7 @@
             let t = this,
                 name = document.querySelector('#abName').value;
             console.log(name)
-            quest.requests({
+            requests({
                 data: {
                     top_id: t.topId,
                     sa_name: name,
@@ -79,7 +79,7 @@
         }
         _SE.prototype.getattributeList = function() { //获取规格列表
             let t = this
-            quest.requests({
+            requests({
                 data: {
                     spec_id: t.topId
                 },
@@ -130,7 +130,7 @@
         }
         _SE.prototype.delSpecAttr = function(id) { //删除规格
             let t = this
-            quest.requests({
+            requests({
                 data: {
                     id: id,
                     type: 2
@@ -156,7 +156,7 @@
         }
         _SE.prototype.getEditData = function(id) { //获取需要编辑的属性
             let t = this
-            quest.requests({
+            requests({
                 data: {
                     id: id,
                     type: 2
@@ -217,4 +217,5 @@
             }
         }
     })()
+    pz.size.init()
 })(window.pz)

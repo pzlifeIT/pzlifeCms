@@ -1,4 +1,4 @@
-;
+import { request } from './ajax.js';;
 (function(win, doc) {
     win.pz = function() {}
     win.pz = pz.prototype
@@ -346,7 +346,7 @@
             let t = this,
                 formdata = new FormData();
             formdata.append('image', file)
-            quest.requests({
+            request({
                 data: formdata,
                 url: 'uploadfile',
                 success: function(res) {
@@ -388,7 +388,7 @@
                 for (i = 0; i < len; i++) {
                     formdata.append('images[]', file[i])
                 }
-                quest.requests({
+                request({
                     data: formdata,
                     url: 'uploadmultifile',
                     success: function(res) {

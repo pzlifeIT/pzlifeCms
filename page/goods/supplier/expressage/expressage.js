@@ -1,5 +1,18 @@
-;
+import { app, requests } from '../../../../index.js';;
 (function(pz) {
+    select({
+        el: '#EEcombobox',
+        data: [{
+            id: 1,
+            type_name: '件数'
+        }, {
+            id: 2,
+            type_name: '重量'
+        }, {
+            id: 3,
+            type_name: '体积'
+        }]
+    })
     pz.expressage = (function() {
         function _EE(o) {
             this.supplierId = pz.geturl().id
@@ -28,7 +41,7 @@
         }
         _EE.prototype.getfreight = function() { //获取供应商快递模板
             let t = this
-            quest.requests({
+            requests({
                 url: 'getsupplierfreights',
                 data: {
                     supplierId: t.supplierId
@@ -91,7 +104,7 @@
         }
         _EE.prototype.getSupplierFreight = function() {
             let t = this
-            quest.requests({
+            requests({
                 url: 'getSupplierFreight',
                 data: {
                     supplierFreightId: t.id
@@ -149,7 +162,7 @@
                 eeTitle = document.querySelector('#eeTitle').value,
                 eeDesc = document.querySelector('#eeDesc').value;
             if (t.id == '') {
-                quest.requests({
+                requests({
                     url: 'addsupplierfreight',
                     data: {
                         supplierId: t.supplierId,
@@ -179,7 +192,7 @@
                     }
                 })
             } else {
-                quest.requests({
+                requests({
                     url: 'updateSupplierFreight',
                     data: {
                         supplier_freight_Id: t.id,
@@ -219,4 +232,5 @@
             }
         }
     })()
+    pz.expressage.init()
 })(window.pz)

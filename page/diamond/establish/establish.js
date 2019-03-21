@@ -1,4 +1,4 @@
-;
+import { requests } from '../../../js/ajax.js';;
 (function(pz) {
     pz.establish = (function() {
         function _EH(o) {
@@ -49,7 +49,7 @@
             creatBossShareDiamondvip: function(data) {
                 let t = this
                 t.proceed = false
-                quest.requests({
+                requests({
                     url: 'creatBossShareDiamondvip',
                     data: {
                         mobile: data.mobile,
@@ -75,4 +75,5 @@
             }
         }
     })()
+    pz.establish.init()
 })(window.pz)

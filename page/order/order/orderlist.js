@@ -1,5 +1,39 @@
-;
+import { app, requests } from '../../../index.js';;
 (function(pz) {
+    select({
+        el: '#order_status',
+        data: [{
+            id: 1,
+            type_name: '待付款'
+        }, {
+            id: 2,
+            type_name: '取消订单'
+        }, {
+            id: 3,
+            type_name: '订单已关闭'
+        }, {
+            id: 4,
+            type_name: '订单已付款'
+        }, {
+            id: 5,
+            type_name: '订单已发货'
+        }, {
+            id: 6,
+            type_name: '订单已收货'
+        }, {
+            id: 7,
+            type_name: '待评价'
+        }, {
+            id: 8,
+            type_name: '退款申请确认'
+        }, {
+            id: 9,
+            type_name: '订单退款中'
+        }, {
+            id: 10,
+            type_name: '退款成功'
+        }]
+    })
     pz.order = (function() {
         function _OL(o) {
             this.orderlist = document.querySelector('#orderlist')
@@ -31,7 +65,7 @@
             },
             getorderlist: function(o) {
                 let t = this
-                quest.requests({
+                requests({
                     url: 'getOrders',
                     data: {
                         page: o.page || 1,
@@ -141,6 +175,6 @@
             }
         }
     })()
-
+    pz.order.init()
 
 })(window.pz)

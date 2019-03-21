@@ -756,46 +756,7 @@
         </div>
     </div>
 </body>
-<script src="../../../config/config.js"></script>
-<script src="../../../js/common.js"></script>
-<script src="../../../js/ajax.js?1.0.1"></script>
-<script src="advertising.js?1.0.8"></script>
-<script>
-    tab({
-        head: '#dlnav',
-        con: '.dlnav-con',
-        num: 1
-    })
-    select({
-        el: '#agaddType',
-        data: [{
-            id: 1,
-            type_name: '专题'
-        }, {
-            id: 21,
-            type_name: '商品图片'
-        }, {
-            id: 22,
-            type_name: '商品信息'
-        }, {
-            id: 3,
-            type_name: '跳转路径'
-        }]
-    })
-    select({
-        el: '#projectType2',
-        data: [{
-            id: 1,
-            type_name: '专题'
-        }, {
-            id: 22,
-            type_name: '商品信息'
-        }, {
-            id: 3,
-            type_name: '跳转路径'
-        }]
-    })
-    pz.advertising.init()
-</script>
+<script type="module" src="../../../js/common.js"></script>
+<script type="module" src="advertising.js?1.0.8"></script>
 
 </html>

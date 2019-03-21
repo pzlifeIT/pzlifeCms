@@ -1,5 +1,10 @@
-;
+import { app, requests } from '../../../../index.js';;
 (function(pz) {
+    tab({
+        head: '#dlnav',
+        con: '.dlnav-con',
+        num: 1
+    })
     pz.orderdetail = (function() {
         function _OD(o) {
             this.id = pz.geturl().id || ''
@@ -31,7 +36,7 @@
             },
             getorderdetail: function() {
                 let t = this
-                quest.requests({
+                requests({
                     url: 'getOrderInfo',
                     data: {
                         id: t.id
@@ -90,14 +95,14 @@
                         <span class="ls-li-name">快递单号：</span>\
                         <input class="ls-odd" type="text" value="' + deliver.express_no + '" placeholder="快递单号"></div>'
                         str += '<input type="button" class="pz-btn btn-amend ls-btn fl" value="发货" data-id="logistics' + data[i].order_goods[x].id + '" data-t="' + t + '" >'
-                        // str += '<input type="button" class="pz-btn btn-amend ls-amend fl" value="修改" data-t="' + t + '" data-id="logistics' + data[i].order_goods[x].id + '"></div>'
+                            // str += '<input type="button" class="pz-btn btn-amend ls-amend fl" value="修改" data-t="' + t + '" data-id="logistics' + data[i].order_goods[x].id + '"></div>'
                         str += '</div>'
                     }
                 }
                 document.querySelector('#logistics').innerHTML = str
                 this.logisticscompany(data)
                 this.shipmentsbtn()
-                // this.amend()
+                    // this.amend()
             },
             shipmentsbtn: function() {
                 let that = this,
@@ -109,24 +114,24 @@
                         let goods_id = tr.querySelector('.name-text').getAttribute('data-id'),
                             express_key = tr.querySelector('.ant-select-selection').getAttribute('data-id')
                         express_no = tr.querySelector('.ls-odd').value
-                        let orderjson= {
+                        let orderjson = {
                             order_goods_id: goods_id,
                             express_no: express_no,
                             express_key: express_key,
                             id: id
                         }
                         if (ls.getAttribute('data-t') == 'true') {
-                          that.updateDeliverOrderGoods(orderjson)
+                            that.updateDeliverOrderGoods(orderjson)
                         } else {
-                          that.deliverOrderGoods(orderjson)
+                            that.deliverOrderGoods(orderjson)
                         }
-                        
+
                     })
                 })
             },
             updateDeliverOrderGoods: function(data) {
                 let that = this
-                quest.requests({
+                requests({
                     url: 'updateDeliverOrderGoods',
                     data: {
                         order_goods_id: data.order_goods_id,
@@ -134,7 +139,7 @@
                         express_key: data.express_key
                     },
                     success: function(res) {
-                      
+
                         alert('修改成功')
                     },
                     Error(code) {
@@ -151,7 +156,7 @@
             },
             deliverOrderGoods: function(data) {
                 let that = this
-                quest.requests({
+                requests({
                     url: 'deliverOrderGoods',
                     data: {
                         order_goods_id: data.order_goods_id,
@@ -160,7 +165,7 @@
                     },
                     success: function(res) {
                         alert('发货成功')
-                        document.querySelector('#'+data.id+'').querySelector('.btn-amend').setAttribute('data-t','true')
+                        document.querySelector('#' + data.id + '').querySelector('.btn-amend').setAttribute('data-t', 'true')
                         that.setnogoodsnum(res.no_deliver_goods.length)
                     },
                     Error(code) {
@@ -302,6 +307,5 @@
             }
         }
     })()
-
-
+    pz.orderdetail.init()
 })(window.pz)

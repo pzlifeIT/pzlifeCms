@@ -1,4 +1,4 @@
-;
+import { app, requests } from '../../../index.js';;
 (function() {
     pz.supplier = (function() {
         function _SR(o) {
@@ -59,7 +59,7 @@
         }
         _SR.prototype.getsuppliers = function(o) { //获得供应商列表
             let t = this
-            quest.requests({
+            requests({
                 url: 'getsuppliers',
                 data: {
                     page: o.page || 1,
@@ -142,7 +142,7 @@
         }
         _SR.prototype.getsupplierdata = function() { //获取供应商详情
             let t = this
-            quest.requests({
+            requests({
                 url: 'getSupplierData',
                 data: {
                     supplierId: t.id
@@ -213,7 +213,7 @@
             formData.image = this.images
             if (t.id != '') {
                 formData.id = this.id
-                quest.requests({
+                requests({
                     url: 'updateSupplier',
                     data: formData,
                     success: function(res) {
@@ -251,7 +251,7 @@
                     }
                 })
             } else {
-                quest.requests({
+                requests({
                     url: 'addsupplier',
                     data: formData,
                     success: function(res) {
@@ -293,4 +293,5 @@
             }
         }
     })()
+    pz.supplier.init({})
 })()

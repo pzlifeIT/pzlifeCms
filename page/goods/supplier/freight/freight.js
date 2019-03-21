@@ -1,4 +1,4 @@
-;
+import { app, requests } from '../../../../index.js';;
 (function(pz) {
     pz.freight = (function() {
         function _FH(o) {
@@ -51,7 +51,7 @@
         }
         _FH.prototype.getfreight = function() { //获取供应商快递模板运费列表
             let t = this
-            quest.requests({
+            requests({
                 url: 'getSupplierFreightdetailList',
                 data: {
                     freight_id: t.FhId
@@ -115,7 +115,7 @@
         }
         _FH.prototype.getsize = function() {
             let t = this
-            quest.requests({
+            requests({
                 url: 'getprovincecitybyfreight',
                 data: {
                     freight_id: t.FhId,
@@ -278,7 +278,7 @@
                 }
             }
             str = str.substr(0, str.length - 1);
-            quest.requests({
+            requests({
                 url: 'updatesupplierfreightarea',
                 data: {
                     city_id_str: str,
@@ -328,7 +328,7 @@
         }
         _FH.prototype.getSupplierFreight = function() {
             let t = this
-            quest.requests({
+            requests({
                 url: 'getSupplierFreightdetail',
                 data: {
                     sfd_id: t.id
@@ -387,7 +387,7 @@
                 if (fhAfter == '') return
                 if (fhTotal == '') return
                 if (countPinkage == '') return
-                quest.requests({
+                requests({
                     url: 'addSupplierFreightdetail',
                     data: {
                         freight_id: t.FhId,
@@ -402,7 +402,7 @@
                     }
                 })
             } else {
-                quest.requests({
+                requests({
                     url: 'editsupplierfreightdetail',
                     data: {
                         freight_detail_id: t.id,
@@ -443,4 +443,5 @@
             }
         }
     })()
+    pz.freight.init()
 })(window.pz)

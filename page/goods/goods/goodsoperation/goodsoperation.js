@@ -1,5 +1,20 @@
-;
+import { app, requests } from '../../../../index.js';;
 (function(pz) {
+    tab({
+        head: '#dlnav',
+        con: '.dlnav-con',
+        num: 1
+    });
+    select({
+        el: '#goodsTypeNew',
+        data: [{
+            id: 1,
+            type_name: '普通商品'
+        }, {
+            id: 2,
+            type_name: '虚拟商品'
+        }]
+    })
     pz.goodsoperation = (function() {
         function _GO() {
             this.id = pz.geturl().id || ''
@@ -49,7 +64,7 @@
                     return
                 }
 
-                quest.requests({
+                requests({
                     url: 'getonegoods',
                     data: {
                         id: t.id,
@@ -137,7 +152,7 @@
             },
             getsupplierfreights: function() { // 获取供应商快递模板列表
                 let t = this
-                quest.requests({
+                requests({
                     url: 'getsupplierfreights',
                     data: {
                         supplierId: t.goodInfo.goods_data.supplier_id
@@ -188,7 +203,7 @@
 
             sortImg: function(order_by) { //商品详情图排序
                 let t = this;
-                quest.requests({
+                requests({
                     url: 'sortimagedetail',
                     data: {
                         image_path: t.sortImgpath,
@@ -257,7 +272,7 @@
             },
             delImg: function(image, type) { //删除轮播图和详情图接口
                 let t = this;
-                quest.requests({
+                requests({
                     url: 'delgoodsimage',
                     data: {
                         image_path: image
@@ -298,7 +313,7 @@
             },
             uploadgoodsimages: function(formData, type) { //提交商品详情和轮播图
                 let t = this
-                quest.requests({
+                requests({
                     url: 'uploadgoodsimages',
                     data: formData,
                     success: function(res) {
@@ -430,7 +445,7 @@
             },
             subjectSave: function(id) {
                 let t = this
-                quest.requests({
+                requests({
                     url: 'subjectgoodsassoc',
                     data: {
                         goods_id: t.id,
@@ -469,7 +484,7 @@
             },
             getgoodssubject: function(type) { //获取商品专题
                 let t = this
-                quest.requests({
+                requests({
                     url: 'getgoodssubject',
                     data: {
                         goods_id: t.id,
@@ -523,7 +538,7 @@
             delgoodssubjectassoc: function(id) {
                 let t = this
                 if (this.id == '') return
-                quest.requests({
+                requests({
                     url: 'delgoodssubjectassoc',
                     data: {
                         goods_id: t.id,
@@ -561,7 +576,7 @@
                 for (i = 0; i < len; i++) {
                     formdata.append('images[]', file[i])
                 }
-                quest.requests({
+                requests({
                     data: formdata,
                     url: 'uploadmultifile',
                     success: function(res) {
@@ -616,7 +631,7 @@
             },
             getSuppliersAll: function() { //获取所有供应商
                 let t = this
-                quest.requests({
+                requests({
                     url: 'getsuppliersall',
                     success: function(res) {
                         select({
@@ -658,7 +673,7 @@
                 } else {
                     cateId = document.querySelector('#cateIdAmend').getAttribute('data-id')
                 }
-                quest.requests({
+                requests({
                     url: 'saveupdategoods',
                     data: {
                         goods_id: t.id,
@@ -719,7 +734,7 @@
                     goodsType = pz.getEl('#goodsTypeNew').querySelector('.ant-select-selection').getAttribute('data-id'),
                     supplierId = pz.getEl('#supplierIdNew').querySelector('.ant-select-selection').getAttribute('data-id'),
                     cateId = pz.getEl('.cateIdNew').getAttribute('data-id');
-                quest.requests({
+                requests({
                     url: 'saveaddgoods',
                     data: {
                         supplier_id: supplierId,
@@ -775,7 +790,7 @@
             },
             allCateList: function() { //获取所有分类
                 let t = this
-                quest.requests({
+                requests({
                     url: 'allCateList',
                     success: function(res) {
                         pz.multistage.init({
@@ -800,7 +815,7 @@
             },
             getspecattr: function() { //获取一级规格和二级属性
                 let t = this
-                quest.requests({
+                requests({
                     url: 'getspecattr',
                     data: {
                         cate_id: t.goodInfo.goods_data.cate_id
@@ -860,7 +875,7 @@
                 let t = this,
                     attrid = document.querySelector('#selsite').querySelector('.ant-select-selection').getAttribute('data-id')
                 if (!attrid) return
-                quest.requests({
+                requests({
                     url: 'addgoodsspec',
                     data: {
                         goods_id: t.id,
@@ -934,7 +949,7 @@
             },
             delgoodsspec: function(tid) { //删除规格接口
                 let t = this
-                quest.requests({
+                requests({
                     url: 'delgoodsspec',
                     data: {
                         goods_id: t.id,
@@ -1026,7 +1041,7 @@
             },
             getgoodssku: function(id) { //获取一条sku
                 let t = this
-                quest.requests({
+                requests({
                     url: 'getgoodssku',
                     data: {
                         sku_id: id
@@ -1098,7 +1113,7 @@
                     weight = document.querySelector('#weight').value,
                     volume = document.querySelector('#volume').value,
                     freight_id = t.freight.querySelector('.ant-select-selection').getAttribute('data-id');
-                quest.requests({
+                requests({
                     url: 'editgoodssku',
                     data: {
                         sku_id: t.skuid,
@@ -1216,4 +1231,5 @@
             }
         }
     })()
+    pz.goodsoperation.init()
 })(window.pz)

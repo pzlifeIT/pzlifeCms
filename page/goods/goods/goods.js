@@ -1,5 +1,6 @@
-;
+import { app, requests } from '../../../index.js';;
 (function(pz) {
+    select({ el: '#combobox1', data: [{ id: 1, type_name: '已上架' }, { id: 2, type_name: '已下架' }, { id: '', type_name: '不限制' }] })
     pz.goods = (function() {
         function _GD(o) {
             this.goodlist = document.querySelector('#goodlist')
@@ -39,7 +40,7 @@
             },
             getgoodslist: function(o) {
                 let t = this
-                quest.requests({
+                requests({
                     url: 'getgoodslist',
                     data: {
                         page: o.page || 1,
@@ -142,7 +143,7 @@
             },
             portupdowngoods: function(id, type) { //商品上下架接口
                 let t = this
-                quest.requests({
+                requests({
                     url: 'updowngoods',
                     data: {
                         id: id,
@@ -200,4 +201,5 @@
             }
         }
     })()
+    pz.goods.init()
 })(window.pz)

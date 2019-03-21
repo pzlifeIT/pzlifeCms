@@ -1,4 +1,4 @@
-;
+import { app, requests } from '../../../index.js';;
 (function(pz) {
 
     pz.subject = (function() {
@@ -54,7 +54,7 @@
             },
             getallsubject: function() { //获取所有专题
                 let t = this
-                quest.requests({
+                requests({
                     url: 'getallsubject',
                     data: {
                         stype: 1
@@ -111,7 +111,7 @@
             },
             subjectDetail: function(id) { //获取专题详细信息
                 let t = this
-                quest.requests({
+                requests({
                     url: 'getsubjectdetail',
                     data: {
                         subject_id: id
@@ -199,7 +199,7 @@
             },
             editsubject: function(data) { //修改专题
                 let t = this
-                quest.requests({
+                requests({
                     url: 'editsubject',
                     data: {
                         id: data.id,
@@ -284,7 +284,7 @@
                         t.newImg = images[0].image;
                     }
                 })
-                quest.requests({
+                requests({
                     url: 'getallsubject',
                     data: {
                         stype: 2
@@ -316,7 +316,7 @@
                 let t = this,
                     subject = t.nameNew.value,
                     pid = t.combobox_class.getAttribute('data-id');
-                quest.requests({
+                requests({
                     url: 'addsubject',
                     data: {
                         pid: pid,
@@ -383,4 +383,5 @@
             }
         }
     })()
+    pz.subject.init()
 })(window.pz)

@@ -73,37 +73,7 @@
         </div>
     </div>
 </body>
-<script src="../../../../config/config.js"></script>
-<script src="../../../../js/ajax.js?1.0.1"></script>
-<script src="../../../../js/common.js?1.0.1"></script>
-<script src="establish.js?1.0.6"></script>
-<script>
-    tab({
-        head: '#dlnav',
-        con: '.dlnav-con',
-        num: 1
-    })
-    select({
-        el: '#redmoneyStatus',
-        data: [{
-            id: 1,
-            type_name: '直接领取'
-        }, {
-            id: 2,
-            type_name: '分享激活后获得'
-        }]
-    })
-    select({
-        el: '#type',
-        data: [{
-            id: 1,
-            type_name: '分享使用'
-        }, {
-            id: 2,
-            type_name: '绑定二维码链接'
-        }]
-    })
-    pz.establish.init()
-</script>
+<script type="module" src="../../../../js/common.js?1.0.1"></script>
+<script type="module" src="establish.js?1.0.6"></script>
 
 </html>

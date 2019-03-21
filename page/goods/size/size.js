@@ -1,4 +1,4 @@
-;
+import { app, requests } from '../../../index.js';;
 (function(pz) {
     pz.size = (function() {
         function _SE(o) {
@@ -41,7 +41,7 @@
         _SE.prototype.compileSave = function() { //保存修改
             let t = this,
                 name = document.querySelector('#sizeName').value;
-            quest.requests({
+            requests({
                 data: {
                     id: t.id,
                     sa_name: name,
@@ -73,7 +73,7 @@
             id = document.querySelector('.multistage').getAttribute('data-id');
             if (!name) return
             if (!id) return
-            quest.requests({
+            requests({
                 data: {
                     top_id: id,
                     sa_name: name,
@@ -89,7 +89,7 @@
         _SE.prototype.getSpecList = function(data) { //获取规格列表
             let t = this
             data = data || ''
-            quest.requests({
+            requests({
                 data: {
                     page: data.page || 1,
                     page_num: data.page_num || 10
@@ -161,7 +161,7 @@
         }
         _SE.prototype.delSpecAttr = function(id) { //删除规格
             let t = this
-            quest.requests({
+            requests({
                 data: {
                     id: id,
                     type: 1
@@ -187,7 +187,7 @@
         }
         _SE.prototype.getEditData = function(id) { //获取需要编辑的规格
             let t = this
-            quest.requests({
+            requests({
                 data: {
                     id: id,
                     type: 1
@@ -202,7 +202,7 @@
         }
         _SE.prototype.allCateList = function() { //获取所有分类
             let t = this
-            quest.requests({
+            requests({
                 url: 'allCateList',
                 success: function(res) {
                     pz.multistage.init({
@@ -272,4 +272,5 @@
             }
         }
     })()
+    pz.size.init()
 })(window.pz)
