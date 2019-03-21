@@ -58,8 +58,10 @@ let Ajax = function(params) {
     // 处理返回数据
     xhr.onreadystatechange = function() {
         // console.log(xhr)
+        console.log(xhr)
         if (xhr.readyState == 4) {
             if (xhr.status == 200) {
+                console.log(xhr.responseText)
                 params.success(JSON.parse(xhr.responseText));
             } else {
                 if (typeof params.failed == 'function') {

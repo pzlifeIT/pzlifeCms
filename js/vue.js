@@ -7,11 +7,9 @@ class Vue {
             this.proxyData(key);
         });
         this.methods = options.methods // 事件方法
-        this.mounted = options.mounted // 事件方法
         this.watcherTask = {}; // 需要监听的任务列表
         this.observer(data); // 初始化劫持监听所有数据
         this.compile(this.$el); // 解析dom
-        this.mounted()
     }
     proxyData(key) {
         let that = this;
@@ -75,6 +73,10 @@ class Vue {
                     this.watcherTask[attrVal].push(new Watcher(node, this, attrVal, 'innerHTML'))
                     node.removeAttribute('v-html')
                 }
+                if (node.hasAttribute('v-for')) {
+                    let attrVal = node.getAttribute('v-for');
+                    console.log(node)
+                }
                 this.compileText(node, 'innerHTML')
                 if (node.hasAttribute('@click')) {
                     let attrVal = node.getAttribute('@click')
@@ -89,8 +91,10 @@ class Vue {
     compileText(node, type) {
         let reg = /\{\{(.*?)\}\}/g,
             txt = node.textContent;
+        // console.log(reg.test(txt))
         if (reg.test(txt)) {
             node.textContent = txt.replace(reg, (matched, value) => {
+                console.log(value)
                 let tpl = this.watcherTask[value] || []
                 tpl.push(new Watcher(node, this, value, type))
                 if (value.split('.').length > 1) {
@@ -116,6 +120,7 @@ class Watcher {
         this.update()
     }
     update() {
+        console.log(this.vm.data[this.value])
         this.el[this.type] = this.vm.data[this.value]
     }
 }

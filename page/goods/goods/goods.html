@@ -28,6 +28,8 @@
                 <img src="../../../images/jia.png" alt="">
             </div>
         </a>
+        <input type="text" v-model="form">
+        <div class="">{{form}}</div>
     </div>
     <div class="gs-screen panel-default">
         <div class="gs-header panel-heading">
@@ -80,7 +82,7 @@
             <span class="col-md-2 bot-bor subli">管理</span>
         </div>
         <div class="table" id="goodlist">
-            <li class="table-tr" v-for="">
+            <li class="table-tr" v-for="goodlist">
                 <span class="col-md-1 bot-bor subli">ID</span>
                 <span class="col-md-2 bot-bor subli">图片</span>
                 <span class="col-md-1 bot-bor subli">商品名称</span>
