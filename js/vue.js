@@ -7,9 +7,11 @@ class Vue {
             this.proxyData(key);
         });
         this.methods = options.methods // 事件方法
+        this.mounted = options.mounted // 事件方法
         this.watcherTask = {}; // 需要监听的任务列表
         this.observer(data); // 初始化劫持监听所有数据
         this.compile(this.$el); // 解析dom
+        this.mounted()
     }
     proxyData(key) {
         let that = this;

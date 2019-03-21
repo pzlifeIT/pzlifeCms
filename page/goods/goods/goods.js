@@ -10,8 +10,8 @@ new Vue({
         }
     },
     mounted() {
-        console.log(this.methods.getgoodslist({}))
-
+        console.log()
+        this.methods.getgoodslist({})
     },
     methods: {
         changeValue() {

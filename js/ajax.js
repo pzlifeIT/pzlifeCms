@@ -146,7 +146,6 @@ let questurl = {
     getgoodssubject: 'subject/getgoodssubject' //获取商品专题
 }
 let requests = function(params) {
-    let t = this
     if (!questurl[params.url]) return
     Ajax({
         data: params.data || '',
