@@ -11,37 +11,33 @@
 </head>
 
 <body>
-    <div class="navbar-header">
-        <div class="navbar-logo"></div>
-    </div>
+
     <div class="navbar  din fl">
-        <!-- <div class="nav-user">
+        <div class="nav-user">
             <div class="user-content">
-                <img class="headimg" src="http://ozwpnu2pa.bkt.clouddn.com/profile_small.jpg" alt="">
-                <p class="username">这是个名字</p>
-                <p class="userstatus">超级管理员</p>
+                <img class="headimg" src="http://bpic.588ku.com/element_origin_min_pic/17/03/16/27cf0027a3d5e7880252b2161be88725.jpg" alt="">
+                <p class="username" id="username">82年咖啡</p>
+                <p class="userstatus" id="userstatus">超级管理员</p>
+                <ul id="dropdown-menu" class="dropdown-menu hide">
+                    <li class="menu-li" data-url="page/user/alterpwd/alterpwd.html" data-name="修改密码">修改密码</li>
+                    <li id="exitlogin">安全退出</li>
+                </ul>
             </div>
-        </div> -->
-        <div class="sidebar">
+        </div>
+        <div class="sidebar" id="sidebar">
             <ul class="sb_list">
-                <!-- <li class="sb_li">
-                    <a class="sb_tit din" href="#"><img class="din fl" src="" alt="">首页</a>
-                </li> -->
+                <li class="sb_li">
+                    <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_14.png" alt="">权限管理</a>
+                    <ul class="sb_sub_list ">
+                        <li data-url="page/jurisdiction/member/member.html" data-name="成员管理">成员管理</li>
+                    </ul>
+                </li>
                 <li class="sb_li">
                     <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_17.png" alt="">订单</a>
                     <ul class="sb_sub_list ">
                         <li data-url="page/order/order/orderlist.html" data-name="订单管理">订单管理</li>
                     </ul>
                 </li>
-                <!-- <li class="sb_li">
-                    <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_13.png" alt="">店铺</a>
-                    <ul class="sb_sub_list ">
-                        <li data-url="dingdan.html" data-name="店铺管理">店铺管理</li>
-                        <li data-url="dingdan.html">店铺申请列表</li>
-                        <li data-url="dingdan.html">店铺审核列表</li>
-                        <li data-url="dingdan.html">买主代表奖金</li>
-                    </ul>
-                </li> -->
                 <li class="sb_li">
                     <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_09.png" alt="">商品</a>
                     <ul class="sb_sub_list ">
@@ -55,8 +51,6 @@
                 <li class="sb_li">
                     <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_14.png" alt="">钻石活动</a>
                     <ul class="sb_sub_list ">
-                        <!-- <li data-url="page/operation/coupon.html" data-name="优惠券活动">创建BOSS分享钻石</li>
-                        <li>审核钻石卡分享机会</li> -->
                         <li data-url="page/diamond/acquire/acquire.html" data-name="BOSS分享钻石卡">BOSS分享钻石卡</li>
                     </ul>
                 </li>
@@ -66,56 +60,28 @@
                         <li data-url="page/advertising/advertising/advertising.html" data-name="广告位管理">广告位管理</li>
                     </ul>
                 </li>
-                <!-- <li class="sb_li">
-                    <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_14.png" alt="">会员</a>
-                    <ul class="sb_sub_list ">
-                        <li>会员管理</li>
-                    </ul>
-                </li> -->
-                <!-- <li class="sb_li">
-                    <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_03.png" alt="">运营</a>
-                    <ul class="sb_sub_list ">
-                        <li>banner管理</li>
-                        <li data-url="page/operation/coupon.html" data-name="优惠券活动">优惠券活动</li>
-                        <li>分类专题</li>
-                        <li>分类专题商品推荐</li>
-                        <li>首页商品推荐管理</li>
-                        <li>分类商品推荐管理</li>
-                        <li>产品详情推荐管理</li>
-                    </ul>
-                </li> -->
-                <!-- <li class="sb_li">
-                    <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_10.png" alt="">平台设置</a>
-                    <ul class="sb_sub_list ">
-                        <li>权限管理</li>
-                        <li>人工调账</li>
-                        <li>分销分利比例设置</li>
-                        <li>系统配置</li>
-                    </ul>
-                </li> -->
+
             </ul>
         </div>
     </div>
-    <div class="right din fl" onclick="">
+    <div class="right din fl">
+        <div class="right-header">品质生活CMS</div>
         <div class="r_tit_list">
             <div class="roll-nav roll-left din fl"></div>
-            <ul class="r_tit_ul din">
+            <ul class="r_tit_ul din" id="">
                 <li class="r_tit_li active" name="workbench">首页</li>
             </ul>
             <div class="roll-nav roll-right din fr"></div>
         </div>
-        <div class="content">
+        <div class="content" id="content">
             <iframe class="J_iframe" id="workbench" name="workbench" width="100%" height="100%" src="workbench.html" frameborder="0" seamless></iframe>
         </div>
     </div>
 </body>
-<script type="text/javascript" src="js/jq.js"></script>
-<script type="text/javascript" src="js/left.js"></script>
-<!-- <script type="module" src="index.js"></script> -->
-<script>
-</script>
+<script type="module" type="text/javascript" src="js/left.js"></script>
+<script type="module" src="index.js?1.0.1"></script>
+
 <script type="text/javascript">
-    Tab.init(document.querySelector('.navbar'), document.querySelector('.content'))
 </script>
 
 </html>

@@ -1,4 +1,4 @@
-import { requests } from '../../../js/ajax.js';
+import { app } from '../../../index.js';
 (function(pz) {
     tab({ head: '#dlnav', con: '.dlnav-con', num: 1 });
     select({ el: '#agaddType', data: [{ id: 1, type_name: '专题' }, { id: 21, type_name: '商品图片' }, { id: 22, type_name: '商品信息' }, { id: 3, type_name: '跳转路径' }] });
@@ -250,7 +250,7 @@ import { requests } from '../../../js/ajax.js';
             },
             getRecommend(data) {
                 let t = this
-                requests({
+                app.requests({
                     url: 'getRecommend',
                     success(res) {
                         // t.ids = res.recommends_ids || []
@@ -437,7 +437,7 @@ import { requests } from '../../../js/ajax.js';
             },
             delRecommend(id) {
                 let t = this
-                requests({
+                app.requests({
                     url: 'delRecommend',
                     data: { id: id },
                     success(res) {
@@ -456,7 +456,7 @@ import { requests } from '../../../js/ajax.js';
             },
             getRecommendInfo1(id) {
                 let t = this
-                requests({
+                app.requests({
                     url: 'getRecommendInfo',
                     data: { id: id },
                     success(res) {
@@ -622,7 +622,7 @@ import { requests } from '../../../js/ajax.js';
                 } else if (data.uploadtype === 'add') {
                     url = 'addRecommend'
                 }
-                requests({
+                app.requests({
                     url: url,
                     data: params,
                     success(res) {
@@ -693,7 +693,7 @@ import { requests } from '../../../js/ajax.js';
             },
             getRecommendInfo(data) {
                 let t = this
-                requests({
+                app.requests({
                     url: 'getRecommendInfo',
                     data: { id: data.id },
                     success(res) {

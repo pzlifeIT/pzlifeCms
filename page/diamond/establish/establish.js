@@ -1,4 +1,4 @@
-import { requests } from '../../../js/ajax.js';;
+import { app } from '../../../index.js';;
 (function(pz) {
     pz.establish = (function() {
         function _EH(o) {
@@ -49,7 +49,7 @@ import { requests } from '../../../js/ajax.js';;
             creatBossShareDiamondvip: function(data) {
                 let t = this
                 t.proceed = false
-                requests({
+                app.requests({
                     url: 'creatBossShareDiamondvip',
                     data: {
                         mobile: data.mobile,

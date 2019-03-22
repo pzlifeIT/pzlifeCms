@@ -1,4 +1,4 @@
-import { app, requests } from '../../../index.js';
+import { app } from '../../../index.js';
 (function(pz) {
     tab({ head: '#dlnav', con: '.dlnav-con', num: 1 });
     select({ el: '#redmoneyStatus', data: [{ id: 1, type_name: '直接领取' }, { id: 2, type_name: '分享激活后获得' }] });
@@ -15,7 +15,7 @@ import { app, requests } from '../../../index.js';
             },
             getBossShareDiamondvip: function(data) {
                 let t = this
-                requests({
+                app.requests({
                     url: 'getBossShareDiamondvip',
                     data: {
                         page: data.page || 1,
@@ -107,7 +107,7 @@ import { app, requests } from '../../../index.js';
             passBossShareDiamondvip: function(data) {
                 let t = this
                 if (data.id == '' || data.id == null) return
-                requests({
+                app.requests({
                     url: 'passBossShareDiamondvip',
                     data: {
                         id: data.id,

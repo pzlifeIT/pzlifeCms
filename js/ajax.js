@@ -142,23 +142,8 @@ let questurl = {
 }
 
 let request = function(params) {
-    if (!questurl[params.url]) return
-    Ajax({
-        data: params.data || '',
-        url: questurl[params.url],
-        success: function(res) {
-            if (res.code == '200' || res.code == '3000') {
-                params.success(res)
-            } else {
-                if (typeof params.Error == 'function') {
-                    params.Error(res.code)
-                }
-            }
-        },
-        failed: function(code) {
-
-        }
-    })
+    params.url = questurl[params.url] || params.url;
+    Ajax(params)
 }
 
 export {

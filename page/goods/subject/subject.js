@@ -1,4 +1,4 @@
-import { app, requests } from '../../../index.js';;
+import { app } from '../../../index.js';;
 (function(pz) {
 
     pz.subject = (function() {
@@ -54,7 +54,7 @@ import { app, requests } from '../../../index.js';;
             },
             getallsubject: function() { //获取所有专题
                 let t = this
-                requests({
+                app.requests({
                     url: 'getallsubject',
                     data: {
                         stype: 1
@@ -111,7 +111,7 @@ import { app, requests } from '../../../index.js';;
             },
             subjectDetail: function(id) { //获取专题详细信息
                 let t = this
-                requests({
+                app.requests({
                     url: 'getsubjectdetail',
                     data: {
                         subject_id: id
@@ -199,7 +199,7 @@ import { app, requests } from '../../../index.js';;
             },
             editsubject: function(data) { //修改专题
                 let t = this
-                requests({
+                app.requests({
                     url: 'editsubject',
                     data: {
                         id: data.id,
@@ -284,7 +284,7 @@ import { app, requests } from '../../../index.js';;
                         t.newImg = images[0].image;
                     }
                 })
-                requests({
+                app.requests({
                     url: 'getallsubject',
                     data: {
                         stype: 2
@@ -316,7 +316,7 @@ import { app, requests } from '../../../index.js';;
                 let t = this,
                     subject = t.nameNew.value,
                     pid = t.combobox_class.getAttribute('data-id');
-                requests({
+                app.requests({
                     url: 'addsubject',
                     data: {
                         pid: pid,

@@ -48,6 +48,8 @@
     color: #fff;
     font-size: 18px;
     border-radius: 6px;
+    cursor: pointer;
+    user-select: none;
 }
 
 .alterpwd {

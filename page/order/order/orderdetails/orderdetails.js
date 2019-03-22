@@ -1,4 +1,4 @@
-import { app, requests } from '../../../../index.js';;
+import { app } from '../../../../index.js';;
 (function(pz) {
     tab({
         head: '#dlnav',
@@ -36,7 +36,7 @@ import { app, requests } from '../../../../index.js';;
             },
             getorderdetail: function() {
                 let t = this
-                requests({
+                app.requests({
                     url: 'getOrderInfo',
                     data: {
                         id: t.id
@@ -131,7 +131,7 @@ import { app, requests } from '../../../../index.js';;
             },
             updateDeliverOrderGoods: function(data) {
                 let that = this
-                requests({
+                app.requests({
                     url: 'updateDeliverOrderGoods',
                     data: {
                         order_goods_id: data.order_goods_id,
@@ -156,7 +156,7 @@ import { app, requests } from '../../../../index.js';;
             },
             deliverOrderGoods: function(data) {
                 let that = this
-                requests({
+                app.requests({
                     url: 'deliverOrderGoods',
                     data: {
                         order_goods_id: data.order_goods_id,

@@ -1,21 +1,4 @@
 var utils = {
-    showToast(obj) {
-        if (!obj) {
-            obj = {}
-        }
-        let parms = {
-            type: obj.type || 'success',
-            text: obj.text || '成功'
-        }
-        let body = document.querySelector('body'),
-            ran = parseInt(Math.random() * 100000000);
-        let str = '<div id="st' + ran + '" class="showToast ' + parms.type + '"><span class="text">' + parms.text + '</span></div>'
-        body.innerHTML += str
-        setTimeout(function() {
-            body.removeChild(document.querySelector('#st' + ran));
-        }, 2000)
-        console.log(parseInt(Math.random() * 100000000000))
-    },
     showLoading() {
 
     },
@@ -70,4 +53,21 @@ var utils = {
         <body><table>${str}</table></body></html>`; //下载模板      
         window.location.href = uri + window.btoa(unescape(encodeURIComponent(template)))
     }
+}
+let showToast = function(obj = {}) {
+    let body = document.querySelector('body'),
+        ran = parseInt(Math.random() * 100000000),
+        div = document.createElement("div");
+    obj.type = obj.type || 'error'
+    obj.text = obj.text || ''
+    div.setAttribute("id", "st" + ran);
+    div.setAttribute("class", "showToast " + obj.type);
+    div.innerHTML = '<span class="text din fl">' + obj.text + '</span>';
+    body.appendChild(div);
+    setTimeout(function() {
+        body.removeChild(document.querySelector('#st' + ran));
+    }, 2000)
+}
+export {
+    showToast
 }

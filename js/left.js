@@ -1,20 +1,48 @@
-(function($) {
+import { app } from '../index.js';;
+(function() {
     var Tab = (function() {
-        function _Tab(lf, ct) {
-            this.lf = lf;
-            this.ct = ct
+        function _Tab() {
+            this.sidebar = document.querySelector('#sidebar');
+            this.content = document.querySelector('#content');
+            this.userstatus = document.querySelector('#userstatus');
+            this.username = document.querySelector('#username');
+            this.menutatus = document.querySelector('#dropdown-menu');
+            this.tabLis = this.sidebar.querySelectorAll('.sb_li');
+            this.subUls = this.sidebar.querySelectorAll('.sb_sub_list');
+            this.titul = document.querySelector('.r_tit_ul');
+            this.menuli = this.menutatus.querySelectorAll('.menu-li')
             this.init();
-            this.bind();
         }
         _Tab.prototype.init = function() {
-            this.tabLis = this.lf.querySelectorAll('.sb_li');
-            this.subUls = this.lf.querySelectorAll('.sb_sub_list');
-            this.titul = document.querySelector('.r_tit_ul');
+            this.bind();
             this.workbench()
-
         }
         _Tab.prototype.bind = function() {
             var _this = this;
+            let st = setInterval(function() {
+                console.log(app.globalData.admininfo.admin_name)
+                if (app.globalData.admininfo.admin_name) {
+                    _this.username.innerHTML = app.globalData.admininfo.admin_name
+                    if (app.globalData.admininfo.stype == 1) {
+                        _this.userstatus.innerHTML = '管理员'
+                    } else if (app.globalData.admininfo.stype == 2) {
+                        _this.userstatus.innerHTML = '超级管理员'
+                    }
+                    clearInterval(st)
+                }
+            }, 1000)
+
+            _this.userstatus.addEventListener('click', function(e) {
+                e.stopPropagation()
+                _this.menutatus.classList.remove('hide')
+            })
+            document.querySelector('body').onclick = function(e) {
+                _this.menutatus.classList.add('hide')
+            }
+            document.querySelector('#exitlogin').addEventListener('click', function() {
+                app.globalData.cms_con_id = ''
+                window.location.href = window.location.origin + '/page/user/login/login.html'
+            })
             _this.tabLis.forEach(function(tabLi) {
                 let a = tabLi.querySelector('.sb_tit')
                 a.addEventListener('click', function(e) {
@@ -24,7 +52,18 @@
                     tabLi.classList.add('active')
                 })
             });
-
+            this.menuli.forEach(function(li) {
+                li.addEventListener('click', function(e) {
+                    let url = li.getAttribute("data-url"),
+                        name = li.getAttribute("data-name"),
+                        urlname = _this.getUrl(url)
+                    _this.setiframe(url, urlname)
+                    _this.setli(name, urlname)
+                    _this.hideIframe(urlname)
+                    _this.settit(urlname)
+                    _this.titleli()
+                })
+            });
             _this.subUls.forEach(function(subul) {
                 let lis = subul.querySelectorAll('li')
                 lis.forEach(function(li) {
@@ -66,10 +105,6 @@
             }, 100)
 
         }
-        _Tab.prototype.hasactive = function(li) { //是否已经有active
-
-        }
-
         _Tab.prototype.hasactive = function(li) { //是否已经有active
             if (li.classList.contains('active')) {
                 return true
@@ -132,7 +167,7 @@
 
         _Tab.prototype.cleariframe = function(name) {
             if (!this.exist('.J_iframe', name)) return
-            let iframe = this.ct.querySelector(".J_iframe[name='" + name + "']")
+            let iframe = this.content.querySelector(".J_iframe[name='" + name + "']")
             iframe.parentNode.removeChild(iframe)
         }
 
@@ -143,7 +178,7 @@
 
         _Tab.prototype.setiframe = function(url, urlname) { //清除iframe
             if (this.exist('.J_iframe', urlname)) return
-            this.ct.innerHTML += '<iframe class="J_iframe" name="' + urlname + '" width="100%" height="100%" src="' + url + '" frameborder="0" seamless></iframe>'
+            this.content.innerHTML += '<iframe class="J_iframe" name="' + urlname + '" width="100%" height="100%" src="' + url + '" frameborder="0" seamless></iframe>'
         }
 
         _Tab.prototype.getUrl = function(url) {
@@ -178,10 +213,10 @@
             })
         }
         return {
-            init: function(lf, ct) {
-                new _Tab(lf, ct)
+            init: function() {
+                new _Tab()
             }
         }
     })()
-    window.Tab = Tab
-})(jQuery)
+    Tab.init()
+})()

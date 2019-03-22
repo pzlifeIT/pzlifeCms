@@ -1,4 +1,4 @@
-import { app, requests } from '../../../index.js';;
+import { app } from '../../../index.js';;
 (function(win) {
 
     pz.goodsclassify = (function() {
@@ -34,7 +34,7 @@ import { app, requests } from '../../../index.js';;
         }
         _GC.prototype.getcatelist = function() { //数据循环到页面
             let t = this
-            requests({
+            app.requests({
                 data: {
                     type: 3
                 },
@@ -49,7 +49,7 @@ import { app, requests } from '../../../index.js';;
         _GC.prototype.gettwocategory = function() {
             let t = this
             console.log(21212)
-            requests({
+            app.requests({
                 url: 'addcatepage',
                 success: function(res) {
                     pz.multistage.init({
@@ -83,7 +83,7 @@ import { app, requests } from '../../../index.js';;
                 let params = {}
                 params.id = t.id
                 params.type_name = t.classcompile.querySelector('#classname').value
-                requests({
+                app.requests({
                     url: 'saveeditcate',
                     data: params,
                     success: function(res) {
@@ -170,7 +170,7 @@ import { app, requests } from '../../../index.js';;
         }
         _GC.prototype.classifydetail = function() { //获取分类详细信息
             let t = this
-            requests({
+            app.requests({
                 url: 'editcatepage',
                 data: {
                     id: t.id
@@ -192,7 +192,7 @@ import { app, requests } from '../../../index.js';;
         }
         _GC.prototype.saveaddcate = function(p) { //添加分类
             let t = this
-            requests({
+            app.requests({
                 url: 'saveaddcate',
                 data: p.data,
                 success: function(res) {
@@ -281,7 +281,7 @@ import { app, requests } from '../../../index.js';;
                     } else {
                         gtype = 1
                     }
-                    requests({
+                    app.requests({
                         url: 'stopstartcate',
                         data: {
                             id: id,

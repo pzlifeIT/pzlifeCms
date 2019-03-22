@@ -1,4 +1,4 @@
-import { app, requests } from '../../../../index.js';;
+import { app } from '../../../../index.js';;
 (function(pz) {
     tab({
         head: '#dlnav',
@@ -64,7 +64,7 @@ import { app, requests } from '../../../../index.js';;
                     return
                 }
 
-                requests({
+                app.requests({
                     url: 'getonegoods',
                     data: {
                         id: t.id,
@@ -152,7 +152,7 @@ import { app, requests } from '../../../../index.js';;
             },
             getsupplierfreights: function() { // 获取供应商快递模板列表
                 let t = this
-                requests({
+                app.requests({
                     url: 'getsupplierfreights',
                     data: {
                         supplierId: t.goodInfo.goods_data.supplier_id
@@ -203,7 +203,7 @@ import { app, requests } from '../../../../index.js';;
 
             sortImg: function(order_by) { //商品详情图排序
                 let t = this;
-                requests({
+                app.requests({
                     url: 'sortimagedetail',
                     data: {
                         image_path: t.sortImgpath,
@@ -272,7 +272,7 @@ import { app, requests } from '../../../../index.js';;
             },
             delImg: function(image, type) { //删除轮播图和详情图接口
                 let t = this;
-                requests({
+                app.requests({
                     url: 'delgoodsimage',
                     data: {
                         image_path: image
@@ -313,7 +313,7 @@ import { app, requests } from '../../../../index.js';;
             },
             uploadgoodsimages: function(formData, type) { //提交商品详情和轮播图
                 let t = this
-                requests({
+                app.requests({
                     url: 'uploadgoodsimages',
                     data: formData,
                     success: function(res) {
@@ -445,7 +445,7 @@ import { app, requests } from '../../../../index.js';;
             },
             subjectSave: function(id) {
                 let t = this
-                requests({
+                app.requests({
                     url: 'subjectgoodsassoc',
                     data: {
                         goods_id: t.id,
@@ -484,7 +484,7 @@ import { app, requests } from '../../../../index.js';;
             },
             getgoodssubject: function(type) { //获取商品专题
                 let t = this
-                requests({
+                app.requests({
                     url: 'getgoodssubject',
                     data: {
                         goods_id: t.id,
@@ -538,7 +538,7 @@ import { app, requests } from '../../../../index.js';;
             delgoodssubjectassoc: function(id) {
                 let t = this
                 if (this.id == '') return
-                requests({
+                app.requests({
                     url: 'delgoodssubjectassoc',
                     data: {
                         goods_id: t.id,
@@ -576,7 +576,7 @@ import { app, requests } from '../../../../index.js';;
                 for (i = 0; i < len; i++) {
                     formdata.append('images[]', file[i])
                 }
-                requests({
+                app.requests({
                     data: formdata,
                     url: 'uploadmultifile',
                     success: function(res) {
@@ -631,7 +631,7 @@ import { app, requests } from '../../../../index.js';;
             },
             getSuppliersAll: function() { //获取所有供应商
                 let t = this
-                requests({
+                app.requests({
                     url: 'getsuppliersall',
                     success: function(res) {
                         select({
@@ -673,7 +673,7 @@ import { app, requests } from '../../../../index.js';;
                 } else {
                     cateId = document.querySelector('#cateIdAmend').getAttribute('data-id')
                 }
-                requests({
+                app.requests({
                     url: 'saveupdategoods',
                     data: {
                         goods_id: t.id,
@@ -734,7 +734,7 @@ import { app, requests } from '../../../../index.js';;
                     goodsType = pz.getEl('#goodsTypeNew').querySelector('.ant-select-selection').getAttribute('data-id'),
                     supplierId = pz.getEl('#supplierIdNew').querySelector('.ant-select-selection').getAttribute('data-id'),
                     cateId = pz.getEl('.cateIdNew').getAttribute('data-id');
-                requests({
+                app.requests({
                     url: 'saveaddgoods',
                     data: {
                         supplier_id: supplierId,
@@ -790,7 +790,7 @@ import { app, requests } from '../../../../index.js';;
             },
             allCateList: function() { //获取所有分类
                 let t = this
-                requests({
+                app.requests({
                     url: 'allCateList',
                     success: function(res) {
                         pz.multistage.init({
@@ -815,7 +815,7 @@ import { app, requests } from '../../../../index.js';;
             },
             getspecattr: function() { //获取一级规格和二级属性
                 let t = this
-                requests({
+                app.requests({
                     url: 'getspecattr',
                     data: {
                         cate_id: t.goodInfo.goods_data.cate_id
@@ -875,7 +875,7 @@ import { app, requests } from '../../../../index.js';;
                 let t = this,
                     attrid = document.querySelector('#selsite').querySelector('.ant-select-selection').getAttribute('data-id')
                 if (!attrid) return
-                requests({
+                app.requests({
                     url: 'addgoodsspec',
                     data: {
                         goods_id: t.id,
@@ -949,7 +949,7 @@ import { app, requests } from '../../../../index.js';;
             },
             delgoodsspec: function(tid) { //删除规格接口
                 let t = this
-                requests({
+                app.requests({
                     url: 'delgoodsspec',
                     data: {
                         goods_id: t.id,
@@ -1041,7 +1041,7 @@ import { app, requests } from '../../../../index.js';;
             },
             getgoodssku: function(id) { //获取一条sku
                 let t = this
-                requests({
+                app.requests({
                     url: 'getgoodssku',
                     data: {
                         sku_id: id
@@ -1113,7 +1113,7 @@ import { app, requests } from '../../../../index.js';;
                     weight = document.querySelector('#weight').value,
                     volume = document.querySelector('#volume').value,
                     freight_id = t.freight.querySelector('.ant-select-selection').getAttribute('data-id');
-                requests({
+                app.requests({
                     url: 'editgoodssku',
                     data: {
                         sku_id: t.skuid,

@@ -5,24 +5,33 @@
 }
 
 .navbar-logo {
+    box-sizing: border-box;
     width: 200px;
     height: 100%;
-    background-color: #3280FC;
+    line-height: 48px;
+    font-size: 18px;
+    text-align: center;
+    color: #fff;
+    background-color: #2f4050;
+    border-bottom: 1px solid #fff;
 }
 
 .navbar {
-    height: calc(100% - 48px);
+    height: 100%;
     background-color: #2f4050;
+    overflow: auto;
 }
 
 .sidebar {
     width: 200px;
-    height: 100%;
     overflow: auto;
     /* background-color: #eee; */
 }
 
-.sidebar .sb_list {}
+.sidebar .sb_list {
+    height: 100%;
+    overflow: auto;
+}
 
 .sidebar .sb_list .sb_li {
     color: #a7b1c2;
@@ -83,7 +92,7 @@
 
 .right {
     width: calc(100% - 200px);
-    height: calc(100% - 48px);
+    height: 100%;
     overflow: hidden;
 }
 
@@ -168,21 +177,20 @@
 }
 
 .content {
-    height: calc(100% - 43px);
+    height: calc(100% - 90px);
     overflow: hidden;
     background-color: #F5F5F5;
 }
 
 .nav-user {
-    height: 155px;
-    background: url(http://ozwpnu2pa.bkt.clouddn.com/header-profile.png) no-repeat;
-    overflow: auto;
+    height: 105px;
+    background: url(https://webimages.pzlive.vip/header-profile.png) no-repeat;
+    padding: 25px;
 }
 
 .user-content {
-    width: 170px;
+    width: 140px;
     height: 105px;
-    margin: 25px auto;
 }
 
 .user-content p {
@@ -196,10 +204,65 @@
 .user-content .userstatus {
     margin-top: 5px;
     color: #8095a8;
+    cursor: pointer;
+    user-select: none;
+}
+
+.userstatus::after {
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-top: 4px solid\9;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
 }
 
 .headimg {
     width: 64px;
     height: 64px;
     border-radius: 50%;
+}
+
+.right-header {
+    width: 100%;
+    height: 48px;
+    line-height: 48px;
+    text-align: center;
+    color: red;
+    font-size: 20px;
+    background-color: #f3f3f4;
+}
+
+.user-content {
+    position: relative;
+}
+
+.user-content .dropdown-menu {
+    position: absolute;
+    width: 140px;
+    margin-top: 5px;
+    padding-top: 5px;
+    background-color: #fff;
+    font-size: 12px;
+    box-shadow: 0 0 3px rgba(86, 96, 117, 0.3);
+    border-radius: 2px;
+    z-index: 20;
+}
+
+.user-content .dropdown-menu li {
+    width: 100%;
+    line-height: 31px;
+    text-indent: 20px;
+    color: #333;
+    cursor: pointer;
+    user-select: none;
+}
+
+.user-content .dropdown-menu li:hover {
+    background-color: #f5f5f5;
+    color: #262626;
 }

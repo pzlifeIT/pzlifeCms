@@ -1,4 +1,4 @@
-import { app, requests } from '../../../index.js';;
+import { app } from '../../../index.js';;
 (function() {
     pz.supplier = (function() {
         function _SR(o) {
@@ -59,7 +59,7 @@ import { app, requests } from '../../../index.js';;
         }
         _SR.prototype.getsuppliers = function(o) { //获得供应商列表
             let t = this
-            requests({
+            app.requests({
                 url: 'getsuppliers',
                 data: {
                     page: o.page || 1,
@@ -142,7 +142,7 @@ import { app, requests } from '../../../index.js';;
         }
         _SR.prototype.getsupplierdata = function() { //获取供应商详情
             let t = this
-            requests({
+            app.requests({
                 url: 'getSupplierData',
                 data: {
                     supplierId: t.id
@@ -213,7 +213,7 @@ import { app, requests } from '../../../index.js';;
             formData.image = this.images
             if (t.id != '') {
                 formData.id = this.id
-                requests({
+                app.requests({
                     url: 'updateSupplier',
                     data: formData,
                     success: function(res) {
@@ -251,7 +251,7 @@ import { app, requests } from '../../../index.js';;
                     }
                 })
             } else {
-                requests({
+                app.requests({
                     url: 'addsupplier',
                     data: formData,
                     success: function(res) {

@@ -1,4 +1,4 @@
-import { app, requests } from '../../../index.js';;
+import { app } from '../../../index.js';;
 (function(pz) {
     select({ el: '#combobox1', data: [{ id: 1, type_name: '已上架' }, { id: 2, type_name: '已下架' }, { id: '', type_name: '不限制' }] })
     pz.goods = (function() {
@@ -40,7 +40,7 @@ import { app, requests } from '../../../index.js';;
             },
             getgoodslist: function(o) {
                 let t = this
-                requests({
+                app.requests({
                     url: 'getgoodslist',
                     data: {
                         page: o.page || 1,
@@ -143,7 +143,7 @@ import { app, requests } from '../../../index.js';;
             },
             portupdowngoods: function(id, type) { //商品上下架接口
                 let t = this
-                requests({
+                app.requests({
                     url: 'updowngoods',
                     data: {
                         id: id,

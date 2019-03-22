@@ -1,4 +1,5 @@
-import { app, requests } from '../../../index.js';;
+import { app } from '../../../index.js';;
+console.log('运行了');
 (function(pz) {
     select({
         el: '#order_status',
@@ -65,7 +66,7 @@ import { app, requests } from '../../../index.js';;
             },
             getorderlist: function(o) {
                 let t = this
-                requests({
+                app.requests({
                     url: 'getOrders',
                     data: {
                         page: o.page || 1,

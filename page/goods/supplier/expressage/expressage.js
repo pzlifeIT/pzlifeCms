@@ -1,4 +1,4 @@
-import { app, requests } from '../../../../index.js';;
+import { app } from '../../../../index.js';;
 (function(pz) {
     select({
         el: '#EEcombobox',
@@ -41,7 +41,7 @@ import { app, requests } from '../../../../index.js';;
         }
         _EE.prototype.getfreight = function() { //获取供应商快递模板
             let t = this
-            requests({
+            app.requests({
                 url: 'getsupplierfreights',
                 data: {
                     supplierId: t.supplierId
@@ -104,7 +104,7 @@ import { app, requests } from '../../../../index.js';;
         }
         _EE.prototype.getSupplierFreight = function() {
             let t = this
-            requests({
+            app.requests({
                 url: 'getSupplierFreight',
                 data: {
                     supplierFreightId: t.id
@@ -162,7 +162,7 @@ import { app, requests } from '../../../../index.js';;
                 eeTitle = document.querySelector('#eeTitle').value,
                 eeDesc = document.querySelector('#eeDesc').value;
             if (t.id == '') {
-                requests({
+                app.requests({
                     url: 'addsupplierfreight',
                     data: {
                         supplierId: t.supplierId,
@@ -192,7 +192,7 @@ import { app, requests } from '../../../../index.js';;
                     }
                 })
             } else {
-                requests({
+                app.requests({
                     url: 'updateSupplierFreight',
                     data: {
                         supplier_freight_Id: t.id,

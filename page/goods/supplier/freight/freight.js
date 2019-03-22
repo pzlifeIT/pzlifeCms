@@ -1,4 +1,4 @@
-import { app, requests } from '../../../../index.js';;
+import { app } from '../../../../index.js';;
 (function(pz) {
     pz.freight = (function() {
         function _FH(o) {
@@ -51,7 +51,7 @@ import { app, requests } from '../../../../index.js';;
         }
         _FH.prototype.getfreight = function() { //获取供应商快递模板运费列表
             let t = this
-            requests({
+            app.requests({
                 url: 'getSupplierFreightdetailList',
                 data: {
                     freight_id: t.FhId
@@ -115,7 +115,7 @@ import { app, requests } from '../../../../index.js';;
         }
         _FH.prototype.getsize = function() {
             let t = this
-            requests({
+            app.requests({
                 url: 'getprovincecitybyfreight',
                 data: {
                     freight_id: t.FhId,
@@ -278,7 +278,7 @@ import { app, requests } from '../../../../index.js';;
                 }
             }
             str = str.substr(0, str.length - 1);
-            requests({
+            app.requests({
                 url: 'updatesupplierfreightarea',
                 data: {
                     city_id_str: str,
@@ -328,7 +328,7 @@ import { app, requests } from '../../../../index.js';;
         }
         _FH.prototype.getSupplierFreight = function() {
             let t = this
-            requests({
+            app.requests({
                 url: 'getSupplierFreightdetail',
                 data: {
                     sfd_id: t.id
@@ -387,7 +387,7 @@ import { app, requests } from '../../../../index.js';;
                 if (fhAfter == '') return
                 if (fhTotal == '') return
                 if (countPinkage == '') return
-                requests({
+                app.requests({
                     url: 'addSupplierFreightdetail',
                     data: {
                         freight_id: t.FhId,
@@ -402,7 +402,7 @@ import { app, requests } from '../../../../index.js';;
                     }
                 })
             } else {
-                requests({
+                app.requests({
                     url: 'editsupplierfreightdetail',
                     data: {
                         freight_detail_id: t.id,
