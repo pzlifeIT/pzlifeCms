@@ -75,11 +75,11 @@ class Vue {
                     this.watcherTask[attrVal].push(new Watcher(node, this, attrVal, 'innerHTML'))
                     node.removeAttribute('v-html')
                 }
+                this.compileText(node, 'innerHTML')
                 if (node.hasAttribute('v-for')) {
                     let attrVal = node.getAttribute('v-for');
-                    console.log(node)
+                    this.compileFor(node, attrVal)
                 }
-                this.compileText(node, 'innerHTML')
                 if (node.hasAttribute('@click')) {
                     let attrVal = node.getAttribute('@click')
                     node.removeAttribute('@click')
@@ -90,13 +90,21 @@ class Vue {
             }
         }
     }
+    compileFor(node, type) {
+        console.log(node)
+        console.log(node.parentNode)
+        console.log(this.data[type])
+        let val = this.data[type],
+            len = val.length;
+        for (let i = 0; i < len; i++) {
+
+        }
+    }
     compileText(node, type) {
         let reg = /\{\{(.*?)\}\}/g,
             txt = node.textContent;
-        // console.log(reg.test(txt))
         if (reg.test(txt)) {
             node.textContent = txt.replace(reg, (matched, value) => {
-                console.log(value)
                 let tpl = this.watcherTask[value] || []
                 tpl.push(new Watcher(node, this, value, type))
                 if (value.split('.').length > 1) {
@@ -122,7 +130,6 @@ class Watcher {
         this.update()
     }
     update() {
-        console.log(this.vm.data[this.value])
         this.el[this.type] = this.vm.data[this.value]
     }
 }

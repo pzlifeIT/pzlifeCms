@@ -3,19 +3,24 @@ import { requests } from '../../../js/ajax.js';
 new Vue({
     el: '#wrap',
     data: {
-        form: '这是form的值',
+        form: '11111',
         test: '<strong>我是粗体</strong>',
+        goodlist: [{
+            type: 1,
+            name: '五毛'
+        }, {
+            type: 1,
+            name: '五毛'
+        }],
         obj: {
             test: 123
         }
     },
     mounted() {
-        console.log()
-        this.methods.getgoodslist({})
+        console.log(this.data['form.name'])
     },
     methods: {
         changeValue() {
-            console.log(this.form)
             this.form = '值被我改变了，气不气？'
         },
         getgoodslist: function(o) {
@@ -268,4 +273,3 @@ new Vue({
 //     })()
 // })(window.pz);
 // pz.goods.init()
-console.log(pz)
