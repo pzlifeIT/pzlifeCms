@@ -18,7 +18,6 @@ import { app } from '../../../../index.js';;
     pz.goodsoperation = (function() {
         function _GO() {
             this.id = pz.geturl().id || ''
-            console.log(this.id)
             this.attributeNew = pz.getEl('#attributeNew') //规格弹框
             this.amendAttribute = pz.getEl('#amendAttribute') //商品规格弹框
             this.previewphoto = pz.getEl('#previewphoto') //图片预览
@@ -73,7 +72,6 @@ import { app } from '../../../../index.js';;
                     success: function(res) {
                         if (get_type == 1 || get_type == '') {
                             t.goodInfo.goods_data = res.goods_data;
-                            console.log(t.goodInfo.goods_data)
                             t.isNewAmend(t.goodInfo.goods_data)
                         }
                         if (get_type == 2 || get_type == '') {
@@ -90,8 +88,8 @@ import { app } from '../../../../index.js';;
                         }
                         if (get_type == 5 || get_type == '') {
                             t.goodInfo.images_detatil = res.images_detatil;
-                            t.setImgsDetatil(t.goodInfo.images_detatil)
                             t.previewDetatil(t.goodInfo.images_detatil)
+                            t.setImgsDetatil(t.goodInfo.images_detatil)
                         }
                         t.getgoodssubject(1)
                     },
@@ -111,7 +109,6 @@ import { app } from '../../../../index.js';;
                 })
             },
             isNewAmend: function(data) { //商品类型:供应商:三级分类:是否已经选择
-                console.log(data)
                 if (data.cate_id == 0 || data.cate_id == '') {
                     this.allCateList()
                     this.elremovehide('.cateIdNew')
@@ -167,7 +164,6 @@ import { app } from '../../../../index.js';;
                 })
             },
             setImgsDetatil: function(data) { //详情图输出
-                console.log(data)
                 let t = this,
                     len = data.length,
                     i, str = ""
@@ -181,6 +177,12 @@ import { app } from '../../../../index.js';;
                     str += '<div class="pl-manage"><input class="imgDel" type="button" data-image="' + data[i].image_path + '" value="删除"><input type="button" class="imgsort" data-image="' + data[i].image_path + '" data-orderby="' + data[i].order_by + '" value="编辑"></div>'
                     str += '</div>'
                 }
+                if (len < 5 && len != 0) {
+                    let len1 = 5 - len;
+                    for (let y = 0; y < len1; y++) {
+                        str += '<div class="pl-li table-cell"></div>'
+                    }
+                }
                 t.imagesDetatil.innerHTML = str
                 t.delImgsDetatil()
                 t.imgsort()
@@ -190,6 +192,7 @@ import { app } from '../../../../index.js';;
                     lis = t.imagesDetatil.querySelectorAll('.pl-li')
                 lis.forEach(function(li) {
                     let imgsort = li.querySelector('.imgsort')
+                    if (!imgsort) return
                     imgsort.addEventListener('click', function(e) {
                         let image = imgsort.getAttribute('data-image'),
                             orderby = imgsort.getAttribute('data-orderby')
@@ -235,6 +238,7 @@ import { app } from '../../../../index.js';;
                 })
             },
             previewDetatil: function(data) { //预览图片
+                console.log(data)
                 let t = this,
                     len = data.length,
                     i, str = ""
@@ -248,6 +252,7 @@ import { app } from '../../../../index.js';;
                     lis = t.imagesDetatil.querySelectorAll('.pl-li')
                 lis.forEach(function(li) {
                     let imgDel = li.querySelector('.imgDel')
+                    if (!imgDel) return
                     imgDel.addEventListener('click', function(e) {
                         let image = imgDel.getAttribute('data-image')
                         t.delImg(image, 5)

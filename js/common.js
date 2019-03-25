@@ -1,4 +1,4 @@
-import { request } from './ajax.js';;
+import { app } from '../index.js';;
 (function(win, doc) {
     win.pz = function() {}
     win.pz = pz.prototype
@@ -346,7 +346,7 @@ import { request } from './ajax.js';;
             let t = this,
                 formdata = new FormData();
             formdata.append('image', file)
-            request({
+            app.requests({
                 data: formdata,
                 url: 'uploadfile',
                 success: function(res) {
@@ -388,7 +388,7 @@ import { request } from './ajax.js';;
                 for (i = 0; i < len; i++) {
                     formdata.append('images[]', file[i])
                 }
-                request({
+                app.requests({
                     data: formdata,
                     url: 'uploadmultifile',
                     success: function(res) {

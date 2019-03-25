@@ -1,5 +1,8 @@
 import { app } from '../../../index.js';;
 (function(pz) {
+    tab({ head: '#dlnav', con: '.dlnav-con', num: 1 });
+    select({ el: '#redmoneyStatus', data: [{ id: 1, type_name: '直接领取' }, { id: 2, type_name: '分享激活后获得' }] });
+    select({ el: '#type', data: [{ id: 1, type_name: '分享使用' }, { id: 2, type_name: '绑定二维码链接' }] });
     pz.establish = (function() {
         function _EH(o) {
             this.mobile = document.querySelector('#mobile')
@@ -14,7 +17,6 @@ import { app } from '../../../index.js';;
         _EH.prototype = {
             init: function() { //进入执行
                 this.elclick()
-                    // this.getBossShareDiamondvip({})
             },
             elclick: function() {
                 let t = this

@@ -29,16 +29,19 @@ var app = {
         })
     },
     requests(params) {
-        console.log(app)
         let that = this
-        params.data = params.data || {}
-        params.data.cms_con_id = localStorage.getItem("cms_con_id") || ''
+        if (!(params.data instanceof FormData)) {
+            params.data = params.data || {}
+            params.data.cms_con_id = localStorage.getItem("cms_con_id") || ''
+        } else {
+            params.data.append('cms_con_id', localStorage.getItem("cms_con_id") || '')
+        }
         request({
             data: params.data || '',
             url: params.url,
             success: function(res) {
                 if (!params.login & res.code == '5000') {
-                    console.log('1111')
+                    return
                     if (window.frames.parent) {
                         window.frames.parent.location.href = window.location.origin + '/page/user/login/login.html'
                     } else {
@@ -126,7 +129,7 @@ var app = {
         })
     }
 }
-app.getadmininfo()
+
 export {
     app
 }

@@ -331,8 +331,8 @@ import { app } from '../../../index.js';;
             y,
             len = data.length,
             len1,
-            len2
-        arr = []
+            len2,
+            arr = []
         for (i = 0; i < len; i++) {
             arr.push(data[i])
             if (data[i].hasOwnProperty('_child')) {

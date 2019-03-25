@@ -47,7 +47,6 @@ let Ajax = function(params) {
             xhr.setRequestHeader("Content-type", "text/plain", "charset=utf-8");
         }
         // console.log()
-
         // console.log(params.data)
         xhr.send(params.data);
     }

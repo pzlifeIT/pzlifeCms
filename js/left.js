@@ -1,5 +1,6 @@
 import { app } from '../index.js';;
 (function() {
+    app.getadmininfo()
     var Tab = (function() {
         function _Tab() {
             this.sidebar = document.querySelector('#sidebar');
