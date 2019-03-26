@@ -1,4 +1,5 @@
-import { app } from '../../../../index.js';;
+import { app } from '../../../../index.js';
+import { showToast } from '../../../../js/utils.js';
 (function(pz) {
     tab({
         head: '#dlnav',
@@ -37,7 +38,7 @@ import { app } from '../../../../index.js';;
             getorderdetail: function() {
                 let t = this
                 app.requests({
-                    url: 'getOrderInfo',
+                    url: 'Order/getOrderInfo',
                     data: {
                         id: t.id
                     },
@@ -45,14 +46,18 @@ import { app } from '../../../../index.js';;
                         t.disdetail(res)
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3002:
-                                alert('订单ID只能是数字')
+                                text = '订单ID只能是数字'
                                 break;
                             default:
-                                alert('意料之外的错误')
+                                text = '意料之外的错误'
                                 break;
                         }
+                        showToast({
+                            text: '操作失败'
+                        })
                     }
                 })
             },
@@ -132,51 +137,64 @@ import { app } from '../../../../index.js';;
             updateDeliverOrderGoods: function(data) {
                 let that = this
                 app.requests({
-                    url: 'updateDeliverOrderGoods',
+                    url: 'Order/updateDeliverOrderGoods',
                     data: {
                         order_goods_id: data.order_goods_id,
                         express_no: data.express_no,
                         express_key: data.express_key
                     },
                     success: function(res) {
-
-                        alert('修改成功')
+                        showToast({
+                            type: 'success',
+                            text: '操作成功'
+                        })
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3005:
-                                alert('商品已发货')
+                                text = '商品已发货'
                                 break;
                             default:
-                                alert('意料之外的错误')
+                                text = '意料之外的错误'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             },
             deliverOrderGoods: function(data) {
                 let that = this
                 app.requests({
-                    url: 'deliverOrderGoods',
+                    url: 'Order/deliverOrderGoods',
                     data: {
                         order_goods_id: data.order_goods_id,
                         express_no: data.express_no,
                         express_key: data.express_key
                     },
                     success: function(res) {
-                        alert('发货成功')
+                        showToast({
+                            type: 'success',
+                            text: '发货成功'
+                        })
                         document.querySelector('#' + data.id + '').querySelector('.btn-amend').setAttribute('data-t', 'true')
                         that.setnogoodsnum(res.no_deliver_goods.length)
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3005:
-                                alert('商品已发货')
+                                text = '商品已发货'
                                 break;
                             default:
-                                alert('意料之外的错误')
+                                text = '意料之外的错误'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             },

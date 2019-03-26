@@ -230,8 +230,18 @@
     transition: all .3s cubic-bezier(.78, .14, .15, .86);
 }
 
+#previewphoto .pz-modal-content::-webkit-scrollbar {
+    display: block;
+}
+
+#previewphoto .pz-modal-content::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.2);
+}
+
 .pz-spin-container {
     padding: 15px;
+    overflow: auto;
 }
 
 .pz-spin-container .dl-show .dl-title {

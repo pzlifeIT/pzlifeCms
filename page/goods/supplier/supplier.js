@@ -1,4 +1,5 @@
-import { app } from '../../../index.js';;
+import { app } from '../../../index.js';
+import { showToast } from '../../../js/utils.js';
 (function() {
     pz.supplier = (function() {
         function _SR(o) {
@@ -60,7 +61,7 @@ import { app } from '../../../index.js';;
         _SR.prototype.getsuppliers = function(o) { //获得供应商列表
             let t = this
             app.requests({
-                url: 'getsuppliers',
+                url: 'suppliers/getsuppliers',
                 data: {
                     page: o.page || 1,
                     pagenum: o.pagenum || 10,
@@ -76,14 +77,18 @@ import { app } from '../../../index.js';;
                     t.bottompage()
                 },
                 Error(code) {
+                    let text = ''
                     switch (parseInt(code)) {
                         case 3002:
-                            alert('页码和查询条数只能是数字')
+                            text = '页码和查询条数只能是数字'
                             break;
                         default:
-                            alert('意料之外的错误')
+                            text = '获取出错'
                             break;
                     }
+                    showToast({
+                        text: text
+                    })
                 }
             })
         }
@@ -143,7 +148,7 @@ import { app } from '../../../index.js';;
         _SR.prototype.getsupplierdata = function() { //获取供应商详情
             let t = this
             app.requests({
-                url: 'getSupplierData',
+                url: 'suppliers/getsupplierdata',
                 data: {
                     supplierId: t.id
                 },
@@ -151,14 +156,18 @@ import { app } from '../../../index.js';;
                     t.setData(res.data || [])
                 },
                 Error(code) {
+                    let text = ''
                     switch (parseInt(code)) {
                         case 3002:
-                            alert('供应商ID只能是数字')
+                            text = '供应商ID只能是数字'
                             break;
                         default:
-                            alert('意料之外的错误')
+                            text = '意料之外的错误'
                             break;
                     }
+                    showToast({
+                        text: text
+                    })
                 }
             })
         }
@@ -214,75 +223,93 @@ import { app } from '../../../index.js';;
             if (t.id != '') {
                 formData.id = this.id
                 app.requests({
-                    url: 'updateSupplier',
+                    url: 'suppliers/updatesupplier',
                     data: formData,
                     success: function(res) {
+                        showToast({
+                            type: 'success',
+                            text: '操作成功'
+                        })
                         t.srcom.classList.add('hide');
                         t.getsuppliers({
                             page: t.page
                         })
                     },
                     Error: function(code) {
+                        let type = ''
                         switch (parseInt(code)) {
                             case 3001:
-                                alert('手机号码格式错误')
+                                type = '手机号码格式错误'
                                 break;
                             case 3002:
-                                alert('提交数据不完整')
+                                type = '提交数据不完整'
                                 break;
                             case 3003:
-                                alert('供应商ID必须是数字')
+                                type = '供应商ID必须是数字'
                                 break;
                             case 3004:
-                                alert('更新失败')
+                                type = '更新失败'
                                 break;
                             case 3005:
-                                alert('图片没有上传过')
+                                type = '图片没有上传过'
                                 break;
                             case 3006:
-                                alert('供应商id不存在')
+                                type = '供应商id不存在'
                                 break;
                             case 3007:
-                                alert('供应商名称不能重复')
+                                type = '供应商名称不能重复'
                                 break;
                             default:
+                                type = '操作失败'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             } else {
                 app.requests({
-                    url: 'addsupplier',
+                    url: 'suppliers/addsupplier',
                     data: formData,
                     success: function(res) {
+                        showToast({
+                            type: 'success',
+                            text: '操作成功'
+                        })
                         t.srcom.classList.add('hide');
                         t.getsuppliers({
                             page: t.page
                         })
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3001:
-                                alert('手机号码格式错误')
+                                text = '手机号码格式错误'
                                 break;
                             case 3002:
-                                alert('提交数据不完整')
+                                text = '提交数据不完整'
                                 break;
                             case 3003:
-                                alert('未选择图片')
+                                text = '未选择图片'
                                 break;
                             case 3004:
-                                alert('添加失败')
+                                text = '添加失败'
                                 break;
                             case 3005:
-                                alert('图片没有上传过')
+                                text = '图片没有上传过'
                                 break;
                             case 3006:
-                                alert('供应商名字不能重复')
+                                text = '供应商名字不能重复'
                                 break;
                             default:
+                                text = ''
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             }

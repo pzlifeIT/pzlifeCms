@@ -1,4 +1,5 @@
 import { app } from '../../../index.js';
+import { showToast } from '../../../js/utils.js';
 (function(pz) {
     tab({ head: '#dlnav', con: '.dlnav-con', num: 1 });
     select({ el: '#agaddType', data: [{ id: 1, type_name: '专题' }, { id: 21, type_name: '商品图片' }, { id: 22, type_name: '商品信息' }, { id: 3, type_name: '跳转路径' }] });
@@ -237,7 +238,6 @@ import { app } from '../../../index.js';
                 data.model_id = '10'
                 data.parent_id = suberiorid[1]
                 data.image_path = t.type2Img
-                console.log(t.type2Id)
                 data.id = t.type2Id
                 if (t.type2Id) {
                     data.uploadtype = 'update'
@@ -251,13 +251,15 @@ import { app } from '../../../index.js';
             getRecommend(data) {
                 let t = this
                 app.requests({
-                    url: 'getRecommend',
+                    url: 'Recommend/getRecommend',
                     success(res) {
                         // t.ids = res.recommends_ids || []
                         t.disRecommend(res.recommends || [])
                     },
                     error(code) {
-
+                        showToast({
+                            text: '获取失败'
+                        })
                     }
                 })
             },
@@ -438,10 +440,14 @@ import { app } from '../../../index.js';
             delRecommend(id) {
                 let t = this
                 app.requests({
-                    url: 'delRecommend',
+                    url: 'Recommend/delRecommend',
                     data: { id: id },
                     success(res) {
-                        // t.getRecommendInfo1(id)
+                        // t.getRecommendInfo1(id)3
+                        showToast({
+                            type: 'success',
+                            text: '删除成功'
+                        })
                         t.getRecommendInfo({
                             id: t.ids[parseInt(t.templateId) - 1],
                             model_id: t.templateId
@@ -449,7 +455,13 @@ import { app } from '../../../index.js';
                     },
                     error(code) {
                         if (code == 3002) {
-                            alert('请先删除下级推荐')
+                            showToast({
+                                text: '请先删除下级推荐'
+                            })
+                        } else {
+                            showToast({
+                                text: '删除失败'
+                            })
                         }
                     }
                 })
@@ -457,7 +469,7 @@ import { app } from '../../../index.js';
             getRecommendInfo1(id) {
                 let t = this
                 app.requests({
-                    url: 'getRecommendInfo',
+                    url: 'Recommend/getRecommendInfo',
                     data: { id: id },
                     success(res) {
                         if (t.templateId == 10) {
@@ -473,7 +485,9 @@ import { app } from '../../../index.js';
                         }
                     },
                     error(code) {
-
+                        showToast({
+                            text: '获取失败'
+                        })
                     }
                 })
             },
@@ -618,14 +632,18 @@ import { app } from '../../../index.js';
                     },
                     url = '';
                 if (data.uploadtype === 'update') {
-                    url = 'updateRecommend'
+                    url = 'Recommend/updateRecommend'
                 } else if (data.uploadtype === 'add') {
-                    url = 'addRecommend'
+                    url = 'Recommend/addRecommend'
                 }
                 app.requests({
                     url: url,
                     data: params,
                     success(res) {
+                        showToast({
+                            type: 'success',
+                            text: '操作成功'
+                        })
                         if (data.tier == 1 & data.uploadtype === 'add') {
                             t.ids[parseInt(data.model_id) - 1] = res.add_id || ''
                         }
@@ -643,61 +661,51 @@ import { app } from '../../../index.js';
                         t.type2Img = ''
                     },
                     error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3001:
-                                alert('添加失败')
-                                break;
                             case 3002:
-                                alert('添加失败')
+                            case 3006:
+                            case 3007:
+                            case 3008:
+                            case 3011:
+                            case 3013:
+                                text = '添加失败'
                                 break;
                             case 3003:
-                                alert('信息未填写完整')
+                                text = '信息未填写完整'
                                 break;
                             case 3004:
-                                alert('请上传图片(选择商品图片)')
+                                text = '请上传图片(选择商品图片)'
                                 break;
                             case 3005:
-                                alert('未设置显示星期')
-                                break;
-                            case 3006:
-                                alert('添加失败')
-                                break;
-                            case 3007:
-                                alert('添加失败')
-                                break;
-                            case 3008:
-                                alert('添加失败')
+                                text = '未设置显示星期'
                                 break;
                             case 3009:
-                                alert('超出添加数量')
+                                text = '超出添加数量'
                                 break;
                             case 3010:
-                                alert('图片没有上传')
-                                break;
-                            case 3011:
-                                alert('添加失败')
+                                text = '图片没有上传'
                                 break;
                             case 3012:
-                                alert('上级未选择')
+                                text = '上级未选择'
                                 break;
-                            case 3013:
-                                alert('添加失败')
-                                break;
-
                             default:
-                                alert('意料之外的错误')
+                                text = '意料之外的错误'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             },
             getRecommendInfo(data) {
                 let t = this
                 app.requests({
-                    url: 'getRecommendInfo',
+                    url: 'Recommend/getRecommendInfo',
                     data: { id: data.id },
                     success(res) {
-
                         if (data.model_id == 10) {
                             let son = t.disInfo(res.recommends_info.son)
                             t.setImgList(son, t.getmodelText(data.model_id).text)
@@ -707,7 +715,9 @@ import { app } from '../../../index.js';
                         }
                     },
                     error(code) {
-
+                        showToast({
+                            text: '获取出错'
+                        })
                     }
                 })
             },

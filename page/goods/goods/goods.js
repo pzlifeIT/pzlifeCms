@@ -1,4 +1,5 @@
-import { app } from '../../../index.js';;
+import { app } from '../../../index.js';
+import { showToast } from '../../../js/utils.js';
 (function(pz) {
     select({ el: '#combobox1', data: [{ id: 1, type_name: '已上架' }, { id: 2, type_name: '已下架' }, { id: '', type_name: '不限制' }] })
     pz.goods = (function() {
@@ -59,27 +60,30 @@ import { app } from '../../../index.js';;
                         t.setpage()
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3001:
-                                alert('page只能为数字')
+                                text = 'page只能为数字'
                                 break;
                             case 3002:
-                                alert('page_num只能为数字')
+                                text = 'page_num只能为数字'
                                 break;
                             case 3003:
-                                alert('goods_id只能为数字')
+                                text = 'goods_id只能为数字'
                                 break;
                             case 3004:
-                                alert('上下架状态参数有误')
+                                text = '上下架状态参数有误'
                                 break;
                             case 3005:
-                                alert('商品属性参数有误')
+                                text = '商品属性参数有误'
                                 break;
                             default:
-                                alert('意料之外的错误')
+                                text = '意料之外的错误'
                                 break;
-
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             },
@@ -144,7 +148,7 @@ import { app } from '../../../index.js';;
             portupdowngoods: function(id, type) { //商品上下架接口
                 let t = this
                 app.requests({
-                    url: 'updowngoods',
+                    url: 'goods/updowngoods',
                     data: {
                         id: id,
                         type: type
@@ -155,35 +159,39 @@ import { app } from '../../../index.js';;
                         })
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3001:
-                                alert('商品不存在')
+                                text = '商品不存在'
                                 break;
                             case 3002:
-                                alert('参数必须是数字')
+                                text = '参数必须是数字'
                                 break;
                             case 3003:
-                                alert('没有可售库存')
+                                text = '没有可售库存'
                                 break;
                             case 3004:
-                                alert('请填写零售价')
+                                text = '请填写零售价'
                                 break;
                             case 3005:
-                                alert('请填写成本价')
+                                text = '请填写成本价'
                                 break;
                             case 3006:
-                                alert('没有详情图')
+                                text = '没有详情图'
                                 break;
                             case 3007:
-                                alert('没有轮播图')
+                                text = '没有轮播图'
                                 break;
                             case 3008:
-                                alert('上下架失败')
+                                text = '上下架失败'
                                 break;
                             default:
-                                alert('意料之外的错误')
+                                text = '意料之外的错误'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             },

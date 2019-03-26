@@ -1,4 +1,5 @@
-import { app } from '../../../index.js';;
+import { app } from '../../../index.js';
+import { showToast } from '../../../js/utils.js';
 (function(pz) {
     pz.size = (function() {
         function _SE(o) {
@@ -47,23 +48,31 @@ import { app } from '../../../index.js';;
                     sa_name: name,
                     type: 1
                 },
-                url: 'saveEditSpecAttr',
+                url: 'spec/saveEditSpecAttr',
                 success: function(res) {
+                    showToast({
+                        type: 'success',
+                        text: '操作成功'
+                    })
                     t.getSpecList()
                     t.compileSize.classList.add('hide')
                 },
                 Error(code) {
+                    let text = ''
                     switch (parseInt(code)) {
                         case 3001:
-                            alert('保存失败')
+                            text = '保存失败'
                             break;
                         case 3002:
-                            alert('参数错误')
+                            text = '参数错误'
                             break;
                         default:
-                            alert('意料之外的错误')
+                            text = '意料之外的错误'
                             break;
                     }
+                    showToast({
+                        text: text
+                    })
                 }
             })
         }
@@ -79,10 +88,19 @@ import { app } from '../../../index.js';;
                     sa_name: name,
                     type: 1
                 },
-                url: 'savespecattr',
+                url: 'spec/savespecattr',
                 success: function(res) {
+                    showToast({
+                        type: 'success',
+                        text: '操作成功'
+                    })
                     t.getSpecList()
                     t.compileNew.classList.add('hide')
+                },
+                Error(code) {
+                    showToast({
+                        text: '获取失败'
+                    })
                 }
             })
         }
@@ -94,13 +112,18 @@ import { app } from '../../../index.js';;
                     page: data.page || 1,
                     page_num: data.page_num || 10
                 },
-                url: 'getSpecList',
+                url: 'spec/getSpecList',
                 success: function(res) {
                     t.setGlul(res.data)
                     console.log(res.total)
                     if (t.total == res.total) return
                     t.total = res.total
                     t.setpage()
+                },
+                Error(code) {
+                    showToast({
+                        text: '获取失败'
+                    })
                 }
             })
         }
@@ -166,22 +189,30 @@ import { app } from '../../../index.js';;
                     id: id,
                     type: 1
                 },
-                url: 'delSpecAttr',
+                url: 'spec/delSpecAttr',
                 success: function(res) {
+                    showToast({
+                        type: 'success',
+                        text: '操作成功'
+                    })
                     t.getSpecList()
                 },
                 Error(code) {
+                    let text = ''
                     switch (parseInt(code)) {
                         case 3002:
-                            alert('参数错误')
+                            text = '参数错误'
                             break;
                         case 3003:
-                            alert('无法删除')
+                            text = '无法删除'
                             break;
                         default:
-                            alert('意料之外的错误')
+                            text = '意料之外的错误'
                             break;
                     }
+                    showToast({
+                        text: text
+                    })
                 }
             })
         }
@@ -192,18 +223,23 @@ import { app } from '../../../index.js';;
                     id: id,
                     type: 1
                 },
-                url: 'getEditData',
+                url: 'spec/getEditData',
                 success: function(res) {
                     t.compileSize.classList.remove('hide')
                     t.id = res.spec.id
                     document.querySelector('#sizeName').value = res.spec.spe_name
+                },
+                Error(code) {
+                    showToast({
+                        text: '获取失败'
+                    })
                 }
             })
         }
         _SE.prototype.allCateList = function() { //获取所有分类
             let t = this
             app.requests({
-                url: 'allCateList',
+                url: 'category/allCateList',
                 success: function(res) {
                     pz.multistage.init({
                         el: '.multistage',
@@ -213,14 +249,18 @@ import { app } from '../../../index.js';;
                     })
                 },
                 Error(code) {
+                    let text = ''
                     switch (parseInt(code)) {
                         case 3001:
-                            alert('状态参数错误')
+                            text = '状态参数错误'
                             break;
                         default:
-                            alert('意料之外的错误')
+                            text = '意料之外的错误'
                             break;
                     }
+                    showToast({
+                        text: text
+                    })
                 }
             })
         }

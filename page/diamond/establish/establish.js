@@ -17,6 +17,7 @@ import { app } from '../../../index.js';;
         _EH.prototype = {
             init: function() { //进入执行
                 this.elclick()
+                    // this.getBossShareDiamondvip({})
             },
             elclick: function() {
                 let t = this

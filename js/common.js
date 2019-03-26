@@ -1,4 +1,5 @@
-import { app } from '../index.js';;
+import { app } from '../index.js';
+import { showToast } from '../js/utils.js';;
 (function(win, doc) {
     win.pz = function() {}
     win.pz = pz.prototype
@@ -348,7 +349,7 @@ import { app } from '../index.js';;
             formdata.append('image', file)
             app.requests({
                 data: formdata,
-                url: 'uploadfile',
+                url: 'upload/uploadfile',
                 success: function(res) {
                     if (t.type == '') {
                         t.images = []
@@ -360,23 +361,27 @@ import { app } from '../index.js';;
                     t.imgChange(t.images);
                 },
                 Error(code) {
+                    let text = ''
                     switch (parseInt(code)) {
                         case 3001:
-                            alert('上传的不是图片')
+                            text = '上传的不是图片'
                             break;
                         case 3002:
-                            alert('上传图片不能超过2M')
+                            text = '上传图片不能超过2M'
                             break;
                         case 3003:
-                            alert('上传失败')
+                            text = '上传失败'
                             break;
                         case 3004:
-                            alert('上传文件不能为空')
+                            text = '上传文件不能为空'
                             break;
                         default:
-                            alert('意料之外的错误')
+                            text = '意料之外的错误'
                             break;
                     }
+                    showToast({
+                        text: text
+                    })
                 }
             })
         }
@@ -390,33 +395,34 @@ import { app } from '../index.js';;
                 }
                 app.requests({
                     data: formdata,
-                    url: 'uploadmultifile',
+                    url: 'upload/uploadmultifile',
                     success: function(res) {
                         t.imgpush(res.data)
                         t.showImg();
                         t.imgChange(t.images);
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3001:
-                                alert('上传的不是图片')
+                                text = '上传的不是图片'
                                 break;
                             case 3002:
-                                alert('上传图片不能超过2M')
+                                text = '上传图片不能超过2M'
                                 break;
                             case 3003:
-                                alert('上传失败')
+                                text = '上传失败!'
                                 break;
                             case 3004:
-                                alert('上传文件不能为空')
-                                break;
-                            case 3005:
-                                alert('上传文件不能为空')
+                                text = '上传文件不能为空'
                                 break;
                             default:
-                                alert('意料之外的错误')
+                                text = '意料之外的错误'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             },

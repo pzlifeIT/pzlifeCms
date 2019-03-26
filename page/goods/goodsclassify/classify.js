@@ -1,4 +1,5 @@
-import { app } from '../../../index.js';;
+import { app } from '../../../index.js';
+import { showToast } from '../../../js/utils.js';
 (function(win) {
 
     pz.goodsclassify = (function() {
@@ -38,25 +39,34 @@ import { app } from '../../../index.js';;
                 data: {
                     type: 3
                 },
-                url: 'allCateList',
+                url: 'category/allCateList',
                 success: function(res) {
                     t.setglul(res.data);
                     t.comp()
+                },
+                Error(code) {
+                    showToast({
+                        text: '获取失败'
+                    })
                 }
             });
         }
 
         _GC.prototype.gettwocategory = function() {
-            let t = this
-            console.log(21212)
+            let t = this;
             app.requests({
-                url: 'addcatepage',
+                url: 'category/addcatepage',
                 success: function(res) {
                     pz.multistage.init({
                         el: '#selClass',
                         ellink: '.linkage',
                         name: 'type_name',
                         data: distwocategory(res.data || [])
+                    })
+                },
+                Error(code) {
+                    showToast({
+                        text: '获取失败'
                     })
                 }
             })
@@ -84,39 +94,47 @@ import { app } from '../../../index.js';;
                 params.id = t.id
                 params.type_name = t.classcompile.querySelector('#classname').value
                 app.requests({
-                    url: 'saveeditcate',
+                    url: 'category/saveeditcate',
                     data: params,
                     success: function(res) {
+                        showToast({
+                            type: 'success',
+                            text: '操作成功！'
+                        })
                         t.getcatelist();
                         t.hideel(t.classcompile)
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3001:
-                                alert('保存失败')
+                                text = '保存失败'
                                 break;
                             case 3002:
-                                alert('id必须为数字')
+                                text = 'id必须为数字'
                                 break;
                             case 3003:
-                                alert('状态参数有误')
+                                text = '状态参数有误'
                                 break;
                             case 3004:
-                                alert('分类id不存在')
+                                text = '分类id不存在'
                                 break;
                             case 3005:
-                                alert('该分类名称已经存在')
+                                text = '该分类名称已经存在'
                                 break;
                             case 3006:
-                                alert('图片没有上传过')
+                                text = '图片没有上传过'
                                 break;
                             case 3007:
-                                alert('没提交要修改的内容')
+                                text = '没提交要修改的内容'
                                 break;
                             default:
-                                alert('意料之外的错误')
+                                text = '意料之外的错误'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             })
@@ -171,7 +189,7 @@ import { app } from '../../../index.js';;
         _GC.prototype.classifydetail = function() { //获取分类详细信息
             let t = this
             app.requests({
-                url: 'editcatepage',
+                url: 'category/editcatepage',
                 data: {
                     id: t.id
                 },
@@ -179,46 +197,58 @@ import { app } from '../../../index.js';;
                     t.setdetail(res)
                 },
                 Error(code) {
+                    let text = ''
                     switch (parseInt(code)) {
                         case 3002:
-                            alert('参数错误')
+                            text = '参数错误'
                             break;
                         default:
-                            alert('意料之外的错误')
+                            text = '意料之外的错误'
                             break;
                     }
+                    showToast({
+                        text: text
+                    })
                 }
             })
         }
         _GC.prototype.saveaddcate = function(p) { //添加分类
             let t = this
             app.requests({
-                url: 'saveaddcate',
+                url: 'category/saveaddcate',
                 data: p.data,
                 success: function(res) {
+                    showToast({
+                        type: 'success',
+                        text: '操作成功！'
+                    })
                     p.success(res)
                 },
                 Error(code) {
+                    let text = ''
                     switch (parseInt(code)) {
                         case 3001:
-                            alert('保存失败')
+                            text = '保存失败'
                             break;
                         case 3002:
-                            alert('分类名称不能为空')
+                            text = '分类名称不能为空'
                             break;
                         case 3003:
-                            alert('图片没有上传过')
+                            text = '图片没有上传过'
                             break;
                         case 3004:
-                            alert('状态参数有误')
+                            text = '状态参数有误'
                             break;
                         case 3005:
-                            alert('该分类名称已经存在')
+                            text = '该分类名称已经存在'
                             break;
                         default:
-                            alert('意料之外的错误')
+                            text = '意料之外的错误'
                             break;
                     }
+                    showToast({
+                        text: text
+                    })
                 }
             })
         }
@@ -282,7 +312,7 @@ import { app } from '../../../index.js';;
                         gtype = 1
                     }
                     app.requests({
-                        url: 'stopstartcate',
+                        url: 'category/stopstartcate',
                         data: {
                             id: id,
                             type: gtype
@@ -291,17 +321,21 @@ import { app } from '../../../index.js';;
                             t.getcatelist()
                         },
                         Error(code) {
+                            let text = ''
                             switch (parseInt(code)) {
                                 case 3001:
-                                    alert('停用失败')
+                                    text = '停用失败'
                                     break;
                                 case 3002:
-                                    alert('参数错误')
+                                    text = '参数错误'
                                     break;
                                 default:
-                                    alert('意料之外的错误')
+                                    text = '意料之外的错误'
                                     break;
                             }
+                            showToast({
+                                text: text
+                            })
                         }
                     })
                 })

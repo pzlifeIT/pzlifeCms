@@ -40,8 +40,8 @@ var app = {
             data: params.data || '',
             url: params.url,
             success: function(res) {
+                console.log(res)
                 if (!params.login & res.code == '5000') {
-                    return
                     if (window.frames.parent) {
                         window.frames.parent.location.href = window.location.origin + '/page/user/login/login.html'
                     } else {

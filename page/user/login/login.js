@@ -7,15 +7,12 @@ document.querySelector('#login').addEventListener('click', function(e) {
         passwordVal = password.value;
     if (!adminNameVal) {
         showToast({
-            type: 'error',
             text: '请输入用户名'
         })
-        alert('请输入用户名')
         return
     }
     if (!passwordVal) {
         showToast({
-            type: 'error',
             text: '请输入密码'
         })
         return

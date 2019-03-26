@@ -1,4 +1,5 @@
-import { app } from '../../../../index.js';;
+import { app } from '../../../../index.js';
+import { showToast } from '../../../../js/utils.js';
 (function(pz) {
     tab({
         head: '#dlnav',
@@ -30,6 +31,7 @@ import { app } from '../../../../index.js';;
             this.imagesDetatil = pz.getEl('#imagesDetatil') //详情图列表
             this.subjectNew = pz.getEl('#subjectNew') //专题弹窗
             this.preview = pz.getEl('#preview') //预览图片
+            this.previewbanner = pz.getEl('#previewbanner') //预览轮播图片
             this.sortimages = document.querySelector('#sortimages')
             this.sortval = document.querySelector('#sortval')
             this.goodImg = '' //产品标题图
@@ -64,7 +66,7 @@ import { app } from '../../../../index.js';;
                 }
 
                 app.requests({
-                    url: 'getonegoods',
+                    url: 'goods/getOneGoods',
                     data: {
                         id: t.id,
                         get_type: gtype
@@ -94,17 +96,21 @@ import { app } from '../../../../index.js';;
                         t.getgoodssubject(1)
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3001:
-                                alert('id必须是数字')
+                                text = 'id必须是数字'
                                 break;
                             case 3002:
-                                alert('get_type错误')
+                                text = 'get_type错误'
                                 break;
                             default:
-                                alert('意料之外的错误')
+                                text = '意料之外的错误'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             },
@@ -150,7 +156,7 @@ import { app } from '../../../../index.js';;
             getsupplierfreights: function() { // 获取供应商快递模板列表
                 let t = this
                 app.requests({
-                    url: 'getsupplierfreights',
+                    url: 'suppliers/getsupplierfreights',
                     data: {
                         supplierId: t.goodInfo.goods_data.supplier_id
                     },
@@ -159,6 +165,11 @@ import { app } from '../../../../index.js';;
                             el: '#freight_id',
                             name: 'title',
                             data: res.data || []
+                        })
+                    },
+                    Error(code) {
+                        showToast({
+                            text: '获取失败'
                         })
                     }
                 })
@@ -207,33 +218,41 @@ import { app } from '../../../../index.js';;
             sortImg: function(order_by) { //商品详情图排序
                 let t = this;
                 app.requests({
-                    url: 'sortimagedetail',
+                    url: 'goods/sortimagedetail',
                     data: {
                         image_path: t.sortImgpath,
                         order_by: order_by
                     },
                     success: function(res) {
+                        showToast({
+                            type: 'success',
+                            text: '操作成功！'
+                        })
                         t.getonegoods(5)
                         t.sortimages.classList.add('hide')
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3001:
-                                alert('图片不能为空')
+                                text = '图片不能为空'
                                 break;
                             case 3002:
-                                alert('图片不存在')
+                                text = '图片不存在'
                                 break;
                             case 3003:
-                                alert('排序字段只能为数字')
+                                text = '排序字段只能为数字'
                                 break;
                             case 3004:
-                                alert('上传失败')
+                                text = '上传失败'
                                 break;
                             default:
-                                alert('意料之外的错误')
+                                text = '意料之外的错误'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             },
@@ -278,28 +297,36 @@ import { app } from '../../../../index.js';;
             delImg: function(image, type) { //删除轮播图和详情图接口
                 let t = this;
                 app.requests({
-                    url: 'delgoodsimage',
+                    url: 'goods/delgoodsimage',
                     data: {
                         image_path: image
                     },
                     success: function(res) {
+                        showToast({
+                            type: 'success',
+                            text: '操作成功'
+                        })
                         t.getonegoods(type)
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3001:
-                                alert('图片不能为空')
+                                text = '图片不能为空'
                                 break;
                             case 3002:
-                                alert('图片不存在')
+                                text = '图片不存在'
                                 break;
                             case 3003:
-                                alert('上传失败')
+                                text = '上传失败'
                                 break;
                             default:
-                                alert('意料之外的错误')
+                                text = '意料之外的错误'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             },
@@ -319,35 +346,43 @@ import { app } from '../../../../index.js';;
             uploadgoodsimages: function(formData, type) { //提交商品详情和轮播图
                 let t = this
                 app.requests({
-                    url: 'uploadgoodsimages',
+                    url: 'goods/uploadgoodsimages',
                     data: formData,
                     success: function(res) {
+                        showToast({
+                            type: 'success',
+                            text: '操作成功！'
+                        })
                         t.getonegoods(type)
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3001:
-                                alert('图片类型有误')
+                                text = '图片类型有误'
                                 break;
                             case 3002:
-                                alert('商品id只能是数字')
+                                text = '商品id只能是数字'
                                 break;
                             case 3003:
-                                alert('图片不能空')
+                                text = '图片不能空'
                                 break;
                             case 3004:
-                                alert('商品id不存在')
+                                text = '商品id不存在'
                                 break;
                             case 3005:
-                                alert('图片没有上传过')
+                                text = '图片没有上传过'
                                 break;
                             case 3006:
-                                alert('上传失败')
+                                text = '上传失败'
                                 break;
                             default:
-                                alert('意料之外的错误')
+                                text = '意料之外的错误'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             },
@@ -390,7 +425,9 @@ import { app } from '../../../../index.js';;
                 document.querySelector('#saveSort').onclick = function(e) {
                     let sortNum = t.sortval.value
                     if (sortNum == '') {
-                        alert('请填写排序')
+                        showToast({
+                            text: '请填写排序'
+                        })
                         return
                     }
                     t.sortImg(sortNum)
@@ -411,7 +448,7 @@ import { app } from '../../../../index.js';;
                     t.previewphoto.classList.add('hide')
                 });
                 //添加商品详情图片
-                document.querySelector('.addpreview').addEventListener('click', function(e) {
+                document.querySelector('#addpreview').addEventListener('click', function(e) {
                     t.previewphoto.classList.remove('hide')
                 });
                 //图片预览
@@ -451,46 +488,54 @@ import { app } from '../../../../index.js';;
             subjectSave: function(id) {
                 let t = this
                 app.requests({
-                    url: 'subjectgoodsassoc',
+                    url: 'subject/subjectgoodsassoc',
                     data: {
                         goods_id: t.id,
                         subject_id: id
                     },
                     success: function(res) {
+                        showToast({
+                            type: 'success',
+                            text: '操作成功！'
+                        })
                         t.getgoodssubject(1)
                         t.subjectNew.classList.add('hide')
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3001:
-                                alert('商品id必须是数字')
+                                text = '商品id必须是数字'
                                 break;
                             case 3002:
-                                alert('专题id必须是数字')
+                                text = '专题id必须是数字'
                                 break;
                             case 3003:
-                                alert('商品不存在')
+                                text = '商品不存在'
                                 break;
                             case 3004:
-                                alert('专题不存在')
+                                text = '专题不存在'
                                 break;
                             case 3005:
-                                alert('已经关联')
+                                text = '已经关联'
                                 break;
                             case 3006:
-                                alert('保存失败')
+                                text = '保存失败'
                                 break;
                             default:
-                                alert('意料之外的错误')
+                                text = '意料之外的错误'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             },
             getgoodssubject: function(type) { //获取商品专题
                 let t = this
                 app.requests({
-                    url: 'getgoodssubject',
+                    url: 'subject/getgoodssubject',
                     data: {
                         goods_id: t.id,
                         stype: type
@@ -502,7 +547,11 @@ import { app } from '../../../../index.js';;
                             t.selgoodssubject(res.data || [])
                         }
                     },
-                    Error: function(code) {}
+                    Error: function(code) {
+                        showToast({
+                            text: '获取失败'
+                        })
+                    }
                 })
             },
             selgoodssubject: function(data) { //可选专题列表
@@ -544,32 +593,40 @@ import { app } from '../../../../index.js';;
                 let t = this
                 if (this.id == '') return
                 app.requests({
-                    url: 'delgoodssubjectassoc',
+                    url: 'subject/delgoodssubjectassoc',
                     data: {
                         goods_id: t.id,
                         subject_id: id
                     },
                     success: function(res) {
+                        showToast({
+                            type: 'success',
+                            text: '操作成功！'
+                        })
                         t.getgoodssubject(1)
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3001:
-                                alert('商品id必须数字')
+                                text = '商品id必须数字'
                                 break;
                             case 3002:
-                                alert('专题id必须数字')
+                                text = '专题id必须数字'
                                 break;
                             case 3003:
-                                alert('商品和专题没有关联')
+                                text = '商品和专题没有关联'
                                 break;
                             case 3004:
-                                alert('取消失败')
+                                text = '取消失败'
                                 break;
                             default:
-                                alert('意料之外的错误')
+                                text = '意料之外的错误'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             },
@@ -583,31 +640,39 @@ import { app } from '../../../../index.js';;
                 }
                 app.requests({
                     data: formdata,
-                    url: 'uploadmultifile',
+                    url: 'upload/uploadmultifile',
                     success: function(res) {
+                        showToast({
+                            type: 'success',
+                            text: '操作成功'
+                        })
                         t.disDetatilimages(res.data)
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3001:
-                                alert('上传的不是图片')
+                                text = '上传的不是图片'
                                 break;
                             case 3002:
-                                alert('上传图片不能超过2M')
+                                text = '上传图片不能超过2M'
                                 break;
                             case 3003:
-                                alert('上传失败')
+                                text = '上传失败'
                                 break;
                             case 3004:
-                                alert('上传文件不能为空')
+                                text = '上传文件不能为空'
                                 break;
                             case 3005:
-                                alert('上传文件不能为空')
+                                text = '上传文件不能为空'
                                 break;
                             default:
-                                alert('意料之外的错误')
+                                text = '意料之外的错误'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             },
@@ -690,45 +755,52 @@ import { app } from '../../../../index.js';;
                         image: t.goodImg
                     },
                     success: function(res) {
-                        alert('修改成功')
+                        showToast({
+                            type: 'success',
+                            text: '修改成功'
+                        })
                         document.location.reload()
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3001:
-                                alert('供应商id必须是数字')
+                                text = '供应商id必须是数字'
                                 break;
                             case 3002:
-                                alert('分类id只能为数字')
+                                text = '分类id只能为数字'
                                 break;
                             case 3003:
-                                alert('商品名称不能空')
+                                text = '商品名称不能空'
                                 break;
                             case 3004:
-                                alert('标题图不能空')
+                                text = '标题图不能空'
                                 break;
                             case 3005:
-                                alert('商品类型只能为数字')
+                                text = '商品类型只能为数字'
                                 break;
                             case 3006:
-                                alert('商品名称重复')
+                                text = '商品名称重复'
                                 break;
                             case 3007:
-                                alert('提交的分类id不是三级分类')
+                                text = '提交的分类id不是三级分类'
                                 break;
                             case 3008:
-                                alert('供应商不存在')
+                                text = '供应商不存在'
                                 break;
                             case 3009:
-                                alert('修改失败')
+                                text = '修改失败'
                                 break;
                             case 3010:
-                                alert('图片没有上传过')
+                                text = '图片没有上传过'
                                 break;
                             default:
-                                alert('意料之外的错误')
+                                text = '意料之外的错误'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             },
@@ -752,44 +824,51 @@ import { app } from '../../../../index.js';;
                     success: function(res) {
                         t.id = res.goods_id
                         location.href = 'goodsoperation.html?id=' + t.id
-                        alert('保存商品成功')
+                        showToast({
+                            type: 'success',
+                            text: '保存商品成功'
+                        })
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3001:
-                                alert('供应商id必须是数字')
+                                text = '供应商id必须是数字'
                                 break;
                             case 3002:
-                                alert('分类id只能为数字')
+                                text = '供应商id必须是数字'
                                 break;
                             case 3003:
-                                alert('商品名称不能空')
+                                text = '供应商id必须是数字'
                                 break;
                             case 3004:
-                                alert('标题图不能空')
+                                text = '供应商id必须是数字'
                                 break;
                             case 3005:
-                                alert('商品类型只能为数字')
+                                text = '供应商id必须是数字'
                                 break;
                             case 3006:
-                                alert('商品名称重复')
+                                text = '供应商id必须是数字'
                                 break;
                             case 3007:
-                                alert('提交的分类id不是三级分类')
+                                text = '供应商id必须是数字'
                                 break;
                             case 3008:
-                                alert('供应商不存在')
+                                text = '供应商id必须是数字'
                                 break;
                             case 3009:
-                                alert('添加失败')
+                                text = '供应商id必须是数字'
                                 break;
                             case 3010:
-                                alert('图片没有上传过')
+                                text = '供应商id必须是数字'
                                 break;
                             default:
-                                alert('意料之外的错误')
+                                text = '供应商id必须是数字'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             },
@@ -807,14 +886,18 @@ import { app } from '../../../../index.js';;
                         })
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3001:
-                                alert('状态参数错误')
+                                text = '状态参数错误'
                                 break;
                             default:
-                                alert('意料之外的错误')
+                                text = '意料之外的错误'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             },
@@ -835,17 +918,21 @@ import { app } from '../../../../index.js';;
                         t.setsiteclick()
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3001:
-                                alert('保存失败')
+                                text = '保存失败'
                                 break;
                             case 3002:
-                                alert('参数错误')
+                                text = '参数错误'
                                 break;
                             default:
-                                alert('意料之外的错误')
+                                text = '意料之外的错误'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             },
@@ -892,38 +979,42 @@ import { app } from '../../../../index.js';;
                         t.getonegoods(4)
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3001:
-                                alert('属性id必须为数字')
+                                text = '属性id必须为数字'
                                 break;
                             case 3002:
-                                alert('商品id必须为数字')
+                                text = '商品id必须为数字'
                                 break;
                             case 3003:
-                                alert('属性不存在')
+                                text = '属性不存在'
                                 break;
                             case 3004:
-                                alert('商品不存在')
+                                text = '商品不存在'
                                 break;
                             case 3005:
-                                alert('规格不能为空')
+                                text = '规格不能为空'
                                 break;
                             case 3006:
-                                alert('商品已有该规格属性 ')
+                                text = '商品已有该规格属性'
                                 break;
                             case 3007:
-                                alert('提交失败')
+                                text = '提交失败'
                                 break;
                             case 3008:
-                                alert('没有任何操作')
+                                text = '没有任何操作'
                                 break;
                             case 3009:
-                                alert('提交的属性分类和商品分类不同')
+                                text = '提交的属性分类和商品分类不同'
                                 break;
                             default:
-                                alert('意料之外的错误')
+                                text = '意料之外的错误'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             },
@@ -965,38 +1056,42 @@ import { app } from '../../../../index.js';;
                         t.getonegoods(4)
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3001:
-                                alert('属性id必须为数字')
+                                text = '属性id必须为数字'
                                 break;
                             case 3002:
-                                alert('商品id必须为数字')
+                                text = '商品id必须为数字'
                                 break;
                             case 3003:
-                                alert('属性不存在')
+                                text = '属性不存在'
                                 break;
                             case 3004:
-                                alert('商品不存在')
+                                text = '商品不存在'
                                 break;
                             case 3005:
-                                alert('规格不能为空')
+                                text = '规格不能为空'
                                 break;
                             case 3006:
-                                alert('该商品未绑定这个属性')
+                                text = '该商品未绑定这个属性'
                                 break;
                             case 3007:
-                                alert('提交失败')
+                                text = '提交失败'
                                 break;
                             case 3008:
-                                alert('没有任何操作')
+                                text = '没有任何操作'
                                 break;
                             case 3009:
-                                alert('提交的属性分类和商品分类不同')
+                                text = '提交的属性分类和商品分类不同'
                                 break;
                             default:
-                                alert('意料之外的错误')
+                                text = '意料之外的错误'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             },
@@ -1139,51 +1234,54 @@ import { app } from '../../../../index.js';;
                         t.amendAttribute.classList.add('hide')
                     },
                     error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3001:
-                                alert('id必须为数字')
+                                text = 'id必须为数字'
                                 break;
                             case 3002:
-                                alert('库存必须为大于或等于0的数字')
+                                text = '库存必须为大于或等于0的数字'
                                 break;
                             case 3003:
-                                alert('价格必须为大于或等于0的数字')
+                                text = 'id必须为数字'
                                 break;
                             case 3004:
-                                alert('积分必须为大于或等于0的数字')
+                                text = 'id必须为数字'
                                 break;
                             case 3005:
-                                alert('图片没有上传过')
+                                text = 'id必须为数字'
                                 break;
                             case 3006:
-                                alert('零售价不能小于成本价')
+                                text = 'id必须为数字'
                                 break;
                             case 3007:
-                                alert('skuid不存在')
+                                text = 'id必须为数字'
                                 break;
                             case 3008:
-                                alert('编辑失败')
+                                text = 'id必须为数字'
                                 break;
                             case 3009:
-                                alert('选择的供应山id有误')
+                                text = 'id必须为数字'
                                 break;
                             case 3010:
-                                alert('请填写零售价和成本价')
+                                text = 'id必须为数字'
                                 break;
                             case 3011:
-                                alert('选择重量模版必须填写重量')
+                                text = 'id必须为数字'
                                 break;
                             case 3012:
-                                alert('选择体积模版必须填写体积')
+                                text = 'id必须为数字'
                                 break;
                             case 3013:
-                                alert('商品下架才能编辑')
+                                text = 'id必须为数字'
                                 break;
-
                             default:
-                                alert('意料之外的错误')
+                                text = 'id必须为数字'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             },

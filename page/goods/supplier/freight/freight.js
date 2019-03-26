@@ -1,4 +1,5 @@
-import { app } from '../../../../index.js';;
+import { app } from '../../../../index.js';
+import { showToast } from '../../../../js/utils.js';
 (function(pz) {
     pz.freight = (function() {
         function _FH(o) {
@@ -52,7 +53,7 @@ import { app } from '../../../../index.js';;
         _FH.prototype.getfreight = function() { //获取供应商快递模板运费列表
             let t = this
             app.requests({
-                url: 'getSupplierFreightdetailList',
+                url: 'suppliers/getSupplierFreightdetailList',
                 data: {
                     freight_id: t.FhId
                 },
@@ -60,14 +61,18 @@ import { app } from '../../../../index.js';;
                     t.setGlul(res.data)
                 },
                 Error(code) {
+                    let text = ''
                     switch (parseInt(code)) {
                         case 3002:
-                            alert('供应商快递模板ID和页码和每页条数只能是数字')
+                            text = '供应商快递模板ID和页码和每页条数只能是数字'
                             break;
                         default:
-                            alert('意料之外的错误')
+                            text = '意料之外的错误'
                             break;
                     }
+                    showToast({
+                        text: text
+                    })
                 }
             })
         }
@@ -116,7 +121,7 @@ import { app } from '../../../../index.js';;
         _FH.prototype.getsize = function() {
             let t = this
             app.requests({
-                url: 'getprovincecitybyfreight',
+                url: 'provinces/getprovincecitybyfreight',
                 data: {
                     freight_id: t.FhId,
                     freight_detail_id: t.id
@@ -124,6 +129,11 @@ import { app } from '../../../../index.js';;
                 success: function(res) {
                     t.site = res.data
                     t.disSite()
+                },
+                Error(code) {
+                    showToast({
+                        text: '获取失败'
+                    })
                 }
             })
         }
@@ -279,13 +289,22 @@ import { app } from '../../../../index.js';;
             }
             str = str.substr(0, str.length - 1);
             app.requests({
-                url: 'updatesupplierfreightarea',
+                url: 'suppliers/updatesupplierfreightarea',
                 data: {
                     city_id_str: str,
                     freight_detail_id: t.id
                 },
                 success: function(res) {
+                    showToast({
+                        type: 'success',
+                        text: '操作成功'
+                    })
                     t.fhsite.classList.add('hide')
+                },
+                Error(code) {
+                    showToast({
+                        text: '操作失败'
+                    })
                 }
             })
         }
@@ -329,7 +348,7 @@ import { app } from '../../../../index.js';;
         _FH.prototype.getSupplierFreight = function() {
             let t = this
             app.requests({
-                url: 'getSupplierFreightdetail',
+                url: 'suppliers/getSupplierFreightdetail',
                 data: {
                     sfd_id: t.id
                 },
@@ -338,14 +357,18 @@ import { app } from '../../../../index.js';;
                     t.eeAmend.classList.remove('hide')
                 },
                 Error(code) {
+                    let text = ''
                     switch (parseInt(code)) {
                         case 3002:
-                            alert('供应商ID只能是数字')
+                            text = '供应商ID只能是数字'
                             break;
                         default:
-                            alert('意料之外的错误')
+                            text = '获取出错'
                             break;
                     }
+                    showToast({
+                        text: text
+                    })
                 }
             })
         }
@@ -388,7 +411,7 @@ import { app } from '../../../../index.js';;
                 if (fhTotal == '') return
                 if (countPinkage == '') return
                 app.requests({
-                    url: 'addSupplierFreightdetail',
+                    url: 'suppliers/addSupplierFreightdetail',
                     data: {
                         freight_id: t.FhId,
                         price: fhPrice,
@@ -397,13 +420,22 @@ import { app } from '../../../../index.js';;
                         unit_price: countPinkage
                     },
                     success: function(res) {
+                        showToast({
+                            type: 'success',
+                            text: '操作成功'
+                        })
                         t.getfreight()
                         t.eeAmend.classList.add('hide')
+                    },
+                    Error(code) {
+                        showToast({
+                            text: '操作失败'
+                        })
                     }
                 })
             } else {
                 app.requests({
-                    url: 'editsupplierfreightdetail',
+                    url: 'suppliers/editsupplierfreightdetail',
                     data: {
                         freight_detail_id: t.id,
                         price: fhPrice,
@@ -412,24 +444,32 @@ import { app } from '../../../../index.js';;
                         unit_price: countPinkage
                     },
                     success: function(res) {
+                        showToast({
+                            type: 'success',
+                            text: '操作成功'
+                        })
                         t.getfreight()
                         t.eeAmend.classList.add('hide')
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3001:
-                                alert('运费模版Id错误')
+                                text = '运费模版Id错误'
                                 break;
                             case 3002:
-                                alert('价格只能是数字')
+                                text = '价格只能是数字'
                                 break;
                             case 3003:
-                                alert('运费详情不存在')
+                                text = '价格只能是数字'
                                 break;
                             default:
-                                alert('意料之外的错误')
+                                text = '操作失败'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             }

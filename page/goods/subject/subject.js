@@ -1,6 +1,6 @@
-import { app } from '../../../index.js';;
+import { app } from '../../../index.js';
+import { showToast } from '../../../js/utils.js';
 (function(pz) {
-
     pz.subject = (function() {
         function _ST() {
             this.subjectcompile = document.querySelector('#subjectcompile'); //修改弹框
@@ -55,15 +55,17 @@ import { app } from '../../../index.js';;
             getallsubject: function() { //获取所有专题
                 let t = this
                 app.requests({
-                    url: 'getallsubject',
+                    url: 'subject/getallsubject',
                     data: {
                         stype: 1
                     },
                     success: function(res) {
                         t.setglul(t.dissubject(res.data || []))
                     },
-                    Error: function(res) {
-
+                    Error: function(code) {
+                        showToast({
+                            text: '获取失败'
+                        })
                     }
                 })
             },
@@ -112,7 +114,7 @@ import { app } from '../../../index.js';;
             subjectDetail: function(id) { //获取专题详细信息
                 let t = this
                 app.requests({
-                    url: 'getsubjectdetail',
+                    url: 'subject/getsubjectdetail',
                     data: {
                         subject_id: id
                     },
@@ -120,14 +122,18 @@ import { app } from '../../../index.js';;
                         t.subjectAmend(res.data)
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3001:
-                                alert('id必须数字')
+                                text = 'id必须数字'
                                 break;
                             default:
-                                alert('意料之外的错误')
+                                text = '意料之外的错误'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             },
@@ -200,7 +206,7 @@ import { app } from '../../../index.js';;
             editsubject: function(data) { //修改专题
                 let t = this
                 app.requests({
-                    url: 'editsubject',
+                    url: 'subject/editsubject',
                     data: {
                         id: data.id,
                         subject: data.subject || '',
@@ -209,39 +215,47 @@ import { app } from '../../../index.js';;
                         order_by: data.order_by || ''
                     },
                     success: function(res) {
+                        showToast({
+                            type: 'success',
+                            text: '操作成功'
+                        })
                         t.subjectcompile.classList.add('hide')
                         t.getallsubject()
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3001:
-                                alert('状态有误')
+                                text = '状态有误'
                                 break;
                             case 3002:
-                                alert('id只能为数字')
+                                text = 'id只能为数字'
                                 break;
                             case 3003:
-                                alert('排序只能是数字')
+                                text = '排序只能是数字'
                                 break;
                             case 3004:
-                                alert('专题不存在')
+                                text = '专题不存在'
                                 break;
                             case 3005:
-                                alert('专题名已存在')
+                                text = '专题名已存在'
                                 break;
                             case 3006:
-                                alert('图片没有上传过')
+                                text = '图片没有上传过'
                                 break;
                             case 3007:
-                                alert('没提交要修改的内容')
+                                text = '没提交要修改的内容'
                                 break;
                             case 3008:
-                                alert('保存失败')
+                                text = '保存失败'
                                 break;
                             default:
-                                alert('意料之外的错误')
+                                text = '意料之外的错误'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             },
@@ -317,7 +331,7 @@ import { app } from '../../../index.js';;
                     subject = t.nameNew.value,
                     pid = t.combobox_class.getAttribute('data-id');
                 app.requests({
-                    url: 'addsubject',
+                    url: 'subject/addsubject',
                     data: {
                         pid: pid,
                         subject: subject,
@@ -325,36 +339,44 @@ import { app } from '../../../index.js';;
                         image: t.newImg
                     },
                     success: function(res) {
+                        showToast({
+                            type: 'success',
+                            text: '操作成功'
+                        })
                         t.getallsubject()
                         t.classadd.classList.add('hide')
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3001:
-                                alert('状态有误')
+                                text = '状态有误'
                                 break;
                             case 3002:
-                                alert('pid只能为数字')
+                                text = 'pid只能为数字'
                                 break;
                             case 3003:
-                                alert('专题名不能为空')
+                                text = '专题名不能为空'
                                 break;
                             case 3004:
-                                alert('pid查不到上级专题')
+                                text = 'pid查不到上级专题'
                                 break;
                             case 3005:
-                                alert('专题名已存在')
+                                text = '专题名已存在'
                                 break;
                             case 3006:
-                                alert('图片没有上传过')
+                                text = '图片没有上传过'
                                 break;
                             case 3007:
-                                alert('保存失败')
+                                text = '保存失败'
                                 break;
                             default:
-                                alert('意料之外的错误')
+                                text = '意料之外的错误'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             },

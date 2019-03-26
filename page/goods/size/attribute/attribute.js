@@ -1,4 +1,5 @@
-import { app } from '../../../../index.js';;
+import { app } from '../../../../index.js';
+import { showToast } from '../../../js/utils.js';;
 (function(pz) {
     pz.size = (function() {
         function _SE(o) {
@@ -43,10 +44,19 @@ import { app } from '../../../../index.js';;
                     sa_name: name,
                     type: 2
                 },
-                url: 'saveEditSpecAttr',
+                url: 'spec/saveEditSpecAttr',
                 success: function(res) {
+                    showToast({
+                        type: 'success',
+                        text: '操作成功!'
+                    })
                     t.getattributeList()
                     t.abcompile.classList.add('hide')
+                },
+                Error(code) {
+                    showToast({
+                        text: '保存失败!'
+                    })
                 }
             })
         }
@@ -60,18 +70,26 @@ import { app } from '../../../../index.js';;
                     sa_name: name,
                     type: 2
                 },
-                url: 'savespecattr',
+                url: 'spec/savespecattr',
                 success: function(res) {
+                    showToast({
+                        type: 'success',
+                        text: '操作成功'
+                    })
                     t.getattributeList()
                     t.abcompile.classList.add('hide')
                 },
                 Error(code) {
                     switch (parseInt(code)) {
                         case 3002:
-                            alert('参数错误')
+                            showToast({
+                                text: '参数错误'
+                            })
                             break;
                         default:
-                            alert('意料之外的错误')
+                            showToast({
+                                text: '意料之外的错误'
+                            })
                             break;
                     }
                 }
@@ -83,9 +101,14 @@ import { app } from '../../../../index.js';;
                 data: {
                     spec_id: t.topId
                 },
-                url: 'getAttr',
+                url: 'spec/getAttr',
                 success: function(res) {
                     t.setGlul(res.attr, res.spec_name)
+                },
+                Error(code) {
+                    showToast({
+                        text: '获取失败'
+                    })
                 }
             })
         }
@@ -135,22 +158,30 @@ import { app } from '../../../../index.js';;
                     id: id,
                     type: 2
                 },
-                url: 'delSpecAttr',
+                url: 'spec/delSpecAttr',
                 success: function(res) {
+                    showToast({
+                        type: 'success',
+                        text: '操作成功！'
+                    })
                     t.getattributeList()
                 },
                 Error(code) {
+                    let text = ''
                     switch (parseInt(code)) {
                         case 3002:
-                            alert('参数错误')
+                            text = '参数错误'
                             break;
                         case 3003:
-                            alert('无法删除')
+                            text = '无法删除'
                             break;
                         default:
-                            alert('意料之外的错误')
+                            text = '意料之外的错误'
                             break;
                     }
+                    showToast({
+                        text: text
+                    })
                 }
             })
         }
@@ -161,11 +192,16 @@ import { app } from '../../../../index.js';;
                     id: id,
                     type: 2
                 },
-                url: 'getEditData',
+                url: 'spec/getEditData',
                 success: function(res) {
                     t.abcompile.classList.remove('hide')
                     t.id = res.attr.id
                     document.querySelector('#abName').value = res.attr.attr_name
+                },
+                Error(code) {
+                    showToast({
+                        text: '获取失败!'
+                    })
                 }
             })
         }

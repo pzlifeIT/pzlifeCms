@@ -1,4 +1,5 @@
-import { app } from '../../../../index.js';;
+import { app } from '../../../../index.js';
+import { showToast } from '../../../../js/utils.js';
 (function(pz) {
     select({
         el: '#EEcombobox',
@@ -42,7 +43,7 @@ import { app } from '../../../../index.js';;
         _EE.prototype.getfreight = function() { //获取供应商快递模板
             let t = this
             app.requests({
-                url: 'getsupplierfreights',
+                url: 'suppliers/getsupplierfreights',
                 data: {
                     supplierId: t.supplierId
                 },
@@ -50,14 +51,18 @@ import { app } from '../../../../index.js';;
                     t.setGlul(res.data || [])
                 },
                 Error(code) {
+                    let text = ''
                     switch (parseInt(code)) {
                         case 3002:
-                            alert('供应商ID只能是数字')
+                            text = '供应商ID只能是数字'
                             break;
                         default:
-                            alert('意料之外的错误')
+                            text = '意料之外的错误'
                             break;
                     }
+                    showToast({
+                        text: text
+                    })
                 }
             })
         }
@@ -105,7 +110,7 @@ import { app } from '../../../../index.js';;
         _EE.prototype.getSupplierFreight = function() {
             let t = this
             app.requests({
-                url: 'getSupplierFreight',
+                url: 'suppliers/getSupplierFreight',
                 data: {
                     supplierFreightId: t.id
                 },
@@ -114,14 +119,18 @@ import { app } from '../../../../index.js';;
                     t.eeAmend.classList.remove('hide')
                 },
                 Error(code) {
+                    let text = ''
                     switch (parseInt(code)) {
                         case 3002:
-                            alert('供应商ID只能是数字')
+                            text = '供应商ID只能是数字'
                             break;
                         default:
-                            alert('意料之外的错误')
+                            text = '意料之外的错误'
                             break;
                     }
+                    showToast({
+                        text: text
+                    })
                 }
             })
         }
@@ -163,7 +172,7 @@ import { app } from '../../../../index.js';;
                 eeDesc = document.querySelector('#eeDesc').value;
             if (t.id == '') {
                 app.requests({
-                    url: 'addsupplierfreight',
+                    url: 'suppliers/addsupplierfreight',
                     data: {
                         supplierId: t.supplierId,
                         stype: eeType,
@@ -171,29 +180,37 @@ import { app } from '../../../../index.js';;
                         desc: eeDesc
                     },
                     success: function(res) {
+                        showToast({
+                            type: 'success',
+                            text: '操作成功'
+                        })
                         t.getfreight()
                         t.eeAmend.classList.add('hide')
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3001:
-                                alert('供应商id必须是数字')
+                                text = '供应商id必须是数字'
                                 break;
                             case 3002:
-                                alert('供应商ID只能是数字')
+                                text = '供应商ID只能是数字'
                                 break;
                             case 3003:
-                                alert('标题和详情不能为空')
+                                text = '标题和详情不能为空'
                                 break;
                             default:
-                                alert('意料之外的错误')
+                                text = '意料之外的错误'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             } else {
                 app.requests({
-                    url: 'updateSupplierFreight',
+                    url: 'suppliers/updateSupplierFreight',
                     data: {
                         supplier_freight_Id: t.id,
                         stype: eeType,
@@ -201,24 +218,32 @@ import { app } from '../../../../index.js';;
                         desc: eeDesc
                     },
                     success: function(res) {
+                        showToast({
+                            type: 'success',
+                            text: '操作成功'
+                        })
                         t.getfreight()
                         t.eeAmend.classList.add('hide')
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3001:
-                                alert('供应商模版id必须是数字')
+                                text = '供应商模版id必须是数字'
                                 break;
                             case 3002:
-                                alert('计价方式参数有误')
+                                text = '计价方式参数有误'
                                 break;
                             case 3003:
-                                alert('标题和详情不能为空')
+                                text = '标题和详情不能为空'
                                 break;
                             default:
-                                alert('意料之外的错误')
+                                text = '意料之外的错误'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             }

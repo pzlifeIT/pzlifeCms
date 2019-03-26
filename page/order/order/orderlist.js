@@ -67,7 +67,7 @@ console.log('运行了');
             getorderlist: function(o) {
                 let t = this
                 app.requests({
-                    url: 'getOrders',
+                    url: 'Order/getOrders',
                     data: {
                         page: o.page || 1,
                         pagenum: o.pagenum || 10,
@@ -83,14 +83,18 @@ console.log('运行了');
                         t.setpage()
                     },
                     Error(code) {
+                        let text = ''
                         switch (parseInt(code)) {
                             case 3002:
-                                alert('页码和查询条数只能是数字')
+                                text = '页码和查询条数只能是数字'
                                 break;
                             default:
-                                alert('意料之外的错误')
+                                text = '意料之外的错误'
                                 break;
                         }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             },
