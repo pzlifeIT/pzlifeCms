@@ -179,7 +179,7 @@ import { showToast } from '../../../../js/utils.js';
                     len = data.length,
                     i, str = ""
                 for (i = 0; i < len; i++) {
-                    if ((i % 7) == 0) {
+                    if ((i % 5) == 0) {
                         str += '<span class="table-row"></span>'
                     }
                     str += '<div class="pl-li table-cell">'
