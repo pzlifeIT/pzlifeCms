@@ -6,10 +6,11 @@ new Vue({
     data: {
         modal: false,
         username: '',
-        pwd: ''
+        pwd: '',
+        adminUserList: []
     },
     mounted() {
-        console.log(app)
+        this.getAdminUsers()
     },
     methods: {
         addMember() {
@@ -17,6 +18,39 @@ new Vue({
         },
         cancel() {
             this.modal = false
+        },
+        getAdminUsers() {
+            let that = this
+            app.requests({
+                url: 'admin/getAdminUsers',
+                data: {},
+                success(res) {
+                    that.adminUserList = that.disadminUserList(res.data)
+                },
+                Error(code) {
+
+                }
+            })
+        },
+        disadminUserList(data = []) {
+            let arr = data,
+                len = arr.length
+            for (let i = 0; i < len; i++) {
+                arr[i].stypeText = this.getstype(arr[i].stype)
+            }
+            return arr
+        },
+        getstype(n) {
+            let text = ''
+            switch (parseInt(n)) {
+                case 1:
+                    text = '管理员'
+                    break;
+                case 2:
+                    text = '超级管理员'
+                    break;
+            }
+            return text
         },
         verdict(type) {
             if (this.username == '') {
@@ -61,7 +95,10 @@ new Vue({
                         type: 'success',
                         text: '添加成功'
                     })
+                    that.username = ''
+                    that.pwd = ''
                     that.modal = false
+                    that.getAdminUsers()
                 },
                 Error(code) {
                     let text = ''
