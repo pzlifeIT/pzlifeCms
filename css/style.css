@@ -859,3 +859,5 @@ input {
 .table-cell {
     display: table-cell!important;
 }
+
+.loading {}

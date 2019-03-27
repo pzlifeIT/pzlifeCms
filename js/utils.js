@@ -70,12 +70,9 @@ let showToast = function(obj = {}) {
 }
 let loading = function() {
     let body = document.querySelector('body'),
-        ran = parseInt(Math.random() * 100000000),
         div = document.createElement("div");
-    obj.type = obj.type || 'error'
-    obj.text = obj.text || ''
-    div.setAttribute("id", "st" + ran);
-    div.setAttribute("class", "showToast " + obj.type);
+    div.setAttribute("id", "loadingId");
+    div.setAttribute("class", "loading ");
     div.innerHTML = '<span class="text din fl">' + obj.text + '</span>';
     body.appendChild(div);
     setTimeout(function() {

@@ -16,6 +16,7 @@ var app = {
                 return
             }
         }
+
         that.requests({
             url: 'admin/getadmininfo',
             data: {
@@ -32,10 +33,14 @@ var app = {
     },
     requests(params) {
         let that = this
-        if (!(params.data instanceof FormData)) {
+        if (!localStorage.getItem("cms_con_id") & !params.login) {
+            that.skiplogin()
+            return
+        }
+        if (!(params.data instanceof FormData) & !params.login) {
             params.data = params.data || {}
             params.data.cms_con_id = localStorage.getItem("cms_con_id") || ''
-        } else {
+        } else if (!params.login) {
             params.data.append('cms_con_id', localStorage.getItem("cms_con_id") || '')
         }
         request({
@@ -44,11 +49,7 @@ var app = {
             success: function(res) {
                 console.log(res)
                 if (!params.login & res.code == '5000') {
-                    if (window.frames.parent) {
-                        window.frames.parent.location.href = window.location.origin + '/page/user/login/login.html'
-                    } else {
-                        window.location.href = window.location.origin + '/page/user/login/login.html'
-                    }
+                    that.skiplogin()
                     return
                 }
                 if (res.code == '200' || res.code == '3000') {
@@ -63,6 +64,16 @@ var app = {
                 that.networkerror(code)
             }
         })
+    },
+    skiplogin() {
+        if (window.frames.parent.location.href.indexOf('login') != -1) {
+            return
+        }
+        if (window.frames.parent) {
+            window.frames.parent.location.href = window.location.origin + '/page/user/login/login.html'
+        } else {
+            window.location.href = window.location.origin + '/page/user/login/login.html'
+        }
     },
     networkerror(code) {
         let text = ''
