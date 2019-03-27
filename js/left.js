@@ -42,6 +42,7 @@ import { app } from '../index.js';;
             }
             document.querySelector('#exitlogin').addEventListener('click', function() {
                 app.globalData.cms_con_id = ''
+                localStorage.SetItem("cms_con_id", '')
                 window.location.href = window.location.origin + '/page/user/login/login.html'
             })
             _this.tabLis.forEach(function(tabLi) {

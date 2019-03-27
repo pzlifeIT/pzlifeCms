@@ -134,7 +134,7 @@ import { showToast } from '../../../js/utils.js';
                 document.querySelector('#agaddTit').value = data.title || ''
                 document.querySelector('#agaddSort').value = data.model_order || ''
                 document.querySelector('#agaddContent').value = data.jump_content || ''
-                selection = document.querySelector('#agaddType').querySelector('.ant-select-selection')
+                let selection = document.querySelector('#agaddType').querySelector('.ant-select-selection')
                 if (data.week) {
                     document.querySelector('#weekcontrol').classList.remove('hide')
                     document.querySelector('#agaddWeek').value = data.show_days || ''
