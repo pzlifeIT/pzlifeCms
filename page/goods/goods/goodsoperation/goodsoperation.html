@@ -13,9 +13,8 @@
 </head>
 <script>
     function back() {
-        console.log(window.frameElement.document)
-        window.frameElement.document.history.back(-1);
-
+        console.log(window.frames)
+        window.frames.document.history.back(-1);
         // return false;
         // parent.document.getElementsByName('page/goods/goods/goods')[0].contentWindow.history.back();
         // console.log(window.frameElement)
@@ -29,9 +28,9 @@
         <div class="refresh topbtn din fl" onclick="document.location.reload()">
             <img src="../../../../images/sx.png" alt="">
         </div>
-        <div id="previewbanner" class="ml15 refresh topbtn addpreview din fl">
+        <!-- <div id="previewbanner" class="ml15 refresh topbtn addpreview din fl">
             <img src="../../../../images/yulan.png" alt="">
-        </div>
+        </div> -->
     </div>
     <div class="details">
         <div class="dl-header">
@@ -309,7 +308,7 @@
     </div>
 </body>
 <script type="module" src="../../../../js/common.js?1.0.1"></script>
-<script type="module" src="goodsoperation.js?1.0.3"></script>
+<script type="module" src="./goodsoperation.js"></script>
 <script>
 </script>
 

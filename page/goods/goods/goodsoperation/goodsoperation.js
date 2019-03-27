@@ -759,7 +759,7 @@ import { showToast } from '../../../../js/utils.js';
                             type: 'success',
                             text: '修改成功'
                         })
-                        document.location.reload()
+                        t.getonegoods(1)
                     },
                     Error(code) {
                         let text = ''

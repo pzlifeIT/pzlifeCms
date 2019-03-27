@@ -8,16 +8,18 @@ var app = {
     getcms_con_id() {
         this.globalData.cms_con_id = localStorage.getItem("cms_con_id") || ''
     },
-    getadmininfo() {
+    getadmininfo(t) {
         let that = this
-        if (localStorage.getItem("admininfo")) {
-            that.globalData.admininfo = JSON.parse(localStorage.getItem("admininfo"))
-            return
+        if (!t) {
+            if (localStorage.getItem("admininfo")) {
+                that.globalData.admininfo = JSON.parse(localStorage.getItem("admininfo"))
+                return
+            }
         }
         that.requests({
             url: 'admin/getadmininfo',
             data: {
-                cms_con_id: that.globalData.cms_con_id
+                cms_con_id: localStorage.getItem("cms_con_id") || ''
             },
             success(res) {
                 that.globalData.admininfo = res.data
@@ -129,7 +131,7 @@ var app = {
         })
     }
 }
-
+app.getadmininfo()
 export {
     app
 }

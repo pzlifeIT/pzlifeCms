@@ -154,6 +154,10 @@ import { showToast } from '../../../js/utils.js';
                         type: type
                     },
                     success: function(res) {
+                        showToast({
+                            type: 'success',
+                            text: '操作成功'
+                        })
                         t.getgoodslist({
                             page: t.page
                         })

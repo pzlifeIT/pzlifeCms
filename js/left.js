@@ -1,6 +1,6 @@
 import { app } from '../index.js';;
 (function() {
-    app.getadmininfo()
+    app.getadmininfo(true)
     var Tab = (function() {
         function _Tab() {
             this.sidebar = document.querySelector('#sidebar');
@@ -31,7 +31,7 @@ import { app } from '../index.js';;
                     }
                     clearInterval(st)
                 }
-            }, 1000)
+            }, 200)
 
             _this.userstatus.addEventListener('click', function(e) {
                 e.stopPropagation()

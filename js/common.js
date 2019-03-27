@@ -41,6 +41,10 @@ import { showToast } from '../js/utils.js';;
     window.pages = (function() {
         function _page(obj) {
             this.floorpages = doc.querySelector(obj.el)
+            if (!this.floorpages) {
+                console.log('无此控件', this.floorpages)
+                return
+            }
             this.num = obj.pagenumber || 1
             this.current = obj.current || 1 //当前页面页码
             this.fn = obj.fn
@@ -194,6 +198,10 @@ import { showToast } from '../js/utils.js';;
     window.select = (function() {
         function D(o) {
             this.box = doc.querySelector(o.el)
+            if (!this.box) {
+                console.log('无此控件', this.box)
+                return
+            }
             this.box.innerHTML += '<div class="as-dropdown"><ul class="as-dropdown-menu"></ul></div>'
             this.menu = this.box.querySelector('.as-dropdown')
             this.select = this.box.querySelector('.ant-select')

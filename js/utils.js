@@ -68,6 +68,20 @@ let showToast = function(obj = {}) {
         body.removeChild(document.querySelector('#st' + ran));
     }, 2000)
 }
+let loading = function() {
+    let body = document.querySelector('body'),
+        ran = parseInt(Math.random() * 100000000),
+        div = document.createElement("div");
+    obj.type = obj.type || 'error'
+    obj.text = obj.text || ''
+    div.setAttribute("id", "st" + ran);
+    div.setAttribute("class", "showToast " + obj.type);
+    div.innerHTML = '<span class="text din fl">' + obj.text + '</span>';
+    body.appendChild(div);
+    setTimeout(function() {
+        body.removeChild(document.querySelector('#st' + ran));
+    }, 2000)
+}
 export {
     showToast
 }
