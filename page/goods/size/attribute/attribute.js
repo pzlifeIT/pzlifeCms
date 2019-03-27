@@ -1,5 +1,5 @@
 import { app } from '../../../../index.js';
-import { showToast } from '../../../js/utils.js';;
+import { showToast } from '../../../../js/utils.js';;
 (function(pz) {
     pz.size = (function() {
         function _SE(o) {

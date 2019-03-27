@@ -79,7 +79,7 @@ import { showToast } from '../../../js/utils.js';
         _SE.prototype.newSave = function() { //保存新建
             let t = this,
                 name = document.querySelector('#newName').value;
-            id = document.querySelector('.multistage').getAttribute('data-id');
+            let id = document.querySelector('.multistage').getAttribute('data-id');
             if (!name) return
             if (!id) return
             app.requests({

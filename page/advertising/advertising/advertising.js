@@ -189,12 +189,12 @@ import { showToast } from '../../../js/utils.js';
 
             gettype1() {
                 let t = this,
-                    data = {}
-                data.title = document.querySelector('#agaddTit').value
-                data.model_order = document.querySelector('#agaddSort').value
-                data.show_days = document.querySelector('#agaddWeek').value
-                type = document.querySelector('#agaddType').querySelector('.ant-select-selection').getAttribute('data-id')
-                typeId = t.gettypeId(type)
+                    data = {};
+                data.title = document.querySelector('#agaddTit').value;
+                data.model_order = document.querySelector('#agaddSort').value;
+                data.show_days = document.querySelector('#agaddWeek').value;
+                let type = document.querySelector('#agaddType').querySelector('.ant-select-selection').getAttribute('data-id');
+                let typeId = t.gettypeId(type)
                 data.jump_content = document.querySelector('#agaddContent').value
                 data.tier = 2
                 data.jump_type = typeId.jump
@@ -613,8 +613,8 @@ import { showToast } from '../../../js/utils.js';
                 })
             },
             addRecommend: function(data) {
-                let t = this
-                params = {
+                let t = this,
+                    params = {
                         id: data.id || '',
                         model_id: data.model_id || '',
                         title: data.title || '',
