@@ -61,6 +61,9 @@ var app = {
                 }
             },
             failed: function(code) {
+                if (typeof params.failed == 'function') {
+                    params.failed()
+                }
                 that.networkerror(code)
             }
         })

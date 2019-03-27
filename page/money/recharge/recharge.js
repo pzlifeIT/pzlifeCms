@@ -13,7 +13,8 @@ new Vue({
         page: 1,
         page_num: 10,
         total: 0,
-        AdminRemittance: []
+        AdminRemittance: [],
+        nolink: true
     },
     mounted() {
         this.getAdminRemittance()
@@ -26,7 +27,6 @@ new Vue({
             this.modal = false
         },
         auditAdminRemittance(id, status) {
-            console.log(id, status)
             let that = this
             app.requests({
                 url: 'admin/auditAdminRemittance',
@@ -216,6 +216,8 @@ new Vue({
             let that = this
             let type = document.querySelector('#selection3').getAttribute('data-id') || '';
             if (!that.verdict(type)) return
+            if (!that.nolink) return
+            that.nolink = false
             app.requests({
                 url: 'admin/adminRemittance',
                 data: {
@@ -231,6 +233,7 @@ new Vue({
                         type: 'success',
                         text: '添加成功'
                     })
+                    that.nolink = true
                     that.modal = false
                     that.nick_name = ''
                     that.credit = ''
@@ -240,6 +243,7 @@ new Vue({
                     that.getAdminRemittance()
                 },
                 Error(code) {
+                    that.nolink = true
                     let text = ''
                     switch (parseInt(code)) {
                         case 3001:
@@ -273,6 +277,9 @@ new Vue({
                         type: 'error',
                         text: text
                     })
+                },
+                failed() {
+                    that.nolink = true
                 }
             })
         },
