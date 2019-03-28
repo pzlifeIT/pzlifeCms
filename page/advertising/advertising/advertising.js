@@ -343,7 +343,7 @@ import { showToast } from '../../../js/utils.js';
             setselArr(data) {
                 // if (data.length < 1) return
                 let len = data.length,
-                    i, arr = []
+                    i, arr = [];
                 for (i = 0; i < len; i++) {
                     if (data[i].tier == 2) {
                         arr.push({
@@ -428,7 +428,7 @@ import { showToast } from '../../../js/utils.js';
             },
             btnamend(name) {
                 let t = this,
-                    namends = document.querySelector('#' + name + 'list').querySelectorAll('.btn-amend')
+                    namends = document.querySelector('#' + name + 'list').querySelectorAll('.btn-amend');
                 namends.forEach(function(li) {
                     li.addEventListener('click', function(e) {
                         let id = li.getAttribute('data-id')
