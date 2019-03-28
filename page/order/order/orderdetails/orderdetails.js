@@ -117,8 +117,8 @@ import { showToast } from '../../../../js/utils.js';
                         let id = ls.getAttribute('data-id'),
                             tr = document.querySelector('#' + id)
                         let goods_id = tr.querySelector('.name-text').getAttribute('data-id'),
-                            express_key = tr.querySelector('.ant-select-selection').getAttribute('data-id')
-                        express_no = tr.querySelector('.ls-odd').value
+                            express_key = tr.querySelector('.ant-select-selection').getAttribute('data-id'),
+                            express_no = tr.querySelector('.ls-odd').value
                         let orderjson = {
                             order_goods_id: goods_id,
                             express_no: express_no,

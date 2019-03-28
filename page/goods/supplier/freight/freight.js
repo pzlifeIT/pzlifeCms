@@ -77,7 +77,7 @@ import { showToast } from '../../../../js/utils.js';
             })
         }
 
-        _FH.prototype.setGlul = function(data) { //循环出供应商列表
+        _FH.prototype.setGlul = function(data = []) { //循环出供应商列表
             let len = data.length,
                 i,
                 str = ''
@@ -167,7 +167,7 @@ import { showToast } from '../../../../js/utils.js';
                 len1, x, y, str = '',
                 pcol = '',
                 ccol = ''
-            for (i = 0; i < len; i++) {
+            for (let i = 0; i < len; i++) {
                 pcol = ''
                 if (data[i].status == 2) {
                     pcol = 'active'
@@ -383,8 +383,8 @@ import { showToast } from '../../../../js/utils.js';
             let t = this,
                 fhPrice = document.querySelector('#fhPrice'),
                 fhAfter = document.querySelector('#fhAfter'),
-                fhTotal = document.querySelector('#fhTotal');
-            countPinkage = document.querySelector('#countPinkage');
+                fhTotal = document.querySelector('#fhTotal'),
+                countPinkage = document.querySelector('#countPinkage');
             if (data) {
                 t.id = data.id
                 fhPrice.value = data.price
@@ -403,8 +403,8 @@ import { showToast } from '../../../../js/utils.js';
             let t = this,
                 fhPrice = document.querySelector('#fhPrice').value,
                 fhAfter = document.querySelector('#fhAfter').value,
-                fhTotal = document.querySelector('#fhTotal').value;
-            countPinkage = document.querySelector('#countPinkage').value;
+                fhTotal = document.querySelector('#fhTotal').value,
+                countPinkage = document.querySelector('#countPinkage').value;
             if (t.id == '') {
                 if (fhPrice == '') return
                 if (fhAfter == '') return

@@ -142,9 +142,9 @@ import { showToast } from '../../../js/utils.js';
                     name = document.querySelector('#amendName'),
                     group = document.querySelector('#amendGroup'),
                     order = document.querySelector('#amendOrder');
-                name.value = data.subject
-                order.value = data.order_by
-                wrappers = group.querySelectorAll('.ant-radio-wrapper')
+                name.value = data.subject;
+                order.value = data.order_by;
+                let wrappers = group.querySelectorAll('.ant-radio-wrapper')
                 wrappers.forEach(function(li) {
                     let status = li.getAttribute('data-status')
                     li.classList.remove('ant-radio-checked')
@@ -167,9 +167,9 @@ import { showToast } from '../../../js/utils.js';
                     group = document.querySelector('#amendGroup'),
                     order = document.querySelector('#amendOrder'),
                     data = {};
-                data.subject = name.value
-                data.order_by = order.value
-                wrappers = group.querySelectorAll('.ant-radio-wrapper')
+                data.subject = name.value;
+                data.order_by = order.value;
+                let wrappers = group.querySelectorAll('.ant-radio-wrapper')
                 wrappers.forEach(function(li) {
                     let status = li.getAttribute('data-status')
                     if (li.classList.contains('ant-radio-checked')) {
