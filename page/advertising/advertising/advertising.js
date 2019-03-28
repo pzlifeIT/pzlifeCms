@@ -132,8 +132,8 @@ import { showToast } from '../../../js/utils.js';
             showtype1(data) {
                 let t = this
                 document.querySelector('#agaddTit').value = data.title || ''
-                document.querySelector('#agaddSort').value = data.model_order || ''
-                document.querySelector('#agaddContent').value = data.jump_content || ''
+                document.querySelector('#agaddSort').value = data.model_order || '';
+                document.querySelector('#agaddContent').value = data.jump_content || '';
                 let selection = document.querySelector('#agaddType').querySelector('.ant-select-selection')
                 if (data.week) {
                     document.querySelector('#weekcontrol').classList.remove('hide')
@@ -161,7 +161,7 @@ import { showToast } from '../../../js/utils.js';
                     data: t.selArr
                 })
                 if (data.type) {
-                    document.querySelector('#projectaddId').classList.add('hide')
+                    document.querySelector('#projectaddId').classList.add('hide');
                     let selection = document.querySelector('#projectSuberior').querySelector('.ant-select-selection')
                     selection.setAttribute('data-id', '')
                     selection.setAttribute('data-value', '')
@@ -171,8 +171,8 @@ import { showToast } from '../../../js/utils.js';
                 }
                 document.querySelector('#projectTit2').value = data.title || ''
                 document.querySelector('#projectSort2').value = data.model_order || ''
-                document.querySelector('#projectContent2').value = data.jump_content || ''
-                selection = document.querySelector('#projectType2').querySelector('.ant-select-selection')
+                document.querySelector('#projectContent2').value = data.jump_content || '';
+                let selection = document.querySelector('#projectType2').querySelector('.ant-select-selection')
                 if (data.type) {
                     selection.setAttribute('data-id', data.type)
                     selection.classList.add('already-select')

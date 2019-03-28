@@ -16,7 +16,6 @@ var app = {
                 return
             }
         }
-
         that.requests({
             url: 'admin/getadmininfo',
             data: {
