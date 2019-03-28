@@ -194,7 +194,7 @@ import { showToast } from '../../../js/utils.js';
                 data.model_order = document.querySelector('#agaddSort').value;
                 data.show_days = document.querySelector('#agaddWeek').value;
                 let type = document.querySelector('#agaddType').querySelector('.ant-select-selection').getAttribute('data-id');
-                let typeId = t.gettypeId(type)
+                let typeId = t.gettypeId(type);
                 data.jump_content = document.querySelector('#agaddContent').value
                 data.tier = 2
                 data.jump_type = typeId.jump
@@ -221,15 +221,15 @@ import { showToast } from '../../../js/utils.js';
             gettype2() {
                 let t = this,
                     data = {},
-                    suberiorid = []
-                suberior = document.querySelector('#projectSuberior').querySelector('.ant-select-selection').getAttribute('data-id') || ''
+                    suberiorid = [],
+                    suberior = document.querySelector('#projectSuberior').querySelector('.ant-select-selection').getAttribute('data-id') || ''
                 if (suberior.indexOf(',') != -1) {
                     suberiorid = suberior.split(',')
                 }
                 data.title = document.querySelector('#projectTit2').value
-                data.model_order = document.querySelector('#projectSort2').value
-                type = document.querySelector('#projectType2').querySelector('.ant-select-selection').getAttribute('data-id')
-                typeId = t.gettypeId(type)
+                data.model_order = document.querySelector('#projectSort2').value;
+                let type = document.querySelector('#projectType2').querySelector('.ant-select-selection').getAttribute('data-id'),
+                    typeId = t.gettypeId(type)
                 data.jump_content = document.querySelector('#projectContent2').value
                 data.tier = suberiorid[0]
                 data.jump_type = typeId.jump
@@ -263,7 +263,7 @@ import { showToast } from '../../../js/utils.js';
                     }
                 })
             },
-            disRecommend(data) {
+            disRecommend(data = []) {
                 let arr = data,
                     len = arr.length,
                     i, x, info, recommends = {};
