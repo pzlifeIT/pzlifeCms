@@ -108,7 +108,8 @@ import { showToast } from '../js/utils.js';;
         }
         _page.prototype.setstart = function() { //设置页码开始值
             // if (this.num <= this.pagelen) return
-            if (this.current <= 3) {
+            console.log(this.current)
+            if (this.current <= 4) {
                 this.start = 1
             } else if ((this.current + 2) >= this.num) {
                 this.start = this.num - 4

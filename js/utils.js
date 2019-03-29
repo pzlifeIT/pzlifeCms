@@ -72,13 +72,18 @@ let loading = function() {
     let body = document.querySelector('body'),
         div = document.createElement("div");
     div.setAttribute("id", "loadingId");
-    div.setAttribute("class", "loading ");
-    div.innerHTML = '<span class="text din fl">' + obj.text + '</span>';
+    div.setAttribute("class", "loading");
+    div.innerHTML = '<div class="loadEffect"> <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><p>加载中</p>';
     body.appendChild(div);
-    setTimeout(function() {
-        body.removeChild(document.querySelector('#st' + ran));
-    }, 2000)
+}
+let hideloading = function() {
+    console.log(document.querySelector('#loadingId'))
+    if (document.querySelector('#loadingId')) {
+        document.querySelector('body').removeChild(document.querySelector('#loadingId'))
+    }
 }
 export {
-    showToast
+    showToast,
+    loading,
+    hideloading
 }
