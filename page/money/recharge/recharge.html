@@ -68,29 +68,31 @@
                 <span>充值记录</span>
             </div>
             <div class="gl-title">
-                <span class="col-md-1 bot-bor subli">序号</span>
+                <span class="col-md-05 bot-bor subli">序号</span>
                 <span class="col-md-1 bot-bor subli">发起操作人</span>
                 <span class="col-md-1 bot-bor subli">发起时间</span>
                 <span class="col-md-1 bot-bor subli">充值用户昵称</span>
                 <span class="col-md-1 bot-bor subli">充值用户手机号</span>
                 <span class="col-md-1 bot-bor subli">充值用户身份</span>
-                <span class="col-md-1 bot-bor subli">充值类型</span>
+                <span class="col-md-05 bot-bor subli">充值类型</span>
                 <span class="col-md-1 bot-bor subli">充值金额</span>
-                <span class="col-md-1 bot-bor subli">充值描述</span>
+                <span class="col-md-1 bot-bor subli">前端描述</span>
+                <span class="col-md-1 bot-bor subli">后端描述</span>
                 <span class="col-md-1 bot-bor subli">状态</span>
                 <span class="col-md-2 bot-bor subli">管理</span>
             </div>
             <div class="table" id="goodlist">
                 <div class="table-tr" v-for="(v,k) in AdminRemittance">
-                    <span class="col-md-1 bot-bor subli">{{k + 1}}</span>
+                    <span class="col-md-05 bot-bor subli">{{k + 1}}</span>
                     <span class="col-md-1 bot-bor subli">{{v.initiateadmin.admin_name}}</span>
                     <span class="col-md-1 bot-bor subli">{{v.create_time}}</span>
                     <span class="col-md-1 bot-bor subli">{{v.user.nick_name}}</span>
                     <span class="col-md-1 bot-bor subli">{{v.user.mobile}}</span>
                     <span class="col-md-1 bot-bor subli">{{v.identity}}</span>
-                    <span class="col-md-1 bot-bor subli">{{v.stypeText}}</span>
+                    <span class="col-md-05 bot-bor subli">{{v.stypeText}}</span>
                     <span class="col-md-1 bot-bor subli">{{v.credit}}</span>
                     <span class="col-md-1 bot-bor subli">{{v.message}}</span>
+                    <span class="col-md-1 bot-bor subli">{{v.admin_message}}</span>
                     <span class="col-md-1 bot-bor subli">{{v.statusText}}</span>
                     <span class="col-md-2 bot-bor subli">
                       <div class="pz-btn btn-amend" v-if="v.status == 1" @click="auditAdminRemittance(v.id,1)" >审核通过</div>
@@ -132,8 +134,12 @@
                         </div>
                     </div>
                     <div class="dl-show">
-                        <span class="dl-title">详细描述:</span>
-                        <input class="dl-info" placeholder="默认详细描述" v-model="message" value="" type="text">
+                        <span class="dl-title">前端描述:</span>
+                        <textarea class="dl-area" placeholder="请输入前端描述" type="text" v-model="message" name=""></textarea>
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">后端描述:</span>
+                        <textarea class="dl-area" placeholder="请输入后端描述" type="text" v-model="admin_message" name=""></textarea>
                     </div>
                     <div class="dl-show flexcenter">
                         <input type="button" value="取消" class="pz-btn btn-cancel" @click="cancel">

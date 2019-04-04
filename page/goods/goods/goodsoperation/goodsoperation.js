@@ -1214,7 +1214,7 @@ import { showToast } from '../../../../js/utils.js';
                     volume = document.querySelector('#volume').value,
                     freight_id = t.freight.querySelector('.ant-select-selection').getAttribute('data-id');
                 app.requests({
-                    url: 'editgoodssku',
+                    url: 'goods/editgoodssku',
                     data: {
                         sku_id: t.skuid,
                         stock: stock,
@@ -1243,40 +1243,40 @@ import { showToast } from '../../../../js/utils.js';
                                 text = '库存必须为大于或等于0的数字'
                                 break;
                             case 3003:
-                                text = 'id必须为数字'
+                                text = '价格必须为大于或等于0的数字'
                                 break;
                             case 3004:
-                                text = 'id必须为数字'
+                                text = '积分必须为大于或等于0的数字'
                                 break;
                             case 3005:
-                                text = 'id必须为数字'
+                                text = '图片没有上传过'
                                 break;
                             case 3006:
-                                text = 'id必须为数字'
+                                text = '零售价不能小于成本价'
                                 break;
                             case 3007:
-                                text = 'id必须为数字'
+                                text = 'sku不存在'
                                 break;
                             case 3008:
-                                text = 'id必须为数字'
+                                text = '编辑失败'
                                 break;
                             case 3009:
-                                text = 'id必须为数字'
+                                text = '选择的供应山id有误'
                                 break;
                             case 3010:
-                                text = 'id必须为数字'
+                                text = '请填写零售价和成本价'
                                 break;
                             case 3011:
-                                text = 'id必须为数字'
+                                text = '选择重量模版必须填写重量'
                                 break;
                             case 3012:
-                                text = 'id必须为数字'
+                                text = '选择体积模版必须填写体积'
                                 break;
                             case 3013:
-                                text = 'id必须为数字'
+                                text = '商品下架才能编辑'
                                 break;
                             default:
-                                text = 'id必须为数字'
+                                text = '意料之外的错误'
                                 break;
                         }
                         showToast({

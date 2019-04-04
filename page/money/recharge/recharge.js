@@ -9,6 +9,7 @@ new Vue({
         mobile: '',
         credit: '',
         message: '',
+        admin_message: '',
         pwd: '',
         page: 1,
         page_num: 10,
@@ -226,7 +227,8 @@ new Vue({
                     mobile: that.mobile,
                     credit: that.credit,
                     passwd: that.pwd,
-                    message: that.message
+                    message: that.message,
+                    admin_message: that.admin_message
                 },
                 success(res) {
                     showToast({
@@ -240,6 +242,7 @@ new Vue({
                     that.message = ''
                     that.mobile = ''
                     that.pwd = ''
+                    that.admin_message = ''
                     that.getAdminRemittance()
                 },
                 Error(code) {
