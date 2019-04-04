@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>会员列表</title>
+    <link rel="stylesheet" href="../../../css/style.css?1.0.1">
+    <link rel="stylesheet" href="../../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../../css/list.css">
+    <link rel="stylesheet" href="../../../css/data.css">
+    <script src="../../../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="iframenav">
+            <div class="refresh topbtn din fl" onclick="document.location.reload()">
+                <img src="../../../images/sx.png" alt="">
+            </div>
+        </div>
+        <div class="gs-screen panel-default">
+            <div class="gs-header panel-heading">
+                <span class="din fl">筛选</span>
+                <button @click="search" class="btn btn-secondary radius din fr">筛选</button>
+                <div class="shrink"></div>
+            </div>
+            <div class="gs-con">
+                <ul>
+                    <!-- <li class="gs-li col-md-3 col-sm-6  col-xs-12">
+                        <p class="gs-name">状态</p>
+                        <div class="combobox" id="order_status">
+                            <div class="ant-select">
+                                <div class="ant-select-selection">请选择</div>
+                                <span class="ant-select-arrow"></span>
+                            </div>
+                        </div>
+                    </li> -->
+                    <li class="gs-li col-md-3 col-sm-6  col-xs-12">
+                        <p class="gs-name">手机号</p>
+                        <input class="gs-inp" v-model="mobile" type="text">
+                    </li>
+                    <!-- <li class="gs-li col-md-3 col-sm-6  col-xs-12">
+                    <p class="gs-name">开始时间</p>
+                    <input id="calend" placeholder="开始时间" class="gs-inp"></input>
+                </li>
+                <li class="gs-li col-md-3 col-sm-6  col-xs-12">
+                    <p class="gs-name">结束时间</p>
+                    <input id="calend1" placeholder="结束时间" class="gs-inp"></input>
+                </li> -->
+                </ul>
+            </div>
+        </div>
+        <div class="gs-list panel-default">
+            <div class="gl-head panel-heading ">
+                <span>商品列表</span>
+            </div>
+            <div class="gl-title">
+                <span class="col-md-1 bot-bor subli">序号</span>
+                <span class="col-md-1 bot-bor subli">用户头像</span>
+                <span class="col-md-1 bot-bor subli">用户昵称</span>
+                <span class="col-md-1 bot-bor subli">用户身份</span>
+                <span class="col-md-1 bot-bor subli">手机号</span>
+                <span class="col-md-1 bot-bor subli">商票余额</span>
+                <span class="col-md-1 bot-bor subli">佣金余额</span>
+                <span class="col-md-1 bot-bor subli">注册时间</span>
+            </div>
+            <div class="table" id="orderlist">
+                <div class="table-tr" v-for="(v,k) in memberList">
+                    <div class="col-md-1 bot-bor subli">{{k + 1}}</div>
+                    <div class="col-md-1 bot-bor subli"><img :src="v.avatar" class="stImg" alt="用户头像"></div>
+                    <div class="col-md-1 bot-bor subli">{{v.nick_name}}</div>
+                    <div class="col-md-1 bot-bor subli">{{v.user_identityText}}</div>
+                    <div class="col-md-1 bot-bor subli">{{v.mobile}}</div>
+                    <div class="col-md-1 bot-bor subli">{{v.balance}}</div>
+                    <div class="col-md-1 bot-bor subli">{{v.commission}}</div>
+                    <span class="col-md-1 bot-bor subli">{{v.create_time}}</span>
+                </div>
+
+            </div>
+            <div class="w-floor-page">
+                <div class="floor-page" id="floorpages"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="module" src="../../../js/common.js"></script>
+<script type="module" src="./memberList.js"></script>
+<script>
+    // calender('#calend').init({
+    //     format: 'yyyy-MM-dd',
+    //     date: [2018, 5, 12]
+    // }, function(date) {
+    //     this.value = date
+    // })
+    // calender('#calend1').init({
+    //     format: 'yyyy-MM-dd',
+    //     date: [2018, 5, 12]
+    // }, function(date) {
+    //     this.value = date
+    // })
+</script>
+
+</html>

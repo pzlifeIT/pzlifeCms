@@ -43,7 +43,7 @@ let Ajax = function(params) {
             // xhr.setRequestHeader("Content-type", "multipart/form-data;");
         } else {
             // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded", "charset=utf-8");
-            // xhr.setRequestHeader("Content-type", "application/json", "charset=utf-8");
+            // xhr.setRequestHeader("Access-Control-Allow-Origin", "*", );
             xhr.setRequestHeader("Content-type", "text/plain", "charset=utf-8");
         }
         // console.log()

@@ -22,6 +22,10 @@ select {
     padding: 0
 }
 
+textarea {
+    resize: none;
+}
+
 body {
     font: 12px "Microsoft YaHei", "Arial Narrow", HELVETICA;
     font-family: "Microsoft YaHei";

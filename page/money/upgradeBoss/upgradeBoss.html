@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>开通boss</title>
+    <link rel="stylesheet" href="../../../css/style.css?1.0.2">
+    <link rel="stylesheet" href="../../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../../css/list.css">
+    <link rel="stylesheet" href="../../../css/details.css">
+    <style>
+        .modalbox {
+            margin-left: 130px;
+        }
+    </style>
+    <script src="../../../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="iframenav">
+            <!-- <button class="">刷新</button> -->
+            <div class="refresh topbtn din fl" onclick="document.location.reload()">
+                <img src="../../../images/sx.png" alt="">
+            </div>
+            <div class="add addgoods topbtn din fl" @click="addMoney">
+                <img src="../../../images/jia.png" alt="">
+            </div>
+        </div>
+        <div class="gs-screen panel-default">
+            <div class="gs-header panel-heading">
+                <span class="din fl">筛选</span>
+                <button id="search" @click="search" class="btn btn-secondary radius din fr">筛选</button>
+                <div class="shrink"></div>
+            </div>
+            <div class="gs-con">
+                <ul>
+                    <li class="gs-li col-md-3 col-sm-6  col-xs-12">
+                        <p class="gs-name">开通账号昵称</p>
+                        <input v-model="s_nick_name" class="gs-inp" type="text">
+                    </li>
+                    <li class="gs-li col-md-3 col-sm-6  col-xs-12">
+                        <p class="gs-name">开通账号手机号</p>
+                        <input class="gs-inp" v-model="s_mobile" type="text">
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="gs-list panel-default">
+            <div class="gl-head panel-heading ">
+                <span>充值记录</span>
+            </div>
+            <div class="gl-title">
+                <span class="col-md-2 bot-bor subli">序号</span>
+                <span class="col-md-2 bot-bor subli">操作管理员</span>
+                <span class="col-md-2 bot-bor subli">开通账号昵称</span>
+                <span class="col-md-2 bot-bor subli">开通账号手机号</span>
+                <span class="col-md-2 bot-bor subli">预扣款金额</span>
+                <span class="col-md-2 bot-bor subli">描述</span>
+                <!-- <span class="col-md-2 bot-bor subli">管理</span> -->
+            </div>
+            <div class="table" id="goodlist">
+                <div class="table-tr" v-for="(v,k) in openbosslist">
+                    <span class="col-md-2 bot-bor subli">{{k + 1}}</span>
+                    <span class="col-md-2 bot-bor subli">{{v.admin_name}}</span>
+                    <span class="col-md-2 bot-bor subli">{{v.nick_name}}</span>
+                    <span class="col-md-2 bot-bor subli">{{v.mobile}}</span>
+                    <span class="col-md-2 bot-bor subli">{{v.money}}</span>
+                    <span class="col-md-2 bot-bor subli">{{v.message}}</span>
+                    <!-- <span class="col-md-2 bot-bor subli"></span> -->
+                </div>
+            </div>
+            <div class="w-floor-page">
+                <div class="floor-page" id="floorpages"></div>
+            </div>
+        </div>
+        <div class="pz-modal" v-show="modal">
+            <div class="pz-modal-content">
+                <div class="pz-modal-header">开通boss</div>
+                <div class="pz-spin-container">
+                    <div class="dl-show">
+                        <span class="dl-title">开通账号昵称:</span>
+                        <input class="dl-info" placeholder="请输入用户昵称" v-model="nick_name" value="" type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">开通账号手机号:</span>
+                        <input class="dl-info" placeholder="请输入用户手机号" v-model="mobile" value="" type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">开通后扣除金额:</span>
+                        <input class="dl-info" placeholder="请输入充值金额" v-model="money" value="" type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">描述:</span>
+                        <textarea class="dl-area" placeholder="请输入描述" type="text" v-model="message" name=""></textarea>
+                    </div>
+                    <div class="dl-show flexcenter">
+                        <input type="button" value="取消" class="pz-btn btn-cancel" @click="cancel">
+                        <input type="button" value="保存" @click="submit" class="pz-btn btn-amend">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="module" src="../../../js/common.js"></script>
+<script type="module" src="./upgradeBoss.js?1.1.1"></script>
+
+</html>

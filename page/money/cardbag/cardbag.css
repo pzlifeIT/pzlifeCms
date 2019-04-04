@@ -1,0 +1,28 @@
+.modalbox {
+    /* margin-left: 130px; */
+}
+
+.modalbox {
+    width: 200px;
+}
+
+.rejectList {
+    overflow: auto;
+}
+
+.addreject {
+    width: 32px;
+    height: 32px;
+    line-height: 30px;
+    text-align: center;
+    margin-left: 10px;
+    font-size: 28px;
+    color: #e82f28;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.rejectLi {
+    overflow: auto;
+    margin-bottom: 10px;
+}

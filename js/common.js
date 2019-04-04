@@ -306,7 +306,7 @@ import { showToast } from '../js/utils.js';;
     window.selpicure = (function() { //添加图片
         function S(o) {
             this.picures = doc.querySelector(o.el)
-            this.num = o.num
+            this.num = o.num || 1
             this.imglist = o.images
             this.images = []
             this.files = []
