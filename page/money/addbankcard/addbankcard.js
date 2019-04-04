@@ -24,6 +24,7 @@ new Vue({
     },
     methods: {
         addbank() {
+            this.intbankCardInfo()
             this.modal = true
         },
         cancel() {
@@ -43,15 +44,52 @@ new Vue({
         getBackcard(id) {
             let arr = this.AdminBank,
                 len = arr.length;
-            for (let i = 0; i < len; i++) {}
+            for (let i = 0; i < len; i++) {
+                if (id == arr[i].id) {
+                    return arr[i]
+                }
+            }
         },
         edit(id) {
+            let that = this
+            app.requests({
+                url: 'admin/getAdminBank',
+                data: {
+                    id: id
+                },
+                success(res) {
+                    that.id = id
+                    that.setbankCardInfo(res.admin_bank)
+                    that.modal = true
+                },
+                Error(code) {
+                    showToast({
+                        text: '获取失败'
+                    })
+                }
+            })
 
         },
-        setbankCardInfo(obj) {
+        setbankCardInfo(obj = {}) {
             this.abbrev = obj.abbrev
             this.bank_name = obj.bank_name
-
+            document.querySelector('#selpicureIcon').querySelector('img').setAttribute('src', obj.icon_img)
+            document.querySelector('#selpicureBack').querySelector('img').setAttribute('src', obj.bg_img)
+            let sel = document.querySelector('#status-select')
+            sel.setAttribute('data-id', obj.status)
+            sel.classList.add('already-select')
+            sel.innerHTML = this.getStatus(obj.status)
+        },
+        intbankCardInfo() {
+            this.id = ''
+            this.abbrev = ''
+            this.bank_name = ''
+            document.querySelector('#selpicureIcon').querySelector('img').setAttribute('src', '')
+            document.querySelector('#selpicureBack').querySelector('img').setAttribute('src', '')
+            let sel = document.querySelector('#status-select')
+            sel.setAttribute('data-id', '')
+            sel.classList.remove('already-select')
+            sel.innerHTML = '请选择(默认停用)'
         },
         editAdminBank() {
             let that = this
@@ -69,8 +107,10 @@ new Vue({
                 success(res) {
                     showToast({
                         type: 'success',
-                        text: '操作成功'
+                        text: '修改成功'
                     })
+                    that.imgs = {}
+                    that.modal = false
                     that.getAdminBank()
                 },
                 Error(code) {
@@ -189,17 +229,14 @@ new Vue({
                 }
             })
         },
-        getStatus(n) {
+        getStatus(n = 0) {
             let text = ''
             switch (parseInt(n)) {
                 case 1:
-                    text = '待审核'
+                    text = '启用'
                     break;
                 case 2:
-                    text = '审核通过'
-                    break;
-                case 3:
-                    text = '审核不通过'
+                    text = '停用'
                     break;
             }
             return text
@@ -227,6 +264,7 @@ new Vue({
         },
         submit() {
             let that = this
+            console.log(that.id)
             if (that.id) {
                 that.editAdminBank()
                 return
@@ -249,9 +287,9 @@ new Vue({
                         type: 'success',
                         text: '添加成功'
                     })
-                    that.abbrev = true
-                    that.bank_name = false
                     that.imgs = {}
+                    that.modal = false
+                    that.getAdminBank()
                 },
                 Error(code) {
                     that.nolink = true

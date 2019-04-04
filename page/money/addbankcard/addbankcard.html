@@ -75,10 +75,10 @@
                     <span class="col-md-1 bot-bor subli">{{k + 1}}</span>
                     <span class="col-md-1 bot-bor subli">{{v.abbrev}}</span>
                     <span class="col-md-1 bot-bor subli">{{v.bank_name}}</span>
-                    <span class="col-md-1 bot-bor subli"><img :src="v.icon_img" alt="银行图标" /></span>
+                    <span class="col-md-1 bot-bor subli"><img class="attrImg" :src="v.icon_img" alt="银行图标" /></span>
                     <span class="col-md-1 bot-bor subli"><img class="attrImg" :src="v.bg_img" alt="背景图片" /></span>
                     <span class="col-md-1 bot-bor subli">
-                      <span class="ant-switch up-down " :class="v.status == 1?'ant-switch-checked':''" class="attrImg" @click="upshop(v.id,v.status)" data-id="" data-type="" ></span>
+                      <span class="ant-switch stop-open " :class="v.status == 1?'ant-switch-checked':''" class="attrImg" @click="upshop(v.id,v.status)" data-id="" data-type="" ></span>
                     </span>
                     <span class="col-md-2 bot-bor subli">
                         <div class="pz-btn btn-amend" @click="edit(v.id)"  >编辑</div>
