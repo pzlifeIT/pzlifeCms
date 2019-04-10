@@ -2,6 +2,24 @@ import { app } from '../../../index.js';
 import { showToast } from '../../../js/utils.js';;
 let adminName = document.querySelector('#adminName'),
     password = document.querySelector('#password');
+// adminName.addEventListener('keydown', function(e) {
+//     sumbit(e)
+// })
+// password.addEventListener('keydown', function(e) {
+//     sumbit(e)
+// })
+
+// function sumbit(e) {
+//     if (e.keyCode == 13) {
+//         document.querySelector('#login').click()
+//     }
+// }
+document.onkeydown = function(e) {
+    var ev = document.all ? window.event : e;
+    if (ev.keyCode == 13) {
+        document.querySelector('#login').click()
+    }
+}
 document.querySelector('#login').addEventListener('click', function(e) {
     let adminNameVal = adminName.value,
         passwordVal = password.value;

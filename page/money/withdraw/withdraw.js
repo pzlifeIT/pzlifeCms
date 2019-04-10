@@ -5,21 +5,22 @@ new Vue({
     el: '#app',
     data: {
         modal: false,
-        message: '',
+        modal1: false,
         page: 1,
         page_num: 10,
         bank_card: '',
         bank_mobile: '',
         user_name: '',
+        message: '',
+        has_invoice: '',
+        no_invoice: '',
         total: 0,
-        cardList: [],
-        nolink: true,
-        reject: ['1'],
-        backId: 0
+        log_transfer: [],
+        id: 0
     },
     mounted() {
         let that = this
-        that.getUserBank()
+        that.getLogTransfer()
         let y = setInterval(function() {
             if (document.querySelector('#reject0')) {
                 that.setselect()
@@ -67,6 +68,29 @@ new Vue({
         cancel() {
             this.modal = false
         },
+        cancel1() {
+            this.modal1 = false
+            this.has_invoice = ''
+            this.no_invoice = ''
+        },
+        showRation() {
+            let that = this
+            app.requests({
+                url: 'admin/getInvoice',
+                success(res) {
+                    if (res.invoice) {
+                        that.has_invoice = res.invoice.has_invoice
+                        that.no_invoice = res.invoice.no_invoice
+                    }
+                    that.modal1 = true
+                },
+                Error(code) {
+                    showToast({
+                        text: '获取失败'
+                    })
+                }
+            })
+        },
         disposecard(id, status) {
             let that = this
             switch (parseInt(status)) {
@@ -99,8 +123,7 @@ new Vue({
                         text: '操作成功'
                     })
                     that.nolink = true
-                    that.modal = false
-                    that.getUserBank()
+                    that.getLogTransfer()
                 },
                 Error(code) {
                     let text = ''
@@ -135,23 +158,21 @@ new Vue({
         },
         search() {
             this.page = 1
-            this.getUserBank()
+            this.getLogTransfer()
         },
-        getUserBank() {
+        getLogTransfer() {
             let that = this;
-            let status = document.querySelector('#selection1').getAttribute('data-id') || '';
+            let invoice = document.querySelector('#selection1').getAttribute('data-id') || '';
             app.requests({
-                url: 'admin/getUserBank',
+                url: 'admin/getLogTransfer',
                 data: {
                     page: that.page || 1,
                     page_num: that.page_num || 10,
-                    status: status,
-                    bank_card: that.bank_card,
-                    bank_mobile: that.bank_mobile,
-                    user_name: that.user_name
+                    stype: 2,
+                    invoice: invoice || ''
                 },
                 success(res) {
-                    that.cardList = that.discardList(res.userbank)
+                    that.log_transfer = that.dislog_transfer(res.log_transfer)
                     if (that.total == res.total) return
                     that.total = res.total
                     that.setpage()
@@ -178,26 +199,23 @@ new Vue({
                 }
             })
         },
-        discardList(data = []) {
+        dislog_transfer(data = []) {
             let arr = data,
                 len = arr.length
             for (let i = 0; i < len; i++) {
+                arr[i].invoiceText = this.getInvoice(arr[i].invoice)
                 arr[i].statusText = this.getStatus(arr[i].status)
-                arr[i].identity = this.getIdentity(arr[i].users.user_identity)
             }
             return arr
         },
-        getIdentity(n) {
+        getInvoice(n) {
             let text = ''
             switch (parseInt(n)) {
                 case 1:
-                    text = '普通会员'
+                    text = '是'
                     break;
                 case 2:
-                    text = '钻石会员'
-                    break;
-                case 4:
-                    text = '合伙人'
+                    text = '否'
                     break;
             }
             return text
@@ -206,53 +224,106 @@ new Vue({
             let text = ''
             switch (parseInt(n)) {
                 case 1:
-                    text = '待处理'
+                    text = '待审核'
                     break;
                 case 2:
-                    text = '启用(审核通过)'
+                    text = '审核通过'
                     break;
                 case 3:
-                    text = '停用'
-                    break;
-                case 4:
-                    text = '已处理'
-                    break;
-                case 5:
                     text = '审核不通过'
                     break;
             }
             return text
         },
-        submit() {
-            let that = this;
-            if (!that.nolink) return
-            if (that.message == '') {
-                showToast({
-                    text: '详细描述不能为空'
-                })
-                return
-            }
-            let len = that.reject.length,
-                fields = '';
-            for (let i = 0; i < len; i++) {
-                if (document.querySelector('#selectionfor' + i)) {
-                    let msg = document.querySelector('#selectionfor' + i).getAttribute('data-id') || '';
-                    console.log(document.querySelector('#selectionfor' + i))
-                    console.log(msg, '#selectionfor' + i)
-                    if (msg == '') {
-                        showToast({
-                            text: '请选择驳回选项'
-                        })
-                        return
+        subRation() {
+            let that = this
+            app.requests({
+                url: 'admin/editInvoice',
+                data: {
+                    has_invoice: that.has_invoice,
+                    no_invoice: that.no_invoice
+                },
+                success(res) {
+                    showToast({
+                        type: 'success',
+                        text: '保存成功'
+                    })
+                    that.no_invoice = ''
+                    that.has_invoice = ''
+                    that.modal1 = false
+                },
+                Error(code) {
+                    let text = ''
+                    switch (parseInt(code)) {
+                        case 3001:
+                            text = '扣除比例必须为数字'
+                            break;
+                        case 3002:
+                            text = '比率不能超过100'
+                            break;
+                        default:
+                            text = '意料之外的错误'
                     }
-                    fields += msg + ','
+                    showToast({
+                        text: text
+                    })
                 }
-            }
-            fields = fields.replace(/,$/gi, "");
-            that.nolink = false
-            that.checkUserBank(that.backId, 5, {
-                message: that.message,
-                error_fields: fields
+            })
+        },
+        submit() {
+            this.checkUserTransfer(this.id, 3, this.message)
+        },
+        showmodal(id) {
+            this.id = id
+            this.message = ''
+            this.modal = true
+        },
+        checkUserTransfer(id, status, msg = '') {
+            let that = this
+            app.requests({
+                url: 'admin/checkUserTransfer',
+                data: {
+                    id: id,
+                    status: status,
+                    message: msg
+                },
+                success(res) {
+                    showToast({
+                        type: 'success',
+                        text: '操作成功'
+                    })
+                    that.modal = false
+                    that.getLogTransfer()
+                },
+                Error(code) {
+                    let text = ''
+                    switch (parseInt(code)) {
+                        case 3001:
+                            text = '状态必须为数字'
+                            break;
+                        case 3002:
+                            text = '错误的status'
+                            break;
+                        case 3003:
+                            text = 'id不能为空'
+                            break;
+                        case 3004:
+                            text = '已审核的提现记录无法再次审核'
+                            break;
+                        case 3006:
+                            text = '已审核的银行卡或者用户停用的银行卡无法再次审核'
+                            break;
+                        case 3007:
+                            text = '审核失败'
+                            break;
+                        default:
+                            text = '意料之外的错误'
+                    }
+                    showToast({
+                        type: 'error',
+                        text: text
+                    })
+                }
             })
         },
         setpage: function() {
@@ -264,7 +335,7 @@ new Vue({
                 fn: function(n) {
                     if (t.page == n) return
                     t.page = n
-                    t.getUserBank()
+                    t.getLogTransfer()
                 }
             })
         },
@@ -278,18 +349,9 @@ select({
         type_name: '全部'
     }, {
         id: 1,
-        type_name: '待处理'
+        type_name: '提供'
     }, {
         id: 2,
-        type_name: '启用(审核通过)'
-    }, {
-        id: 3,
-        type_name: '停用'
-    }, {
-        id: 4,
-        type_name: '已处理'
-    }, {
-        id: 5,
-        type_name: '审核不通过'
+        type_name: '不提供'
     }]
 })
