@@ -1,5 +1,5 @@
 import { app } from '../index.js';
-import { showToast } from '../js/utils.js';;
+import { showToast, imageDeal } from '../js/utils.js';;
 (function(win, doc) {
     win.pz = function() {}
     win.pz = pz.prototype
@@ -348,7 +348,9 @@ import { showToast } from '../js/utils.js';;
                 if (t.type == 'multiple') {
                     t.uploadmultifile(t.file.files)
                 } else {
-                    t.uploadfile(t.file.files[0])
+                    imageDeal(t.file.files[0], function(file) {
+                        t.uploadfile(file)
+                    })
                 }
             }
         }
@@ -368,6 +370,7 @@ import { showToast } from '../js/utils.js';;
                     t.images.push(str);
                     t.showImg();
                     t.imgChange(t.images);
+                    t.file.value = ''
                 },
                 Error(code) {
                     let text = ''
@@ -391,17 +394,31 @@ import { showToast } from '../js/utils.js';;
                     showToast({
                         text: text
                     })
+                    t.file.value = ''
                 }
             })
         }
         S.prototype.uploadmultifile = function(file) {
                 let t = this,
                     len = file.length,
-                    i,
+                    i, x = 0,
                     formdata = new FormData();
                 for (i = 0; i < len; i++) {
-                    formdata.append('images[]', file[i])
+                    imageDeal(file[i], function(file) {
+                            x++
+                            formdata.append('images[]', file)
+                        })
+                        // formdata.append('images[]', file[i])
                 }
+                let interval = setInterval(function() {
+                    if (len === x) {
+                        clearInterval(interval)
+                        t.linkuploadmultifile(formdata)
+                    }
+                }, 100)
+            },
+            S.prototype.linkuploadmultifile = function(formdata) {
+                let t = this
                 app.requests({
                     data: formdata,
                     url: 'upload/uploadmultifile',
@@ -409,6 +426,7 @@ import { showToast } from '../js/utils.js';;
                         t.imgpush(res.data)
                         t.showImg();
                         t.imgChange(t.images);
+                        t.file.value = ''
                     },
                     Error(code) {
                         let text = ''
@@ -432,10 +450,11 @@ import { showToast } from '../js/utils.js';;
                         showToast({
                             text: text
                         })
+                        t.file.value = ''
                     }
                 })
-            },
-            S.prototype.imgpush = function(data) {
+            }
+        S.prototype.imgpush = function(data) {
                 let len = data.length,
                     i, str
                 for (i = 0; i < len; i++) {

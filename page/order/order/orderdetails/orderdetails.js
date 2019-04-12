@@ -237,6 +237,7 @@ import { showToast } from '../../../../js/utils.js';
                 document.querySelector('#pay_money').innerHTML = data.pay_money
                 document.querySelector('#goods_money').innerHTML = data.goods_money
                 document.querySelector('#discount_money').innerHTML = data.discount_money
+                document.querySelector('#express_money').innerHTML = data.express_money
                 document.querySelector('#pay_type').innerHTML = this.getpaytype(data.pay_type)
                 document.querySelector('#third_money').innerHTML = data.third_money
                 document.querySelector('#third_pay_type').innerHTML = this.getthirdpaytype(data.third_pay_type)

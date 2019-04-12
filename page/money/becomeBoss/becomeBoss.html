@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>邀请成为boss</title>
+    <link rel="stylesheet" href="../../../css/style.css?1.0.2">
+    <link rel="stylesheet" href="../../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../../css/list.css">
+    <link rel="stylesheet" href="../../../css/details.css">
+    <script src="../../../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="iframenav">
+            <div class="refresh topbtn din fl" onclick="document.location.reload()">
+                <img src="../../../images/sx.png" alt="">
+            </div>
+        </div>
+        <div class="gs-screen panel-default">
+            <div class="gs-header panel-heading">
+                <span class="din fl">筛选</span>
+                <button id="search" @click="search" class="btn btn-secondary radius din fr">筛选</button>
+                <div class="shrink"></div>
+            </div>
+            <div class="gs-con">
+                <ul>
+                    <li class="gs-li col-md-3 col-sm-6  col-xs-12">
+                        <p class="gs-name">邀请人昵称</p>
+                        <input v-model="refe_uname" placeholder="请输入邀请人昵称" class="gs-inp" type="text">
+                    </li>
+                    <li class="gs-li col-md-3 col-sm-6  col-xs-12">
+                        <p class="gs-name">被邀请人昵称</p>
+                        <input v-model="target_uname" placeholder="请输入被邀请人昵称" class="gs-inp" type="text">
+                    </li>
+                    <li class="gs-li col-md-3 col-sm-6  col-xs-12">
+                        <p class="gs-name">被邀请人姓名</p>
+                        <input v-model="target_nickname" placeholder="请输入被邀请人姓名" class="gs-inp" type="text">
+                    </li>
+                    <li class="gs-li col-md-3 col-sm-6  col-xs-12">
+                        <p class="gs-name">被邀请人性别</p>
+                        <div class="combobox" id="combobox3">
+                            <div class="ant-select">
+                                <div class="ant-select-selection" id="selection1">请选择</div>
+                                <span class="ant-select-arrow"></span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="gs-li col-md-3 col-sm-6  col-xs-12">
+                        <p class="gs-name">被邀请人手机号</p>
+                        <input v-model="target_mobile" placeholder="请输入被邀请人手机号" class="gs-inp" type="text">
+                    </li>
+                    <li class="gs-li col-md-3 col-sm-6  col-xs-12">
+                        <p class="gs-name">被邀请人身份证号</p>
+                        <input v-model="target_idcard" placeholder="请输入被邀请人身份证号" class="gs-inp" type="text">
+                    </li>
+                    <li class="gs-li col-md-3 col-sm-6  col-xs-12">
+                        <p class="gs-name">申请进度</p>
+                        <div class="combobox" id="combobox4">
+                            <div class="ant-select">
+                                <div class="ant-select-selection" id="selection2">请选择</div>
+                                <span class="ant-select-arrow"></span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="gs-list panel-default">
+            <div class="gl-head panel-heading ">
+                <span>充值记录</span>
+            </div>
+            <div class="gl-title">
+                <span class="col-md-05 bot-bor subli">序号</span>
+                <span class="col-md-1 bot-bor subli">邀请人昵称</span>
+                <span class="col-md-1 bot-bor subli">被邀请人昵称</span>
+                <span class="col-md-1 bot-bor subli">被邀请人姓名</span>
+                <span class="col-md-1 bot-bor subli">被邀请人性别</span>
+                <span class="col-md-1 bot-bor subli">被邀请人手机号</span>
+                <span class="col-md-1 bot-bor subli">被邀请人身份证号</span>
+                <span class="col-md-1 bot-bor subli">申请时间</span>
+                <span class="col-md-1 bot-bor subli">状态</span>
+                <span class="col-md-3 bot-bor subli">管理</span>
+            </div>
+            <div class="table" id="goodlist">
+                <div class="table-tr" v-for="(v,k) in shopApplyList">
+                    <span class="col-md-05 bot-bor subli">{{k + 1}}</span>
+                    <span class="col-md-1 bot-bor subli">{{v.refe_uname}}</span>
+                    <span class="col-md-1 bot-bor subli">{{v.target_uname}}</span>
+                    <span class="col-md-1 bot-bor subli">{{v.target_nickname}}</span>
+                    <span class="col-md-1 bot-bor subli">{{v.target_sexText}}</span>
+                    <span class="col-md-1 bot-bor subli">{{v.target_mobile}}</span>
+                    <span class="col-md-1 bot-bor subli">{{v.target_idcard}}</span>
+                    <span class="col-md-1 bot-bor subli">{{v.create_time}}</span>
+                    <span class="col-md-1 bot-bor subli">{{v.statusText}}</span>
+                    <span class="col-md-3 bot-bor subli">
+                      <div class="pz-btn btn-amend" v-if="v.status == 1" @click="auditShopApply(v.id,2)" >财务审核通过</div>
+                      <div class="pz-btn  btn-amend"  v-if="v.status == 2" @click="auditShopApply(v.id,3)" >经理审核通过</div>
+                      <div class="pz-btn  btn-del"  v-if="v.status == 1 || v.status == 2" @click="auditShopApply(v.id,4)" >审核不通过</div>
+                    </span>
+                </div>
+            </div>
+            <div class="w-floor-page">
+                <div class="floor-page" id="floorpages"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="module" src="../../../js/common.js"></script>
+<script type="module" src="./becomeBoss.js"></script>
+
+</html>
