@@ -138,6 +138,9 @@ new Vue({
                         case 3008:
                             text = '开通失败'
                             break;
+                        case 3009:
+                            text = 'boss正在申请中'
+                            break;
                         default:
                             text = '意料之外的错误'
                     }
