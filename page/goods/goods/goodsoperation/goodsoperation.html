@@ -5,170 +5,171 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>产品编辑</title>
+    <title>商品品编辑</title>
     <link rel="stylesheet" href="../../../../css/style.css?1.0.4">
     <link rel="stylesheet" href="../../../../css/bootstrap.css?1.0.2">
     <link rel="stylesheet" href="../../../../css/details.css?1.0.2">
     <link rel="stylesheet" href="../../../../css/list.css?1.0.2">
+    <script src="../../../../js/vue.js"></script>
 </head>
 <script>
     function back() {
         console.log(window.frames)
         window.frames.document.history.back(-1);
-        // return false;
-        // parent.document.getElementsByName('page/goods/goods/goods')[0].contentWindow.history.back();
-        // console.log(window.frameElement)
-        // window.parent.document.getElementsByName('page/goods/goods/goods')[0].history.back();
-        // window.event.chancelBUbble = true;
     }
 </script>
 
 <body>
-    <div class="iframenav">
-        <div class="refresh topbtn din fl" onclick="document.location.reload()">
-            <img src="../../../../images/sx.png" alt="">
+    <div id="app">
+        <div class="iframenav">
+            <div class="refresh topbtn din fl" onclick="document.location.reload()">
+                <img src="../../../../images/sx.png" alt="">
+            </div>
         </div>
-        <!-- <div id="previewbanner" class="ml15 refresh topbtn addpreview din fl">
-            <img src="../../../../images/yulan.png" alt="">
-        </div> -->
-    </div>
-    <div class="details">
-        <div class="dl-header">
-            <span class="dl-name">商品详情</span>
-        </div>
-        <div class="dl-con">
-            <ul class="dl-nav" id="dlnav">
-                <li>基本信息</li>
-                <li>专题</li>
-                <li>商品轮播图</li>
-                <li>商品规格</li>
-                <li>商品详情图</li>
-            </ul>
-            <div class="dlnav-con dl-1">
-                <div class="dl-show">
-                    <span class="dl-title">商品名称:</span>
-                    <input class="dl-info" id="goodsNameNew" value="" type="text">
+        <div class="details">
+            <div class="dl-header">
+                <span class="dl-name">商品详情</span>
+            </div>
+            <div class="dl-con">
+                <ul class="dl-nav" id="dlnav">
+                    <li>基本信息</li>
+                    <li>专题</li>
+                    <li>商品轮播图</li>
+                    <li>商品规格</li>
+                    <li>商品详情图</li>
+                </ul>
+                <div class="dlnav-con dl-1">
+                    <div class="dl-show">
+                        <span class="dl-title">商品名称:</span>
+                        <input class="dl-info" id="goodsNameNew" value="" v-model="goods_data.goods_name" placeholder="请输入商品名称" type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">商品标题:</span>
+                        <textarea class="dl-area" v-model="goods_data.subtitle" placeholder="请输入商品标题" id="goodsSubtitleNew" value="" type="text"></textarea>
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">商品类型:</span>
+                        <span class="disable" id="goodsTypeAmend" v-if="id != ''">{{goods_data.goodTypeText}}</span>
+                        <div v-else class="din combobox" id="goodsTypeNew">
+                            <div class="ant-select">
+                                <div id="goodsType" class="ant-select-selection">请选择</div>
+                                <span class="ant-select-arrow"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">供应商:</span>
+                        <span class="disable" v-if="id != ''" id="supplierIdAmend">{{goods_data.supplier_name}}</span>
+                        <div v-else class="din combobox" id="supplierIdNew">
+                            <div class="ant-select">
+                                <div id="supplierId" class="ant-select-selection">请选择</div>
+                                <span class="ant-select-arrow"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">三级分类:</span>
+                        <span class="disable" id="cateIdAmend" v-if="id != ''">{{goods_data.goods_class}}</span>
+                        <span v-else id="cateIdNew" class="multistage cateIdNew ">请选择</span>
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">产品标题图:</span>
+                        <div class="selpicure" id="selpicure1">
+                            <div class="selfile fr"></div>
+                        </div>
+                    </div>
+                    <div class="dl-show flexcenter">
+                        <input type="button" value="保存" id="goodSaveNew" @click="saveGood" class="pz-btn btn-amend">
+                    </div>
                 </div>
-                <div class="dl-show">
-                    <span class="dl-title">商品标题:</span>
-                    <textarea class="dl-area" id="goodsSubtitleNew" value="" type="text"></textarea>
+                <div class="dlnav-con dl-1">
+                    <div class="addsubjecticon">
+                        <div class="add addsubject topbtn din fl">
+                            <img src="../../../../images/jia.png" alt="">
+                        </div>
+                    </div>
+                    <div class="d2-list subjectbox">
+                        <div class="list-header">
+                            <span class="col-md-1">序号</span>
+                            <span class="col-md-3">一级专题</span>
+                            <span class="col-md-3">二级专题</span>
+                            <span class="col-md-3">三级专题</span>
+                            <span class="col-md-2">管理</span>
+                        </div>
+                        <ul id="subjectlist">
+                            <li v-for="">
+                                <span class="col-md-1">序号</span>
+                                <span class="col-md-3">一级专题</span>
+                                <span class="col-md-3">二级专题</span>
+                                <span class="col-md-3">三级专题</span>
+                                <span class="col-md-2">管理</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="dl-show">
-                    <span class="dl-title">商品类型:</span>
-                    <span class="disable hide" id="goodsTypeAmend">请选择</span>
-                    <div class="din combobox hide" id="goodsTypeNew">
-                        <div class="ant-select">
-                            <div class="ant-select-selection">请选择</div>
-                            <span class="ant-select-arrow"></span>
+                <div class="dlnav-con dl-1">
+                    <div class="dl-show">
+                        <span class="dl-title">产品图片集:</span>
+                        <div class="selpicure" id="selpicure2">
+                            <div class="selfile fr"></div>
                         </div>
                     </div>
                 </div>
-                <div class="dl-show">
-                    <span class="dl-title">供应商:</span>
-                    <span class="disable hide" id="supplierIdAmend">请选择</span>
-                    <div class="din combobox hide" id="supplierIdNew">
-                        <div class="ant-select">
-                            <div class="ant-select-selection">请选择</div>
-                            <span class="ant-select-arrow"></span>
+                <div class="dlnav-con dl-1">
+                    <div>
+                        <div class="add addattribute topbtn din fl">
+                            <img src="../../../../images/jia.png" alt="">
                         </div>
                     </div>
-                </div>
-                <div class="dl-show">
-                    <span class="dl-title">三级分类:</span>
-                    <span class="disable hide" id="cateIdAmend">请选择</span>
-                    <span class="multistage cateIdNew hide">请选择</span>
-                </div>
-                <div class="dl-show">
-                    <span class="dl-title">产品标题图:</span>
-                    <div class="selpicure" id="selpicure1">
-                        <div class="selfile fr"></div>
+                    <div class="d2-list">
+                        <div class="list-header">
+                            <span class="col-md-3">序号</span>
+                            <span class="col-md-3">规格</span>
+                            <span class="col-md-3">属性</span>
+                            <span class="col-md-3">管理</span>
+                        </div>
+                        <ul id="attributeList">
+                        </ul>
+                    </div>
+                    <div class="d2-list">
+                        <div class="list-header">
+                            <span class="col-md-05">序号</span>
+                            <span class="col-md-1">规格名称</span>
+                            <span class="col-md-1">规格图</span>
+                            <span class="col-md-05">库存</span>
+                            <span class="col-md-1">市场价</span>
+                            <span class="col-md-1">零售价</span>
+                            <span class="col-md-1">成本价</span>
+                            <span class="col-md-1">其他运费成本</span>
+                            <span class="col-md-1">积分售价</span>
+                            <!-- <span class="col-md-05">积分赠送</span> -->
+                            <span class="col-md-1">重量(单位kg)</span>
+                            <span class="col-md-1">体积(单位m³)</span>
+                            <span class="col-md-1">运费</span>
+                            <span class="col-md-1">管理</span>
+                        </div>
+                        <ul id="goodattributeList">
+                        </ul>
                     </div>
                 </div>
-                <div class="dl-show flexcenter">
-                    <input type="button" value="保存" id="goodSaveNew" class="pz-btn btn-amend">
-                </div>
-            </div>
-            <div class="dlnav-con dl-1">
-                <div class="addsubjecticon">
-                    <div class="add addsubject topbtn din fl">
+                <div class="dlnav-con dl-1">
+                    <div id="addpreview" class="refresh  topbtn addpreview din fl">
+                        <img src="../../../../images/yulan.png" alt="">
+                    </div>
+                    <div class="add addImg topbtn fl">
                         <img src="../../../../images/jia.png" alt="">
                     </div>
-                </div>
-                <div class="d2-list subjectbox">
-                    <div class="list-header">
-                        <span class="col-md-1">序号</span>
-                        <span class="col-md-3">一级专题</span>
-                        <span class="col-md-3">二级专题</span>
-                        <span class="col-md-3">三级专题</span>
-                        <span class="col-md-2">管理</span>
-                    </div>
-                    <ul id="subjectlist">
-                    </ul>
-                </div>
-            </div>
-            <div class="dlnav-con dl-1">
-                <div class="dl-show">
-                    <span class="dl-title">产品图片集:</span>
-                    <div class="selpicure" id="selpicure2">
-                        <div class="selfile fr"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="dlnav-con dl-1">
-                <div>
-                    <div class="add addattribute topbtn din fl">
-                        <img src="../../../../images/jia.png" alt="">
-                    </div>
-                </div>
-                <div class="d2-list">
-                    <div class="list-header">
-                        <span class="col-md-3">序号</span>
-                        <span class="col-md-3">规格</span>
-                        <span class="col-md-3">属性</span>
-                        <span class="col-md-3">管理</span>
-                    </div>
-                    <ul id="attributeList">
-                    </ul>
-                </div>
-                <div class="d2-list">
-                    <div class="list-header">
-                        <span class="col-md-05">序号</span>
-                        <span class="col-md-1">规格名称</span>
-                        <span class="col-md-1">规格图</span>
-                        <span class="col-md-05">库存</span>
-                        <span class="col-md-1">市场价</span>
-                        <span class="col-md-1">零售价</span>
-                        <span class="col-md-1">成本价</span>
-                        <span class="col-md-1">其他运费成本</span>
-                        <span class="col-md-1">积分售价</span>
-                        <!-- <span class="col-md-05">积分赠送</span> -->
-                        <span class="col-md-1">重量(单位kg)</span>
-                        <span class="col-md-1">体积(单位m³)</span>
-                        <span class="col-md-1">运费</span>
-                        <span class="col-md-1">管理</span>
-                    </div>
-                    <ul id="goodattributeList">
-                    </ul>
-                </div>
-            </div>
-            <div class="dlnav-con dl-1">
-                <div id="addpreview" class="refresh  topbtn addpreview din fl">
-                    <img src="../../../../images/yulan.png" alt="">
-                </div>
-                <div class="add addImg topbtn fl">
-                    <img src="../../../../images/jia.png" alt="">
-                </div>
-                <input id="imgDetatil" type="file" accept="image/*" multiple="multiple">
-                <div class="photolist din fl">
-                    <div id="imagesDetatil" class="table">
-                    </div>
-                    <div class="photoPreview din fl">
+                    <input id="imgDetatil" type="file" accept="image/*" multiple="multiple">
+                    <div class="photolist din fl">
+                        <div id="imagesDetatil" class="table">
+                        </div>
+                        <div class="photoPreview din fl">
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
     <div class="linkage hide" id="catelinkage"></div>
     <div class="linkage hide" id="subjectlinkage"></div>
@@ -304,6 +305,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </body>
 <script type="module" src="../../../../js/common.js?1.0.1"></script>
