@@ -1,4 +1,5 @@
-import { app } from '../../../index.js';;
+import { app } from '../../../index.js';
+import { showToast } from '../../../js/utils.js';
 (function(pz) {
     tab({ head: '#dlnav', con: '.dlnav-con', num: 1 });
     select({ el: '#redmoneyStatus', data: [{ id: 1, type_name: '直接领取' }, { id: 2, type_name: '分享激活后获得' }] });
@@ -34,12 +35,42 @@ import { app } from '../../../index.js';;
                     couponMoneyText = t.couponMoney.value,
                     redmoneyStatusText = t.redmoneyStatus.querySelector('.ant-select-selection').getAttribute('data-id'),
                     typeText = t.type.querySelector('.ant-select-selection').getAttribute('data-id')
-                if (mobileText == '') return
-                if (linkmanText == '') return
-                if (stockText == '') return
-                if (couponMoneyText == '') return
-                if (redmoneyStatus == '' || redmoneyStatus == null) return
-                if (typeText == '' || redmoneyStatus == null) return
+                if (mobileText == '') {
+                    showToast({
+                        text: '会员手机号不能为空'
+                    })
+                    return
+                }
+                if (linkmanText == '') {
+                    showToast({
+                        text: '会员姓名不能为空'
+                    })
+                    return
+                }
+                if (stockText == '') {
+                    showToast({
+                        text: '库存不能为空'
+                    })
+                    return
+                }
+                if (couponMoneyText == '') {
+                    showToast({
+                        text: '被分享用户将获得活动商票不能为空'
+                    })
+                    return
+                }
+                if (redmoneyStatus == '' || redmoneyStatus == null) {
+                    showToast({
+                        text: '请选择商票状态'
+                    })
+                    return
+                }
+                if (typeText == '' || redmoneyStatus == null) {
+                    showToast({
+                        text: '请选择使用类型'
+                    })
+                    return
+                }
                 t.creatBossShareDiamondvip({
                     mobile: mobileText,
                     linkman: linkmanText,
@@ -53,7 +84,7 @@ import { app } from '../../../index.js';;
                 let t = this
                 t.proceed = false
                 app.requests({
-                    url: 'creatBossShareDiamondvip',
+                    url: 'Rights/creatBossShareDiamondvip',
                     data: {
                         mobile: data.mobile,
                         linkman: data.linkman,
@@ -67,7 +98,21 @@ import { app } from '../../../index.js';;
                         window.location.href = '../acquire/acquire.html'
                     },
                     error: function(code) {
-
+                        let text = ''
+                        switch (parseInt(code)) {
+                            case 3001:
+                                text = '手机号格式错误'
+                                break;
+                            case 3002:
+                                text = '库存或者被分享用户将获得活动商票必须是数字'
+                                break;
+                            case 3005:
+                                text = '超出金额设置范围'
+                                break;
+                        }
+                        showToast({
+                            text: text
+                        })
                     }
                 })
             }

@@ -80,8 +80,18 @@ import { showToast } from '../../../js/utils.js';
             let t = this,
                 name = document.querySelector('#newName').value;
             let id = document.querySelector('.multistage').getAttribute('data-id');
-            if (!name) return
-            if (!id) return
+            if (!id) {
+                showToast({
+                    text: '请选择三级分类'
+                })
+                return
+            }
+            if (!name) {
+                showToast({
+                    text: '请输入规格名称'
+                })
+                return
+            }
             app.requests({
                 data: {
                     top_id: id,

@@ -38,6 +38,12 @@ import { showToast } from '../../../../js/utils.js';;
         _SE.prototype.saveAb = function() { //保存修改
             let t = this,
                 name = document.querySelector('#abName').value;
+            if (!name) {
+                showToast({
+                    text: '请输入规格名称'
+                })
+                return
+            }
             app.requests({
                 data: {
                     id: t.id,
@@ -63,7 +69,12 @@ import { showToast } from '../../../../js/utils.js';;
         _SE.prototype.savenew = function() { //保存新建
             let t = this,
                 name = document.querySelector('#abName').value;
-            console.log(name)
+            if (!name) {
+                showToast({
+                    text: '请输入规格名称'
+                })
+                return
+            }
             app.requests({
                 data: {
                     top_id: t.topId,
@@ -82,14 +93,10 @@ import { showToast } from '../../../../js/utils.js';;
                 Error(code) {
                     switch (parseInt(code)) {
                         case 3002:
-                            showToast({
-                                text: '参数错误'
-                            })
+                            showToast({ text: '参数错误' })
                             break;
                         default:
-                            showToast({
-                                text: '意料之外的错误'
-                            })
+                            showToast({ text: '意料之外的错误' })
                             break;
                     }
                 }
