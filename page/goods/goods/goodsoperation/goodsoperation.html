@@ -10,14 +10,9 @@
     <link rel="stylesheet" href="../../../../css/bootstrap.css?1.0.2">
     <link rel="stylesheet" href="../../../../css/details.css?1.0.2">
     <link rel="stylesheet" href="../../../../css/list.css?1.0.2">
+    <link rel="stylesheet" href="./goodsoperation.css">
     <script src="../../../../js/vue.js"></script>
 </head>
-<script>
-    function back() {
-        console.log(window.frames)
-        window.frames.document.history.back(-1);
-    }
-</script>
 
 <body>
     <div id="app">
@@ -37,6 +32,7 @@
                     <li>商品轮播图</li>
                     <li>商品规格</li>
                     <li>商品详情图</li>
+                    <li>标签</li>
                 </ul>
                 <div class="dlnav-con dl-1">
                     <div class="dl-show">
@@ -84,7 +80,7 @@
                 </div>
                 <div class="dlnav-con dl-1">
                     <div class="addsubjecticon">
-                        <div class="add addsubject topbtn din fl">
+                        <div @click="addsubject" class="add addsubject topbtn din fl">
                             <img src="../../../../images/jia.png" alt="">
                         </div>
                     </div>
@@ -97,12 +93,14 @@
                             <span class="col-md-2">管理</span>
                         </div>
                         <ul id="subjectlist">
-                            <li v-for="">
-                                <span class="col-md-1">序号</span>
-                                <span class="col-md-3">一级专题</span>
-                                <span class="col-md-3">二级专题</span>
-                                <span class="col-md-3">三级专题</span>
-                                <span class="col-md-2">管理</span>
+                            <li v-for="(v,k) in subjectList">
+                                <span class="col-md-1">{{k+1}}</span>
+                                <span class="col-md-3">{{v.subject}}</span>
+                                <span class="col-md-3">{{v.subject_tier1}}</span>
+                                <span class="col-md-3">{{v.subject_tier1}}</span>
+                                <span class="col-md-2">
+                  <div class="pz-btn btn-del" @click="delsubject(v.id)">删除</div>
+                </span></span>
                             </li>
                         </ul>
                     </div>
@@ -117,7 +115,7 @@
                 </div>
                 <div class="dlnav-con dl-1">
                     <div>
-                        <div class="add addattribute topbtn din fl">
+                        <div @click="addattribute" class="add addattribute topbtn din fl">
                             <img src="../../../../images/jia.png" alt="">
                         </div>
                     </div>
@@ -129,6 +127,12 @@
                             <span class="col-md-3">管理</span>
                         </div>
                         <ul id="attributeList">
+                            <li v-for="(v,k) in spec_attr">
+                                <span class="col-md-3">{{k+1}}</span>
+                                <span class="col-md-3">{{v.spec_name}}</span>
+                                <span class="col-md-3">{{v.attr_name}}</span>
+                                <span class="col-md-3"><div class="pz-btn btn-del" @click="delgoodsspec(v.attr_id)" >删除</div></span>
+                            </li>
                         </ul>
                     </div>
                     <div class="d2-list">
@@ -149,163 +153,204 @@
                             <span class="col-md-1">管理</span>
                         </div>
                         <ul id="goodattributeList">
+                            <li v-for="(v,k) in good_sku">
+                                <span class="col-md-05">{{k+1}}</span>
+                                <span class="col-md-1 sizeauto">{{v.attrText}}</span>
+                                <span class="col-md-1"><img class="attrImg" :src="v.sku_image" /></span>
+                                <span class="col-md-05">{{v.stock}}</span>
+                                <span class="col-md-1">{{v.market_price}}</span>
+                                <span class="col-md-1">{{v.retail_price}}</span>
+                                <span class="col-md-1">{{v.cost_price}}</span>
+                                <span class="col-md-1">{{v.margin_price}}</span>
+                                <span class="col-md-1">{{v.integral_price}}</span>
+                                <!-- <span class="col-md-05">积分赠送</span> -->
+                                <span class="col-md-1">{{v.weight}}</span>
+                                <span class="col-md-1">{{v.volume}}</span>
+                                <span class="col-md-1">{{v.freight_title}}</span>
+                                <span class="col-md-1"><div class="pz-btn btn-amend" @click="getgoodssku(v.id)" >编辑</div></span>
+                            </li>
                         </ul>
                     </div>
                 </div>
                 <div class="dlnav-con dl-1">
-                    <div id="addpreview" class="refresh  topbtn addpreview din fl">
+                    <div id="addpreview" @click="refresh" class="refresh  topbtn addpreview din fl">
                         <img src="../../../../images/yulan.png" alt="">
                     </div>
-                    <div class="add addImg topbtn fl">
+                    <div @click="addImg" class="add addImg topbtn fl">
                         <img src="../../../../images/jia.png" alt="">
                     </div>
-                    <input id="imgDetatil" type="file" accept="image/*" multiple="multiple">
+                    <input id="imgDetatil" type="file" @change="imgDetatilChange" accept="image/*" multiple="multiple">
                     <div class="photolist din fl">
                         <div id="imagesDetatil" class="table">
+                            <div class="pl-li table-cell" v-for="(v,k) in images_detatil" :class="v.row?'trpl':''">
+                                <img class="pl-image" :src="v.image_path" alt="">
+                                <div class="hierarchy">{{v.order_by}}</div>
+                                <div class="pl-manage">
+                                    <input class="imgDel" type="button" value="删除" @click="delImg(v.image_path,5)">
+                                    <input type="button" class="imgsort" value="编辑" @click="showSort(v.image_path,v.order_by)">
+                                </div>
+                            </div>
+                            </i>
                         </div>
                         <div class="photoPreview din fl">
 
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="linkage hide" id="catelinkage"></div>
-    <div class="linkage hide" id="subjectlinkage"></div>
-    <div class="pz-modal hide" id="previewphoto">
-        <div class="pz-modal-content" id="modalContent">
-            <div class="pz-modal-header">预览图片</div>
-            <div class="pz-spin-container" id="preview">
-            </div>
-        </div>
-    </div>
-    <div class="pz-modal hide" id="subjectNew">
-        <div class="pz-modal-content">
-            <div class="pz-modal-header">关联专题</div>
-            <div class="pz-spin-container">
-                <div class="dl-show">
-                    <span class="dl-title">专题:</span>
-                    <span class="multistage" data-id="" id="selSubject">请选择</span>
-                </div>
-                <div class="dl-show flexcenter">
-                    <input type="button" value="取消" class="pz-btn btn-cancel" id="cancelSubject">
-                    <input type="button" value="保存" id="saveSubject" class="pz-btn btn-amend">
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="pz-modal hide" id="sortimages">
-        <div class="pz-modal-content">
-            <div class="pz-modal-header">图片排序</div>
-            <div class="pz-spin-container">
-                <div class="dl-show">
-                    <span class="dl-title">排序:</span>
-                    <input id="sortval" class="dl-info" type="text">
-                </div>
-                <div class="dl-show flexcenter">
-                    <input type="button" value="取消" class="pz-btn btn-cancel" id="cancelSort">
-                    <input type="button" value="保存" id="saveSort" class="pz-btn btn-amend">
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="pz-modal hide" id="attributeNew">
-        <div class="pz-modal-content">
-            <div class="pz-modal-header">添加属性</div>
-            <div class="pz-spin-container">
-                <div class="dl-show">
-                    <span class="dl-title">规格:</span>
-                    <div class="din combobox" id="selattr">
-                        <div class="ant-select">
-                            <div class="ant-select-selection">请选择</div>
-                            <span class="ant-select-arrow"></span>
-                        </div>
+                <div class="dlnav-con dl-1">
+                    <!-- <div class="dl-show">
+                        <input class="dl-info" v-model="label" @keyup.enter="addLabel" type="text" value="">
+                        <input type="button" @click="addLabel" class="pz-btn btn-amend" value="添加标签">
+                    </div> -->
+                    <div class="dl-show">
+                        <ul class="labellist">
+                            <li v-for="(v,k) in labellist">
+                                {{v.label_name}}<i @click=""></i>
+                            </li>
+                            <li class="labelinpli">
+                                <input class="labelinp" v-model="label" @keyup.enter="addLabel" type="text">
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="dl-show">
-                    <span class="dl-title">属性:</span>
-                    <div class="din combobox" id="selsite">
-                        <div class="ant-select">
-                            <div class="ant-select-selection">请选择</div>
-                            <span class="ant-select-arrow"></span>
-                        </div>
+            </div>
+        </div>
+        <div class="linkage hide" id="catelinkage"></div>
+        <div class="linkage hide" id="subjectlinkage"></div>
+        <div class="pz-modal" id="previewphoto" v-show="modal.previewphoto" @click="cancelmodal('previewphoto')">
+            <div class="pz-modal-content" @click.stop="" id="modalContent">
+                <div class="pz-modal-header">预览图片</div>
+                <div class="pz-spin-container" id="preview">
+                    <img v-for="(v,k) in images_detatil" :src="v.image_path" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="pz-modal" id="subjectNew" v-show="modal.subject">
+            <div class="pz-modal-content">
+                <div class="pz-modal-header">关联专题</div>
+                <div class="pz-spin-container">
+                    <div class="dl-show">
+                        <span class="dl-title">专题:</span>
+                        <span class="multistage" data-id="" id="selSubject">请选择</span>
+                    </div>
+                    <div class="dl-show flexcenter">
+                        <input type="button" value="取消" class="pz-btn btn-cancel" id="cancelSubject" @click="cancelmodal('subject')">
+                        <input type="button" value="保存" id="saveSubject" @click="subjectSave" class="pz-btn btn-amend">
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="pz-modal" id="sortimages" v-show="modal.sortimages">
+            <div class="pz-modal-content">
+                <div class="pz-modal-header">图片排序</div>
+                <div class="pz-spin-container">
+                    <div class="dl-show">
+                        <span class="dl-title">排序:</span>
+                        <input id="sortval" v-model="sortorderby.order_by" class="dl-info" type="text">
+                    </div>
+                    <div class="dl-show flexcenter">
+                        <input type="button" value="取消" class="pz-btn btn-cancel" @click="cancelmodal('sortimages')" id="cancelSort">
+                        <input type="button" @click="sortImg" value="保存" id="saveSort" class="pz-btn btn-amend">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pz-modal" id="attributeNew" v-show="modal.attribute">
+            <div class="pz-modal-content">
+                <div class="pz-modal-header">添加属性</div>
+                <div class="pz-spin-container">
+                    <div class="dl-show">
+                        <span class="dl-title">规格:</span>
+                        <div class="din combobox" id="selattr">
+                            <div class="ant-select">
+                                <div class="ant-select-selection">请选择</div>
+                                <span class="ant-select-arrow"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">属性:</span>
+                        <div class="din combobox" id="selsite">
+                            <div class="ant-select">
+                                <div class="ant-select-selection">请选择</div>
+                                <span class="ant-select-arrow"></span>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="dl-show flexcenter">
-                    <input type="button" value="取消" class="pz-btn btn-cancel" id="cancelNew">
-                    <input type="button" value="保存" id="saveNew" class="pz-btn btn-amend">
+                    <div class="dl-show flexcenter">
+                        <input type="button" value="取消" class="pz-btn btn-cancel" id="cancelNew" @click="cancelmodal('attribute')">
+                        <input type="button" value="保存" @click="addgoodsspec" id="saveNew" class="pz-btn btn-amend">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="pz-modal hide" id="amendAttribute">
-        <div class="pz-modal-content">
-            <div class="pz-modal-header">编辑商品规格</div>
-            <div class="pz-spin-container">
-                <div class="dl-show">
-                    <span class="dl-title">规格名称:</span>
-                    <span class="disable" id="sku_name"></span>
-                </div>
-                <div class="dl-show">
-                    <span class="dl-title">库存:</span>
-                    <input class="dl-info" id="stock" type="text">
-                </div>
-                <div class="dl-show">
-                    <span class="dl-title">市场价:</span>
-                    <input class="dl-info" id="market_price" type="text">
-                </div>
-                <div class="dl-show">
-                    <span class="dl-title">零售价:</span>
-                    <input class="dl-info" id="retail_price" type="text">
-                </div>
-                <div class="dl-show">
-                    <span class="dl-title">成本价:</span>
-                    <input class="dl-info" id="cost_price" type="text">
-                </div>
-                <div class="dl-show">
-                    <span class="dl-title">其他运费成本:</span>
-                    <input class="dl-info" id="margin_price" type="text">
-                </div>
-                <div class="dl-show">
-                    <span class="dl-title">积分售价:</span>
-                    <input class="dl-info" id="integral_price" type="text">
-                </div>
-                <!-- <div class="dl-show">
+        <div class="pz-modal" id="amendAttribute" v-show="modal.amendAttribute">
+            <div class="pz-modal-content">
+                <div class="pz-modal-header">编辑商品规格</div>
+                <div class="pz-spin-container">
+                    <div class="dl-show">
+                        <span class="dl-title">规格名称:</span>
+                        <span class="disable" id="sku_name">{{goodssku.attrText}}</span>
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">库存:</span>
+                        <input class="dl-info" v-model="goodssku.stock" id="stock" type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">市场价:</span>
+                        <input class="dl-info" v-model="goodssku.market_price" id="market_price" type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">零售价:</span>
+                        <input class="dl-info" v-model="goodssku.retail_price" id="retail_price" type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">成本价:</span>
+                        <input class="dl-info" v-model="goodssku.cost_price" id="cost_price" type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">其他运费成本:</span>
+                        <input class="dl-info" v-model="goodssku.margin_price" id="margin_price" type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">积分售价:</span>
+                        <input class="dl-info" v-model="goodssku.integral_price" id="integral_price" type="text">
+                    </div>
+                    <!-- <div class="dl-show">
                     <span class="dl-title">积分赠送:</span>
                     <input class="dl-info" id="integral_active" type="text">
                 </div> -->
-                <div class="dl-show">
-                    <span class="dl-title">运费:</span>
-                    <div class="din combobox" id="freight_id">
-                        <div class="ant-select">
-                            <div class="ant-select-selection">请选择</div>
-                            <span class="ant-select-arrow"></span>
+                    <div class="dl-show">
+                        <span class="dl-title">运费:</span>
+                        <div class="din combobox" id="freight_id">
+                            <div class="ant-select">
+                                <div id="skuselection" class="ant-select-selection">请选择</div>
+                                <span class="ant-select-arrow"></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="dl-show">
-                    <span class="dl-title">重量(单位kg):</span>
-                    <input class="dl-info" id="weight" type="text">
-                </div>
-                <div class="dl-show">
-                    <span class="dl-title">体积(单位m³):</span>
-                    <input class="dl-info" id="volume" type="text">
-                </div>
-                <div class="dl-show">
-                    <span class="dl-title">规格详情图:</span>
-                    <div class="selpicure" id="selpicure3">
-                        <div class="selfile fr"></div>
+                    <div class="dl-show">
+                        <span class="dl-title">重量(单位kg):</span>
+                        <input class="dl-info" v-model="goodssku.weight" id="weight" type="text">
                     </div>
-                </div>
-                <div class="dl-show flexcenter">
-                    <input type="button" value="取消" class="pz-btn btn-cancel" id="cancelAmend">
-                    <input type="button" value="保存" id="saveAmend" class="pz-btn btn-amend">
+                    <div class="dl-show">
+                        <span class="dl-title">体积(单位m³):</span>
+                        <input class="dl-info" v-model="goodssku.volume" id="volume" type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">规格详情图:</span>
+                        <div class="selpicure" id="selpicure3">
+                            <div class="selfile fr"></div>
+                        </div>
+                    </div>
+                    <div class="dl-show flexcenter">
+                        <input type="button" value="取消" class="pz-btn btn-cancel" id="cancelAmend" @click="cancelmodal('amendAttribute')">
+                        <input type="button" value="保存" id="saveAmend" class="pz-btn btn-amend" @click="savegoodssku(goodssku.id)">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </body>
 <script type="module" src="../../../../js/common.js?1.0.1"></script>

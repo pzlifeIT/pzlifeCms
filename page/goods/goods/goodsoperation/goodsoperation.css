@@ -1,0 +1,68 @@
+.labellist {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #d9d9d9;
+}
+
+.labellist li {
+    position: relative;
+    display: inline-block;
+    padding: 2px 18px 2px 10px;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #353535;
+    background-color: #f6f8f9;
+}
+
+.labellist li i {
+    cursor: pointer;
+    position: absolute;
+    right: 2px;
+    top: 4px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 14px;
+    height: 14px;
+    margin-top: 1px;
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.labellist li i::before {
+    content: '';
+    display: block;
+    width: 9px;
+    height: 1px;
+    background: #d2d3d4;
+    position: absolute;
+    top: 6px;
+    left: 3px;
+}
+
+.labellist li i::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 9px;
+    background: #d2d3d4;
+    position: absolute;
+    top: 2px;
+    left: 7px;
+}
+
+.labellist li:hover i::before,
+.labellist li:hover i::after {
+    background-color: #ababab;
+}
+
+.labellist li.labelinpli {
+    background-color: #fff;
+    padding: 2px 0;
+}
+
+.labellist .labelinp {
+    background-color: #fff;
+}
