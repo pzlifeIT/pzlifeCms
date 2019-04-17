@@ -205,7 +205,7 @@
                     <div class="dl-show">
                         <ul class="labellist">
                             <li v-for="(v,k) in labellist">
-                                {{v.label_name}}<i @click=""></i>
+                                {{v.label_name}}<i @click="dellabel(v.label_id)"></i>
                             </li>
                             <li class="labelinpli">
                                 <input class="labelinp" v-model="label" @keyup.enter="addLabel" type="text">

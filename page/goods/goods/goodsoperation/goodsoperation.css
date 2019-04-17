@@ -59,10 +59,14 @@
 }
 
 .labellist li.labelinpli {
-    background-color: #fff;
+    margin-bottom: 0;
     padding: 2px 0;
+    background-color: #fff;
 }
 
 .labellist .labelinp {
+    padding: 5px 5px;
     background-color: #fff;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
 }

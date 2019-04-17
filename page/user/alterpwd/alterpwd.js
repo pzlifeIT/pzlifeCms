@@ -27,8 +27,15 @@ import { app } from '../../../index.js';
             success(res) {
                 showToast({
                     type: 'success',
-                    text: '修改成功'
+                    text: '修改成功,请重新登录'
                 })
+                setTimeout(function() {
+                    if (window.frames.parent) {
+                        window.frames.parent.location.href = window.location.origin + "/page/user/login/login.html";
+                    } else {
+                        window.location.href = window.location.origin + "/page/user/login/login.html";
+                    }
+                }, 1500)
             },
             Error(code) {
                 let text = ''

@@ -87,6 +87,25 @@ new Vue({
                 }
             })
         },
+        dellabel(lid) {
+            if (!this.id) return
+            let that = this
+            app.requests({
+                url: 'label/labeldel',
+                data: {
+                    goods_id: that.id,
+                    label_id: lid
+                },
+                success: function(res) {
+                    that.goodslabellist()
+                },
+                Error(code) {
+                    showToast({
+                        text: '删除失败'
+                    })
+                }
+            })
+        },
         goodslabellist() {
             if (!this.id) return
             let that = this
