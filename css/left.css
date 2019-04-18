@@ -65,7 +65,7 @@
 }
 
 .sb_list .sb_li.active .sb_sub_list {
-    max-height: 150px;
+    max-height: 210px;
     overflow: auto;
     transition: all 1s;
 }

@@ -509,3 +509,22 @@
     border-collapse: separate;
     border-spacing: 10px;
 }
+
+.trpl {
+    display: table-row!important;
+    height: 1px;
+    overflow: hidden;
+    padding: 0;
+}
+
+.trpl .pl-image {
+    display: none;
+}
+
+.trpl .hierarchy {
+    display: none;
+}
+
+.trpl .pl-manage {
+    display: none;
+}
