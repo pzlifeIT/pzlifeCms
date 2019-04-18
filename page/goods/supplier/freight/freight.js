@@ -236,7 +236,7 @@ import { showToast } from '../../../../js/utils.js';
                 len1, i, y, p = 0,
                 c = 0,
                 cel = document.querySelector('.c' + id),
-                pel = document.querySelector('.p' + tid)
+                pel = document.querySelector('.p' + tid);
             if (n == 1) {
                 cel.classList.remove('active')
             }
