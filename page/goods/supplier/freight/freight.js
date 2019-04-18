@@ -473,9 +473,6 @@ import { showToast } from '../../../../js/utils.js';
                     }
                 })
             }
-
-
-
         }
         return {
             init: function(obj) {
