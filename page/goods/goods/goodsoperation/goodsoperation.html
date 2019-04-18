@@ -209,7 +209,7 @@
                                 {{v.label_name}}<i @click="dellabel(v.label_id)"></i>
                             </li>
                             <li class="labelinpli">
-                                <input class="labelinp" v-model="label" placeholder="请输入标签" @keyup.enter="addLabel" type="text">
+                                <input class="labelinp" v-model="label" @input="labelChane" placeholder="请输入标签" @keyup.enter="addLabel" type="text">
                             </li>
                         </ul>
                     </div>

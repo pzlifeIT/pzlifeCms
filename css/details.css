@@ -241,6 +241,8 @@
 
 .pz-spin-container {
     padding: 15px;
+    height: calc(100% - 73px);
+    /* height: 100%; */
     overflow: auto;
 }
 

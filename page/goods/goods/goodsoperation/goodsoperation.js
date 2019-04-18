@@ -36,6 +36,10 @@ new Vue({
         cancelmodal(str) {
             this.modal[str] = false
         },
+        labelChane() {
+            console.log(this.label)
+            this.label = this.label.replace(/\s*/g, "")
+        },
         addLabel() {
             if (!this.id) return
             if (!this.label) {
