@@ -241,6 +241,8 @@
 
 .pz-spin-container {
     padding: 15px;
+    height: calc(100% - 73px);
+    /* height: 100%; */
     overflow: auto;
 }
 
@@ -508,4 +510,23 @@
 #imagesDetatil {
     border-collapse: separate;
     border-spacing: 10px;
+}
+
+.trpl {
+    display: table-row!important;
+    height: 1px;
+    overflow: hidden;
+    padding: 0;
+}
+
+.trpl .pl-image {
+    display: none;
+}
+
+.trpl .hierarchy {
+    display: none;
+}
+
+.trpl .pl-manage {
+    display: none;
 }

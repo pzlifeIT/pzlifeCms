@@ -235,8 +235,8 @@ import { showToast } from '../../../../js/utils.js';
                 len = sdata.length,
                 len1, i, y, p = 0,
                 c = 0,
-                cel = document.querySelector('.c' + id);
-            pel = document.querySelector('.p' + tid)
+                cel = document.querySelector('.c' + id),
+                pel = document.querySelector('.p' + tid);
             if (n == 1) {
                 cel.classList.remove('active')
             }
@@ -473,9 +473,6 @@ import { showToast } from '../../../../js/utils.js';
                     }
                 })
             }
-
-
-
         }
         return {
             init: function(obj) {

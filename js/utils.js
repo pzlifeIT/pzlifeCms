@@ -2,27 +2,6 @@ var utils = {
     showLoading() {
 
     },
-    geturl: function() {
-        let href = location.href,
-            list = {}
-        if (href.indexOf('?') != -1) {
-            let params = href.split('?')[1]
-            if (params.indexOf('&') != -1) {
-                let arr = params.split('&'),
-                    len = arr.length
-                for (let i = 0; i < len; i++) {
-                    if (arr[i].indexOf('=') != -1) {
-                        let l = arr[i].split('=')
-                        list[l[0]] = l[1]
-                    }
-                }
-            } else if (params.indexOf('=') != -1) {
-                let arr = params.split('=')
-                list[arr[0]] = arr[1]
-            }
-        }
-        return list
-    },
     tableToExcel(Data) {
         let str = '<tr>\
               <td>购买商品数量</td>\
@@ -54,7 +33,28 @@ var utils = {
         window.location.href = uri + window.btoa(unescape(encodeURIComponent(template)))
     }
 }
-let showToast = function(obj = {}) {
+let geturl = function() {
+    let href = location.href,
+        list = {}
+    if (href.indexOf('?') != -1) {
+        let params = href.split('?')[1]
+        if (params.indexOf('&') != -1) {
+            let arr = params.split('&'),
+                len = arr.length
+            for (let i = 0; i < len; i++) {
+                if (arr[i].indexOf('=') != -1) {
+                    let l = arr[i].split('=')
+                    list[l[0]] = l[1]
+                }
+            }
+        } else if (params.indexOf('=') != -1) {
+            let arr = params.split('=')
+            list[arr[0]] = arr[1]
+        }
+    }
+    return list
+}
+let showToast = function(obj = {}) { //提示信息
     let body = document.querySelector('body'),
         ran = parseInt(Math.random() * 100000000),
         div = document.createElement("div");
@@ -68,7 +68,7 @@ let showToast = function(obj = {}) {
         body.removeChild(document.querySelector('#st' + ran));
     }, 2000)
 }
-let loading = function() {
+let loading = function() { //载入loading
     let body = document.querySelector('body'),
         div = document.createElement("div");
     div.setAttribute("id", "loadingId");
@@ -145,5 +145,6 @@ export {
     showToast,
     loading,
     hideloading,
-    imageDeal
+    imageDeal,
+    geturl
 }
