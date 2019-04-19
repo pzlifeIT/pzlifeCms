@@ -5,7 +5,6 @@ new Vue({
     el: '#app',
     data: {
         modal: false,
-        modal1: false,
         page: 1,
         page_num: 10,
         bank_card: '',
@@ -72,24 +71,6 @@ new Vue({
             this.modal1 = false
             this.has_invoice = ''
             this.no_invoice = ''
-        },
-        showRation() {
-            let that = this
-            app.requests({
-                url: 'admin/getInvoice',
-                success(res) {
-                    if (res.invoice) {
-                        that.has_invoice = res.invoice.has_invoice
-                        that.no_invoice = res.invoice.no_invoice
-                    }
-                    that.modal1 = true
-                },
-                Error(code) {
-                    showToast({
-                        text: '获取失败'
-                    })
-                }
-            })
         },
         disposecard(id, status) {
             let that = this
@@ -162,14 +143,12 @@ new Vue({
         },
         getLogTransfer() {
             let that = this;
-            let invoice = document.querySelector('#selection1').getAttribute('data-id') || '';
             app.requests({
                 url: 'admin/getLogTransfer',
                 data: {
                     page: that.page || 1,
                     page_num: that.page_num || 10,
-                    stype: 2,
-                    invoice: invoice || '',
+                    stype: 4,
                     bank_card: that.bank_card,
                     bank_mobile: that.bank_mobile,
                     user_name: that.user_name
@@ -206,22 +185,9 @@ new Vue({
             let arr = data,
                 len = arr.length
             for (let i = 0; i < len; i++) {
-                arr[i].invoiceText = this.getInvoice(arr[i].invoice)
                 arr[i].statusText = this.getStatus(arr[i].status)
             }
             return arr
-        },
-        getInvoice(n) {
-            let text = ''
-            switch (parseInt(n)) {
-                case 1:
-                    text = '是'
-                    break;
-                case 2:
-                    text = '否'
-                    break;
-            }
-            return text
         },
         getStatus(n) {
             let text = ''

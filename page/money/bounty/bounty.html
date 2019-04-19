@@ -3,10 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="cache-control" content="no-cache, must-revalidate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>佣金提现</title>
+    <title>奖励金提现</title>
     <link rel="stylesheet" href="../../../css/style.css?1.0.2">
     <link rel="stylesheet" href="../../../css/bootstrap.css">
     <link rel="stylesheet" href="../../../css/list.css">
@@ -21,7 +20,6 @@
             <div class="refresh topbtn din fl" onclick="document.location.reload()">
                 <img src="../../../images/sx.png" alt="">
             </div>
-            <div @click="showRation" class="ratioBtn">提现比例</div>
         </div>
         <div class="gs-screen panel-default">
             <div class="gs-header panel-heading">
@@ -43,15 +41,6 @@
                         <p class="gs-name">银行开户人</p>
                         <input v-model="user_name" placeholder="请输入银行开户人" class="gs-inp" type="text">
                     </li>
-                    <li class="gs-li col-md-3 col-sm-6  col-xs-12">
-                        <p class="gs-name">是否提供发票</p>
-                        <div class="combobox" id="combobox3">
-                            <div class="ant-select">
-                                <div class="ant-select-selection" id="selection1">请选择</div>
-                                <span class="ant-select-arrow"></span>
-                            </div>
-                        </div>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -60,13 +49,12 @@
                 <span>充值记录</span>
             </div>
             <div class="gl-title">
-                <span class="col-md-05 bot-bor subli">序号</span>
-                <span class="col-md-1 bot-bor subli">提现人名称/手机号码</span>
+                <span class="col-md-1 bot-bor subli">序号</span>
+                <span class="col-md-1 bot-bor subli">提现人名称</span>
+                <span class="col-md-1 bot-bor subli">手机号码</span>
                 <span class="col-md-2 bot-bor subli">开户银行/银行卡号</span>
                 <span class="col-md-1 bot-bor subli">提现金额</span>
-                <span class="col-md-1 bot-bor subli">到账金额</span>
-                <span class="col-md-1 bot-bor subli">手续费</span>
-                <span class="col-md-05 bot-bor subli">是否提供发票</span>
+
                 <span class="col-md-1 bot-bor subli">提现时间</span>
                 <span class="col-md-1 bot-bor subli">描述</span>
                 <span class="col-md-1 bot-bor subli">状态</span>
@@ -74,13 +62,11 @@
             </div>
             <div class="table" id="goodlist">
                 <div class="table-tr" v-for="(v,k) in log_transfer">
-                    <span class="col-md-05 bot-bor subli">{{k + 1}}</span>
-                    <span class="col-md-1 bot-bor subli">{{v.user_name}}<br>{{v.bank_mobile}}</span>
+                    <span class="col-md-1 bot-bor subli">{{k + 1}}</span>
+                    <span class="col-md-1 bot-bor subli">{{v.user_name}}</span>
+                    <span class="col-md-1 bot-bor subli">{{v.bank_mobile}}</span>
                     <span class="col-md-2 bot-bor subli">{{v.bank_name}}<br>{{v.bank_card}}</span>
                     <span class="col-md-1 bot-bor subli">{{v.money}}</span>
-                    <span class="col-md-1 bot-bor subli">{{v.real_money}}</span>
-                    <span class="col-md-1 bot-bor subli">{{v.deduct_money}}</span>
-                    <span class="col-md-05 bot-bor subli">{{v.invoiceText}}</span>
                     <span class="col-md-1 bot-bor subli">{{v.create_time}}</span>
                     <span class="col-md-1 bot-bor subli">{{v.message}}</span>
                     <span class="col-md-1 bot-bor subli">{{v.statusText}}</span>
@@ -109,28 +95,9 @@
                 </div>
             </div>
         </div>
-        <div class="pz-modal" v-show="modal1">
-            <div class="pz-modal-content">
-                <div class="pz-modal-header">提现</div>
-                <div class="pz-spin-container">
-                    <div class="dl-show">
-                        <span class="dl-title">提供发票扣除比例:</span>
-                        <input v-model="has_invoice" placeholder="请输入提供发票扣除比例" class="dl-info" type="number">
-                    </div>
-                    <div class="dl-show">
-                        <span class="dl-title">不提供发票扣除比例:</span>
-                        <input v-model="no_invoice" placeholder="请输入不提供发票扣除比例" class="dl-info" type="number">
-                    </div>
-                    <div class="dl-show flexcenter">
-                        <input type="button" value="取消" class="pz-btn btn-cancel" @click="cancel1">
-                        <input type="button" value="保存" @click="subRation" class="pz-btn btn-amend">
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </body>
 <script type="module" src="../../../js/common.js"></script>
-<script type="module" src="./withdraw.js"></script>
+<script type="module" src="./bounty.js"></script>
 
 </html>
