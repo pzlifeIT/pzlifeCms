@@ -6,7 +6,7 @@
     <meta http-equiv="cache-control" content="no-cache, must-revalidate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
-    <title>奖励金提现</title>
+    <title>兼职网推奖励金列表</title>
     <link rel="stylesheet" href="../../../css/style.css?1.0.2">
     <link rel="stylesheet" href="../../../css/bootstrap.css">
     <link rel="stylesheet" href="../../../css/list.css">
@@ -30,16 +30,13 @@
             <div class="gs-con">
                 <ul>
                     <li class="gs-li col-md-3 col-sm-6  col-xs-12">
-                        <p class="gs-name">银行卡号</p>
-                        <input v-model="bank_card" placeholder="请输入银行卡号" class="gs-inp" type="text">
-                    </li>
-                    <li class="gs-li col-md-3 col-sm-6  col-xs-12">
-                        <p class="gs-name">银行开户手机号</p>
-                        <input v-model="bank_mobile" placeholder="请输入银行开户手机号" class="gs-inp" type="text">
-                    </li>
-                    <li class="gs-li col-md-3 col-sm-6  col-xs-12">
-                        <p class="gs-name">银行开户人</p>
-                        <input v-model="user_name" placeholder="请输入银行开户人" class="gs-inp" type="text">
+                        <p class="gs-name">状态</p>
+                        <div class="combobox" id="combobox3">
+                            <div class="ant-select">
+                                <div class="ant-select-selection" id="selection1">请选择</div>
+                                <span class="ant-select-arrow"></span>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -50,25 +47,24 @@
             </div>
             <div class="gl-title">
                 <span class="col-md-1 bot-bor subli">序号</span>
-                <span class="col-md-1 bot-bor subli">提现人名称</span>
-                <span class="col-md-1 bot-bor subli">手机号码</span>
-                <span class="col-md-2 bot-bor subli">开户银行/银行卡号</span>
-                <span class="col-md-1 bot-bor subli">提现金额</span>
-
-                <span class="col-md-1 bot-bor subli">提现时间</span>
-                <span class="col-md-1 bot-bor subli">描述</span>
+                <span class="col-md-1 bot-bor subli">boss名称</span>
+                <span class="col-md-1 bot-bor subli">统计类型</span>
+                <span class="col-md-1 bot-bor subli">统计数量</span>
+                <span class="col-md-1 bot-bor subli">金额</span>
+                <span class="col-md-1 bot-bor subli">开始时间</span>
+                <span class="col-md-1 bot-bor subli">最后更新时间</span>
                 <span class="col-md-1 bot-bor subli">状态</span>
                 <span class="col-md-2 bot-bor subli">管理</span>
             </div>
             <div class="table" id="goodlist">
-                <div class="table-tr" v-for="(v,k) in log_transfer">
+                <div class="table-tr" v-for="(v,k) in diamondvipNetPush">
                     <span class="col-md-1 bot-bor subli">{{k + 1}}</span>
-                    <span class="col-md-1 bot-bor subli">{{v.user_name}}</span>
-                    <span class="col-md-1 bot-bor subli">{{v.bank_mobile}}</span>
-                    <span class="col-md-2 bot-bor subli">{{v.bank_name}}<br>{{v.bank_card}}</span>
-                    <span class="col-md-1 bot-bor subli">{{v.money}}</span>
+                    <span class="col-md-1 bot-bor subli">{{v.user.nick_name}}</span>
+                    <span class="col-md-1 bot-bor subli">钻石网推</span>
+                    <span class="col-md-1 bot-bor subli">{{v.count}}</span>
+                    <span class="col-md-1 bot-bor subli">{{v.cost}}</span>
                     <span class="col-md-1 bot-bor subli">{{v.create_time}}</span>
-                    <span class="col-md-1 bot-bor subli">{{v.message}}</span>
+                    <span class="col-md-1 bot-bor subli">{{v.update_time}}</span>
                     <span class="col-md-1 bot-bor subli">{{v.statusText}}</span>
                     <span class="col-md-2 bot-bor subli">
                       <div class="pz-btn btn-amend" v-if="v.status == 1" @click="checkUserTransfer(v.id,2)" >审核通过</div>
@@ -98,6 +94,6 @@
     </div>
 </body>
 <script type="module" src="../../../js/common.js"></script>
-<script type="module" src="./bounty.js"></script>
+<script type="module" src="./bountyList.js"></script>
 
 </html>

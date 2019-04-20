@@ -14,12 +14,12 @@ new Vue({
         has_invoice: '',
         no_invoice: '',
         total: 0,
-        log_transfer: [],
+        diamondvipNetPush: [],
         id: 0
     },
     mounted() {
         let that = this
-        that.getLogTransfer()
+        that.getDiamondvipNetPush()
     },
     methods: {
         cancel() {
@@ -27,22 +27,20 @@ new Vue({
         },
         search() {
             this.page = 1
-            this.getLogTransfer()
+            this.getDiamondvipNetPush()
         },
-        getLogTransfer() {
+        getDiamondvipNetPush() {
             let that = this;
+            let status = document.querySelector('#selection1').getAttribute('data-id') || '';
             app.requests({
-                url: 'admin/getLogTransfer',
+                url: 'Rights/getDiamondvipNetPush',
                 data: {
                     page: that.page || 1,
                     page_num: that.page_num || 10,
-                    stype: 4,
-                    bank_card: that.bank_card,
-                    bank_mobile: that.bank_mobile,
-                    user_name: that.user_name
+                    status: status
                 },
                 success(res) {
-                    that.log_transfer = that.dislog_transfer(res.log_transfer)
+                    that.diamondvipNetPush = that.disNetPush(res.diamondvipNetPush)
                     if (that.total == res.total) return
                     that.total = res.total
                     that.setpage()
@@ -56,9 +54,6 @@ new Vue({
                         case 3002:
                             text = '错误的审核类型'
                             break;
-                        case 3003:
-                            text = '银行卡号输入错误'
-                            break;
                         default:
                             text = '意料之外的错误'
                     }
@@ -69,7 +64,7 @@ new Vue({
                 }
             })
         },
-        dislog_transfer(data = []) {
+        disNetPush(data = []) {
             let arr = data,
                 len = arr.length
             for (let i = 0; i < len; i++) {
@@ -81,13 +76,13 @@ new Vue({
             let text = ''
             switch (parseInt(n)) {
                 case 1:
-                    text = '待审核'
+                    text = '待发放'
                     break;
                 case 2:
-                    text = '审核通过'
+                    text = '已经发放'
                     break;
                 case 3:
-                    text = '审核不通过'
+                    text = '取消发放'
                     break;
             }
             return text
@@ -150,7 +145,7 @@ new Vue({
                         text: '操作成功'
                     })
                     that.modal = false
-                    that.getLogTransfer()
+                    that.getDiamondvipNetPush()
                 },
                 Error(code) {
                     let text = ''
@@ -192,7 +187,7 @@ new Vue({
                 fn: function(n) {
                     if (t.page == n) return
                     t.page = n
-                    t.getLogTransfer()
+                    t.getDiamondvipNetPush()
                 }
             })
         },
@@ -206,9 +201,12 @@ select({
         type_name: '全部'
     }, {
         id: 1,
-        type_name: '提供'
+        type_name: '待发放'
     }, {
         id: 2,
-        type_name: '不提供'
+        type_name: '已经发放'
+    }, {
+        id: 3,
+        type_name: '取消发放'
     }]
 })
