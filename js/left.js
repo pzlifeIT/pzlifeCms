@@ -69,7 +69,7 @@ new Vue({
                 path: 'page/goods/size/size.html',
                 name: '规格属性'
             }, {
-                path: 'ppage/goods/subject/subject.html',
+                path: 'page/goods/subject/subject.html',
                 name: '专题'
             }]
         }, {
@@ -92,7 +92,8 @@ new Vue({
         navList: [{
             name: 'workbench',
             text: '首页',
-            show: true
+            show: true,
+            index: true
         }],
         iframeList: [{
             name: 'workbench',
@@ -117,19 +118,58 @@ new Vue({
             }
             this.urlList = list
         },
-        showIfame(text, name) {
-            console.log(name)
-            this.hideIframe()
+        addIframe(text, name) {
             let nav = {},
                 iframe = {},
                 pname = name.split('.')[0];
-            nav.name = pname
-            nav.text = text
-            nav.show = true
-            iframe.name = pname
-            iframe.path = name
+            if (this.isexist(pname)) {
+                this.showIframe(pname)
+                return
+            }
+            this.hideIframe()
+            nav = {
+                name: pname,
+                text: text,
+                show: true
+            }
+            iframe = {
+                name: pname,
+                path: name,
+                show: true
+            }
             this.navList.push(nav)
             this.iframeList.push(iframe)
+        },
+        isexist(name) {
+            let nlist = this.navList,
+                len = nlist.length;
+            for (let i = 0; i < len; i++) {
+                if (nlist[i].name === name) {
+                    return true
+                }
+            }
+            return false
+        },
+        showIframe(name) {
+            this.hideIframe()
+            let nlist = this.navList,
+                ilist = this.iframeList,
+                len = nlist.length,
+                len1 = ilist.length;
+            for (let i = 0; i < len; i++) {
+                if (nlist[i].name === name) {
+                    nlist[i].show = true
+                    break;
+                }
+            }
+            for (let i = 0; i < len1; i++) {
+                if (ilist[i].name === name) {
+                    ilist[i].show = true
+                    break;
+                }
+            }
+            this.navList = nlist
+            this.iframeList = ilist
         },
         hideIframe() {
             let nlist = this.navList,
@@ -144,6 +184,43 @@ new Vue({
             }
             this.navList = nlist
             this.iframeList = ilist
+        },
+        delIframe(name) {
+            let nlist = this.navList,
+                ilist = this.iframeList,
+                len = nlist.length,
+                len1 = ilist.length;
+            for (let i = 0; i < len; i++) {
+                if (nlist[i].name === name) {
+                    if (nlist[i].show) {
+                        nlist = this.delShowIframe(nlist, i - 1)
+                    }
+                    nlist[i].name = ''
+                    nlist[i].del = true
+                    break;
+                }
+            }
+            for (let i = 0; i < len1; i++) {
+                if (ilist[i].name === name) {
+                    if (ilist[i].show) {
+                        ilist = this.delShowIframe(ilist, i - 1)
+                    }
+                    ilist[i].name = ''
+                    ilist[i].del = true
+                    break;
+                }
+            }
+            this.navList = nlist
+            this.iframeList = ilist
+        },
+        delShowIframe(list, k) {
+            for (let i = k; i > 0; i--) {
+                if (!list[i].del) {
+                    list[i].show = true
+                    break;
+                }
+            }
+            return list
         }
     }
 });

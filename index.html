@@ -31,7 +31,7 @@
                     <li class="sb_li" :class="v.show?'active':''" v-for="(v,k) in urlList">
                         <div class="sb_tit din" @click="subclick(k)"><img class="din fl" :src="v.src" alt="">{{v.name}}</div>
                         <ul class="sb_sub_list ">
-                            <li @click="showIfame(v1.name,v1.path)" v-for="(v1, k1) in v._child">{{v1.name}}</li>
+                            <li @click="addIframe(v1.name,v1.path)" v-for="(v1, k1) in v._child">{{v1.name}}</li>
                         </ul>
                     </li>
                     <!-- <li class="sb_li">
@@ -86,7 +86,6 @@
                             <li data-url="page/advertising/advertising/advertising.html" data-name="广告位管理">广告位管理</li>
                         </ul>
                     </li> -->
-
                 </ul>
             </div>
         </div>
@@ -95,12 +94,12 @@
             <div class="r_tit_list">
                 <div class="roll-nav roll-left din fl"></div>
                 <ul class="r_tit_ul din" id="">
-                    <li class="r_tit_li " :class="v.show?'active':''" v-for="(v,k) in navList" name="v.name">{{v.text}}</li>
-                </ul>1
+                    <li class="r_tit_li " v-if="!v.del" :class="v.show?'active':''" v-for="(v,k) in navList" :name="v.name" @click="showIframe(v.name)">{{v.text}}<i v-if="!v.index" @click.stop="delIframe(v.name)"></i></li>
+                </ul>
                 <div class="roll-nav roll-right din fr"></div>
             </div>
             <div class="content" id="content">
-                <iframe v-for="(v,k) in iframeList" class="J_iframe" :class="v.show?'':hide" name="v.name" width="100%" height="100%" :src="v.path" frameborder="0" seamless></iframe>
+                <iframe v-if="!v.del" v-for="(v,k) in iframeList" class="J_iframe" :class="v.show?'':'hide'" :name="v.name" width="100%" height="100%" :src="v.path" frameborder="0" seamless></iframe>
             </div>
         </div>
 
