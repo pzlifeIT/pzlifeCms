@@ -6,95 +6,104 @@
     <meta http-equiv="cache-control" content="no-cache, must-revalidate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/left.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/left.css?1.0.1">
+    <script src="./js/vue.js"></script>
     <title>品质生活cms</title>
 </head>
 
 <body>
+    <div id="app" class="indexapp">
+        <div class="navbar  din fl">
+            <div class="nav-user">
+                <div class="user-content">
+                    <img class="headimg" src="http://bpic.588ku.com/element_origin_min_pic/17/03/16/27cf0027a3d5e7880252b2161be88725.jpg" alt="">
+                    <p class="username" id="username">82年咖啡</p>
+                    <p class="userstatus" id="userstatus">超级管理员</p>
+                    <ul id="dropdown-menu" class="dropdown-menu hide">
+                        <li class="menu-li" data-url="page/user/alterpwd/alterpwd.html" data-name="修改密码">修改密码</li>
+                        <li id="exitlogin">安全退出</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sidebar" id="sidebar">
+                <ul class="sb_list">
+                    <li class="sb_li" :class="v.show?'active':''" v-for="(v,k) in urlList">
+                        <div class="sb_tit din" @click="subclick(k)"><img class="din fl" :src="v.src" alt="">{{v.name}}</div>
+                        <ul class="sb_sub_list ">
+                            <li @click="showIfame(v1.name,v1.path)" v-for="(v1, k1) in v._child">{{v1.name}}</li>
+                        </ul>
+                    </li>
+                    <!-- <li class="sb_li">
+                        <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_14.png" alt="">权限管理</a>
+                        <ul class="sb_sub_list ">
+                            <li data-url="page/jurisdiction/member/member.html" data-name="成员管理">成员管理</li>
+                        </ul>
+                    </li> -->
+                    <!-- <li class="sb_li">
+                        <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_14.png" alt="">金额管理</a>
+                        <ul class="sb_sub_list ">
+                            <li data-url="page/money/recharge/recharge.html" data-name="充值管理">充值管理</li>
+                            <li data-url="page/money/upgradeBoss/upgradeBoss.html" data-name="开通boss">开通boss</li>
+                            <li data-url="page/money/becomeBoss/becomeBoss.html" data-name="邀请成为boss">邀请成为boss</li>
+                            <li data-url="page/money/cardbag/cardbag.html" data-name="卡包">卡包</li>
+                            <li data-url="page/money/withdraw/withdraw.html" data-name="佣金提现">佣金提现</li>
+                            <li data-url="page/money/bounty/bounty.html" data-name="奖励金提现">奖励金提现</li>
+                            <li data-url="page/money/addbankcard/addbankcard.html" data-name="添加银行">添加银行</li>
+                        </ul>
+                    </li>
+                    <li class="sb_li">
+                        <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_14.png" alt="">会员管理</a>
+                        <ul class="sb_sub_list ">
+                            <li data-url="page/member/memberList/memberList.html" data-name="会员列表">会员列表</li>
+                        </ul>
+                    </li>
+                    <li class="sb_li">
+                        <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_17.png" alt="">订单</a>
+                        <ul class="sb_sub_list ">
+                            <li data-url="page/order/order/orderlist.html" data-name="订单管理">订单管理</li>
+                        </ul>
+                    </li>
+                    <li class="sb_li">
+                        <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_09.png" alt="">商品</a>
+                        <ul class="sb_sub_list ">
+                            <li data-url="page/goods/supplier/supplier.html" data-name="供应商管理">供应商管理</li>
+                            <li data-url="page/goods/goods/goods.html" data-name="商品库">商品库</li>
+                            <li data-url="page/goods/goodsclassify/goodsclassify.html" data-name="商品分类">商品分类</li>
+                            <li data-url="page/goods/size/size.html" data-name="规格属性">规格属性</li>
+                            <li data-url="page/goods/subject/subject.html" data-name="专题">专题</li>
+                        </ul>
+                    </li>
+                    <li class="sb_li">
+                        <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_14.png" alt="">钻石活动</a>
+                        <ul class="sb_sub_list ">
+                            <li data-url="page/diamond/acquire/acquire.html" data-name="BOSS分享钻石卡">BOSS分享钻石卡</li>
+                        </ul>
+                    </li>
+                    <li class="sb_li">
+                        <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_14.png" alt="">广告位管理</a>
+                        <ul class="sb_sub_list ">
+                            <li data-url="page/advertising/advertising/advertising.html" data-name="广告位管理">广告位管理</li>
+                        </ul>
+                    </li> -->
 
-    <div class="navbar  din fl">
-        <div class="nav-user">
-            <div class="user-content">
-                <img class="headimg" src="http://bpic.588ku.com/element_origin_min_pic/17/03/16/27cf0027a3d5e7880252b2161be88725.jpg" alt="">
-                <p class="username" id="username">82年咖啡</p>
-                <p class="userstatus" id="userstatus">超级管理员</p>
-                <ul id="dropdown-menu" class="dropdown-menu hide">
-                    <li class="menu-li" data-url="page/user/alterpwd/alterpwd.html" data-name="修改密码">修改密码</li>
-                    <li id="exitlogin">安全退出</li>
                 </ul>
             </div>
         </div>
-        <div class="sidebar" id="sidebar">
-            <ul class="sb_list">
-                <li class="sb_li">
-                    <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_14.png" alt="">权限管理</a>
-                    <ul class="sb_sub_list ">
-                        <li data-url="page/jurisdiction/member/member.html" data-name="成员管理">成员管理</li>
-                    </ul>
-                </li>
-                <li class="sb_li">
-                    <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_14.png" alt="">金额管理</a>
-                    <ul class="sb_sub_list ">
-                        <li data-url="page/money/recharge/recharge.html" data-name="充值管理">充值管理</li>
-                        <li data-url="page/money/upgradeBoss/upgradeBoss.html" data-name="开通boss">开通boss</li>
-                        <li data-url="page/money/becomeBoss/becomeBoss.html" data-name="邀请成为boss">邀请成为boss</li>
-                        <li data-url="page/money/cardbag/cardbag.html" data-name="卡包">卡包</li>
-                        <li data-url="page/money/withdraw/withdraw.html" data-name="佣金提现">佣金提现</li>
-                        <li data-url="page/money/bounty/bounty.html" data-name="奖励金提现">奖励金提现</li>
-                        <li data-url="page/money/addbankcard/addbankcard.html" data-name="添加银行">添加银行</li>
-                    </ul>
-                </li>
-                <li class="sb_li">
-                    <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_14.png" alt="">会员管理</a>
-                    <ul class="sb_sub_list ">
-                        <li data-url="page/member/memberList/memberList.html" data-name="会员列表">会员列表</li>
-                    </ul>
-                </li>
-                <li class="sb_li">
-                    <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_17.png" alt="">订单</a>
-                    <ul class="sb_sub_list ">
-                        <li data-url="page/order/order/orderlist.html" data-name="订单管理">订单管理</li>
-                    </ul>
-                </li>
-                <li class="sb_li">
-                    <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_09.png" alt="">商品</a>
-                    <ul class="sb_sub_list ">
-                        <li data-url="page/goods/supplier/supplier.html" data-name="供应商管理">供应商管理</li>
-                        <li data-url="page/goods/goods/goods.html" data-name="商品库">商品库</li>
-                        <li data-url="page/goods/goodsclassify/goodsclassify.html" data-name="商品分类">商品分类</li>
-                        <li data-url="page/goods/size/size.html" data-name="规格属性">规格属性</li>
-                        <li data-url="page/goods/subject/subject.html" data-name="专题">专题</li>
-                    </ul>
-                </li>
-                <li class="sb_li">
-                    <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_14.png" alt="">钻石活动</a>
-                    <ul class="sb_sub_list ">
-                        <li data-url="page/diamond/acquire/acquire.html" data-name="BOSS分享钻石卡">BOSS分享钻石卡</li>
-                    </ul>
-                </li>
-                <li class="sb_li">
-                    <a class="sb_tit din" href="#"><img class="din fl" src="images/CMS-icon_14.png" alt="">广告位管理</a>
-                    <ul class="sb_sub_list ">
-                        <li data-url="page/advertising/advertising/advertising.html" data-name="广告位管理">广告位管理</li>
-                    </ul>
-                </li>
+        <div class="right din fl">
+            <div class="right-header">品质生活CMS</div>
+            <div class="r_tit_list">
+                <div class="roll-nav roll-left din fl"></div>
+                <ul class="r_tit_ul din" id="">
+                    <li class="r_tit_li " :class="v.show?'active':''" v-for="(v,k) in navList" name="v.name">{{v.text}}</li>
+                </ul>1
+                <div class="roll-nav roll-right din fr"></div>
+            </div>
+            <div class="content" id="content">
+                <iframe v-for="(v,k) in iframeList" class="J_iframe" :class="v.show?'':hide" name="v.name" width="100%" height="100%" :src="v.path" frameborder="0" seamless></iframe>
+            </div>
+        </div>
 
-            </ul>
-        </div>
-    </div>
-    <div class="right din fl">
-        <div class="right-header">品质生活CMS</div>
-        <div class="r_tit_list">
-            <div class="roll-nav roll-left din fl"></div>
-            <ul class="r_tit_ul din" id="">
-                <li class="r_tit_li active" name="workbench">首页</li>
-            </ul>
-            <div class="roll-nav roll-right din fr"></div>
-        </div>
-        <div class="content" id="content">
-            <iframe class="J_iframe" id="workbench" name="workbench" width="100%" height="100%" src="workbench.html" frameborder="0" seamless></iframe>
-        </div>
     </div>
 </body>
 <script type="module" type="text/javascript" src="js/left.js"></script>
