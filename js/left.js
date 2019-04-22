@@ -33,6 +33,9 @@ new Vue({
                 path: 'page/money/bounty/bounty.html',
                 name: '奖励金提现'
             }, {
+                path: 'page/money/bountyList/bountyList.html',
+                name: '奖励金列表'
+            }, {
                 path: 'page/money/addbankcard/addbankcard.html',
                 name: '添加银行'
             }]
