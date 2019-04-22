@@ -57,7 +57,7 @@ new Vue({
             selectedIconPath: 'icon9',
             _child: [{
                 path: 'page/order/order/orderlist.html',
-                name: '订单管理'
+                name: '商品订单管理'
             }]
         }, {
             name: '商品管理',

@@ -135,6 +135,7 @@ new Vue({
             if (t.id == '') {
                 this.getSuppliersAll()
                 this.allCateList()
+                this.setselpicure('')
                 return
             } else {
 
