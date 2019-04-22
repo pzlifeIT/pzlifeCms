@@ -99,10 +99,46 @@ new Vue({
             name: 'workbench',
             path: 'workbench.html',
             show: true
-        }]
+        }],
+        select_menu: false,
+        admininfo: {}
     },
-    mounted() {},
+    mounted() {
+        this.getadmininfo()
+    },
     methods: {
+        getadmininfo() {
+            let that = this;
+            app.requests({
+                url: "admin/getadmininfo",
+                data: {
+                    cms_con_id: localStorage.getItem("cms_con_id") || ""
+                },
+                success(res) {
+                    that.admininfo = res.data;
+                    localStorage.setItem("admininfo", JSON.stringify(res.data));
+                }
+            })
+        },
+        quit() {
+            app.globalData.cms_con_id = ''
+            localStorage.setItem("cms_con_id", '')
+            window.location.href = window.location.origin + '/page/user/login/login.html'
+        },
+        hideMenu() {
+            this.select_menu = false
+        },
+        showMenu() {
+            if (this.select_menu) {
+                this.select_menu = false
+            } else {
+                this.select_menu = true
+            }
+        },
+        changePassword() {
+            this.addIframe('修改密码', 'page/user/alterpwd/alterpwd.html')
+            this.select_menu = false
+        },
         subclick(k) {
             let list = this.urlList,
                 len = list.length,
@@ -119,14 +155,14 @@ new Vue({
             this.urlList = list
         },
         addIframe(text, name) {
-            let nav = {},
-                iframe = {},
-                pname = name.split('.')[0];
+            let pname = name.split('.')[0];
             if (this.isexist(pname)) {
                 this.showIframe(pname)
                 return
             }
             this.hideIframe()
+            let nav = {},
+                iframe = {};
             nav = {
                 name: pname,
                 text: text,
@@ -152,66 +188,47 @@ new Vue({
         },
         showIframe(name) {
             this.hideIframe()
-            let nlist = this.navList,
-                ilist = this.iframeList,
-                len = nlist.length,
-                len1 = ilist.length;
+            this.navList = this.disshowIframe(this.navList, name)
+            this.iframeList = this.disshowIframe(this.iframeList, name)
+        },
+        disshowIframe(list, name) {
+            let len = list.length;
             for (let i = 0; i < len; i++) {
-                if (nlist[i].name === name) {
-                    nlist[i].show = true
+                if (list[i].name === name) {
+                    list[i].show = true
                     break;
                 }
             }
-            for (let i = 0; i < len1; i++) {
-                if (ilist[i].name === name) {
-                    ilist[i].show = true
-                    break;
-                }
-            }
-            this.navList = nlist
-            this.iframeList = ilist
+            return list
         },
         hideIframe() {
-            let nlist = this.navList,
-                ilist = this.iframeList,
-                len = nlist.length,
-                len1 = ilist.length;
+            this.navList = this.dishideIframe(this.navList)
+            this.iframeList = this.dishideIframe(this.iframeList)
+        },
+        dishideIframe(list) {
+            let len = list.length;
             for (let i = 0; i < len; i++) {
-                nlist[i].show = false
+                list[i].show = false
             }
-            for (let i = 0; i < len1; i++) {
-                ilist[i].show = false
-            }
-            this.navList = nlist
-            this.iframeList = ilist
+            return list
         },
         delIframe(name) {
-            let nlist = this.navList,
-                ilist = this.iframeList,
-                len = nlist.length,
-                len1 = ilist.length;
+            this.navList = this.disdelIframe(this.navList, name)
+            this.iframeList = this.disdelIframe(this.iframeList, name)
+        },
+        disdelIframe(list, name) {
+            let len = list.length;
             for (let i = 0; i < len; i++) {
-                if (nlist[i].name === name) {
-                    if (nlist[i].show) {
-                        nlist = this.delShowIframe(nlist, i - 1)
+                if (list[i].name === name) {
+                    if (list[i].show) {
+                        list = this.delShowIframe(list, i - 1)
                     }
-                    nlist[i].name = ''
-                    nlist[i].del = true
+                    list[i].name = ''
+                    list[i].del = true
                     break;
                 }
             }
-            for (let i = 0; i < len1; i++) {
-                if (ilist[i].name === name) {
-                    if (ilist[i].show) {
-                        ilist = this.delShowIframe(ilist, i - 1)
-                    }
-                    ilist[i].name = ''
-                    ilist[i].del = true
-                    break;
-                }
-            }
-            this.navList = nlist
-            this.iframeList = ilist
+            return list
         },
         delShowIframe(list, k) {
             for (let i = k; i > 0; i--) {
@@ -226,7 +243,7 @@ new Vue({
 });
 
 (function() {
-    app.getadmininfo(true)
+    // app.getadmininfo(true)
     var Tab = (function() {
             function _Tab() {
                 this.sidebar = document.querySelector('#sidebar');

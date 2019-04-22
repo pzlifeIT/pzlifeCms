@@ -13,19 +13,25 @@
 </head>
 
 <body>
-    <div id="app" class="indexapp">
-        <div class="navbar  din fl">
-            <div class="nav-user">
-                <div class="user-content">
-                    <img class="headimg" src="http://bpic.588ku.com/element_origin_min_pic/17/03/16/27cf0027a3d5e7880252b2161be88725.jpg" alt="">
-                    <p class="username" id="username">82年咖啡</p>
-                    <p class="userstatus" id="userstatus">超级管理员</p>
-                    <ul id="dropdown-menu" class="dropdown-menu hide">
-                        <li class="menu-li" data-url="page/user/alterpwd/alterpwd.html" data-name="修改密码">修改密码</li>
-                        <li id="exitlogin">安全退出</li>
-                    </ul>
+    <div id="app" class="indexapp" @click="hideMenu">
+        <div class="header">
+            <img class="din fl cmslogo" src="./images/cmslogo.png" alt="">
+            <div class="din fr">
+                <div class="quit fr">
+                    <img class="cms_quit" src="./images/cmsQuit.png" alt="">
+                    <span class="quit_con" @click="quit">退出</span>
+                </div>
+                <div class="cms_user fr" @click.stop="showMenu">
+                    <img class="head_photo din fl" src="http://www.yuyueyang.cn/wp-content/uploads/2018/07/4859ec39f86c1d936170fdbc4e6acc05.jpg" alt="">
+                    <span class="user_name din fl">{{admininfo.admin_name}}</span>
                 </div>
             </div>
+        </div>
+        <ul class="select_menu" v-show="select_menu">
+            <li @click="changePassword">修改密码</li>
+        </ul>
+        <div class="navbar  din fl">
+            <div class=""></div>
             <div class="sidebar" id="sidebar">
                 <ul class="sb_list">
                     <li class="sb_li" :class="v.show?'active':''" v-for="(v,k) in urlList">
@@ -90,7 +96,7 @@
             </div>
         </div>
         <div class="right din fl">
-            <div class="right-header">品质生活CMS</div>
+            <!-- <div class="right-header">品质生活CMS</div> -->
             <div class="r_tit_list">
                 <div class="roll-nav roll-left din fl"></div>
                 <ul class="r_tit_ul din" id="">
