@@ -78,6 +78,9 @@ new Vue({
                         case 3004:
                             text = '标签已关联该商品'
                             break;
+                        case 3005:
+                            text = '标签长度过长'
+                            break;
                         case 3006:
                             text = '添加失败'
                             break;

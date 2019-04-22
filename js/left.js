@@ -3,17 +3,19 @@ new Vue({
     el: '#app',
     data: {
         urlList: [{
-            src: 'images/CMS-icon_14.png',
             name: '权限管理',
             show: false,
+            iconPath: 'icon4',
+            selectedIconPath: 'icon3',
             _child: [{
                 path: 'page/jurisdiction/member/member.html',
                 name: '成员管理'
             }]
         }, {
-            src: 'images/CMS-icon_14.png',
             name: '金额管理',
             show: false,
+            iconPath: 'icon6',
+            selectedIconPath: 'icon5',
             _child: [{
                 path: 'page/money/recharge/recharge.html',
                 name: '充值管理'
@@ -40,25 +42,28 @@ new Vue({
                 name: '添加银行'
             }]
         }, {
-            src: 'images/CMS-icon_14.png',
             name: '会员管理',
             show: false,
+            iconPath: 'icon8',
+            selectedIconPath: 'icon7',
             _child: [{
                 path: 'page/member/memberList/memberList.html',
                 name: '会员列表'
             }]
         }, {
-            src: 'images/CMS-icon_17.png',
             name: '订单',
             show: false,
+            iconPath: 'icon10',
+            selectedIconPath: 'icon9',
             _child: [{
                 path: 'page/order/order/orderlist.html',
                 name: '订单管理'
             }]
         }, {
-            src: 'images/CMS-icon_09.png',
             name: '商品管理',
             show: false,
+            iconPath: 'icon12',
+            selectedIconPath: 'icon11',
             _child: [{
                 path: 'page/goods/supplier/supplier.html',
                 name: '供应商管理'
@@ -76,17 +81,19 @@ new Vue({
                 name: '专题'
             }]
         }, {
-            src: 'images/CMS-icon_14.png',
             name: '活动管理',
             show: false,
+            iconPath: 'icon14',
+            selectedIconPath: 'icon13',
             _child: [{
                 path: 'page/diamond/acquire/acquire.html',
                 name: 'BOSS分享钻石卡'
             }]
         }, {
-            src: 'images/CMS-icon_14.png',
             name: '广告位管理',
             show: false,
+            iconPath: 'icon16',
+            selectedIconPath: 'icon15',
             _child: [{
                 path: 'page/advertising/advertising/advertising.html',
                 name: '广告位管理'
