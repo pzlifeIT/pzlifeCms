@@ -58,6 +58,9 @@ new Vue({
             _child: [{
                 path: 'page/order/order/orderlist.html',
                 name: '商品订单管理'
+            }, {
+                path: 'page/order/memberOrder/memberOrder.html',
+                name: '权益购买订单'
             }]
         }, {
             name: '商品管理',
