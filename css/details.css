@@ -160,6 +160,7 @@
 
 .list-header {
     display: table;
+    border-collapse: collapse;
     width: 100%;
     background-color: #f7f7f7;
 }

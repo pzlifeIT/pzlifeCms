@@ -101,6 +101,24 @@ new Vue({
                 path: 'page/advertising/advertising/advertising.html',
                 name: '广告位管理'
             }]
+        }, {
+            name: '消息模板',
+            show: false,
+            iconPath: 'icon18',
+            selectedIconPath: 'icon17',
+            _child: [{
+                path: 'page/message/triggerList/triggerList.html',
+                name: '触发列表'
+            }, {
+                path: 'page/message/conList/conList.html',
+                name: '内容列表'
+            }, {
+                path: 'page/message/taskList/taskList.html',
+                name: '任务列表'
+            }, {
+                path: 'page/message/sendList/sendList.html',
+                name: '发送列表'
+            }]
         }],
         navList: [{
             name: 'workbench',

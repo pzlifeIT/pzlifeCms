@@ -58,6 +58,7 @@
 .gl-title {
     width: 100%;
     display: table;
+    border-collapse: collapse;
     overflow: hidden;
     border-bottom: 1px solid #dcdcdc;
 }

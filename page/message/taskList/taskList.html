@@ -10,7 +10,7 @@
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="Cache" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
-    <title>兼职网推奖励金列表</title>
+    <title>触发列表</title>
     <link rel="stylesheet" href="../../../css/style.css">
     <link rel="stylesheet" href="../../../css/bootstrap.css">
     <link rel="stylesheet" href="../../../css/list.css?10.0.1">
@@ -25,7 +25,7 @@
                 <img src="../../../images/sx.png" alt="">
             </div>
         </div>
-        <div class="gs-screen panel-default">
+        <!-- <div class="gs-screen panel-default">
             <div class="gs-header panel-heading">
                 <span class="din fl">筛选</span>
                 <button id="search" @click="search" class="btn btn-secondary radius din fr">筛选</button>
@@ -44,32 +44,30 @@
                     </li>
                 </ul>
             </div>
-        </div>
+        </div> -->
         <div class="gs-list panel-default">
             <div class="gl-head panel-heading ">
-                <span>充值记录</span>
+                <span>触发列表</span>
             </div>
             <div class="gl-title">
                 <span class="col-md-1 bot-bor subli">序号</span>
-                <span class="col-md-1 bot-bor subli">boss名称</span>
-                <span class="col-md-1 bot-bor subli">统计类型</span>
-                <span class="col-md-1 bot-bor subli">统计数量</span>
-                <span class="col-md-1 bot-bor subli">金额</span>
-                <span class="col-md-1 bot-bor subli">开始时间</span>
-                <span class="col-md-1 bot-bor subli">最后更新时间</span>
+                <span class="col-md-1 bot-bor subli">创建名称</span>
+                <span class="col-md-1 bot-bor subli">时间</span>
+                <span class="col-md-1 bot-bor subli">触发条件</span>
+                <span class="col-md-1 bot-bor subli">触发方式</span>
+                <span class="col-md-1 bot-bor subli">起止时间</span>
                 <span class="col-md-1 bot-bor subli">状态</span>
                 <span class="col-md-2 bot-bor subli">管理</span>
             </div>
             <div class="table" id="goodlist">
-                <div class="table-tr" v-for="(v,k) in diamondvipNetPush">
-                    <span class="col-md-1 bot-bor subli">{{k + 1}}</span>
-                    <span class="col-md-1 bot-bor subli">{{v.user.nick_name}}</span>
-                    <span class="col-md-1 bot-bor subli">钻石网推</span>
-                    <span class="col-md-1 bot-bor subli">{{v.count}}</span>
-                    <span class="col-md-1 bot-bor subli">{{v.cost}}</span>
-                    <span class="col-md-1 bot-bor subli">{{v.create_time}}</span>
-                    <span class="col-md-1 bot-bor subli">{{v.update_time}}</span>
-                    <span class="col-md-1 bot-bor subli">{{v.statusText}}</span>
+                <div class="table-tr">
+                    <span class="col-md-1 bot-bor subli">序号</span>
+                    <span class="col-md-1 bot-bor subli">创建名称</span>
+                    <span class="col-md-1 bot-bor subli">时间</span>
+                    <span class="col-md-1 bot-bor subli">触发条件</span>
+                    <span class="col-md-1 bot-bor subli">触发方式</span>
+                    <span class="col-md-1 bot-bor subli">起止时间</span>
+                    <span class="col-md-1 bot-bor subli">状态</span>
                     <span class="col-md-2 bot-bor subli">
                       <!-- <div class="pz-btn btn-amend" v-if="v.status == 1" @click="checkUserTransfer(v.id,2)" >审核通过</div>
                       <div class="pz-btn  btn-del"  v-if="v.status == 1" @click="showmodal(v.id)" >审核不通过</div> -->
@@ -98,6 +96,6 @@
     </div>
 </body>
 <script type="module" src="../../../js/common.js"></script>
-<script type="module" src="./bountyList.js"></script>
+<script type="module" src="./taskList.js"></script>
 
 </html>
