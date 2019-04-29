@@ -30,11 +30,9 @@ new Vue({
             this.sellocation = this.$refs.redact.selectionStart
         },
         textChange() {
-            console.log(this.ttext[this.sellocation])
             let t1 = this.ttext.substring(0, this.sellocation)
             let t2 = this.ttext.substring(this.sellocation, this.ttext.length)
-            console.log(t1, t2)
-            this.ttext = t1 + this.ctext.fontcolor(1111) + t2
+            this.ttext = t1 + '{{' + this.ctext + '}}' + t2
                 // this.ttext[this.sellocation - 1] = this.ttext[this.sellocation - 1] + this.ctext
         },
         cancel() {
