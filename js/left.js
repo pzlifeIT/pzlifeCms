@@ -8,6 +8,9 @@ new Vue({
             iconPath: 'icon4',
             selectedIconPath: 'icon3',
             _child: [{
+                path: 'page/jurisdiction/group/group.html',
+                name: '组管理'
+            }, {
                 path: 'page/jurisdiction/member/member.html',
                 name: '成员管理'
             }]
@@ -138,6 +141,9 @@ new Vue({
         this.getadmininfo()
     },
     methods: {
+        geturlList() {
+
+        },
         getadmininfo() {
             let that = this;
             app.requests({

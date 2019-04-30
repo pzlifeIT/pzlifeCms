@@ -1,0 +1,58 @@
+.gl-head {
+    border-bottom: 1px solid #dcdcdc;
+    border-right: 1px solid #dcdcdc;
+    font-size: 18px;
+}
+
+.gs-list {
+    margin-bottom: 0;
+    margin-top: 0;
+    font-size: 16px;
+    border-top: none;
+    border-bottom: none;
+}
+
+.gs-list.first-child {
+    margin-top: 20px;
+    border-top: 1px solid #dcdcdc
+}
+
+.fun_sel {
+    height: 34px;
+    margin-right: 10px;
+    line-height: 34px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.fun_sel span {
+    float: left;
+    user-select: none;
+}
+
+.fun_sel .name {
+    display: inline-block;
+    line-height: 34px;
+    color: #8a8a8a;
+}
+
+.select {
+    display: inline-block;
+    margin: 5px;
+    width: 24px;
+    height: 24px;
+    background: url(../../../../images/select_uncheck.png) center no-repeat;
+    background-size: 100%;
+}
+
+.fun_sel.check .select {
+    background-image: url(../../../../images/select_check.png);
+}
+
+.fun_sel.check .name {
+    color: #0f9ae0;
+}
+
+color: #0f9ae0;
+
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="cache-control" content="no-cache, must-revalidate">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <title>权限设置</title>
+    <link rel="stylesheet" href="../../../../css/style.css">
+    <link rel="stylesheet" href="../../../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../../../css/list.css?10.0.2">
+    <link rel="stylesheet" href="../../../../css/details.css?10.0.1">
+    <link rel="stylesheet" href="./jsSet.css?10.0.5">
+    <script src="../../../../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="iframenav">
+            <div class="refresh topbtn din fl" onclick="document.location.reload()">
+                <img src="../../../../images/sx.png" alt="">
+            </div>
+        </div>
+        <div class="gs-list panel-default" :class="k == 0?'first-child':''" v-for="(v,k) in menuList">
+            <div class="gl-head panel-heading ">
+                <span>{{v.name}}</span>
+            </div>
+            <!-- <div class="gl-title">
+                <span class="col-md-1 bot-bor subli">菜单列表</span>
+                <span class="col-md-3 bot-bor subli">子菜单列表</span>
+                <span class="col-md-3 bot-bor subli">描述</span>
+                <span class="col-md-3 bot-bor subli">管理</span>
+            </div> -->
+            <div class="table" id="goodlist">
+                <div class="table-tr" v-for="(v1,k1) in v.child">
+                    <span class="col-md-2 bot-bor subli">{{v1.name}}</span>
+                    <span class="col-md-6 bot-bor subli">
+                      <div class="din fl fun_sel" :class="v2.status == 1?'check':''" @click="selFun(k,k1,k2)" v-for="(v2,k2) in v1.child"><span class="select" ></span><span class="name">{{v2.name}}</span></div>
+                </span>
+                <span class="col-md-2 bot-bor subli"><span class="ant-switch show-hide " :class="v1.status == 1?'ant-switch-checked':''" class="attrImg" @click="showMenu(k,k1)" data-id="" data-type="" ></span></span>
+                <span class="col-md-2 bot-bor subli"></span>
+            </div>
+        </div>
+        <!-- <div class="w-floor-page">
+                <div class="floor-page" id="floorpages"></div>
+            </div> -->
+    </div>
+    </div>
+</body>
+<script type="module" src="../../../../js/common.js"></script>
+<script type="module" src="./jtSet.js?10.0.2"></script>
+
+</html>
