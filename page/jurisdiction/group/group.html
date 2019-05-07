@@ -8,8 +8,9 @@
     <meta http-equiv="Expires" content="0">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Cache-control" content="no-cache">
-    <meta http-equiv="Cache" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <meta http-equiv="Cache" content="no-cache">
+
     <title>组管理</title>
     <link rel="stylesheet" href="../../../css/style.css">
     <link rel="stylesheet" href="../../../css/bootstrap.css">
@@ -41,42 +42,42 @@
                 <span class="col-md-3 bot-bor subli">管理</span>
             </div>
             <div class="table" id="goodlist">
-                <div class="table-tr" v-for="(v,k) in adminUserList">
+                <div class="table-tr" v-for="(v,k) in admingroup">
                     <span class="col-md-3 bot-bor subli">{{k + 1}}</span>
-                    <span class="col-md-3 bot-bor subli">{{v.admin_name}}</span>
-                    <span class="col-md-3 bot-bor subli">{{v.department}}</span>
+                    <span class="col-md-3 bot-bor subli">{{v.group_name}}</span>
+                    <span class="col-md-3 bot-bor subli">{{v.content}}</span>
                     <span class="col-md-3 bot-bor subli">
-                      <a class="pz-btn btn-amend" href="jtSet/jtSet.html">权限设置</a>
+                      <div class="pz-btn btn-amend"  @click="gojtSet(v.id)">权限设置</div>
                     <div class="pz-btn btn-amend" @click="checkUserTransfer()">人员管理</div>
                     </span>
+                    </a>
+                </div>
+                <div class="w-floor-page">
+                    <div class="floor-page" id="floorpages"></div>
                 </div>
             </div>
-            <div class="w-floor-page">
-                <div class="floor-page" id="floorpages"></div>
-            </div>
-        </div>
-        <div class="pz-modal" v-show="modal">
-            <div class="pz-modal-content">
-                <div class="pz-modal-header">组管理</div>
-                <div class="pz-spin-container">
-                    <div class="dl-show">
-                        <span class="dl-title">组名称:</span>
-                        <input class="dl-info" placeholder="请输入组名称" v-model="username" value="" type="text">
-                    </div>
-                    <div class="dl-show">
-                        <span class="dl-title">密码:</span>
-                        <textarea class="dl-area" placeholder="请输入描述" v-model="pwd" value="" type="text"></textarea>
-                    </div>
-                    <div class="dl-show flexcenter">
-                        <input type="button" value="取消" class="pz-btn btn-cancel" @click="cancel">
-                        <input type="button" value="保存" @click="submit" class="pz-btn btn-amend">
+            <div class="pz-modal" v-show="modal">
+                <div class="pz-modal-content">
+                    <div class="pz-modal-header">组管理</div>
+                    <div class="pz-spin-container">
+                        <div class="dl-show">
+                            <span class="dl-title">组名称:</span>
+                            <input class="dl-info" placeholder="请输入组名称" v-model="groupname" value="" type="text">
+                        </div>
+                        <div class="dl-show">
+                            <span class="dl-title">描述:</span>
+                            <textarea class="dl-area" placeholder="请输入描述" v-model="content" value="" type="text"></textarea>
+                        </div>
+                        <div class="dl-show flexcenter">
+                            <input type="button" value="取消" class="pz-btn btn-cancel" @click="cancel">
+                            <input type="button" value="保存" @click="submit" class="pz-btn btn-amend">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 </body>
 <script type="module" src="../../../js/common.js"></script>
-<script type="module" src="./group.js"></script>
+<script type="module" src="./group.js?10.0.3"></script>
 
 </html>

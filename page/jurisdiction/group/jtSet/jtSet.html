@@ -25,6 +25,7 @@
             <div class="refresh topbtn din fl" onclick="document.location.reload()">
                 <img src="../../../../images/sx.png" alt="">
             </div>
+            <input type="button" @click="addpermissionsgrouppower()" value="保存" class=" pz-btn btn-amend">
         </div>
         <div class="gs-list panel-default" :class="k == 0?'first-child':''" v-for="(v,k) in menuList">
             <div class="gl-head panel-heading ">
@@ -37,10 +38,10 @@
                 <span class="col-md-3 bot-bor subli">管理</span>
             </div> -->
             <div class="table" id="goodlist">
-                <div class="table-tr" v-for="(v1,k1) in v.child">
+                <div class="table-tr" v-for="(v1,k1) in v._child">
                     <span class="col-md-2 bot-bor subli">{{v1.name}}</span>
                     <span class="col-md-6 bot-bor subli">
-                      <div class="din fl fun_sel" :class="v2.status == 1?'check':''" @click="selFun(k,k1,k2)" v-for="(v2,k2) in v1.child"><span class="select" ></span><span class="name">{{v2.name}}</span></div>
+                      <div class="din fl fun_sel" :class="v2.status == 1?'check':''" @click="selFun(k,k1,k2)" v-for="(v2,k2) in v1.child"><span class="select" ></span><span class="name">{{v2.cn_name}}</span></div>
                 </span>
                 <span class="col-md-2 bot-bor subli"><span class="ant-switch show-hide " :class="v1.status == 1?'ant-switch-checked':''" class="attrImg" @click="showMenu(k,k1)" data-id="" data-type="" ></span></span>
                 <span class="col-md-2 bot-bor subli"></span>
@@ -53,6 +54,6 @@
     </div>
 </body>
 <script type="module" src="../../../../js/common.js"></script>
-<script type="module" src="./jtSet.js?10.0.2"></script>
+<script type="module" src="./jtSet.js?10.0.3"></script>
 
 </html>

@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../../../css/bootstrap.css">
     <link rel="stylesheet" href="../../../css/list.css?10.0.1">
     <link rel="stylesheet" href="../../../css/details.css?10.0.1">
-    <link rel="stylesheet" href="./withdraw.css">
+    <link rel="stylesheet" href="./withdraw.css?10.0.1">
     <script src="../../../js/vue.js"></script>
 </head>
 
@@ -118,11 +118,11 @@
                 <div class="pz-modal-header">提现</div>
                 <div class="pz-spin-container">
                     <div class="dl-show">
-                        <span class="dl-title">提供发票扣除比例:</span>
+                        <span class="dl-title invoice_title">提供发票扣除比例:</span>
                         <input v-model="has_invoice" placeholder="请输入提供发票扣除比例" class="dl-info" type="number">
                     </div>
                     <div class="dl-show">
-                        <span class="dl-title">不提供发票扣除比例:</span>
+                        <span class="dl-title invoice_title">不提供发票扣除比例:</span>
                         <input v-model="no_invoice" placeholder="请输入不提供发票扣除比例" class="dl-info" type="number">
                     </div>
                     <div class="dl-show flexcenter">

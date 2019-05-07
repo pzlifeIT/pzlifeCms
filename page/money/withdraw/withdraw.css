@@ -10,3 +10,7 @@
     font-size: 12px;
     background-color: #3bb4f2;
 }
+
+.pz-spin-container .dl-show .invoice_title {
+    width: 140px;
+}
