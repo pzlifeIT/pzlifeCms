@@ -103,15 +103,16 @@ new Vue({
                         type: 'success',
                         text: '添加成功'
                     })
-                    that.nolink = true
                     that.modal = false
                     that.nick_name = ''
                     that.money = ''
                     that.mobile = ''
                     that.getopenbosslist()
                 },
-                Error(code) {
+                complete() {
                     that.nolink = true
+                },
+                Error(code) {
                     let text = ''
                     switch (parseInt(code)) {
                         case 3001:

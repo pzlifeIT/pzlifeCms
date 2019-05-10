@@ -123,6 +123,7 @@ new Vue({
                 name: '发送列表'
             }]
         }],
+        menuList: [],
         navList: [{
             name: 'workbench',
             text: '首页',
@@ -139,10 +140,25 @@ new Vue({
     },
     mounted() {
         this.getadmininfo()
+        this.getmenuList()
     },
     methods: {
-        geturlList() {
-
+        getmenuList() {
+            let that = this;
+            app.requests({
+                url: "admin/cmsmenu",
+                success(res) {
+                    that.menuList = that.addshow(res.data)
+                }
+            })
+        },
+        addshow(data = []) {
+            let arr = data,
+                len = arr.length;
+            for (let i = 0; i < len; i++) {
+                arr[i].show = false
+            }
+            return arr
         },
         getadmininfo() {
             let that = this;
@@ -177,7 +193,7 @@ new Vue({
             this.select_menu = false
         },
         subclick(k) {
-            let list = this.urlList,
+            let list = this.menuList,
                 len = list.length,
                 show = false;
             if (!list[k].show) {
@@ -189,7 +205,7 @@ new Vue({
             if (show) {
                 list[k].show = true
             }
-            this.urlList = list
+            this.menuList = list
         },
         addIframe(text, name) {
             let pname = name.split('.')[0];

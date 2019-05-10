@@ -440,6 +440,7 @@
 
 .list-heared {
     display: table;
+    border-collapse: collapse;
     width: 100%;
     border-bottom: 1px solid #dcdcdc;
     overflow: auto;

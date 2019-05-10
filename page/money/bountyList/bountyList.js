@@ -122,61 +122,11 @@ new Vue({
                 }
             })
         },
-        submit() {
-            this.checkUserTransfer(this.id, 3, this.message)
-        },
+
         showmodal(id) {
             this.id = id
             this.message = ''
             this.modal = true
-        },
-        checkUserTransfer(id, status, msg = '') {
-            let that = this
-            app.requests({
-                url: 'admin/checkUserTransfer',
-                data: {
-                    id: id,
-                    status: status,
-                    message: msg
-                },
-                success(res) {
-                    showToast({
-                        type: 'success',
-                        text: '操作成功'
-                    })
-                    that.modal = false
-                    that.getDiamondvipNetPush()
-                },
-                Error(code) {
-                    let text = ''
-                    switch (parseInt(code)) {
-                        case 3001:
-                            text = '状态必须为数字'
-                            break;
-                        case 3002:
-                            text = '错误的status'
-                            break;
-                        case 3003:
-                            text = 'id不能为空'
-                            break;
-                        case 3004:
-                            text = '已审核的提现记录无法再次审核'
-                            break;
-                        case 3006:
-                            text = '已审核的银行卡或者用户停用的银行卡无法再次审核'
-                            break;
-                        case 3007:
-                            text = '审核失败'
-                            break;
-                        default:
-                            text = '意料之外的错误'
-                    }
-                    showToast({
-                        type: 'error',
-                        text: text
-                    })
-                }
-            })
         },
         setpage: function() {
             let t = this,

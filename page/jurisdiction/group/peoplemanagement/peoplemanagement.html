@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="cache-control" content="no-cache, must-revalidate">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <meta http-equiv="Cache" content="no-cache">
+
+    <title>人员管理</title>
+    <link rel="stylesheet" href="../../../../css/style.css">
+    <link rel="stylesheet" href="../../../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../../../css/list.css?10.0.1">
+    <link rel="stylesheet" href="../../../../css/details.css?10.0.1">
+    <link rel="stylesheet" href="./peoplemanagement.css">
+    <script src="../../../../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="iframenav">
+            <!-- <button class="">刷新</button> -->
+            <div class="refresh topbtn din fl" onclick="document.location.reload()">
+                <img src="../../../../images/sx.png" alt="">
+            </div>
+            <div class="add addgoods topbtn din fl" @click="addMember">
+                <img src="../../../../images/jia.png" alt="">
+            </div>
+        </div>
+        <div class="gs-list panel-default">
+            <div class="gl-head panel-heading ">
+                <span>组成员列表</span>
+            </div>
+            <div class="gl-title">
+                <span class="col-md-3 bot-bor subli">序号</span>
+                <span class="col-md-3 bot-bor subli">组成员名称</span>
+                <span class="col-md-3 bot-bor subli">管理</span>
+            </div>
+            <div class="table" id="goodlist">
+                <div class="table-tr" v-for="(v,k) in peopleList">
+                    <span class="col-md-3 bot-bor subli">{{k + 1}}</span>
+                    <span class="col-md-3 bot-bor subli">{{v.admin_name}}</span>
+                    <span class="col-md-3 bot-bor subli">
+                    <div class="pz-btn btn-del" @click="deladminpermissions(v.id)">删除</div>
+                    </span>
+                </div>
+            </div>
+            <div class="pz-modal" v-show="modal">
+                <div class="pz-modal-content">
+                    <div class="pz-modal-header">添加组成员</div>
+                    <div class="pz-spin-container">
+                        <div class="dl-show">
+                            <span class="dl-title">成员名称:</span>
+                            <div class="combobox" id="combobox3">
+                                <div class="ant-select">
+                                    <div class="ant-select-selection" id="selection1">请选择</div>
+                                    <span class="ant-select-arrow"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dl-show flexcenter">
+                            <input type="button" value="取消" class="pz-btn btn-cancel" @click="cancel">
+                            <input type="button" value="保存" @click="submit" class="pz-btn btn-amend">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+<script type="module" src="../../../../js/common.js"></script>
+<script type="module" src="./peoplemanagement.js"></script>
+
+</html>

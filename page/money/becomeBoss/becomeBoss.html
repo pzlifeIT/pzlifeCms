@@ -103,8 +103,9 @@
                     <span class="col-md-1 bot-bor subli">{{v.statusText}}</span>
                     <span class="col-md-3 bot-bor subli">
                       <div class="pz-btn btn-amend" v-if="v.status == 1" @click="auditShopApply(v.id,2)" >财务审核通过</div>
-                      <div class="pz-btn  btn-amend"  v-if="v.status == 2" @click="auditShopApply(v.id,3)" >经理审核通过</div>
-                      <div class="pz-btn  btn-del"  v-if="v.status == 1 || v.status == 2" @click="auditShopApply(v.id,4)" >审核不通过</div>
+                      <div class="pz-btn  btn-amend"  v-if="v.status == 2" @click="auditManagerShopApply(v.id,3)" >经理审核通过</div>
+                      <div class="pz-btn  btn-del"  v-if="v.status == 1" @click="auditShopApply(v.id,4)" >审核不通过</div>
+                      <div class="pz-btn  btn-del"  v-if="v.status == 2" @click="auditManagerShopApply(v.id,4)" >审核不通过</div>
                     </span>
                 </div>
             </div>

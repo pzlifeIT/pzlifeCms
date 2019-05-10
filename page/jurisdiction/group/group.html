@@ -47,10 +47,10 @@
                     <span class="col-md-3 bot-bor subli">{{v.group_name}}</span>
                     <span class="col-md-3 bot-bor subli">{{v.content}}</span>
                     <span class="col-md-3 bot-bor subli">
+                        <div class="pz-btn btn-amend" @click="getgroupinfo(v.id)">编辑</div>
                       <div class="pz-btn btn-amend"  @click="gojtSet(v.id)">权限设置</div>
-                    <div class="pz-btn btn-amend" @click="checkUserTransfer()">人员管理</div>
+                    <div class="pz-btn btn-amend" @click="gopeople(v.id)">人员管理</div>
                     </span>
-                    </a>
                 </div>
                 <div class="w-floor-page">
                     <div class="floor-page" id="floorpages"></div>
@@ -75,9 +75,28 @@
                     </div>
                 </div>
             </div>
+            <div class="pz-modal" v-show="modal1">
+                <div class="pz-modal-content">
+                    <div class="pz-modal-header">组管理</div>
+                    <div class="pz-spin-container">
+                        <div class="dl-show">
+                            <span class="dl-title">组名称:</span>
+                            <input class="dl-info" placeholder="请输入组名称" v-model="groupInfo.group_name" value="" type="text">
+                        </div>
+                        <div class="dl-show">
+                            <span class="dl-title">描述:</span>
+                            <textarea class="dl-area" placeholder="请输入描述" v-model="groupInfo.content" value="" type="text"></textarea>
+                        </div>
+                        <div class="dl-show flexcenter">
+                            <input type="button" value="取消" class="pz-btn btn-cancel" @click="cancel1">
+                            <input type="button" value="保存" @click="compile" class="pz-btn btn-amend">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 </body>
 <script type="module" src="../../../js/common.js"></script>
-<script type="module" src="./group.js?10.0.3"></script>
+<script type="module" src="./group.js?10.0.9"></script>
 
 </html>

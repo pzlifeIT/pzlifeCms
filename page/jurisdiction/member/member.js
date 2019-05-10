@@ -37,6 +37,7 @@ new Vue({
                 len = arr.length
             for (let i = 0; i < len; i++) {
                 arr[i].stypeText = this.getstype(arr[i].stype)
+                arr[i].statusText = this.getstatus(arr[i].status)
             }
             return arr
         },
@@ -48,6 +49,18 @@ new Vue({
                     break;
                 case 2:
                     text = '超级管理员'
+                    break;
+            }
+            return text
+        },
+        getstatus(n) {
+            let text = ''
+            switch (parseInt(n)) {
+                case 1:
+                    text = '启用'
+                    break;
+                case 2:
+                    text = '停用'
                     break;
             }
             return text

@@ -37,17 +37,17 @@
             <div class="gl-title">
                 <span class="col-md-2 bot-bor subli">序号</span>
                 <span class="col-md-3 bot-bor subli">用户名</span>
-                <span class="col-md-2 bot-bor subli">部门</span>
+                <span class="col-md-2 bot-bor subli">组名称</span>
                 <span class="col-md-2 bot-bor subli">权限</span>
-                <span class="col-md-3 bot-bor subli">管理</span>
+                <span class="col-md-3 bot-bor subli">状态</span>
             </div>
             <div class="table" id="goodlist">
                 <div class="table-tr" v-for="(v,k) in adminUserList">
                     <span class="col-md-2 bot-bor subli">{{k + 1}}</span>
                     <span class="col-md-3 bot-bor subli">{{v.admin_name}}</span>
-                    <span class="col-md-2 bot-bor subli">{{v.department}}</span>
+                    <span class="col-md-2 bot-bor subli">{{v.group}}</span>
                     <span class="col-md-2 bot-bor subli">{{v.stypeText}}</span>
-                    <span class="col-md-3 bot-bor subli"></span>
+                    <span class="col-md-3 bot-bor subli">{{v.statusText}}</span>
                 </div>
             </div>
             <div class="w-floor-page">
@@ -85,6 +85,6 @@
     </div>
 </body>
 <script type="module" src="../../../js/common.js"></script>
-<script type="module" src="./member.js"></script>
+<script type="module" src="./member.js?10.0.1"></script>
 
 </html>

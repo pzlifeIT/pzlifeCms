@@ -39,10 +39,10 @@
             <div class=""></div>
             <div class="sidebar" id="sidebar">
                 <ul class="sb_list">
-                    <li class="sb_li" :class="v.show?'active':''" v-for="(v,k) in urlList">
-                        <div class="sb_tit din" @click="subclick(k)"><i class="din fl icon" :class="v.show?v.selectedIconPath:v.iconPath"></i>{{v.name}}</div>
+                    <li class="sb_li" :class="v.show?'active':''" v-for="(v,k) in menuList">
+                        <div class="sb_tit din" @click="subclick(k)"><i class="din fl icon" :class="v.show?v.select_image:v.icon_image"></i>{{v.name}}</div>
                         <ul class="sb_sub_list ">
-                            <li @click="addIframe(v1.name,v1.path)" v-for="(v1, k1) in v._child">{{v1.name}}</li>
+                            <li @click="addIframe(v1.name,v1.link)" v-for="(v1, k1) in v._child">{{v1.name}}</li>
                         </ul>
                     </li>
                 </ul>

@@ -24,6 +24,55 @@ new Vue({
         cancel() {
             this.modal = false
         },
+        auditManagerShopApply(id, status) {
+            let that = this
+            app.requests({
+                url: 'Rights/auditManagerShopApply',
+                data: {
+                    id: id,
+                    status: status
+                },
+                success(res) {
+                    showToast({
+                        type: 'success',
+                        text: '操作成功'
+                    })
+                    that.getShopApplyList()
+                },
+                Error(code) {
+                    let text = ''
+                    switch (parseInt(code)) {
+                        case 3001:
+                            text = 'status必须为数字'
+                            break;
+                        case 3002:
+                            text = 'id为空'
+                            break;
+                        case 3003:
+                            text = '传入status错误'
+                            break;
+                        case 3004:
+                            text = '错误的申请状态'
+                            break;
+                        case 3005:
+                            text = '已审核的无法再次进行相同的审核结果'
+                            break;
+                        case 3006:
+                            text = '审核失败'
+                            break;
+                        case 3007:
+                            text = '没有操作权限'
+                            break;
+                        default:
+                            text = '意料之外的错误'
+                    }
+                    showToast({
+                        type: 'error',
+                        text: text
+                    })
+                }
+            })
+        },
         auditShopApply(id, status) {
             let that = this
             app.requests({

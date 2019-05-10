@@ -56,7 +56,7 @@ import { showToast } from '../../../../js/utils.js';
                                 break;
                         }
                         showToast({
-                            text: '操作失败'
+                            text: text
                         })
                     }
                 })

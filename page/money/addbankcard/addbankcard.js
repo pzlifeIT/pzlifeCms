@@ -291,8 +291,10 @@ new Vue({
                     that.modal = false
                     that.getAdminBank()
                 },
-                Error(code) {
+                complete() {
                     that.nolink = true
+                },
+                Error(code) {
                     let text = ''
                     switch (parseInt(code)) {
                         case 3001:

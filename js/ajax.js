@@ -10,11 +10,9 @@ let Ajax = function(params) {
         xhr = new ActiveXObject('Microsoft.XMLHTTP')
     }
     if ('withCredentials' in xhr) {}
-    let url = apiHost
-        // let url = 'https://wwwapi.pzlive.vip/admin/'
-        // let url = 'https://adminapi.pzlive.vip/'
-    url += params.url
-    let type = params.type || 'post'
+    let url = apiHost;
+    url += params.url;
+    let type = params.type || 'post';
     type = type.toUpperCase();
     // 用于清除缓存
     let random = Math.random();
@@ -46,8 +44,6 @@ let Ajax = function(params) {
             // xhr.setRequestHeader("Access-Control-Allow-Origin", "*", );
             xhr.setRequestHeader("Content-type", "text/plain", "charset=utf-8");
         }
-        // console.log()
-        // console.log(params.data)
         xhr.send(params.data);
     }
 

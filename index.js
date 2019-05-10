@@ -55,12 +55,15 @@ var app = {
                     return
                 }
                 if (res.code == "200" || res.code == "3000") {
-                    params.success(res);
+                    typeof params.success == 'function' ? params.success(res) : ''
+                } else if (res.code == "3100") {
+                    showToast({
+                        text: '没有权限'
+                    })
                 } else {
-                    if (typeof params.Error == "function") {
-                        params.Error(res.code);
-                    }
+                    typeof params.Error == 'function' ? params.Error(res.code) : ''
                 }
+                typeof params.complete == 'function' ? params.complete(res) : ''
             },
             failed: function(code) {
                 if (typeof params.failed == "function") {
@@ -140,7 +143,7 @@ var app = {
                 text = "服务器错误"
                 break;
             default:
-                text = "意料之外的网络错误"
+                text = "网络错误"
         }
         showToast({
             type: "error",

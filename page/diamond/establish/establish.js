@@ -94,10 +94,12 @@ import { showToast } from '../../../js/utils.js';
                         type: data.type
                     },
                     success: function(res) {
-                        t.proceed = true
                         window.location.href = '../acquire/acquire.html'
                     },
-                    error: function(code) {
+                    complete() {
+                        t.proceed = true
+                    },
+                    Error: function(code) {
                         let text = ''
                         switch (parseInt(code)) {
                             case 3001:
@@ -106,9 +108,14 @@ import { showToast } from '../../../js/utils.js';
                             case 3002:
                                 text = '库存或者被分享用户将获得活动商票必须是数字'
                                 break;
+                            case 3003:
+                                text = '该用户不存在'
+                                break;
                             case 3005:
                                 text = '超出金额设置范围'
                                 break;
+                            default:
+                                text = '意料之外的错误'
                         }
                         showToast({
                             text: text

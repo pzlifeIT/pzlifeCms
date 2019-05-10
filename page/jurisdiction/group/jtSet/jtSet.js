@@ -14,7 +14,7 @@ new Vue({
     methods: {
         selFun(k, k1, k2) {
             let status = this.menuList[k]._child[k1].child[k2].status
-            if (status === 1) {
+            if (status == 1) {
                 this.menuList[k]._child[k1].child[k2].status = 0
             } else {
                 if (this.menuList[k]._child[k1].status == 0) return
@@ -23,7 +23,8 @@ new Vue({
         },
         showMenu(k, k1) {
             let status = this.menuList[k]._child[k1].status
-            if (status === 1) {
+            console.log(2121211)
+            if (status == 1) {
                 this.menuList[k]._child[k1].status = 0
             } else {
                 this.menuList[k]._child[k1].status = 1

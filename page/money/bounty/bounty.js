@@ -138,7 +138,7 @@ new Vue({
         checkUserTransfer(id, status, msg = '') {
             let that = this
             app.requests({
-                url: 'admin/checkUserTransfer',
+                url: 'admin/checkUserBountyTransfer',
                 data: {
                     id: id,
                     status: status,
