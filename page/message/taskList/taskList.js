@@ -12,13 +12,12 @@ new Vue({
         wtype: '',
         mt_id: '',
         trigger_id: '',
-        sellocation: '',
-        conList: [],
-        templateId: ''
+        task_id: '',
+        taskList: []
     },
     mounted() {
         let that = this
-        that.getMessageTemplate()
+        that.getMessageTask()
         that.setType()
         that.setWtype()
         that.setMt()
@@ -53,7 +52,7 @@ new Vue({
         setWtype() {
             let that = this
             select({
-                el: '#combobox1',
+                el: '#combobox2',
                 data: [{
                     id: 1,
                     type_name: '订单发货'
@@ -84,15 +83,14 @@ new Vue({
         setMt() {
             let that = this
             app.requests({
-                url: 'ModelMessage/getMessageTemplateText',
+                url: 'ModelMessage/getMessageTemplate',
                 success(res) {
                     select({
-                        el: '#combobox2',
-                        data: res.templatetext || [],
-                        name: 'value',
+                        el: '#combobox3',
+                        data: res.MessageTemplate || [],
+                        name: 'title',
                         callback(id, val) {
-                            console.log(key, val)
-                            that.mt_id = key
+                            that.mt_id = id
                         }
                     })
                 }
@@ -101,17 +99,14 @@ new Vue({
         setTrigger() {
             let that = this
             app.requests({
-                url: 'ModelMessage/getMessageTemplateText',
+                url: 'ModelMessage/getTrigger',
                 success(res) {
                     select({
-                        el: '#combobox2',
-                        data: res.templatetext || [],
-                        name: 'value',
-                        id: 'key',
+                        el: '#combobox4',
+                        data: res.Trigger || [],
+                        name: 'title',
                         callback(id, val) {
-                            console.log(id, val)
                             that.trigger_id = id
-                            that.intMsg(key)
                         }
                     })
                 }
@@ -121,13 +116,22 @@ new Vue({
             this.modal = false
         },
         showmodal(id) {
+            this.title = ''
+            this.task_id = ''
+            this.type = ''
+            this.wtype = ''
+            this.mt_id = ''
+            this.trigger_id = ''
+            this.setBox('#selection1')
+            this.setBox('#selection2')
+            this.setBox('#selection3')
+            this.setBox('#selection4')
             this.modal = true
         },
-
-        getMessageTemplate(id = '') {
+        getMessageTask(id = '') {
             let that = this;
             app.requests({
-                url: 'ModelMessage/getMessageTemplate',
+                url: 'ModelMessage/getMessageTask',
                 data: {
                     page: that.page || 1,
                     page_num: that.page_num || 10,
@@ -136,14 +140,20 @@ new Vue({
                 success(res) {
                     if (id != '') {
                         that.modal = true
-                        let template = res.Trigger || {}
-                        that.templateId = template.id
-                        that.title = template.title
-                        that.type = template.type
-                        that.setBox(template.type)
+                        let task = res.messagetask || {}
+                        that.task_id = task.id
+                        that.title = task.title
+                        that.type = task.type
+                        that.wtype = task.wtype
+                        that.mt_id = task.messagetemplate.id
+                        that.trigger_id = task.messagetrigger.id
+                        that.setBox('#selection1', task.type, '', 'type')
+                        that.setBox('#selection2', task.wtype, '', 'wtype')
+                        that.setBox('#selection3', task.messagetemplate.id, task.messagetemplate.title)
+                        that.setBox('#selection4', task.messagetrigger.id, task.messagetrigger.title)
                         return
                     }
-                    that.conList = that.disconList(res.MessageTemplate)
+                    that.taskList = that.distaskList(res.messagetask)
                     if (that.total == res.total) return
                     that.total = res.total
                     that.setpage()
@@ -167,40 +177,60 @@ new Vue({
                 }
             })
         },
-        setBox(type = '') {
-            let selection = document.querySelector('#selection1')
-            let typeText = this.getType(type)
-            selection.setAttribute('data-value', typeText)
-            selection.setAttribute('data-id', type)
-            if (type == '') {
+        setBox(el = '', k = '', val = '', field = '') {
+            if (el == '') return
+            let selection = document.querySelector(el)
+            if (val == '' & k != '') {
+                if (field == 'wtype') {
+                    val = this.getWtype(k)
+                } else if (field == 'type') {
+                    val = this.getType(k)
+                }
+            }
+            selection.setAttribute('data-value', val)
+            selection.setAttribute('data-id', k)
+            if (val == '' & k == '') {
                 selection.innerHTML = '请选择'
                 selection.classList.remove('already-select')
             } else {
-                selection.innerHTML = typeText
+                selection.innerHTML = val
                 selection.classList.add('already-select')
             }
 
         },
-        disconList(data = []) {
+        distaskList(data = []) {
             let arr = data,
                 len = arr.length
             for (let i = 0; i < len; i++) {
-                arr[i].statusText = this.getStatus(arr[i].status)
+                arr[i].wtypeText = this.getWtype(arr[i].wtype)
                 arr[i].typeText = this.getType(arr[i].type)
+                arr[i].statusText = this.getStatus(arr[i].status)
             }
             return arr
         },
-        getStatus(n) {
+        getWtype(n) {
             let text = ''
             switch (parseInt(n)) {
                 case 1:
-                    text = '待启用'
+                    text = '订单发货'
                     break;
                 case 2:
-                    text = '启用'
+                    text = '订单退款'
                     break;
                 case 3:
-                    text = '停用'
+                    text = '未付款订单提醒'
+                    break;
+                case 4:
+                    text = '营销类活动'
+                    break;
+                case 5:
+                    text = '定时任务'
+                    break;
+                case 6:
+                    text = '生日祝福'
+                    break;
+                case 7:
+                    text = '提现到账'
                     break;
             }
             return text
@@ -209,21 +239,42 @@ new Vue({
             let text = ''
             switch (parseInt(n)) {
                 case 1:
-                    text = '短短信'
+                    text = '所有会员'
                     break;
                 case 2:
-                    text = '长短信'
+                    text = '普通会员'
                     break;
                 case 3:
-                    text = '彩信'
+                    text = '钻石会员'
+                    break;
+                case 4:
+                    text = '创业店主'
+                    break;
+                case 5:
+                    text = '合伙人'
                     break;
             }
             return text
         },
-        auditMessageTemplate(id = '', status = '') {
+        getStatus(n) {
+            let text = ''
+            switch (parseInt(n)) {
+                case 1:
+                    text = '待启用'
+                    break;
+                case 2:
+                    text = '启用中'
+                    break;
+                case 3:
+                    text = '停用中'
+                    break;
+            }
+            return text
+        },
+        auditMessageTask(id = '', status = '') {
             let that = this
             app.requests({
-                url: 'ModelMessage/auditMessageTemplate',
+                url: 'ModelMessage/auditMessageTask',
                 data: {
                     status: status,
                     id: id
@@ -233,7 +284,7 @@ new Vue({
                         type: 'success',
                         text: '操作成功'
                     })
-                    that.getMessageTemplate()
+                    that.getMessageTask()
                 },
                 Error(code) {
                     let text = ''
@@ -266,22 +317,43 @@ new Vue({
             }
             if (that.type == '') {
                 showToast({
-                    text: '请选择发送类型'
+                    text: '请选择发送人群'
+                })
+                return
+            }
+            if (that.wtype == '') {
+                showToast({
+                    text: '请选择任务类型'
+                })
+                return
+            }
+            if (that.mt_id == '') {
+                showToast({
+                    text: '请选择消息模板'
+                })
+                return
+            }
+            if (that.trigger_id == '') {
+                showToast({
+                    text: '请选择触发器'
                 })
                 return
             }
             let urlText = ''
-            if (that.templateId == '') {
-                urlText = 'ModelMessage/saveMessageTemplate'
+            if (that.task_id == '') {
+                urlText = 'ModelMessage/saveMessageTask'
             } else {
-                urlText = 'ModelMessage/editMessageTemplate'
+                urlText = 'ModelMessage/editMessageTask'
             }
             app.requests({
                 url: urlText,
                 data: {
-                    title: that.title,
+                    wtype: that.wtype,
                     type: that.type,
-                    id: that.templateId
+                    mt_id: that.mt_id,
+                    trigger_id: that.trigger_id,
+                    title: that.title,
+                    MessageTask_id: that.task_id
                 },
                 success(res) {
                     showToast({
@@ -289,12 +361,7 @@ new Vue({
                         text: '操作成功'
                     })
                     that.modal = false
-                    that.templateId = ''
-                    that.title = ''
-                    that.msg = ''
-                    that.type = ''
-                    that.setBox()
-                    that.getMessageTemplate()
+                    that.getMessageTask()
                 },
                 Error(code) {
                     let text = ''
@@ -303,10 +370,22 @@ new Vue({
                             text = '标题不能为空'
                             break;
                         case 3002:
-                            text = '请选择发送类型'
+                            text = '请选择消息模板或触发器'
                             break;
                         case 3003:
-                            text = '内容模板不能为空'
+                            text = '请选择任务类型'
+                            break;
+                        case 3004:
+                            text = '该短信模板未启用或者不存在'
+                            break;
+                        case 3005:
+                            text = '该触发器未启用或者不存在'
+                            break;
+                        case 3006:
+                            text = '该消息任务不存在'
+                            break;
+                        case 3007:
+                            text = '该状态使用中'
                             break;
                         default:
                             text = '意料之外的错误'
