@@ -256,7 +256,7 @@ import { showToast } from '../../../js/utils.js';
                         // t.ids = res.recommends_ids || []
                         t.disRecommend(res.recommends || [])
                     },
-                    error(code) {
+                    Error(code) {
                         showToast({
                             text: '获取失败'
                         })
@@ -453,7 +453,7 @@ import { showToast } from '../../../js/utils.js';
                             model_id: t.templateId
                         })
                     },
-                    error(code) {
+                    Error(code) {
                         if (code == 3002) {
                             showToast({
                                 text: '请先删除下级推荐'
@@ -484,7 +484,7 @@ import { showToast } from '../../../js/utils.js';
                             t.agadd.classList.remove('hide')
                         }
                     },
-                    error(code) {
+                    Error(code) {
                         showToast({
                             text: '获取失败'
                         })
@@ -660,7 +660,7 @@ import { showToast } from '../../../js/utils.js';
                         t.type1Img = ''
                         t.type2Img = ''
                     },
-                    error(code) {
+                    Error(code) {
                         let text = ''
                         switch (parseInt(code)) {
                             case 3001:
@@ -714,7 +714,7 @@ import { showToast } from '../../../js/utils.js';
                             t.setImgList(res.recommends_info.son, t.getmodelText(data.model_id).text)
                         }
                     },
-                    error(code) {
+                    Error(code) {
                         showToast({
                             text: '获取出错'
                         })

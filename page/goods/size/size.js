@@ -116,7 +116,7 @@ import { showToast } from '../../../js/utils.js';
         }
         _SE.prototype.getSpecList = function(data) { //获取规格列表
             let t = this
-            data = data || ''
+            data = data || { page: t.page }
             app.requests({
                 data: {
                     page: data.page || 1,

@@ -25,10 +25,15 @@
 }
 
 .fun_sel {
+    position: relative;
     height: 34px;
+    padding-right: 28px;
     margin-right: 10px;
     line-height: 34px;
     font-size: 16px;
+    overflow: hidden;
+    /* text-overflow: ellipsis;
+    white-space: nowrap; */
 }
 
 .fun_sel span {
@@ -37,8 +42,13 @@
 
 .fun_sel .name {
     display: inline-block;
+    max-width: 100%;
     line-height: 34px;
     color: #8a8a8a;
+}
+
+.fun_sel .select {
+    position: absolute;
 }
 
 .select {
@@ -64,11 +74,13 @@
 .sub-title {
     position: relative;
     line-height: 34px;
+    padding-right: 38px;
 }
 
 .sub-title .select {
     position: absolute;
-    top: calc(50% - 17px)
+    top: calc(50% - 17px);
+    right: 10px;
 }
 
 .combobox {

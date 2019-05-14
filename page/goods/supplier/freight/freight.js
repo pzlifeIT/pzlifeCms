@@ -405,11 +405,31 @@ import { showToast } from '../../../../js/utils.js';
                 fhAfter = document.querySelector('#fhAfter').value,
                 fhTotal = document.querySelector('#fhTotal').value,
                 countPinkage = document.querySelector('#countPinkage').value;
+            if (countPinkage == '') {
+                showToast({
+                    text: '计价单位不能为空'
+                })
+                return
+            }
+            if (fhPrice == '') {
+                showToast({
+                    text: '邮费单价不能为空'
+                })
+                return
+            }
+            if (fhAfter == '') {
+                showToast({
+                    text: '续件价格不能为空'
+                })
+                return
+            }
+            if (fhTotal == '') {
+                showToast({
+                    text: '包邮价格不能为空'
+                })
+                return
+            }
             if (t.id == '') {
-                if (fhPrice == '') return
-                if (fhAfter == '') return
-                if (fhTotal == '') return
-                if (countPinkage == '') return
                 app.requests({
                     url: 'suppliers/addSupplierFreightdetail',
                     data: {

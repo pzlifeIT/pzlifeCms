@@ -13,6 +13,7 @@
     <title>触发列表</title>
     <link rel="stylesheet" href="../../../css/style.css">
     <link rel="stylesheet" href="../../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../../css/data.css">
     <link rel="stylesheet" href="../../../css/list.css?10.0.1">
     <link rel="stylesheet" href="../../../css/details.css?10.0.1">
     <script src="../../../js/vue.js"></script>
@@ -24,53 +25,35 @@
             <div class="refresh topbtn din fl" onclick="document.location.reload()">
                 <img src="../../../images/sx.png" alt="">
             </div>
+            <div class="add addgoods topbtn din fl" @click="showmodal">
+                <img src="../../../images/jia.png" alt="">
+            </div>
         </div>
-        <!-- <div class="gs-screen panel-default">
-            <div class="gs-header panel-heading">
-                <span class="din fl">筛选</span>
-                <button id="search" @click="search" class="btn btn-secondary radius din fr">筛选</button>
-                <div class="shrink"></div>
-            </div>
-            <div class="gs-con">
-                <ul>
-                    <li class="gs-li col-md-3 col-sm-6  col-xs-12">
-                        <p class="gs-name">状态</p>
-                        <div class="combobox" id="combobox3">
-                            <div class="ant-select">
-                                <div class="ant-select-selection" id="selection1">请选择</div>
-                                <span class="ant-select-arrow"></span>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div> -->
         <div class="gs-list panel-default">
             <div class="gl-head panel-heading ">
                 <span>触发列表</span>
             </div>
             <div class="gl-title">
                 <span class="col-md-1 bot-bor subli">序号</span>
-                <span class="col-md-1 bot-bor subli">创建名称</span>
-                <span class="col-md-1 bot-bor subli">时间</span>
-                <span class="col-md-1 bot-bor subli">触发条件</span>
-                <span class="col-md-1 bot-bor subli">触发方式</span>
-                <span class="col-md-1 bot-bor subli">起止时间</span>
+                <span class="col-md-2 bot-bor subli">标题</span>
+                <span class="col-md-2 bot-bor subli">开始时间</span>
+                <span class="col-md-2 bot-bor subli">结束时间</span>
+                <span class="col-md-2 bot-bor subli">创建时间</span>
                 <span class="col-md-1 bot-bor subli">状态</span>
                 <span class="col-md-2 bot-bor subli">管理</span>
             </div>
             <div class="table" id="goodlist">
-                <div class="table-tr">
-                    <span class="col-md-1 bot-bor subli">序号</span>
-                    <span class="col-md-1 bot-bor subli">创建名称</span>
-                    <span class="col-md-1 bot-bor subli">时间</span>
-                    <span class="col-md-1 bot-bor subli">触发条件</span>
-                    <span class="col-md-1 bot-bor subli">触发方式</span>
-                    <span class="col-md-1 bot-bor subli">起止时间</span>
-                    <span class="col-md-1 bot-bor subli">状态</span>
+                <div class="table-tr" v-for="(v,k) in TriggerList">
+                    <span class="col-md-1 bot-bor subli">{{k+1}}</span>
+                    <span class="col-md-2 bot-bor subli">{{v.title}}</span>
+                    <span class="col-md-2 bot-bor subli">{{v.start_time}}</span>
+                    <span class="col-md-2 bot-bor subli">{{v.stop_time}}</span>
+                    <span class="col-md-2 bot-bor subli">{{v.create_time}}</span>
+                    <span class="col-md-1 bot-bor subli">{{v.statusText}}</span>
                     <span class="col-md-2 bot-bor subli">
-                      <!-- <div class="pz-btn btn-amend" v-if="v.status == 1" @click="checkUserTransfer(v.id,2)" >审核通过</div>
-                      <div class="pz-btn  btn-del"  v-if="v.status == 1" @click="showmodal(v.id)" >审核不通过</div> -->
+                        <div class="pz-btn btn-amend"  @click="getTrigger(v.id)" >编辑</div>
+                        <div class="pz-btn btn-amend" @click="auditTrigger(v.id,2)" >启用</div>
+                        <div class="pz-btn btn-amend" @click="auditTrigger(v.id,3)" >停用</div>
                     </span>
                 </div>
             </div>
@@ -80,11 +63,19 @@
         </div>
         <div class="pz-modal" v-show="modal">
             <div class="pz-modal-content">
-                <div class="pz-modal-header">提现</div>
+                <div class="pz-modal-header">触发器</div>
                 <div class="pz-spin-container">
                     <div class="dl-show">
-                        <span class="dl-title">详细描述:</span>
-                        <textarea class="dl-area" placeholder="默认详细描述" v-model="message" type="text"></textarea>
+                        <span class="dl-title">标题:</span>
+                        <input class="dl-info" v-model='title' type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">开始时间:</span>
+                        <input id="start_time" v-model='time.start_time' placeholder="开始时间(默认当前时间)" class="dl-info"></input>
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">结束时间:</span>
+                        <input id="stop_time" v-model='time.stop_time' placeholder="结束时间" class="dl-info"></input>
                     </div>
                     <div class="dl-show flexcenter">
                         <input type="button" value="取消" class="pz-btn btn-cancel" @click="cancel">
@@ -95,7 +86,8 @@
         </div>
     </div>
 </body>
-<script type="module" src="../../../js/common.js"></script>
-<script type="module" src="./triggerList.js"></script>
+<script type="module" src="../../../js/common.js?10.0.1"></script>
+<script type="module" src="../../../js/data.js"></script>
+<script type="module" src="./triggerList.js?10.0.1"></script>
 
 </html>

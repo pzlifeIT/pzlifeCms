@@ -5,42 +5,64 @@ new Vue({
     el: '#app',
     data: {
         modal: false,
+        time: {
+            start_time: '',
+            stop_time: ''
+        },
+        title: '',
         page: 1,
         page_num: 10,
-        bank_card: '',
-        bank_mobile: '',
-        user_name: '',
-        message: '',
-        has_invoice: '',
-        no_invoice: '',
         total: 0,
-        diamondvipNetPush: [],
-        id: 0
+        triggerId: 0,
+        TriggerList: []
     },
     mounted() {
         let that = this
-        that.getDiamondvipNetPush()
+        that.getTrigger()
+        this.setTime('#start_time', 'start_time')
+        this.setTime('#stop_time', 'stop_time')
     },
     methods: {
+        setTime(el, name) {
+            let that = this
+            calender(el).init({
+                format: 'yyyy-MM-dd hh:mm:ss'
+            }, function(date) {
+                this.value = date
+                that.time[name] = date
+                console.log(that.time[name])
+            })
+        },
         cancel() {
             this.modal = false
         },
+        showmodal() {
+            this.modal = true
+        },
         search() {
             this.page = 1
-            this.getDiamondvipNetPush()
+            this.getTrigger()
         },
-        getDiamondvipNetPush() {
+        getTrigger(id = '') {
             let that = this;
-            // let status = document.querySelector('#selection1').getAttribute('data-id') || '';
             app.requests({
-                url: 'Rights/getDiamondvipNetPush',
+                url: 'ModelMessage/getTrigger',
                 data: {
                     page: that.page || 1,
                     page_num: that.page_num || 10,
-                    status: status
+                    id: id
                 },
                 success(res) {
-                    that.diamondvipNetPush = that.disNetPush(res.diamondvipNetPush)
+                    if (id != '') {
+                        that.modal = true
+                        let Trigger = res.Trigger || {}
+                        that.triggerId = Trigger.id
+                        that.title = Trigger.title
+                        that.time.start_time = Trigger.start_time
+                        that.time.stop_time = Trigger.stop_time
+                        return
+                    }
+                    that.TriggerList = that.disTriggerList(res.Trigger)
                     if (that.total == res.total) return
                     that.total = res.total
                     that.setpage()
@@ -64,109 +86,105 @@ new Vue({
                 }
             })
         },
-        disNetPush(data = []) {
-            let arr = data,
-                len = arr.length
+        disTriggerList(data = []) {
+            let len = data.length
+            if (len == 0) return []
             for (let i = 0; i < len; i++) {
-                arr[i].statusText = this.getStatus(arr[i].status)
+                data[i].statusText = this.getStatus(data[i].status)
             }
-            return arr
+            return data
         },
         getStatus(n) {
             let text = ''
             switch (parseInt(n)) {
                 case 1:
-                    text = '待发放'
+                    text = '待启用'
                     break;
                 case 2:
-                    text = '已经发放'
+                    text = '启用中'
                     break;
                 case 3:
-                    text = '取消发放'
+                    text = '停用中'
                     break;
             }
             return text
         },
-        subRation() {
-            let that = this
+        auditTrigger(id = '', status = 0) {
+            let that = this;
             app.requests({
-                url: 'admin/editInvoice',
-                data: {
-                    has_invoice: that.has_invoice,
-                    no_invoice: that.no_invoice
-                },
-                success(res) {
-                    showToast({
-                        type: 'success',
-                        text: '保存成功'
-                    })
-                    that.no_invoice = ''
-                    that.has_invoice = ''
-                    that.modal1 = false
-                },
-                Error(code) {
-                    let text = ''
-                    switch (parseInt(code)) {
-                        case 3001:
-                            text = '扣除比例必须为数字'
-                            break;
-                        case 3002:
-                            text = '比率不能超过100'
-                            break;
-                        default:
-                            text = '意料之外的错误'
-                    }
-                    showToast({
-                        text: text
-                    })
-                }
-            })
-        },
-        submit() {
-            this.checkUserTransfer(this.id, 3, this.message)
-        },
-        showmodal(id) {
-            this.id = id
-            this.message = ''
-            this.modal = true
-        },
-        checkUserTransfer(id, status, msg = '') {
-            let that = this
-            app.requests({
-                url: 'admin/checkUserTransfer',
+                url: 'ModelMessage/auditTrigger',
                 data: {
                     id: id,
-                    status: status,
-                    message: msg
+                    status: status
                 },
                 success(res) {
                     showToast({
                         type: 'success',
                         text: '操作成功'
                     })
-                    that.modal = false
-                    that.getDiamondvipNetPush()
+                    that.getTrigger()
                 },
                 Error(code) {
                     let text = ''
                     switch (parseInt(code)) {
                         case 3001:
-                            text = '状态必须为数字'
+                            text = '状态码为空'
                             break;
                         case 3002:
-                            text = '错误的status'
+                            text = '格式错误'
                             break;
                         case 3003:
-                            text = 'id不能为空'
+                            text = '该信息已进行过审核'
                             break;
-                        case 3004:
-                            text = '已审核的提现记录无法再次审核'
+                        default:
+                            text = '意料之外的错误'
+                    }
+                    showToast({
+                        type: 'error',
+                        text: text
+                    })
+                }
+            })
+        },
+        submit() {
+            let that = this,
+                urlText = ''
+            if (that.triggerId == 0) {
+                urlText = 'ModelMessage/addTrigger'
+            } else {
+                urlText = 'ModelMessage/editTrigger'
+            }
+            app.requests({
+                url: urlText,
+                data: {
+                    id: that.triggerId,
+                    title: that.title,
+                    start_time: that.time.start_time,
+                    stop_time: that.time.stop_time
+                },
+                success(res) {
+                    showToast({
+                        type: 'success',
+                        text: '保存成功'
+                    })
+                    that.modal = false
+                    that.id = 0
+                    that.title = ''
+                    that.time.start_time = ''
+                    that.time.stop_time = ''
+                    that.getTrigger()
+                },
+                Error(code) {
+                    let text = ''
+                    switch (parseInt(code)) {
+                        case 3001:
+                            text = '标题不能为空'
                             break;
-                        case 3006:
-                            text = '已审核的银行卡或者用户停用的银行卡无法再次审核'
+                        case 3002:
+                            text = '时间格式错误'
                             break;
-                        case 3007:
-                            text = '审核失败'
+                        case 3003:
+                            text = '结束时间不能小于开始时间'
                             break;
                         default:
                             text = '意料之外的错误'
@@ -187,7 +205,7 @@ new Vue({
                 fn: function(n) {
                     if (t.page == n) return
                     t.page = n
-                    t.getDiamondvipNetPush()
+                    t.getTrigger()
                 }
             })
         },

@@ -190,7 +190,7 @@
                             <div class="pl-li table-cell" v-for="(v,k) in images_detatil" :class="v.row?'trpl':''">
                                 <img class="pl-image" :src="v.image_path" alt="">
                                 <div class="hierarchy">{{v.order_by}}</div>
-                                <div class="pl-manage">
+                                <div class="pl-manage" v-if="!v.kong">
                                     <input class="imgDel" type="button" value="删除" @click="delImg(v.image_path,5)">
                                     <input type="button" class="imgsort" value="编辑" @click="showSort(v.image_path,v.order_by)">
                                 </div>
@@ -358,8 +358,8 @@
         </div>
     </div>
 </body>
-<script type="module" src="../../../../js/common.js"></script>
-<script type="module" src="./goodsoperation.js"></script>
+<script type="module" src="../../../../js/common.js?10.0.1"></script>
+<script type="module" src="./goodsoperation.js?10.0.3"></script>
 <script>
 </script>
 

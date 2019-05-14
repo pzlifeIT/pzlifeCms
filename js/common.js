@@ -210,6 +210,7 @@ import { showToast, imageDeal } from '../js/utils.js';;
             this.data = o.data
             this.id = o.id || 'id'
             this.type_name = o.name || 'type_name'
+            this.callback = o.callback || ''
             this.init()
 
         }
@@ -256,6 +257,7 @@ import { showToast, imageDeal } from '../js/utils.js';;
                         sel.innerHTML = value
                         sel.classList.add('already-select')
                         t.showmenu()
+                        typeof t.callback == 'function' ? t.callback(id, value) : ''
 
                     })
                 })

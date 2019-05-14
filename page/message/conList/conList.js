@@ -4,56 +4,101 @@ import { showToast } from '../../../js/utils.js';
 new Vue({
     el: '#app',
     data: {
-        modal: true,
+        modal: false,
         page: 1,
         page_num: 10,
-        bank_card: '',
-        bank_mobile: '',
-        user_name: '',
-        message: '',
-        has_invoice: '',
-        no_invoice: '',
-        total: 0,
-        diamondvipNetPush: [],
-        sellocation: 0,
-        id: 0,
-        ctext: '',
-        ttext: ''
+        title: '',
+        type: '',
+        template: '',
+        msg: '',
+        sellocation: '',
+        conList: [],
+        templateId: ''
     },
     mounted() {
         let that = this
-            // that.getDiamondvipNetPush()
+        that.getMessageTemplate()
+        that.setStatus()
+        that.getMessageTemplateText()
     },
     methods: {
+        setStatus() {
+            let that = this
+            select({
+                el: '#combobox1',
+                data: [{
+                    id: 1,
+                    type_name: '短短信'
+                }, {
+                    id: 2,
+                    type_name: '长短信'
+                }, {
+                    id: 3,
+                    type_name: '彩信'
+                }],
+                callback(id, val) {
+                    that.type = id
+                }
+            })
+        },
         redactBlur(e) {
             console.log(this.$refs.redact.selectionStart)
             this.sellocation = this.$refs.redact.selectionStart
         },
-        textChange() {
-            let t1 = this.ttext.substring(0, this.sellocation)
-            let t2 = this.ttext.substring(this.sellocation, this.ttext.length)
-            this.ttext = t1 + '{{' + this.ctext + '}}' + t2
+        intMsg(key) {
+            console.log(key)
+            let t1 = this.msg.substring(0, this.sellocation)
+            let t2 = this.msg.substring(this.sellocation, this.msg.length)
+
+            this.msg = t1 + key + t2
                 // this.ttext[this.sellocation - 1] = this.ttext[this.sellocation - 1] + this.ctext
         },
         cancel() {
             this.modal = false
         },
-        search() {
-            this.page = 1
-            this.getDiamondvipNetPush()
+
+        showmodal(id) {
+            this.modal = true
         },
-        getDiamondvipNetPush() {
-            let that = this;
-            // let status = document.querySelector('#selection1').getAttribute('data-id') || '';
+        getMessageTemplateText() {
+            let that = this
             app.requests({
-                url: 'Rights/getDiamondvipNetPush',
+                url: 'ModelMessage/getMessageTemplateText',
+                success(res) {
+                    select({
+                        el: '#combobox2',
+                        data: res.templatetext || [],
+                        name: 'value',
+                        id: 'key',
+                        callback(key, val) {
+                            console.log(key, val)
+                            that.intMsg(key)
+                        }
+                    })
+                }
+            })
+        },
+        getMessageTemplate(id = '') {
+            let that = this;
+            app.requests({
+                url: 'ModelMessage/getMessageTemplate',
                 data: {
                     page: that.page || 1,
                     page_num: that.page_num || 10,
-                    status: status
+                    id: id
                 },
                 success(res) {
-                    that.diamondvipNetPush = that.disNetPush(res.diamondvipNetPush)
+                    if (id != '') {
+                        that.modal = true
+                        let template = res.Trigger || {}
+                        that.templateId = template.id
+                        that.title = template.title
+                        that.msg = template.template
+                        that.type = template.type
+                        that.setBox(template.type)
+                        return
+                    }
+                    that.conList = that.disconList(res.MessageTemplate)
                     if (that.total == res.total) return
                     that.total = res.total
                     that.setpage()
@@ -77,11 +122,26 @@ new Vue({
                 }
             })
         },
-        disNetPush(data = []) {
+        setBox(type = '') {
+            let selection = document.querySelector('#selection1')
+            let typeText = this.getType(type)
+            selection.setAttribute('data-value', typeText)
+            selection.setAttribute('data-id', type)
+            if (type == '') {
+                selection.innerHTML = '请选择'
+                selection.classList.remove('already-select')
+            } else {
+                selection.innerHTML = typeText
+                selection.classList.add('already-select')
+            }
+
+        },
+        disconList(data = []) {
             let arr = data,
                 len = arr.length
             for (let i = 0; i < len; i++) {
                 arr[i].statusText = this.getStatus(arr[i].status)
+                arr[i].typeText = this.getType(arr[i].type)
             }
             return arr
         },
@@ -89,13 +149,28 @@ new Vue({
             let text = ''
             switch (parseInt(n)) {
                 case 1:
-                    text = '待发放'
+                    text = '待启用'
                     break;
                 case 2:
-                    text = '已经发放'
+                    text = '启用'
                     break;
                 case 3:
-                    text = '取消发放'
+                    text = '停用'
+                    break;
+            }
+            return text
+        },
+        getType(n) {
+            let text = ''
+            switch (parseInt(n)) {
+                case 1:
+                    text = '短短信'
+                    break;
+                case 2:
+                    text = '长短信'
+                    break;
+                case 3:
+                    text = '彩信'
                     break;
             }
             return text
@@ -136,21 +211,38 @@ new Vue({
             })
         },
         submit() {
-            this.checkUserTransfer(this.id, 3, this.message)
-        },
-        showmodal(id) {
-            this.id = id
-            this.message = ''
-            this.modal = true
-        },
-        checkUserTransfer(id, status, msg = '') {
             let that = this
+            if (that.title == '') {
+                showToast({
+                    text: '标题不能为空'
+                })
+                return
+            }
+            if (that.type == '') {
+                showToast({
+                    text: '请选择发送类型'
+                })
+                return
+            }
+            if (that.msg == '') {
+                showToast({
+                    text: '内容模板不能为空'
+                })
+                return
+            }
+            let urlText = ''
+            if (that.templateId == '') {
+                urlText = 'ModelMessage/saveMessageTemplate'
+            } else {
+                urlText = 'ModelMessage/editMessageTemplate'
+            }
             app.requests({
-                url: 'admin/checkUserTransfer',
+                url: urlText,
                 data: {
-                    id: id,
-                    status: status,
-                    message: msg
+                    title: that.title,
+                    type: that.type,
+                    template: that.msg,
+                    id: that.templateId
                 },
                 success(res) {
                     showToast({
@@ -158,28 +250,24 @@ new Vue({
                         text: '操作成功'
                     })
                     that.modal = false
-                    that.getDiamondvipNetPush()
+                    that.templateId = ''
+                    that.title = ''
+                    that.msg = ''
+                    that.type = ''
+                    that.setBox()
+                    that.getMessageTemplate()
                 },
                 Error(code) {
                     let text = ''
                     switch (parseInt(code)) {
                         case 3001:
-                            text = '状态必须为数字'
+                            text = '标题不能为空'
                             break;
                         case 3002:
-                            text = '错误的status'
+                            text = '请选择发送类型'
                             break;
                         case 3003:
-                            text = 'id不能为空'
-                            break;
-                        case 3004:
-                            text = '已审核的提现记录无法再次审核'
-                            break;
-                        case 3006:
-                            text = '已审核的银行卡或者用户停用的银行卡无法再次审核'
-                            break;
-                        case 3007:
-                            text = '审核失败'
+                            text = '内容模板不能为空'
                             break;
                         default:
                             text = '意料之外的错误'
@@ -200,10 +288,10 @@ new Vue({
                 fn: function(n) {
                     if (t.page == n) return
                     t.page = n
-                    t.getDiamondvipNetPush()
+                    t.getMessageTemplate()
                 }
             })
-        },
+        }
     }
 })
 
@@ -221,5 +309,6 @@ new Vue({
 //     }, {
 //         id: 3,
 //         type_name: '取消发放'
-//     }]
+//     }],
+//      callback(){}
 // })

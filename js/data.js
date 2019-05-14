@@ -7,7 +7,9 @@ window.calender = (function(win, doc) {
             format: 'yyyy年MM月dd日',
             left: 0,
             top: 0,
-            onload: function() {}
+            onload: function() {
+
+            }
         }
     };
     C.prototype = {
@@ -196,7 +198,7 @@ window.calender = (function(win, doc) {
             html += '<div id="calender-header" class="calender-header none-btn "><a id="calender-prev" href="javascript:;"><</a><a id="calender-next" href="javascript:;">></a> <span id="calender-year">2016</span>年<span id="calender-mon">10</span>月</div>'
                 //星期
             html += '<div class="calender-list"><div class="calender-caption">';
-            for (i = 0; i < 7; i++) {
+            for (let i = 0; i < 7; i++) {
                 html += '<div class="calender-cell">' + private_Day_title[i] + '</div>';
             };
             html += '</div><div class="calender-content"></div>';

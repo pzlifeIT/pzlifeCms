@@ -298,28 +298,16 @@ new Vue({
                     let text = ''
                     switch (parseInt(code)) {
                         case 3001:
-                            text = '密码错误'
+                            text = '状态必须为数字'
                             break;
                         case 3002:
-                            text = '账号昵称不能未空'
+                            text = '错误的状态'
                             break;
                         case 3003:
-                            text = '金额必须为数字'
+                            text = '银行英文缩写名和银行全称不能为空'
                             break;
                         case 3004:
-                            text = '扣除金额不能是负数'
-                            break;
-                        case 3005:
-                            text = '没有操作权限'
-                            break;
-                        case 3006:
-                            text = '用户不存在'
-                            break;
-                        case 3007:
-                            text = '该用户已经是boss'
-                            break;
-                        case 3008:
-                            text = '开通失败'
+                            text = '银行英文缩写名和银行全称不能重复'
                             break;
                         default:
                             text = '意料之外的错误'

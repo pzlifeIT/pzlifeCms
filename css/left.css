@@ -157,6 +157,9 @@
     color: #202020;
     cursor: pointer;
     user-select: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .sidebar .sb_list .sb_li .sb_tit img {
@@ -186,6 +189,9 @@
     transition: all .5s;
     cursor: pointer;
     color: #f99f36;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .sb_sub_list li {
@@ -228,13 +234,14 @@
 }
 
 .r_tit_list .r_tit_ul {
-    width: calc(100% - 82px);
+    width: calc(100% - 72px);
     height: 40px;
 }
 
 .r_tit_list .r_tit_ul .r_tit_li {
     position: relative;
-    width: 120px;
+    width: 106px;
+    padding-right: 14px;
     height: 40px;
     line-height: 40px;
     border-right: 1px solid #eee;
@@ -243,6 +250,9 @@
     color: #999;
     cursor: pointer;
     transition: all .5s;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .r_tit_list .r_tit_ul .r_tit_li:hover {

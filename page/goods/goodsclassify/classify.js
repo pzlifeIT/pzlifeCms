@@ -329,6 +329,12 @@ import { showToast } from '../../../js/utils.js';
                                 case 3002:
                                     text = '参数错误'
                                     break;
+                                case 3003:
+                                    text = '该分类有子分类,请先停用子分类'
+                                    break;
+                                case 3004:
+                                    text = '请先解除该分类下的规格属性'
+                                    break;
                                 default:
                                     text = '意料之外的错误'
                                     break;

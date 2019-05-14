@@ -353,13 +353,13 @@ import { showToast } from '../../../js/utils.js';
                                 text = '状态有误'
                                 break;
                             case 3002:
-                                text = 'pid只能为数字'
+                                text = '请选择上级专题'
                                 break;
                             case 3003:
                                 text = '专题名不能为空'
                                 break;
                             case 3004:
-                                text = 'pid查不到上级专题'
+                                text = '请选择上级专题'
                                 break;
                             case 3005:
                                 text = '专题名已存在'

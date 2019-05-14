@@ -266,6 +266,12 @@ new Vue({
                 }
                 arr.push(data[i])
             }
+            if (len > 0 & len < 5) {
+                let l = 5 - len
+                for (let i = 0; i < l; i++) {
+                    arr.push({ kong: true })
+                }
+            }
             return arr
         },
         getgoodssku: function(id) { //获取一条sku
@@ -331,6 +337,10 @@ new Vue({
                     volume: goodssku.volume,
                 },
                 success: function(res) {
+                    showToast({
+                        type: 'success',
+                        text: '保存成功'
+                    })
                     t.getOneGoods(4)
                     t.modal.amendAttribute = false
                 },
@@ -524,6 +534,7 @@ new Vue({
                         text: '操作成功'
                     })
                     t.disDetatilimages(res.data)
+                    document.querySelector('#imgDetatil').value = ''
                 },
                 Error(code) {
                     let text = ''
@@ -575,6 +586,11 @@ new Vue({
                         text: '操作成功！'
                     })
                     t.getOneGoods(type)
+                },
+                complete(res) {
+                    if (type == 3 & res.code == '3100') {
+                        t.setbannerimages(t.images_carousel)
+                    }
                 },
                 Error(code) {
                     let text = ''
