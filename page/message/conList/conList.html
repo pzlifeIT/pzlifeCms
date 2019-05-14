@@ -72,8 +72,8 @@
                     <span class="col-md-1 bot-bor subli">{{v.statusText}}</span>
                     <span class="col-md-2 bot-bor subli">
                       <div class="pz-btn btn-amend"  @click="getMessageTemplate(v.id)" >编辑</div>
-                        <div class="pz-btn btn-amend" @click="auditTrigger(v.id,2)" >启用</div>
-                        <div class="pz-btn btn-amend" @click="auditTrigger(v.id,3)" >停用</div>
+                        <div class="pz-btn btn-amend" @click="auditMessageTemplate(v.id,2)" >启用</div>
+                        <div class="pz-btn btn-amend" @click="auditMessageTemplate(v.id,3)" >停用</div>
                     </span>
                 </div>
             </div>
@@ -121,6 +121,6 @@
     </div>
 </body>
 <script type="module" src="../../../js/common.js?10.0.1"></script>
-<script type="module" src="./conList.js?10.0.4"></script>
+<script type="module" src="./conList.js?10.0.5"></script>
 
 </html>

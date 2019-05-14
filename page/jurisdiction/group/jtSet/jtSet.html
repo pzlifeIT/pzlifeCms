@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../../../../css/bootstrap.css">
     <link rel="stylesheet" href="../../../../css/list.css?10.0.2">
     <link rel="stylesheet" href="../../../../css/details.css?10.0.1">
-    <link rel="stylesheet" href="./jsSet.css?10.0.5">
+    <link rel="stylesheet" href="./jsSet.css?10.0.6">
     <script src="../../../../js/vue.js"></script>
 </head>
 
@@ -40,11 +40,10 @@
             <div class="table" id="goodlist">
                 <div class="table-tr" v-for="(v1,k1) in v._child">
                     <span class="col-md-2 bot-bor subli">{{v1.name}}</span>
-                    <span class="col-md-6 bot-bor subli">
+                    <span class="col-md-8 bot-bor subli">
                       <div class="din fl fun_sel" :class="v2.status == 1?'check':''" @click="selFun(k,k1,k2)" v-for="(v2,k2) in v1.child"><span class="select" ></span><span class="name">{{v2.cn_name}}</span></div>
                 </span>
                 <span class="col-md-2 bot-bor subli"><span class="ant-switch show-hide " :class="v1.status == 1?'ant-switch-checked':''" class="attrImg" @click="showMenu(k,k1)" data-id="" data-type="" ></span></span>
-                <span class="col-md-2 bot-bor subli"></span>
             </div>
         </div>
         <!-- <div class="w-floor-page">

@@ -175,31 +175,32 @@ new Vue({
             }
             return text
         },
-        subRation() {
+        auditMessageTemplate(id = '', status = '') {
             let that = this
             app.requests({
-                url: 'admin/editInvoice',
+                url: 'ModelMessage/auditMessageTemplate',
                 data: {
-                    has_invoice: that.has_invoice,
-                    no_invoice: that.no_invoice
+                    status: status,
+                    id: id
                 },
                 success(res) {
                     showToast({
                         type: 'success',
-                        text: '保存成功'
+                        text: '操作成功'
                     })
-                    that.no_invoice = ''
-                    that.has_invoice = ''
-                    that.modal1 = false
+                    that.getMessageTemplate()
                 },
                 Error(code) {
                     let text = ''
                     switch (parseInt(code)) {
                         case 3001:
-                            text = '扣除比例必须为数字'
+                            text = '状态参数错误'
                             break;
                         case 3002:
-                            text = '比率不能超过100'
+                            text = '参数错误 '
+                            break;
+                        case 3003:
+                            text = '已经是该状态'
                             break;
                         default:
                             text = '意料之外的错误'

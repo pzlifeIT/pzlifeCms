@@ -18,11 +18,14 @@
 }
 
 .fun_sel {
+    position: relative;
     height: 34px;
+    padding-left: 36px;
     margin-right: 10px;
     line-height: 34px;
     font-size: 16px;
     cursor: pointer;
+    overflow: hidden;
 }
 
 .fun_sel span {
@@ -34,6 +37,11 @@
     display: inline-block;
     line-height: 34px;
     color: #8a8a8a;
+}
+
+.fun_sel .select {
+    position: absolute;
+    left: 0;
 }
 
 .select {
