@@ -412,27 +412,9 @@ new Vue({
                 fn: function(n) {
                     if (t.page == n) return
                     t.page = n
-                    t.getMessageTemplate()
+                    t.getMessageTask()
                 }
             })
         }
     }
 })
-
-// select({
-//     el: '#combobox3',
-//     data: [{
-//         id: '',
-//         type_name: '全部'
-//     }, {
-//         id: 1,
-//         type_name: '待发放'
-//     }, {
-//         id: 2,
-//         type_name: '已经发放'
-//     }, {
-//         id: 3,
-//         type_name: '取消发放'
-//     }],
-//      callback(){}
-// })

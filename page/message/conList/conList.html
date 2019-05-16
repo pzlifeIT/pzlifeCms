@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../../../css/bootstrap.css">
     <link rel="stylesheet" href="../../../css/list.css?10.0.1">
     <link rel="stylesheet" href="../../../css/details.css?10.0.1">
-    <link rel="stylesheet" href="./conList.css">
+    <link rel="stylesheet" href="./conList.css?10.0.1">
     <script src="../../../js/vue.js"></script>
 </head>
 
@@ -109,7 +109,11 @@
                     </div>
                     <div class="dl-show">
                         <span class="dl-title">内容模板:</span>
-                        <textarea class="dl-area" ref="redact" @blur="redactBlur($event)" v-model="msg" placeholder="请输入内容模板" type="text"></textarea>
+                        <textarea class="dl-area" ref="redact" @blur="redactBlur($event)" @input="changeRedact" v-model="msg" placeholder="请输入内容模板" type="text"></textarea>
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">内容模板输出样式:</span>
+                        <div class="ml130 dl-area">{{msgoutput}}</div>
                     </div>
                     <div class="dl-show flexcenter">
                         <input type="button" value="取消" class="pz-btn btn-cancel" @click="cancel">
@@ -121,6 +125,6 @@
     </div>
 </body>
 <script type="module" src="../../../js/common.js?10.0.1"></script>
-<script type="module" src="./conList.js?10.0.8"></script>
+<script type="module" src="./conList.js?10.0.9"></script>
 
 </html>

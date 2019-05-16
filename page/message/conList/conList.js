@@ -11,6 +11,8 @@ new Vue({
         type: '',
         template: '',
         msg: '',
+        msgoutput: '',
+        mtTextJson: {},
         sellocation: '',
         conList: [],
         templateId: ''
@@ -42,22 +44,32 @@ new Vue({
             })
         },
         redactBlur(e) {
-            console.log(this.$refs.redact.selectionStart)
             this.sellocation = this.$refs.redact.selectionStart
         },
+        changeRedact() {
+            this.setmsgoutput(this.msg)
+        },
         intMsg(key) {
-            console.log(key)
             let t1 = this.msg.substring(0, this.sellocation)
             let t2 = this.msg.substring(this.sellocation, this.msg.length)
-
             this.msg = t1 + key + t2
-                // this.ttext[this.sellocation - 1] = this.ttext[this.sellocation - 1] + this.ctext
+            this.setmsgoutput(this.msg)
+        },
+        setmsgoutput(msg) {
+            let that = this
+            this.msgoutput = msg.replace(/\{{2}\[.*?\]\}{2}/g, function(t, s) {
+                return '<' + that.mtTextJson[t] + '>'
+            })
         },
         cancel() {
             this.modal = false
         },
-
         showmodal(id) {
+            this.templateId = ''
+            this.title = ''
+            this.msg = ''
+            this.type = ''
+            this.setBox()
             this.modal = true
         },
         getMessageTemplateText() {
@@ -65,18 +77,25 @@ new Vue({
             app.requests({
                 url: 'ModelMessage/getMessageTemplateText',
                 success(res) {
+                    that.distemplatetext(res.templatetext)
                     select({
                         el: '#combobox2',
                         data: res.templatetext || [],
                         name: 'value',
                         id: 'key',
                         callback(key, val) {
-                            console.log(key, val)
                             that.intMsg(key)
                         }
                     })
                 }
             })
+        },
+        distemplatetext(data = []) {
+            let len = data.length
+            for (let i = 0; i < len; i++) {
+                this.mtTextJson[data[i].key] = data[i].value
+            }
+            console.log(this.mtTextJson)
         },
         getMessageTemplate(id = '') {
             let that = this;
@@ -94,6 +113,7 @@ new Vue({
                         that.templateId = template.id
                         that.title = template.title
                         that.msg = template.template
+                        that.setmsgoutput(that.msg)
                         that.type = template.type
                         that.setBox(template.type)
                         return
@@ -254,11 +274,6 @@ new Vue({
                         text: '操作成功'
                     })
                     that.modal = false
-                    that.templateId = ''
-                    that.title = ''
-                    that.msg = ''
-                    that.type = ''
-                    that.setBox()
                     that.getMessageTemplate()
                 },
                 Error(code) {
@@ -272,6 +287,12 @@ new Vue({
                             break;
                         case 3003:
                             text = '内容模板不能为空'
+                            break;
+                        case 3004:
+                            text = '结束时间不能小于开始时间'
+                            break;
+                        case 3005:
+                            text = '启用中无法修改'
                             break;
                         default:
                             text = '意料之外的错误'

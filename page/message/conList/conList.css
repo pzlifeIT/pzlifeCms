@@ -1,7 +1,11 @@
 .dl-area {
-    height: 200px;
+    height: 120px;
 }
 
 .combobox {
+    margin-left: 130px;
+}
+
+.ml130 {
     margin-left: 130px;
 }
