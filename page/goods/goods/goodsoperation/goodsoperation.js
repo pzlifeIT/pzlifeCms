@@ -862,6 +862,9 @@ new Vue({
                         case 3009:
                             text = '提交的属性分类和商品分类不同'
                             break;
+                        case 3013:
+                            text = '商品下架才能编辑'
+                            break;
                         default:
                             text = '意料之外的错误'
                             break;

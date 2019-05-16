@@ -153,13 +153,16 @@ new Vue({
                     let text = ''
                     switch (parseInt(code)) {
                         case 3001:
-                            text = '状态必须为数字'
+                            text = '手机号校验失败'
                             break;
                         case 3002:
-                            text = '错误的审核类型'
+                            text = '页数获取出错'
                             break;
                         case 3003:
-                            text = '银行卡号输入错误'
+                            text = '被邀请人身份证号校验失败'
+                            break;
+                        case 3004:
+                            text = '状态选择出错'
                             break;
                         default:
                             text = '意料之外的错误'

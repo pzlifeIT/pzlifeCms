@@ -134,7 +134,10 @@ new Vue({
                             text = '格式错误'
                             break;
                         case 3003:
-                            text = '该信息已进行过审核'
+                            text = '该状态正在使用中'
+                            break;
+                        case 3004:
+                            text = '存在已启用的消息任务，无法停用'
                             break;
                         default:
                             text = '意料之外的错误'
@@ -175,25 +178,55 @@ new Vue({
                     that.getTrigger()
                 },
                 Error(code) {
-                    let text = ''
-                    switch (parseInt(code)) {
-                        case 3001:
-                            text = '标题不能为空'
-                            break;
-                        case 3002:
-                            text = '时间格式错误'
-                            break;
-                        case 3003:
-                            text = '结束时间不能小于开始时间'
-                            break;
-                        default:
-                            text = '意料之外的错误'
+                    if (that.triggerId == 0) {
+                        that.addTriggerErrot(code)
+                    } else {
+                        that.editTriggerErrot(code)
                     }
-                    showToast({
-                        type: 'error',
-                        text: text
-                    })
                 }
+            })
+        },
+        addTriggerErrot(code) {
+            let text = ''
+            switch (parseInt(code)) {
+                case 3001:
+                    text = '标题不能为空'
+                    break;
+                case 3002:
+                    text = '时间格式错误'
+                    break;
+                case 3003:
+                    text = '结束时间要大于开始时间15分钟'
+                    break;
+                default:
+                    text = '意料之外的错误'
+            }
+            showToast({
+                type: 'error',
+                text: text
+            })
+        },
+        editTriggerErrot(code) {
+            let text = ''
+            switch (parseInt(code)) {
+                case 3001:
+                    text = '状态码为空'
+                    break;
+                case 3002:
+                    text = 'id格式错误'
+                    break;
+                case 3003:
+                    text = '启用中无法修改'
+                    break;
+                case 3004:
+                    text = '结束时间要大于开始时间15分钟'
+                    break;
+                default:
+                    text = '意料之外的错误'
+            }
+            showToast({
+                type: 'error',
+                text: text
             })
         },
         setpage: function() {
@@ -208,7 +241,7 @@ new Vue({
                     t.getTrigger()
                 }
             })
-        },
+        }
     }
 })
 

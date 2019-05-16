@@ -202,6 +202,9 @@ new Vue({
                         case 3003:
                             text = '已经是该状态'
                             break;
+                        case 3004:
+                            text = '存在已启用的消息任务，无法停用'
+                            break;
                         default:
                             text = '意料之外的错误'
                     }

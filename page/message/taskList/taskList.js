@@ -84,6 +84,9 @@ new Vue({
             let that = this
             app.requests({
                 url: 'ModelMessage/getMessageTemplate',
+                data: {
+                    all: 1
+                },
                 success(res) {
                     select({
                         el: '#combobox3',
@@ -100,6 +103,9 @@ new Vue({
             let that = this
             app.requests({
                 url: 'ModelMessage/getTrigger',
+                data: {
+                    all: 1
+                },
                 success(res) {
                     select({
                         el: '#combobox4',
