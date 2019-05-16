@@ -55,7 +55,7 @@
                     <span class="col-md-1 bot-bor subli">{{v.create_time}}</span>
                     <span class="col-md-1 bot-bor subli">{{v.statusText}}</span>
                     <span class="col-md-2 bot-bor subli">
-                      <div class="pz-btn btn-amend"  @click="getMessageTask(v.id)" >编辑</div>
+                      <div class="pz-btn btn-amend" v-if="v.status != 2"  @click="getMessageTask(v.id)" >编辑</div>
                         <div class="pz-btn btn-amend" @click="auditMessageTask(v.id,2)" >启用</div>
                         <div class="pz-btn btn-amend" @click="auditMessageTask(v.id,3)" >停用</div>
                     </span>
@@ -119,6 +119,6 @@
     </div>
 </body>
 <script type="module" src="../../../js/common.js?10.0.1"></script>
-<script type="module" src="./taskList.js?10.0.1"></script>
+<script type="module" src="./taskList.js?10.0.2"></script>
 
 </html>

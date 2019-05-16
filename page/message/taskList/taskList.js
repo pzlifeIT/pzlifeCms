@@ -391,7 +391,10 @@ new Vue({
                             text = '该消息任务不存在'
                             break;
                         case 3007:
-                            text = '该状态使用中'
+                            text = '启用中无法修改'
+                            break;
+                        case 3008:
+                            text = '存在已启用的同类模板任务'
                             break;
                         default:
                             text = '意料之外的错误'
