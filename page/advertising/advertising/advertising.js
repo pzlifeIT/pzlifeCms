@@ -38,6 +38,9 @@ import { showToast } from '../../../js/utils.js';
                 document.querySelector('#agaddSave').onclick = function(e) {
                     t.gettype1()
                 }
+                document.querySelector('#reloadBtn').onclick = function(e) {
+                    t.resetRecommend()
+                }
                 document.querySelector('#projectCancel').onclick = function(e) {
                     t.projectadd.classList.add('hide')
                 }
@@ -128,6 +131,22 @@ import { showToast } from '../../../js/utils.js';
                         }
                     })(arr[i])
                 }
+            },
+            resetRecommend() {
+                app.requests({
+                    url: 'Recommend/resetRecommend',
+                    success(res) {
+                        showToast({
+                            type: 'success',
+                            text: '刷新成功'
+                        })
+                    },
+                    Error(code) {
+                        showToast({
+                            text: '刷新失败'
+                        })
+                    }
+                })
             },
             showtype1(data) {
                 let t = this

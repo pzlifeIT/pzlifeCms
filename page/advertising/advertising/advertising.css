@@ -36,3 +36,17 @@
 .wid {
     width: 100%;
 }
+
+.ratioBtn {
+    display: inline-block;
+    height: 34px;
+    line-height: 34px;
+    margin: 1px 10px;
+    padding: 0 5px;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    background-color: #3bb4f2;
+    user-select: none;
+}

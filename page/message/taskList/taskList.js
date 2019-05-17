@@ -304,6 +304,15 @@ new Vue({
                         case 3003:
                             text = '已经是该状态'
                             break;
+                        case 3004:
+                            text = '短信模板未启或者不存在'
+                            break;
+                        case 3005:
+                            text = '触发其未启用或者不存在'
+                            break;
+                        case 3008:
+                            text = '存在已启用的同类模板任务'
+                            break;
                         default:
                             text = '意料之外的错误'
                     }
@@ -370,40 +379,76 @@ new Vue({
                     that.getMessageTask()
                 },
                 Error(code) {
-                    let text = ''
-                    switch (parseInt(code)) {
-                        case 3001:
-                            text = '标题不能为空'
-                            break;
-                        case 3002:
-                            text = '请选择消息模板或触发器'
-                            break;
-                        case 3003:
-                            text = '请选择任务类型'
-                            break;
-                        case 3004:
-                            text = '该短信模板未启用或者不存在'
-                            break;
-                        case 3005:
-                            text = '该触发器未启用或者不存在'
-                            break;
-                        case 3006:
-                            text = '该消息任务不存在'
-                            break;
-                        case 3007:
-                            text = '启用中无法修改'
-                            break;
-                        case 3008:
-                            text = '存在已启用的同类模板任务'
-                            break;
-                        default:
-                            text = '意料之外的错误'
+                    if (that.task_id == '') {
+                        that.saveMessageTaskErrot(code)
+                    } else {
+                        that.editMessageTaskErrot(code)
                     }
-                    showToast({
-                        type: 'error',
-                        text: text
-                    })
                 }
+            })
+        },
+        saveMessageTaskErrot(code) {
+            let text = ''
+            switch (parseInt(code)) {
+                case 3001:
+                    text = '标题不能为空'
+                    break;
+                case 3002:
+                    text = '请选择消息模板或触发器'
+                    break;
+                case 3003:
+                    text = '请选择任务类型'
+                    break;
+                case 3004:
+                    text = '该短信模板未启用或者不存在'
+                    break;
+                case 3005:
+                    text = '该触发器未启用或者不存在'
+                    break;
+                case 3006:
+                    text = '存在已启用的同类模板任务'
+                    break;
+                default:
+                    text = '意料之外的错误'
+            }
+            showToast({
+                type: 'error',
+                text: text
+            })
+        },
+        editMessageTaskErrot(code) {
+            let text = ''
+            switch (parseInt(code)) {
+                case 3001:
+                    text = '标题不能为空'
+                    break;
+                case 3002:
+                    text = '请选择消息模板或触发器'
+                    break;
+                case 3003:
+                    text = '请选择任务类型'
+                    break;
+                case 3004:
+                    text = '该短信模板未启用或者不存在'
+                    break;
+                case 3005:
+                    text = '该触发器未启用或者不存在'
+                    break;
+                case 3006:
+                    text = '该消息任务不存在'
+                    break;
+                case 3007:
+                    text = '启用中无法修改'
+                    break;
+                case 3008:
+                    text = '存在已启用的同类模板任务'
+                    break;
+                default:
+                    text = '意料之外的错误'
+            }
+            showToast({
+                type: 'error',
+                text: text
             })
         },
         setpage: function() {
