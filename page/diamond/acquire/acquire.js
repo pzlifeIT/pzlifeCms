@@ -1,4 +1,5 @@
 import { app } from '../../../index.js';
+import { showToast } from '../../../js/utils.js';
 (function(pz) {
 
     pz.acquire = (function() {
@@ -9,12 +10,12 @@ import { app } from '../../../index.js';
         }
         _AE.prototype = {
             init: function() { //进入执行
-                this.getBossShareDiamondvip({})
+                this.getBossShareDiamondvip()
             },
-            getBossShareDiamondvip: function(data) {
+            getBossShareDiamondvip: function(data = {}) {
                 let t = this
                 app.requests({
-                    url: 'getBossShareDiamondvip',
+                    url: 'Rights/getBossShareDiamondvip',
                     data: {
                         page: data.page || 1,
                         pagenum: data.pagenum || 10
@@ -25,8 +26,10 @@ import { app } from '../../../index.js';
                         t.totle = res.totle
                         t.setpage()
                     },
-                    error: function(code) {
-
+                    Error: function(code) {
+                        showToast({
+                            text: "获取失败"
+                        })
                     }
                 })
             },
@@ -104,9 +107,14 @@ import { app } from '../../../index.js';
             },
             passBossShareDiamondvip: function(data) {
                 let t = this
-                if (data.id == '' || data.id == null) return
+                if (data.id == '' || data.id == null) {
+                    showToast({
+                        text: "找不到该纪录"
+                    })
+                    return
+                }
                 app.requests({
-                    url: 'passBossShareDiamondvip',
+                    url: 'Rights/passBossShareDiamondvip',
                     data: {
                         id: data.id,
                         status: data.status
@@ -116,8 +124,10 @@ import { app } from '../../../index.js';
                             page: t.page
                         })
                     },
-                    error: function(code) {
-
+                    Error: function(code) {
+                        showToast({
+                            text: "审核失败"
+                        })
                     }
                 })
             },

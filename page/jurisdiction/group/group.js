@@ -59,11 +59,14 @@ new Vue({
                         case 3001:
                             text = '分组名称错误'
                             break;
-                        case 3002:
-                            text = '没有权限'
-                            break;
                         case 3003:
-                            text = '添加失败'
+                            text = '修改的用户不存在'
+                            break;
+                        case 3004:
+                            text = '分组错误'
+                            break;
+                        case 3005:
+                            text = '修改失败'
                             break;
                         default:
                             text = '意料之外的错误'
@@ -151,10 +154,7 @@ new Vue({
                         case 3001:
                             text = '分组名称错误'
                             break;
-                        case 3002:
-                            text = '没有权限'
-                            break;
-                        case 3003:
+                        case 3005:
                             text = '添加失败'
                             break;
                         default:

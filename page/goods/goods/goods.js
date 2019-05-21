@@ -42,7 +42,7 @@ import { showToast } from '../../../js/utils.js';
             getgoodslist: function(o) {
                 let t = this
                 app.requests({
-                    url: 'getgoodslist',
+                    url: 'goods/getgoodslist',
                     data: {
                         page: o.page || 1,
                         pagenum: o.pagenum || 10,
@@ -188,6 +188,9 @@ import { showToast } from '../../../js/utils.js';
                                 break;
                             case 3008:
                                 text = '上下架失败'
+                                break;
+                            case 3009:
+                                text = '请选择分类'
                                 break;
                             default:
                                 text = '意料之外的错误'

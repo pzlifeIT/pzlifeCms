@@ -51,25 +51,17 @@ import { showToast } from '../../../../js/utils.js';
                     t.setGlul(res.data || [])
                 },
                 Error(code) {
-                    let text = ''
-                    switch (parseInt(code)) {
-                        case 3002:
-                            text = '供应商ID只能是数字'
-                            break;
-                        default:
-                            text = '意料之外的错误'
-                            break;
-                    }
                     showToast({
-                        text: text
+                        text: '获取失败'
                     })
                 }
             })
         }
-        _EE.prototype.setGlul = function(data) { //循环出供应商列表
+        _EE.prototype.setGlul = function(data = []) { //循环出供应商列表
             let len = data.length,
                 i,
-                str = ''
+                str = '';
+            if (len == 0) return
             for (i = 0; i < len; i++) {
                 str += '<div class="table-tr"> \
               <div class = "col-md-2 bot-bor subli" ><span>' + data[i].id + '</span> </div> \
@@ -119,17 +111,8 @@ import { showToast } from '../../../../js/utils.js';
                     t.eeAmend.classList.remove('hide')
                 },
                 Error(code) {
-                    let text = ''
-                    switch (parseInt(code)) {
-                        case 3002:
-                            text = '供应商ID只能是数字'
-                            break;
-                        default:
-                            text = '意料之外的错误'
-                            break;
-                    }
                     showToast({
-                        text: text
+                        text: '获取供应商快递模板列表失败'
                     })
                 }
             })
@@ -167,9 +150,21 @@ import { showToast } from '../../../../js/utils.js';
         }
         _EE.prototype.saveEE = function() {
             let t = this,
-                eeType = t.EEcombobox.querySelector('.ant-select-selection').getAttribute('data-id'),
+                eeType = t.EEcombobox.querySelector('.ant-select-selection').getAttribute('data-id') || '',
                 eeTitle = document.querySelector('#eeTitle').value,
                 eeDesc = document.querySelector('#eeDesc').value;
+            if (eeType == '') {
+                showToast({
+                    text: '请选择计价方式'
+                })
+                return
+            }
+            if (eeTitle == '') {
+                showToast({
+                    text: '标题不能为空'
+                })
+                return
+            }
             if (t.id == '') {
                 app.requests({
                     url: 'suppliers/addsupplierfreight',
@@ -232,7 +227,7 @@ import { showToast } from '../../../../js/utils.js';
                                 text = '供应商模版id必须是数字'
                                 break;
                             case 3002:
-                                text = '计价方式参数有误'
+                                text = '计价方式选择有误'
                                 break;
                             case 3003:
                                 text = '标题和详情不能为空'

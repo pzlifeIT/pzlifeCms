@@ -74,7 +74,6 @@ import { showToast } from '../../../js/utils.js';
         _GC.prototype.savenew = function() {
             let t = this,
                 params = {};
-            console.log(document.querySelector('#nameNew').value)
             params.type_name = document.querySelector('#nameNew').value
             params.pid = document.querySelector('#selClass').getAttribute('data-id')
             params.status = t.status
@@ -88,7 +87,7 @@ import { showToast } from '../../../js/utils.js';
         }
         _GC.prototype.savecompile = function() {
             let t = this,
-                amend = t.classcompile.querySelector('.btn-amend')
+                amend = t.classcompile.querySelector('.btn-amend');
             amend.addEventListener('click', function(e) {
                 let params = {}
                 params.id = t.id
@@ -356,7 +355,7 @@ import { showToast } from '../../../js/utils.js';
 
     pz.goodsclassify.init()
 
-    function distwocategory(data) {
+    function distwocategory(data = []) {
         data.unshift({
             id: '0',
             tier: '1',

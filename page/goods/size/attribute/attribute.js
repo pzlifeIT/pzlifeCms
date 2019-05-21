@@ -119,10 +119,11 @@ import { showToast } from '../../../../js/utils.js';;
                 }
             })
         }
-        _SE.prototype.setGlul = function(data, name) { //循环出规格列表
+        _SE.prototype.setGlul = function(data = [], name) { //循环出规格列表
             let len = data.length,
                 i,
-                str = ''
+                str = '';
+            if (len == 0) return
             for (i = 0; i < len; i++) {
                 str += '<div class="table-tr"> \
               <div class = "col-md-3 bot-bor subli" ><span>' + (i + 1) + '</span> </div> \
@@ -131,8 +132,9 @@ import { showToast } from '../../../../js/utils.js';;
               <div class = "col-md-3 bot-bor subli" >\
                   <a class = "pz-btn btn-amend seamend" \
               href = "javascript:;" data-id="' + data[i].id + '" > 编辑 </a> \
-              <a class = "pz-btn btn-del" data-id="' + data[i].id + '" href = "#" > 删除 </a> </div></div>'
+               </div></div>'
             }
+            //<a class = "pz-btn btn-del" data-id="' + data[i].id + '" href = "#" > 删除 </a>
             this.ablist.innerHTML = str
             this.delSize()
             this.amendSize()

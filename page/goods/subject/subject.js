@@ -111,7 +111,7 @@ import { showToast } from '../../../js/utils.js';
                     })
                 })
             },
-            subjectDetail: function(id) { //获取专题详细信息
+            subjectDetail: function(id = '') { //获取专题详细信息
                 let t = this
                 app.requests({
                     url: 'subject/getsubjectdetail',
@@ -169,6 +169,18 @@ import { showToast } from '../../../js/utils.js';
                     data = {};
                 data.subject = name.value;
                 data.order_by = order.value;
+                if (data.subject == '') {
+                    showToast({
+                        text: '分类名称不能为空'
+                    })
+                    return
+                }
+                if (data.order_by == '') {
+                    showToast({
+                        text: '排序不能为空'
+                    })
+                    return
+                }
                 let wrappers = group.querySelectorAll('.ant-radio-wrapper')
                 wrappers.forEach(function(li) {
                     let status = li.getAttribute('data-status')
@@ -299,15 +311,15 @@ import { showToast } from '../../../js/utils.js';
                     }
                 })
                 app.requests({
-                    url: 'getallsubject',
+                    url: 'subject/getallsubject',
                     data: {
                         stype: 2
                     },
                     success: function(res) {
-                        t.stMultistage(t.distwocategory(res.data || []))
+                        t.stMultistage(t.distwocategory(res.data))
                     },
                     Error: function(res) {
-                        t.stMultistage(t.distwocategory([]))
+                        t.stMultistage(t.distwocategory())
                     }
                 })
             },
@@ -319,7 +331,7 @@ import { showToast } from '../../../js/utils.js';
                     data: data
                 })
             },
-            distwocategory: function(data) { //添加顶级分类
+            distwocategory: function(data = []) { //添加顶级分类
                 data.unshift({
                     id: '0',
                     subject: '顶级分类'
@@ -329,7 +341,19 @@ import { showToast } from '../../../js/utils.js';
             savenew: function() { //保存新建
                 let t = this,
                     subject = t.nameNew.value,
-                    pid = t.combobox_class.getAttribute('data-id');
+                    pid = t.combobox_class.getAttribute('data-id') || '';
+                if (pid == '') {
+                    showToast({
+                        text: '请选择上级专题'
+                    })
+                    return
+                }
+                if (subject == '') {
+                    showToast({
+                        text: '专题名称不能为空'
+                    })
+                    return
+                }
                 app.requests({
                     url: 'subject/addsubject',
                     data: {

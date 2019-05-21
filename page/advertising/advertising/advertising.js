@@ -485,7 +485,7 @@ import { showToast } from '../../../js/utils.js';
                     }
                 })
             },
-            getRecommendInfo1(id) {
+            getRecommendInfo1(id = '') {
                 let t = this
                 app.requests({
                     url: 'Recommend/getRecommendInfo',
@@ -709,6 +709,12 @@ import { showToast } from '../../../js/utils.js';
                             case 3012:
                                 text = '上级未选择'
                                 break;
+                            case 3011:
+                                text = '添加失败'
+                                break;
+                            case 3013:
+                                text = '添加内容模板与父级模板不一致'
+                                break;
                             default:
                                 text = '意料之外的错误'
                                 break;
@@ -719,7 +725,7 @@ import { showToast } from '../../../js/utils.js';
                     }
                 })
             },
-            getRecommendInfo(data) {
+            getRecommendInfo(data = {}) {
                 let t = this
                 app.requests({
                     url: 'Recommend/getRecommendInfo',

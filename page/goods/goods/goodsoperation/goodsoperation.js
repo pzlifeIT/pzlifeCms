@@ -41,7 +41,12 @@ new Vue({
             this.label = this.label.replace(/\s*/g, "")
         },
         addLabel() {
-            if (!this.id) return
+            if (!this.id) {
+                showToast({
+                    text: '找不到商品'
+                })
+                return
+            }
             if (!this.label) {
                 showToast({
                     text: '标签不能为空！'
@@ -56,10 +61,6 @@ new Vue({
                     label_name: that.label
                 },
                 success: function(res) {
-                    // showToast({
-                    //     type: 'success',
-                    //     text: '添加成功'
-                    // })
                     that.label = ""
                     that.goodslabellist()
                 },
@@ -67,7 +68,7 @@ new Vue({
                     let text = '';
                     switch (parseInt(code)) {
                         case 3001:
-                            text = '标签名不能未空'
+                            text = '标签名不能为空'
                             break;
                         case 3002:
                             text = '商品id必须为数字'
@@ -95,7 +96,12 @@ new Vue({
             })
         },
         dellabel(lid) {
-            if (!this.id) return
+            if (!this.id) {
+                showToast({
+                    text: '找不到商品'
+                })
+                return
+            }
             let that = this
             app.requests({
                 url: 'label/labeldel',
@@ -114,7 +120,12 @@ new Vue({
             })
         },
         goodslabellist() {
-            if (!this.id) return
+            if (!this.id) {
+                showToast({
+                    text: '找不到商品'
+                })
+                return
+            }
             let that = this
             app.requests({
                 url: 'label/goodslabellist',
@@ -143,20 +154,18 @@ new Vue({
             t.portgetgood(stype, type)
         },
         getSuppliersAll: function() { //获取所有供应商
-            let t = this
             app.requests({
                 url: 'suppliers/getsuppliersall',
                 success: function(res) {
                     select({
                         el: '#supplierIdNew',
                         name: 'name',
-                        data: res.data
+                        data: res.data || []
                     })
                 }
             })
         },
         allCateList: function() { //获取所有分类
-            let t = this
             app.requests({
                 url: 'category/allCateList',
                 success: function(res) {
@@ -165,7 +174,7 @@ new Vue({
                         ellink: '#catelinkage',
                         type: '3',
                         name: 'type_name',
-                        data: res.data
+                        data: res.data || []
                     })
                 },
                 Error(code) {
@@ -277,7 +286,7 @@ new Vue({
         getgoodssku: function(id) { //获取一条sku
             let t = this
             app.requests({
-                url: 'getgoodssku',
+                url: 'goods/getgoodssku',
                 data: {
                     sku_id: id
                 },
@@ -551,9 +560,6 @@ new Vue({
                         case 3004:
                             text = '上传文件不能为空'
                             break;
-                        case 3005:
-                            text = '上传文件不能为空'
-                            break;
                         default:
                             text = '意料之外的错误'
                             break;
@@ -710,6 +716,9 @@ new Vue({
                             break;
                         case 3009:
                             text = '提交的属性分类和商品分类不同'
+                            break;
+                        case 3013:
+                            text = '商品下架才能删除'
                             break;
                         default:
                             text = '意料之外的错误'
@@ -908,7 +917,12 @@ new Vue({
         },
         delsubject(id) {
             let t = this;
-            if (this.id == '') return
+            if (!this.id) {
+                showToast({
+                    text: '找不到商品'
+                })
+                return
+            }
             app.requests({
                 url: 'subject/delgoodssubjectassoc',
                 data: {

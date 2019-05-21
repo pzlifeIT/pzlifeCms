@@ -57,9 +57,6 @@ new Vue({
                         case 3001:
                             text = '分组错误'
                             break;
-                        case 3002:
-                            text = '没有权限'
-                            break;
                         case 3003:
                             text = '权限分组不存在'
                             break;
@@ -117,6 +114,12 @@ new Vue({
         submit() {
             let that = this,
                 adminId = document.querySelector('#selection1').getAttribute('data-id') || '';
+            if (adminId == '') {
+                showToast({
+                    text: '请选择成员'
+                })
+                return
+            }
             app.requests({
                 url: 'admin/addadminpermissions',
                 data: {

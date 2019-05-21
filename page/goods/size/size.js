@@ -125,7 +125,6 @@ import { showToast } from '../../../js/utils.js';
                 url: 'spec/getSpecList',
                 success: function(res) {
                     t.setGlul(res.data)
-                    console.log(res.total)
                     if (t.total == res.total) return
                     t.total = res.total
                     t.setpage()
@@ -144,6 +143,7 @@ import { showToast } from '../../../js/utils.js';
                 el: '#floorpages',
                 pagenumber: total,
                 fn: function(n) {
+                    if (t.page == n) return
                     t.page = n
                     t.getSpecList({
                         page: n
@@ -165,8 +165,9 @@ import { showToast } from '../../../js/utils.js';
               href = "attribute/attribute.html?id=' + data[i].id + '" > 查看属性 </a> \
                   <a class = "pz-btn btn-amend seamend" \
               href = "javascript:;" data-id="' + data[i].id + '" > 编辑 </a> \
-              <a class = "pz-btn btn-del" data-id="' + data[i].id + '" href = "#" > 删除 </a> </div></div>'
+               </div></div>'
             }
+            // <a class = "pz-btn btn-del" data-id="' + data[i].id + '" href = "#" > 删除 </a>
             this.sizelist.innerHTML = str
             this.delSize()
             this.amendSize()
@@ -265,7 +266,7 @@ import { showToast } from '../../../js/utils.js';
                             text = '状态参数错误'
                             break;
                         default:
-                            text = '意料之外的错误'
+                            text = '获取出错'
                             break;
                     }
                     showToast({

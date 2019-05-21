@@ -61,17 +61,8 @@ import { showToast } from '../../../../js/utils.js';
                     t.setGlul(res.data)
                 },
                 Error(code) {
-                    let text = ''
-                    switch (parseInt(code)) {
-                        case 3002:
-                            text = '供应商快递模板ID和页码和每页条数只能是数字'
-                            break;
-                        default:
-                            text = '意料之外的错误'
-                            break;
-                    }
                     showToast({
-                        text: text
+                        text: '获取出错'
                     })
                 }
             })
@@ -80,7 +71,8 @@ import { showToast } from '../../../../js/utils.js';
         _FH.prototype.setGlul = function(data = []) { //循环出供应商列表
             let len = data.length,
                 i,
-                str = ''
+                str = '';
+            if (len == 0) return
             for (i = 0; i < len; i++) {
                 str += '<div class="table-tr"> \
               <div class = "col-md-2 bot-bor subli" ><span>' + data[i].id + '</span> </div> \
@@ -297,13 +289,13 @@ import { showToast } from '../../../../js/utils.js';
                 success: function(res) {
                     showToast({
                         type: 'success',
-                        text: '操作成功'
+                        text: '保存成功'
                     })
                     t.fhsite.classList.add('hide')
                 },
                 Error(code) {
                     showToast({
-                        text: '操作失败'
+                        text: '保存失败'
                     })
                 }
             })

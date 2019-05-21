@@ -220,6 +220,30 @@ import { showToast } from '../../../js/utils.js';
             formData.title = sdTitle.value
             formData.desc = sdDesc.value
             formData.image = this.images
+            if (formData.name == '') {
+                showToast({
+                    text: '前端供应商名称不能为空'
+                })
+                return
+            }
+            if (formData.tel == '') {
+                showToast({
+                    text: '供应商客服不能为空'
+                })
+                return
+            }
+            if (formData.title == '') {
+                showToast({
+                    text: '后端供应商名称不能为空'
+                })
+                return
+            }
+            if (formData.desc == '') {
+                showToast({
+                    text: '描述不能为空'
+                })
+                return
+            }
             if (t.id != '') {
                 formData.id = this.id
                 app.requests({
@@ -264,7 +288,7 @@ import { showToast } from '../../../js/utils.js';
                                 break;
                         }
                         showToast({
-                            text: text
+                            text: type
                         })
                     }
                 })
