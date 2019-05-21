@@ -74,6 +74,9 @@ new Vue({
                 }, {
                     id: 7,
                     type_name: '提现到账'
+                }, {
+                    id: 8,
+                    type_name: '奖励金到账'
                 }],
                 callback(id, val) {
                     that.wtype = id
@@ -237,6 +240,9 @@ new Vue({
                     break;
                 case 7:
                     text = '提现到账'
+                    break;
+                case 8:
+                    text = '奖励金到账'
                     break;
             }
             return text

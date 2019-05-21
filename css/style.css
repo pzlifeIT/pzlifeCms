@@ -355,9 +355,9 @@ input {
 }
 
 .add:hover::after {
-    width: 58px;
-    right: -66px;
-    content: '\6dfb\52a0\5546\54c1';
+    width: 38px;
+    right: -46px;
+    content: '\6dfb\52a0';
 }
 
 .add:hover {
@@ -370,14 +370,23 @@ input {
 }
 
 .addgoods:hover::after {
+    /* 添加商品  */
+    width: 58px;
+    right: -66px;
     content: '\6dfb\52a0\5546\54c1';
 }
 
 .addclass:hover::after {
+    /* 添加分类 */
+    width: 58px;
+    right: -66px;
     content: '\6dfb\52a0\5206\7c7b';
 }
 
 .addsubject:hover::after {
+    /* 添加专题 */
+    width: 58px;
+    right: -66px;
     content: '\6dfb\52a0\4e13\9898';
 }
 

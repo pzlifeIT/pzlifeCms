@@ -120,12 +120,7 @@ new Vue({
             })
         },
         goodslabellist() {
-            if (!this.id) {
-                showToast({
-                    text: '找不到商品'
-                })
-                return
-            }
+            if (!this.id) return
             let that = this
             app.requests({
                 url: 'label/goodslabellist',
