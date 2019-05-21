@@ -315,7 +315,7 @@
 }
 
 .content {
-    height: calc(100% - 90px);
+    height: calc(100% - 50px);
     overflow: hidden;
     background-color: #fff;
 }

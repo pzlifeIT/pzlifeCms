@@ -77,14 +77,12 @@ let loading = function() { //载入loading
     body.appendChild(div);
 }
 let hideloading = function() {
-    console.log(document.querySelector('#loadingId'))
     if (document.querySelector('#loadingId')) {
         document.querySelector('body').removeChild(document.querySelector('#loadingId'))
     }
 }
 
 function dataURLtoFile(dataurl, filename) { //将base64转换为文件
-    console.log(filename)
     var arr = dataurl.split(','),
         mime = arr[0].match(/:(.*?);/)[1],
         bstr = atob(arr[1]),
@@ -130,7 +128,6 @@ function suofang(base64, bili, callback) {
         _canvas.getContext("2d").drawImage(this, 0, 0, w, h);
         var base64 = _canvas.toDataURL("image/jpeg");
         _canvas.toBlob(function(blob) {
-            console.log(blob.size);
             if (blob.size > 1024 * 1024) {
                 suofang(base64, bili, callback);
             } else {

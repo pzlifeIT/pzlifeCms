@@ -163,7 +163,7 @@ new Vue({
             return list
         },
         delShowIframe(list, k) {
-            for (let i = k; i > 0; i--) {
+            for (let i = k; i >= 0; i--) {
                 if (!list[i].del) {
                     list[i].show = true
                     break;

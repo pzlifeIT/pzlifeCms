@@ -277,10 +277,10 @@ import { showToast, imageDeal } from '../js/utils.js';;
             setmenustyle: function() { //设置下拉框的宽度和位置
                 let t = this,
                     top = t.menu.offsetTop,
-                    body = doc.querySelector('body')
-                    // t.menu.style.top = top - body.scrollTop + 'px'
-                t.menu.style.top = t.box.getBoundingClientRect().top + t.box.offsetHeight + 'px'
-                t.menu.style.width = this.box.offsetWidth + 'px'
+                    body = doc.querySelector('body');
+                t.menu.style.top = t.box.getBoundingClientRect().bottom + 'px'
+                t.menu.style.width = this.box.offsetWidth + 'px';
+                t.menu.style.maxHeight = document.body.clientHeight - this.box.getBoundingClientRect().bottom + 'px'
                 body.addEventListener('scroll', function(e) {
                     if (!t.menu.classList.contains('active')) return
                         // top = t.menu.offsetTop
