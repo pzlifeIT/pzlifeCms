@@ -87,6 +87,7 @@
     height: 50px;
     padding: 10px;
     overflow: auto;
+    word-break: break-all;
 }
 
 .table-tr:hover {

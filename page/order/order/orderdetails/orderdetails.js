@@ -117,13 +117,25 @@ import { showToast } from '../../../../js/utils.js';
                         let id = ls.getAttribute('data-id'),
                             tr = document.querySelector('#' + id)
                         let goods_id = tr.querySelector('.name-text').getAttribute('data-id'),
-                            express_key = tr.querySelector('.ant-select-selection').getAttribute('data-id'),
-                            express_no = tr.querySelector('.ls-odd').value
+                            express_key = tr.querySelector('.ant-select-selection').getAttribute('data-id') || '',
+                            express_no = tr.querySelector('.ls-odd').value || ''
                         let orderjson = {
                             order_goods_id: goods_id,
                             express_no: express_no,
                             express_key: express_key,
                             id: id
+                        }
+                        if (express_key == '') {
+                            showToast({
+                                text: '请选择快递'
+                            })
+                            return
+                        }
+                        if (express_no == '') {
+                            showToast({
+                                text: '请输入快递单号'
+                            })
+                            return
                         }
                         if (ls.getAttribute('data-t') == 'true') {
                             that.updateDeliverOrderGoods(orderjson)
@@ -152,6 +164,12 @@ import { showToast } from '../../../../js/utils.js';
                     Error(code) {
                         let text = ''
                         switch (parseInt(code)) {
+                            case 3001:
+                                text = '快递和快递单号不能为空'
+                                break;
+                            case 3002:
+                                text = '请输入正确的快递公司编码'
+                                break;
                             case 3005:
                                 text = '商品已发货'
                                 break;
@@ -185,6 +203,12 @@ import { showToast } from '../../../../js/utils.js';
                     Error(code) {
                         let text = ''
                         switch (parseInt(code)) {
+                            case 3001:
+                                text = '快递和快递单号不能为空'
+                                break;
+                            case 3002:
+                                text = '请输入正确的快递公司编码'
+                                break;
                             case 3005:
                                 text = '商品已发货'
                                 break;

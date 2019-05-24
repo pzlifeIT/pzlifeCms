@@ -1031,6 +1031,7 @@ new Vue({
                 goodsType = document.querySelector('#goodsType').getAttribute('data-id') || '',
                 supplierId = document.querySelector('#supplierId').getAttribute('data-id') || '',
                 cateId = document.querySelector('#cateIdNew').getAttribute('data-id') || '';
+
             app.requests({
                 url: 'goods/saveaddgoods',
                 data: {
@@ -1053,10 +1054,10 @@ new Vue({
                     let text = ''
                     switch (parseInt(code)) {
                         case 3001:
-                            text = '供应商id必须是数字'
+                            text = '请选择供应商'
                             break;
                         case 3002:
-                            text = '分类id只能为数字'
+                            text = '请选择分类'
                             break;
                         case 3003:
                             text = '商品名称不能空'
@@ -1065,13 +1066,13 @@ new Vue({
                             text = '标题图不能空'
                             break;
                         case 3005:
-                            text = '商品类型只能为数字'
+                            text = '请选择商品类型'
                             break;
                         case 3006:
                             text = '商品名称重复'
                             break;
                         case 3007:
-                            text = '提交的分类id不是三级分类'
+                            text = '请选择三级分类'
                             break;
                         case 3008:
                             text = '供应商不存在'

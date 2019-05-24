@@ -1,4 +1,5 @@
-import { app } from '../../../index.js';;
+import { app } from '../../../index.js';
+import { tableToExcel } from '../../../js/utils.js';
 console.log('运行了');
 (function(pz) {
     select({
@@ -63,7 +64,12 @@ console.log('运行了');
                         search: true
                     })
                 }
+                document.querySelector('.btn-danger').onclick = function(e) {
+                    // console.log(t.orderArr)
+                    // tableToExcel()
+                }
             },
+
             getorderlist: function(o) {
                 let t = this
                 app.requests({
