@@ -56,8 +56,14 @@ new Vue({
             this.offlineTitle = ''
             this.qrcodeModal = false
         },
-        getQRcode(id) {
+        getQRcode() {
             let that = this
+            if (that.pid == '') {
+                showToast({
+                    text: '分享者id不能为空'
+                })
+                return
+            }
             app.requests({
                 url: 'OfflineActivities/resetOfflineActivitiesQrcode',
                 data: {
@@ -70,7 +76,48 @@ new Vue({
                     that.download = true
                 },
                 Error(code) {
-
+                    let text = ''
+                    switch (parseInt(code)) {
+                        case 3001:
+                            text = 'con_id长度只能是28位'
+                            break;
+                        case 3002:
+                            text = '分享者id不能为空'
+                            break;
+                        case 3003:
+                            text = 'scene不能为空'
+                            break;
+                        case 3004:
+                            text = '获取access_token失败'
+                            break;
+                        case 3005:
+                            text = '未获取到access_token'
+                            break;
+                        case 3006:
+                            text = '生成二维码失败'
+                            break;
+                        case 3007:
+                            text = 'scene最大长度32'
+                            break;
+                        case 3008:
+                            text = 'page不能为空'
+                            break;
+                        case 3009:
+                            text = '微信错误'
+                            break;
+                        case 30011:
+                            text = '上传失败'
+                            break;
+                        case 30012:
+                            text = '该会员不存在'
+                            break;
+                        default:
+                            text = '意料之外的错误'
+                            break;
+                    }
+                    showToast({
+                        text: text
+                    })
                 }
             })
         },
@@ -92,26 +139,8 @@ new Vue({
                     that.setpage()
                 },
                 Error(code) {
-                    let text = ''
-                    switch (parseInt(code)) {
-                        case 3001:
-                            text = '标题不能为空'
-                            break;
-                        case 3002:
-                            text = '活动出错'
-                            break;
-                        case 3009:
-                            text = '微信错误'
-                            break;
-                        case 30011:
-                            text = '上传失败'
-                            break;
-                        default:
-                            text = '意料之外的错误'
-                            break;
-                    }
                     showToast({
-                        text: text
+                        text: '获取失败'
                     })
                 }
             })

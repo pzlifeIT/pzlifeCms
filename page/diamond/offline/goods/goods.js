@@ -35,7 +35,7 @@ new Vue({
                 format: 'yyyy-MM-dd hh:mm:ss'
             }, function(date) {
                 this.value = date
-                that.time[name] = date
+                that.offlineInfo[name] = date
                 console.log(that.time[name])
             })
         },

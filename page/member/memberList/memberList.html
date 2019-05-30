@@ -63,24 +63,30 @@
             </div>
             <div class="gl-title">
                 <span class="col-md-1 bot-bor subli">序号</span>
+                <span class="col-md-1 bot-bor subli">用户id</span>
                 <span class="col-md-1 bot-bor subli">用户头像</span>
                 <span class="col-md-1 bot-bor subli">用户昵称</span>
                 <span class="col-md-1 bot-bor subli">用户身份</span>
                 <span class="col-md-1 bot-bor subli">手机号</span>
                 <span class="col-md-1 bot-bor subli">商票余额</span>
                 <span class="col-md-1 bot-bor subli">佣金余额</span>
+                <span class="col-md-1 bot-bor subli">积分</span>
                 <span class="col-md-1 bot-bor subli">注册时间</span>
+                <span class="col-md-2 bot-bor subli">最后登录时间</span>
             </div>
             <div class="table" id="orderlist">
                 <div class="table-tr" v-for="(v,k) in memberList">
                     <div class="col-md-1 bot-bor subli">{{k + 1}}</div>
+                    <div class="col-md-1 bot-bor subli">{{v.id}}</div>
                     <div class="col-md-1 bot-bor subli"><img :src="v.avatar" class="stImg" alt="用户头像"></div>
                     <div class="col-md-1 bot-bor subli">{{v.nick_name}}</div>
                     <div class="col-md-1 bot-bor subli">{{v.user_identityText}}</div>
                     <div class="col-md-1 bot-bor subli">{{v.mobile}}</div>
                     <div class="col-md-1 bot-bor subli">{{v.balance}}</div>
                     <div class="col-md-1 bot-bor subli">{{v.commission}}</div>
+                    <div class="col-md-1 bot-bor subli">{{v.integral}}</div>
                     <span class="col-md-1 bot-bor subli">{{v.create_time}}</span>
+                    <span class="col-md-2 bot-bor subli">{{v.last_time}}</span>
                 </div>
 
             </div>
