@@ -1,0 +1,10 @@
+.offline {
+    width: 500px;
+    padding: 20px 0 10px;
+    margin-left: 20px;
+    box-shadow: none;
+}
+
+.offline .dl-title {
+    width: 100px;
+}

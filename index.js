@@ -47,6 +47,7 @@ var app = {
         request({
             data: params.data || "",
             url: params.url,
+            type: params.type || 'POST',
             success: function(res) {
                 console.log(res);
                 hideloading();
