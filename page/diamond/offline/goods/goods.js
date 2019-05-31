@@ -36,7 +36,6 @@ new Vue({
             }, function(date) {
                 this.value = date
                 that.offlineInfo[name] = date
-                console.log(that.time[name])
             })
         },
         getGoodInfo(id, goodid) {
