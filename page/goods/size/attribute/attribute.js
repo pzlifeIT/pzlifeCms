@@ -1,5 +1,5 @@
 import { app } from '../../../../index.js';
-import { showToast } from '../../../../js/utils.js';;
+import { showToast, geturl } from '../../../../js/utils.js';;
 (function(pz) {
     pz.size = (function() {
         function _SE(o) {
@@ -9,7 +9,7 @@ import { showToast } from '../../../../js/utils.js';;
             this.abcompile = document.querySelector('#abcompile');
             this.addattribute = document.querySelector('.addattribute');
             this.ablist = document.querySelector('#ablist');
-            this.topId = pz.geturl().id
+            this.topId = geturl().id
             this.id = '';
             this.init();
         }

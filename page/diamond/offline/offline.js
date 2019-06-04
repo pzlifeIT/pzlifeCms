@@ -50,6 +50,8 @@ new Vue({
             this.offlineId = id
             this.offlineTitle = tit
             this.qrcodeModal = true
+            this.download = false
+            this.pid = ''
         },
         qrcodecancel() {
             this.offlineId = ''

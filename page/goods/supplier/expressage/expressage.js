@@ -1,5 +1,5 @@
 import { app } from '../../../../index.js';
-import { showToast } from '../../../../js/utils.js';
+import { showToast, geturl } from '../../../../js/utils.js';
 (function(pz) {
     select({
         el: '#EEcombobox',
@@ -16,7 +16,7 @@ import { showToast } from '../../../../js/utils.js';
     })
     pz.expressage = (function() {
         function _EE(o) {
-            this.supplierId = pz.geturl().id
+            this.supplierId = geturl().id
             this.id = ''
             this.addfreight = document.querySelector('.addfreight')
             this.eeCancel = document.querySelector('#eeCancel')
@@ -133,7 +133,7 @@ import { showToast } from '../../../../js/utils.js';
                 t.id = data.id
                 eeType.classList.add('already-select')
                 eeType.setAttribute('data-id', data.stype)
-                let type = pz.getPriceType(data.stype)
+                let type = t.getPriceType(data.stype)
                 eeType.setAttribute('data-value', type)
                 eeType.innerHTML = type
                 eeTitle.value = data.title
@@ -147,6 +147,14 @@ import { showToast } from '../../../../js/utils.js';
                 eeTitle.value = ''
                 eeDesc.value = ''
             }
+        }
+        _EE.prototype.getPriceType = function(n) {
+            let data = {
+                '1': '件数',
+                '2': '重量',
+                '3': '体积'
+            }
+            return data[n]
         }
         _EE.prototype.saveEE = function() {
             let t = this,

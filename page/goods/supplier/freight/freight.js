@@ -1,10 +1,10 @@
 import { app } from '../../../../index.js';
-import { showToast } from '../../../../js/utils.js';
+import { showToast, geturl } from '../../../../js/utils.js';
 (function(pz) {
     pz.freight = (function() {
         function _FH(o) {
-            this.FhId = pz.geturl().id
-            this.mode = pz.geturl().mode
+            this.FhId = geturl().id
+            this.mode = geturl().mode
             console.log(this.mode)
             this.id = ''
             this.addfreight = document.querySelector('.addfreight')

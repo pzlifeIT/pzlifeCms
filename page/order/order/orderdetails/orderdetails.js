@@ -1,5 +1,5 @@
 import { app } from '../../../../index.js';
-import { showToast } from '../../../../js/utils.js';
+import { showToast, geturl } from '../../../../js/utils.js';
 (function(pz) {
     tab({
         head: '#dlnav',
@@ -8,7 +8,7 @@ import { showToast } from '../../../../js/utils.js';
     })
     pz.orderdetail = (function() {
         function _OD(o) {
-            this.id = pz.geturl().id || ''
+            this.id = geturl().id || ''
             this.orderlist = document.querySelector('#orderlist')
             this.ExpressList = [
                 { id: 'shunfeng', type_name: '顺丰速运' },
