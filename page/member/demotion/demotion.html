@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="cache-control" content="no-cache, must-revalidate">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <title>会员降级</title>
+    <link rel="stylesheet" href="../../../css/style.css?10.1.4">
+    <link rel="stylesheet" href="../../../css/bootstrap.css?10.1.1">
+    <link rel="stylesheet" href="../../../css/list.css?10.0.1">
+    <link rel="stylesheet" href="../../../css/details.css?10.0.1">
+    <link rel="stylesheet" href="./demotion.css?10.0.1">
+    <script src="../../../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="iframenav">
+            <!-- <button class="">刷新</button> -->
+            <div class="refresh topbtn din fl" onclick="document.location.reload()">
+                <img src="../../../images/sx.png" alt="">
+            </div>
+            <div class="add topbtn din fl" @click="showmodal">
+                <img src="../../../images/jia.png" alt="">
+            </div>
+        </div>
+        <!-- <div class="gs-screen panel-default">
+            <div class="gs-header panel-heading">
+                <span class="din fl">筛选</span>
+                <button id="search" @click="search" class="btn btn-secondary radius din fr">筛选</button>
+                <div class="shrink"></div>
+            </div>
+            <div class="gs-con">
+                <ul>
+                    <li class="gs-li col-md-3 col-sm-6  col-xs-12">
+                        <p class="gs-name">状态</p>
+                        <div class="combobox" id="combobox3">
+                            <div class="ant-select">
+                                <div class="ant-select-selection" id="selection1">请选择</div>
+                                <span class="ant-select-arrow"></span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="gs-li col-md-3 col-sm-6  col-xs-12">
+                        <p class="gs-name">充值类型</p>
+                        <div class="combobox" id="combobox1">
+                            <div class="ant-select">
+                                <div class="ant-select-selection" id="selection2">请选择</div>
+                                <span class="ant-select-arrow"></span>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div> -->
+        <div class="gs-list panel-default">
+            <div class="gl-head panel-heading ">
+                <span>会员降级纪录记录(暂时只能boss降级普通会员或钻石会员)</span>
+            </div>
+            <div class="gl-title">
+                <span class="col-md-1 bot-bor subli">序号</span>
+                <span class="col-md-1 bot-bor subli">降级的uid</span>
+                <span class="col-md-1 bot-bor subli">降级后的身份</span>
+                <span class="col-md-1 bot-bor subli">降级后的上级boss</span>
+                <span class="col-md-1 bot-bor subli">降级原因描述</span>
+                <span class="col-md-2 bot-bor subli">管理</span>
+            </div>
+            <div class="table" id="goodlist">
+                <div class="table-tr" v-for="(v,k) in demotionList">
+                    <span class="col-md-1 bot-bor subli">{{k + 1}}</span>
+                    <span class="col-md-1 bot-bor subli">{{v.uid}}</span>
+                    <span class="col-md-1 bot-bor subli">{{v.after_identity_text}}</span>
+                    <span class="col-md-1 bot-bor subli">{{v.boss_uid}}</span>
+                    <span class="col-md-1 bot-bor subli">{{v.content}}</span>
+                    <span class="col-md-2 bot-bor subli">
+                      <div class="pz-btn  btn-amend" v-if="v.order_list.length > 0" @click="lookList(v.order_list,k)" >查看未完成订单</div>
+                      <div class="pz-btn  btn-amend" v-if="v.order_list.length > 0" @click="lookList(v.uid_list,k)" >可获收益会员列表</div>
+                    </span>
+                </div>
+            </div>
+            <div class="w-floor-page">
+                <div class="floor-page" id="floorpages"></div>
+            </div>
+        </div>
+        <div class="pz-modal" v-if="modal">
+            <div class="pz-modal-content">
+                <div class="pz-modal-header">boss降级</div>
+                <div class="pz-spin-container">
+                    <div class="dl-show">
+                        <span class="dl-title">用户手机号:</span>
+                        <input class="dl-info" placeholder="请输入用户手机号" v-model="mobile" value="" type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">降级后身份:</span>
+                        <div class="combobox modalbox" id="combobox2">
+                            <div class="ant-select">
+                                <div class="ant-select-selection" ref="selection" id="selection3">请选择</div>
+                                <span class="ant-select-arrow"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">降级原因:</span>
+                        <textarea class="dl-area" placeholder="请输入降级原因" type="text" v-model="message" name=""></textarea>
+                    </div>
+                    <div class="dl-show flexcenter">
+                        <input type="button" value="取消" class="pz-btn btn-cancel" @click="hidemodal">
+                        <input type="button" value="保存" @click="submit" class="pz-btn btn-amend">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pz-modal" v-if="showList">
+            <div class="pz-modal-content list-content">
+                <div class="pz-modal-header">信息查看</div>
+                <div class="pz-spin-container">
+                    <div class="dl-show">
+                        <span class="order_li" v-for="(v,k) in list">{{v}}</span>
+                    </div>
+                    <div class="dl-show flexcenter">
+                        <input type="button" value="取消" class="pz-btn btn-cancel" @click="hideList">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="module" src="../../../js/common.js?10.0.2"></script>
+<script type="module" src="./demotion.js?10.0.2"></script>
+
+</html>

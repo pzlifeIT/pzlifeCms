@@ -401,61 +401,61 @@ import { showToast, imageDeal } from '../js/utils.js';;
             })
         }
         S.prototype.uploadmultifile = function(file) {
-                let t = this,
-                    len = file.length,
-                    i, x = 0,
-                    formdata = new FormData();
-                for (i = 0; i < len; i++) {
-                    imageDeal(file[i], function(file) {
-                            x++
-                            formdata.append('images[]', file)
-                        })
-                        // formdata.append('images[]', file[i])
-                }
-                let interval = setInterval(function() {
-                    if (len === x) {
-                        clearInterval(interval)
-                        t.linkuploadmultifile(formdata)
-                    }
-                }, 100)
-            },
-            S.prototype.linkuploadmultifile = function(formdata) {
-                let t = this
-                app.requests({
-                    data: formdata,
-                    url: 'upload/uploadmultifile',
-                    success: function(res) {
-                        t.imgpush(res.data)
-                        t.showImg();
-                        t.imgChange(t.images);
-                        t.file.value = ''
-                    },
-                    Error(code) {
-                        let text = ''
-                        switch (parseInt(code)) {
-                            case 3001:
-                                text = '上传的不是图片'
-                                break;
-                            case 3002:
-                                text = '上传图片不能超过2M'
-                                break;
-                            case 3003:
-                                text = '上传失败!'
-                                break;
-                            case 3004:
-                                text = '上传文件不能为空'
-                                break;
-                            default:
-                                text = '意料之外的错误'
-                                break;
-                        }
-                        showToast({
-                            text: text
-                        })
-                        t.file.value = ''
-                    }
-                })
+            let t = this,
+                len = file.length,
+                i, x = 0,
+                formdata = new FormData();
+            for (i = 0; i < len; i++) {
+                imageDeal(file[i], function(file) {
+                        x++
+                        formdata.append('images[]', file)
+                    })
+                    // formdata.append('images[]', file[i])
             }
+            let interval = setInterval(function() {
+                if (len === x) {
+                    clearInterval(interval)
+                    t.linkuploadmultifile(formdata)
+                }
+            }, 100)
+        }
+        S.prototype.linkuploadmultifile = function(formdata) {
+            let t = this
+            app.requests({
+                data: formdata,
+                url: 'upload/uploadmultifile',
+                success: function(res) {
+                    t.imgpush(res.data)
+                    t.showImg();
+                    t.imgChange(t.images);
+                    t.file.value = ''
+                },
+                Error(code) {
+                    let text = ''
+                    switch (parseInt(code)) {
+                        case 3001:
+                            text = '上传的不是图片'
+                            break;
+                        case 3002:
+                            text = '上传图片不能超过2M'
+                            break;
+                        case 3003:
+                            text = '上传失败!'
+                            break;
+                        case 3004:
+                            text = '上传文件不能为空'
+                            break;
+                        default:
+                            text = '意料之外的错误'
+                            break;
+                    }
+                    showToast({
+                        text: text
+                    })
+                    t.file.value = ''
+                }
+            })
+        }
         S.prototype.imgpush = function(data) {
                 let len = data.length,
                     i, str
@@ -465,7 +465,7 @@ import { showToast, imageDeal } from '../js/utils.js';;
                     str[this.field] = data[i]
                     this.images.push(str)
                 }
-            },
+            }
             // S.prototype.disposefiles = function(files) {
             //     let len3 = files.length
             //     for (let y = 0; y < len3; y++) {
@@ -481,26 +481,26 @@ import { showToast, imageDeal } from '../js/utils.js';;
             //     }
             //     this.showImg()
             // }
-            S.prototype.showImg = function() {
-                let str = '',
-                    len = this.images.length,
-                    sp = '',
-                    t = false
-                if (this.type == 'multiple') {
-                    t = true
-                }
-                for (let i = 0; i < len; i++) {
-                    if (t) {
-                        sp = '<span class="imgDel" data-img="' + this.images[i][this.field] + '" >✖</span>'
-                    }
-                    str += '<li>' + sp + '<img src="' + this.images[i][this.field] + '" alt=""></li>'
-                }
-                this.list.innerHTML = str
+        S.prototype.showImg = function() {
+            let str = '',
+                len = this.images.length,
+                sp = '',
+                t = false
+            if (this.type == 'multiple') {
+                t = true
+            }
+            for (let i = 0; i < len; i++) {
                 if (t) {
-                    this.delImg()
+                    sp = '<span class="imgDel" data-img="' + this.images[i][this.field] + '" >✖</span>'
                 }
-            },
-            S.prototype.delImg = function() {
+                str += '<li>' + sp + '<img src="' + this.images[i][this.field] + '" alt=""></li>'
+            }
+            this.list.innerHTML = str
+            if (t) {
+                this.delImg()
+            }
+        }
+        S.prototype.delImg = function() {
                 let t = this,
                     lis = t.list.querySelectorAll('li')
                 lis.forEach(function(li) {

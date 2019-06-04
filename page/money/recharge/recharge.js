@@ -157,6 +157,9 @@ new Vue({
                 case 2:
                     text = '钻石会员'
                     break;
+                case 3:
+                    text = '创业店主'
+                    break;
                 case 4:
                     text = '合伙人'
                     break;
