@@ -58,22 +58,24 @@
                 <span>充值记录</span>
             </div>
             <div class="gl-title">
-                <span class="col-md-2 bot-bor subli">序号</span>
-                <span class="col-md-2 bot-bor subli">操作管理员</span>
+                <span class="col-md-1 bot-bor subli">序号</span>
+                <span class="col-md-1 bot-bor subli">操作管理员</span>
                 <span class="col-md-2 bot-bor subli">开通账号昵称</span>
                 <span class="col-md-2 bot-bor subli">开通账号手机号</span>
                 <span class="col-md-2 bot-bor subli">预扣款金额</span>
                 <span class="col-md-2 bot-bor subli">描述</span>
+                <span class="col-md-2 bot-bor subli">创建时间</span>
                 <!-- <span class="col-md-2 bot-bor subli">管理</span> -->
             </div>
             <div class="table" id="goodlist">
                 <div class="table-tr" v-for="(v,k) in openbosslist">
-                    <span class="col-md-2 bot-bor subli">{{k + 1}}</span>
-                    <span class="col-md-2 bot-bor subli">{{v.admin_name}}</span>
+                    <span class="col-md-1 bot-bor subli">{{k + 1}}</span>
+                    <span class="col-md-1 bot-bor subli">{{v.admin_name}}</span>
                     <span class="col-md-2 bot-bor subli">{{v.nick_name}}</span>
                     <span class="col-md-2 bot-bor subli">{{v.mobile}}</span>
                     <span class="col-md-2 bot-bor subli">{{v.money}}</span>
                     <span class="col-md-2 bot-bor subli">{{v.message}}</span>
+                    <span class="col-md-2 bot-bor subli">{{v.create_time}}</span>
                     <!-- <span class="col-md-2 bot-bor subli"></span> -->
                 </div>
             </div>

@@ -62,7 +62,7 @@
         </div> -->
         <div class="gs-list panel-default">
             <div class="gl-head panel-heading ">
-                <span>会员降级纪录记录(暂时只能boss降级普通会员或钻石会员)</span>
+                <span>会员降级纪录(暂时只能boss降级普通会员或钻石会员)</span>
             </div>
             <div class="gl-title">
                 <span class="col-md-1 bot-bor subli">序号</span>
@@ -70,6 +70,7 @@
                 <span class="col-md-1 bot-bor subli">降级后的身份</span>
                 <span class="col-md-1 bot-bor subli">降级后的上级boss</span>
                 <span class="col-md-1 bot-bor subli">降级原因描述</span>
+                <span class="col-md-1 bot-bor subli">创建时间</span>
                 <span class="col-md-2 bot-bor subli">管理</span>
             </div>
             <div class="table" id="goodlist">
@@ -79,6 +80,7 @@
                     <span class="col-md-1 bot-bor subli">{{v.after_identity_text}}</span>
                     <span class="col-md-1 bot-bor subli">{{v.boss_uid}}</span>
                     <span class="col-md-1 bot-bor subli">{{v.content}}</span>
+                    <span class="col-md-1 bot-bor subli">{{v.create_time}}</span>
                     <span class="col-md-2 bot-bor subli">
                       <div class="pz-btn  btn-amend" v-if="v.order_list.length > 0" @click="lookList(v.order_list,k)" >查看未完成订单</div>
                       <div class="pz-btn  btn-amend" v-if="v.order_list.length > 0" @click="lookList(v.uid_list,k)" >可获收益会员列表</div>

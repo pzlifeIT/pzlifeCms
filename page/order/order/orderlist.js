@@ -5,6 +5,9 @@ console.log('运行了');
     select({
         el: '#order_status',
         data: [{
+            id: '',
+            type_name: '全部'
+        }, {
             id: 1,
             type_name: '待付款'
         }, {
@@ -41,6 +44,8 @@ console.log('运行了');
             this.orderlist = document.querySelector('#orderlist')
             this.elorder_status = document.querySelector('#order_status').querySelector('.ant-select-selection')
             this.order_status = ''
+            this.order_no = ''
+            this.nick_name = ''
             this.page = parseInt(localStorage.getItem("orderList")) || 1
             this.totle = 0
             this.orderArr = []
@@ -59,6 +64,8 @@ console.log('运行了');
                     t.order_status = t.elorder_status.getAttribute('data-id') || ''
                     localStorage.setItem("orderList", 1)
                     t.page = 1
+                    t.order_no = document.querySelector('#order_no').value;
+                    t.nick_name = document.querySelector('#nick_name').value;
                     t.getorderlist({
                         page: 1,
                         search: true
@@ -77,7 +84,9 @@ console.log('运行了');
                     data: {
                         page: o.page || 1,
                         pagenum: o.pagenum || 10,
-                        order_status: t.order_status || ''
+                        order_status: t.order_status || '',
+                        order_no: t.order_no || '',
+                        nick_name: t.nick_name || ''
                     },
                     success: function(res) {
                         localStorage.setItem("orderList", o.page)

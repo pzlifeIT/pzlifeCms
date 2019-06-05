@@ -32,14 +32,14 @@
         </div>
         <div class="gs-con">
             <ul>
-                <!-- <li class="gs-li col-md-3 col-sm-6  col-xs-12">
-                    <p class="gs-name">商品名称</p>
-                    <input class="gs-inp" type="text">
+                <li class="gs-li col-md-3 col-sm-6  col-xs-12">
+                    <p class="gs-name">订单号</p>
+                    <input class="gs-inp" id="order_no" type="text">
                 </li>
                 <li class="gs-li col-md-3 col-sm-6  col-xs-12">
-                    <p class="gs-name">销售价格</p>
-                    <input class="gs-inp" type="text">
-                </li> -->
+                    <p class="gs-name">用户昵称</p>
+                    <input class="gs-inp" id="nick_name" type="text">
+                </li>
                 <li class="gs-li col-md-3 col-sm-6  col-xs-12">
                     <p class="gs-name">状态</p>
                     <div class="combobox" id="order_status">
@@ -49,18 +49,6 @@
                         </div>
                     </div>
                 </li>
-                <!-- <li class="gs-li col-md-3 col-sm-6  col-xs-12">
-                    <p class="gs-name">库存数量</p>
-                    <input class="gs-inp" type="text">
-                </li>
-                <li class="gs-li col-md-3 col-sm-6  col-xs-12">
-                    <p class="gs-name">开始时间</p>
-                    <input id="calend" placeholder="开始时间" class="gs-inp"></input>
-                </li>
-                <li class="gs-li col-md-3 col-sm-6  col-xs-12">
-                    <p class="gs-name">结束时间</p>
-                    <input id="calend1" placeholder="结束时间" class="gs-inp"></input>
-                </li> -->
             </ul>
         </div>
     </div>
@@ -87,26 +75,6 @@
     </div>
 </body>
 <script type="module" src="../../../js/common.js?10.0.2"></script>
-<script type="module" src="./orderlist.js?10.0.1"></script>
-<script>
-    // calender('#calend').init({
-    //     format: 'yyyy-MM-dd',
-    //     date: [2018, 5, 12]
-    // }, function(date) {
-    //     this.value = date
-    // })
-    // calender('#calend1').init({
-    //     format: 'yyyy-MM-dd',
-    //     date: [2018, 5, 12]
-    // }, function(date) {
-    //     this.value = date
-    // })
-    class cale {
-        constructor() {
-            console.log(1212)
-        }
-    }
-    new cale()
-</script>
+<script type="module" src="./orderlist.js?10.0.3"></script>
 
 </html>
