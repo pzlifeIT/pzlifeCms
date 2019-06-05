@@ -12,7 +12,7 @@ new Vue({
         user_identity: '',
         page: 1,
         page_num: 10,
-        totle: 0,
+        total: 0,
         demotionList: [],
         nolink: true
     },
@@ -67,8 +67,8 @@ new Vue({
                 },
                 success(res) {
                     that.demotionList = that.disdemotionList(res.data)
-                    if (that.totle == res.totle) return
-                    that.totle = res.totle
+                    if (that.total == res.total) return
+                    that.total = res.total
                     that.setpage()
                 },
                 Error(code) {
@@ -183,13 +183,14 @@ new Vue({
         },
         setpage: function() {
             let t = this,
-                totle = Math.ceil(parseInt(t.totle) / 10)
+                total = Math.ceil(parseInt(t.total) / 10)
             pages.init({
                 el: '#floorpages',
-                pagenumber: totle,
+                pagenumber: total,
                 fn: function(n) {
+                    if (t.page == n) return
                     t.page = n
-                    t.getAdminRemittance()
+                    t.getdemotionList()
                 }
             })
         },
