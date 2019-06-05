@@ -13,7 +13,7 @@ new Vue({
         message: '',
         page: 1,
         page_num: 10,
-        total: 0,
+        all_count: 0,
         openbosslist: [],
         nolink: true
     },
@@ -43,8 +43,8 @@ new Vue({
                 },
                 success(res) {
                     that.openbosslist = res.data
-                    if (that.total == res.total) return
-                    that.total = res.total
+                    if (that.all_count == res.all_count) return
+                    that.all_count = res.all_count
                     that.setpage()
                 },
                 Error(code) {
@@ -157,10 +157,10 @@ new Vue({
         },
         setpage: function() {
             let t = this,
-                total = Math.ceil(parseInt(t.total) / 10)
+                all_count = Math.ceil(parseInt(t.all_count) / 10)
             pages.init({
                 el: '#floorpages',
-                pagenumber: total,
+                pagenumber: all_count,
                 fn: function(n) {
                     if (t.page == n) return
                     t.page = n
