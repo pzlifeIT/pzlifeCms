@@ -173,6 +173,9 @@ import { showToast, geturl } from '../../../../js/utils.js';
                             case 3005:
                                 text = '商品已发货'
                                 break;
+                            case 3007:
+                                text = '不同用户订单不能使用同一物流公司物流单号发货'
+                                break;
                             default:
                                 text = '意料之外的错误'
                                 break;
@@ -211,6 +214,9 @@ import { showToast, geturl } from '../../../../js/utils.js';
                                 break;
                             case 3005:
                                 text = '商品已发货'
+                                break;
+                            case 3007:
+                                text = '不同用户订单不能使用同一物流公司物流单号发货'
                                 break;
                             default:
                                 text = '意料之外的错误'
