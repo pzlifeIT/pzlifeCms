@@ -170,8 +170,14 @@ import { showToast, geturl } from '../../../../js/utils.js';
                             case 3002:
                                 text = '请输入正确的快递公司编码'
                                 break;
+                            case 3003:
+                                text = '订单商品不存在'
+                                break;
+                            case 3004:
+                                text = '非待发货订单无法发货或已发货订单无法变更'
+                                break;
                             case 3005:
-                                text = '商品已发货'
+                                text = '请先发货'
                                 break;
                             case 3007:
                                 text = '不同用户订单不能使用同一物流公司物流单号发货'
@@ -212,8 +218,17 @@ import { showToast, geturl } from '../../../../js/utils.js';
                             case 3002:
                                 text = '请输入正确的快递公司编码'
                                 break;
+                            case 3003:
+                                text = '订单商品不存在'
+                                break;
+                            case 3004:
+                                text = '非待发货订单无法发货'
+                                break;
                             case 3005:
-                                text = '商品已发货'
+                                text = '已添加的订单商品物流分配关系'
+                                break;
+                            case 3006:
+                                text = '添加失败'
                                 break;
                             case 3007:
                                 text = '不同用户订单不能使用同一物流公司物流单号发货'
