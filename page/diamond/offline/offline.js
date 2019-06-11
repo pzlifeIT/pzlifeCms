@@ -105,23 +105,23 @@ new Vue({
                             text = 'page不能为空'
                             break;
                         case 3009:
-                            text = '微信错误'
+                            text = '微信错误';
                             break;
                         case 30011:
-                            text = '上传失败'
+                            text = '上传失败';
                             break;
                         case 30012:
-                            text = '该会员不存在'
+                            text = '该会员不存在';
                             break;
                         default:
-                            text = '意料之外的错误'
+                            text = '意料之外的错误';
                             break;
                     }
                     showToast({
                         text: text
-                    })
+                    });
                 }
-            })
+            });
         },
         qrCodeDownload() {
             downloadIamge(this.qrCodePath, this.offlineTitle)
