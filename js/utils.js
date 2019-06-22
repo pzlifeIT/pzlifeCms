@@ -19,7 +19,7 @@ let tableToExcel = function(Data = []) {
     <td>发件人姓名</td>\
     <td>发件人电话</td>\
   </tr>'; //循环遍历，每行加入tr标签，每个单元格加td标签      
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 10; i++) {
         str += '<tr>';
         for (let item in Data[i]) { //增加\t为了不让表格显示科学计数法或者其他格式   
             str += `<td>${ Data[i][item] + '\t'}</td>`;

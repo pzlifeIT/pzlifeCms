@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="cache-control" content="no-cache, must-revalidate">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <title>供应商账号</title>
+    <link rel="stylesheet" href="../../../css/style.css?10.1.1">
+    <link rel="stylesheet" href="../../../css/bootstrap.css?10.1.1">
+    <link rel="stylesheet" href="../../../css/list.css?10.0.1">
+    <link rel="stylesheet" href="../../../css/details.css?10.0.1">
+    <style>
+        .combobox {
+            margin-left: 130px;
+        }
+    </style>
+    <script src="../../../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="iframenav">
+            <!-- <button class="">刷新</button> -->
+            <div class="refresh topbtn din fl" onclick="document.location.reload()">
+                <img src="../../../images/sx.png" alt="">
+            </div>
+            <div class="add topbtn din fl" @click="addMember">
+                <img src="../../../images/jia.png" alt="">
+            </div>
+        </div>
+        <div class="gs-list panel-default">
+            <div class="gl-head panel-heading ">
+                <span>成员列表</span>
+            </div>
+            <div class="gl-title">
+                <span class="col-md-2 bot-bor subli">序号</span>
+                <span class="col-md-3 bot-bor subli">账号名称</span>
+                <span class="col-md-2 bot-bor subli">手机号</span>
+            </div>
+            <div class="table" id="goodlist">
+                <div class="table-tr" v-for="(v,k) in suplist">
+                    <span class="col-md-2 bot-bor subli">{{k + 1}}</span>
+                    <span class="col-md-3 bot-bor subli">{{v.sup_name}}</span>
+                    <span class="col-md-2 bot-bor subli">{{v.mobile}}</span>
+                </div>
+            </div>
+            <div class="w-floor-page">
+                <div class="floor-page" id="floorpages"></div>
+            </div>
+        </div>
+        <div class="pz-modal" v-show="modal">
+            <div class="pz-modal-content">
+                <div class="pz-modal-header">供应商账号</div>
+                <div class="pz-spin-container">
+                    <div class="dl-show">
+                        <span class="dl-title">供应商登录账号:</span>
+                        <input class="dl-info" placeholder="请输入供应商登录账号" v-model="sup_name" value="" type="text">
+                    </div>
+                    <div class="dl-show">
+                        <span class="dl-title">手机号:</span>
+                        <input class="dl-info" placeholder="请输入手机号" v-model="mobile" value="" type="text">
+                    </div>
+                    <!-- <div class="dl-show">
+                        <span class="dl-title">供应商:</span>
+                        <div class="combobox">
+                            <div class="ant-select">
+                                <div class="ant-select-selection" ref="selection" id="selection">请选择供应商</div>
+                                <span class="ant-select-arrow"></span>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="dl-show flexcenter">
+                        <input type="button" value="取消" class="pz-btn btn-cancel" @click="cancel">
+                        <input type="button" value="保存" @click="submit" class="pz-btn btn-amend">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="module" src="../../../js/common.js?10.0.2"></script>
+<script type="module" src="./accountSup.js"></script>
+
+</html>
