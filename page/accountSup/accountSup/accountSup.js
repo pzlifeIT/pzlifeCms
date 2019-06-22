@@ -8,7 +8,7 @@ new Vue({
         sup_name: '',
         suplist: [],
         mobile: '',
-        page:1,
+        page: 1,
         total: 0
     },
     mounted() {
@@ -26,7 +26,7 @@ new Vue({
             app.requests({
                 url: 'suppliers/supplieradminlist',
                 data: {
-                  page:that.page
+                    page: that.page
                 },
                 success(res) {
                     that.suplist = res.data || [];
@@ -121,7 +121,7 @@ new Vue({
                         case 3004:
                             text = '未注册用户不能添加'
                             break;
-                        case 3006:
+                        case 3005:
                             text = '添加失败'
                             break;
                         default:
@@ -135,17 +135,17 @@ new Vue({
             })
         },
         setpage: function() {
-          let t = this,
-              total = Math.ceil(parseInt(t.total) / 10)
-          pages.init({
-              el: '#floorpages',
-              pagenumber: total,
-              fn: function(n) {
-                  if (t.page == n) return
-                  t.page = n
-                  t.supplieradminlist()
-              }
-          })
-      }
+            let t = this,
+                total = Math.ceil(parseInt(t.total) / 10)
+            pages.init({
+                el: '#floorpages',
+                pagenumber: total,
+                fn: function(n) {
+                    if (t.page == n) return
+                    t.page = n
+                    t.supplieradminlist()
+                }
+            })
+        }
     }
 })
