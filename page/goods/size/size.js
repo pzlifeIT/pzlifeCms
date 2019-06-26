@@ -17,12 +17,22 @@ import { showToast } from '../../../js/utils.js';
             this.init()
         }
         _SE.prototype.init = function() {
-            this.getSpecList()
+            let typeName = document.querySelector('#typeNameInp').value;
+            this.getSpecList({
+                type_name: typeName
+            })
             this.cancelModal()
             this.allCateList()
         }
         _SE.prototype.cancelModal = function() { //隐藏弹框
             let t = this
+            document.querySelector('#screening').onclick = function() {
+                let typeName = document.querySelector('#typeNameInp').value;
+                t.page = 1
+                t.getSpecList({
+                    type_name: typeName
+                })
+            }
             t.cancelNew.addEventListener('click', function(e) {
                 t.compileNew.classList.add('hide')
             })
@@ -120,7 +130,8 @@ import { showToast } from '../../../js/utils.js';
             app.requests({
                 data: {
                     page: data.page || 1,
-                    page_num: data.page_num || 10
+                    page_num: data.page_num || 10,
+                    type_name: data.type_name
                 },
                 url: 'spec/getSpecList',
                 success: function(res) {
@@ -151,10 +162,15 @@ import { showToast } from '../../../js/utils.js';
                 }
             })
         }
-        _SE.prototype.setGlul = function(data) { //循环出规格列表
+        _SE.prototype.setGlul = function(data = []) { //循环出规格列表
             let len = data.length,
                 i,
-                str = ''
+                str = '';
+            if (len === 0) {
+                showToast({
+                    text: '未查询到纪录'
+                })
+            };
             for (i = 0; i < len; i++) {
                 str += '<div class="table-tr"> \
               <div class = "col-md-3 bot-bor subli" ><span>' + (i + 1) + '</span> </div> \
